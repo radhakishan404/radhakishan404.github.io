@@ -1,7 +1,5 @@
 import React, { Fragment } from "react";
-import "../css/Setting.scss";
 import "../css/Header.scss";
-import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 
 function Header(props) {
@@ -41,10 +39,10 @@ function Header(props) {
                             </Link>
                         </li>
                     </ul>
-                    <div class="site-header-burger">
-                        <div class="ml-3 burger js-menu-trigger">
-                            <span class="closed"><img src={"https://githubuniverse.com/assets/img/svgs/burger.svg"} alt="menu icon" /></span>
-                            <span class="open"><img src={"https://githubuniverse.com/assets/img/svgs/close.svg"} alt="close icon" /></span>
+                    <div className="site-header-burger">
+                        <div className="ml-3 burger js-menu-trigger">
+                            <span className="closed"><img src={"https://githubuniverse.com/assets/img/svgs/burger.svg"} alt="menu icon" /></span>
+                            <span className="open"><img src={"https://githubuniverse.com/assets/img/svgs/close.svg"} alt="close icon" /></span>
                         </div>
                     </div>
                 </div>
@@ -77,8 +75,8 @@ function Header(props) {
                         </ul>
                     </div>
                 </nav>
-            </header>
-        </Fragment>
+            </header >
+        </Fragment >
     )
 }
 
