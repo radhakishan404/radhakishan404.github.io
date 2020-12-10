@@ -1,0 +1,9 @@
+body.page-home {
+    position: relative;
+    z-index: 1;
+    padding-top: 0;
+}
+body.page-ready {
+    transition-delay: 1s ease;
+    opacity: 1;
+}

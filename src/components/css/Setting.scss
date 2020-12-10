@@ -1,0 +1,91 @@
+// SCSS Settings //
+@import url('https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap');
+// Fonts //
+
+// 300 | 400 | 500 | 600 | 700
+$sans-serif: "Nova Cut", mono, sans-serif;
+
+// 300 | 400 | 500 | 700
+$mono: "fira", mono, sans-serif;
+
+// Font Size/ Line Height //
+
+$main-font: $sans-serif;
+$nova-font: 'Nova Cut', cursive;
+$base-font-size: 16px;
+$base-line-height: 1.5;
+
+// Colors //
+
+$white: #fff;
+$black: #000000;
+$gray-dark: #121216;
+$border: rgba(#42526d, 0.5);
+$primary: #161122;
+
+$mkt-gray: #b5bfd2;
+$mkt-gray-dark: #09111d;
+
+$gradient-portfolio: linear-gradient(92.05deg, #bca1f7 12.09%, #e577b4 42.58%, #ff7170 84.96%);
+$gradient-service: linear-gradient(267.91deg, #ffe57f 9.35%, #ff7170 96.48%);
+$gradient-about: linear-gradient(272.22deg, #3bf0e4 -14.27%, #73f280 43.01%, #b2f4b6 96.82%);
+
+$gradient: linear-gradient(269.16deg, #FFE580 -15.83%, #FF7571 -4.97%, #FF7270 15.69%, #EA5DAD 32.43%, #C2A0FD 50.09%, #9867F0 67.47%, #3BF0E4 84.13%, #33CE43 105.13%, #B2F4B6 123.24%);
+//$gradient-play: linear-gradient(264.51deg, #FFD33A 4%, #FFA04C 12%, #FF7270 24%, #EA5DAD 44%, #814FDB 62%, #502C91 74%, #33CE43 88%);
+
+$gradient-play: linear-gradient(269.16deg,  #C2A0FD 5%, #9867F0 35%, #3BF0E4 80%, #33CE43 105.13%, #B2F4B6 123.24%);
+$gradient-play: linear-gradient(92.7deg, #A2FACF -1.37%, #64ACFF 78.71%);
+
+$gray-light: #6a737d;
+$gray: #2f363d;
+
+$error: #ea4a5a;
+
+// Breakpoints //
+
+$xlarge: 1280px;
+$large: 1012px;
+$medium: 768px;
+$small: 544px;
+
+@mixin start-at($device-width) {
+    @media (min-width: $device-width) {
+        @content;
+    }
+}
+
+@mixin stop-at($device-width) {
+    @media (max-width: $device-width - 1) {
+        @content;
+    }
+}
+
+// Global Variables //
+
+$header-breakpoint: $medium;
+
+$transition-speed: 0.3s;
+$transition: $transition-speed ease-in-out;
+
+$trans: $transition-speed ease-in-out;
+
+$bounce: cubic-bezier(0.68, -0.25, 0.27, 1.25);
+
+$container-percentage: 92%;
+$container-width: 1260px;
+$container-padding: (100% - $container-percentage) / 2;
+
+@keyframes gradient-shift {
+    0% {
+      background-position: 58% 50%;
+    }
+    25% {
+      background-position: 100% 0%;
+    }
+    75% {
+      background-position: 10% 50%;
+    }
+    to {
+      background-position: 58% 50%;
+    }
+  }

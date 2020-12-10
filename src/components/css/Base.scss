@@ -1,0 +1,135 @@
+html,
+body {
+    background: $black;
+    height: 100%;
+}
+
+body {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+
+    &.page-ready {
+        transition-delay: 1s ease;
+        opacity: 1;
+    }
+}
+
+body,
+input,
+button,
+select,
+textarea {
+    font-family: $main-font;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    color: $white;
+    font-feature-settings: "ss02" on;
+}
+
+a,
+.a {
+    color: inherit;
+    text-decoration: none !important;
+    transition: all $transition;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+a[href^="tel:"] {
+    &:hover {
+        cursor: default;
+    }
+}
+
+[data-scroll-to],
+[data-click-target],
+[data-scroll-to-home] {
+    cursor: pointer;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    display: block;
+}
+
+address {
+    font-style: normal;
+}
+
+svg {
+    display: block;
+}
+
+sup {
+    vertical-align: super;
+    font-size: smaller;
+}
+
+hr {
+    background: $border;
+    //background: linear-gradient(87.54deg, #9867F0 -6.8%, #ED4E50 84.14%);
+    height: 1px;
+    border: none;
+
+    &.gradient {
+        background: $gradient;
+        height: 8px;
+    }
+}
+
+.border-top,
+.border-bottom {
+    border-color: $border;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+main,
+audio,
+canvas,
+video,
+svg {
+    display: block;
+}
+
+textarea {
+    overflow: auto;
+    resize: vertical;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
