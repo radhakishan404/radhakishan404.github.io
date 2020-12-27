@@ -312,7 +312,7 @@ $max-logo-width: 202px;
     }
 }
 
-.contact {
+.gradient-btn {
     font-family: $sans-serif;
     position: relative;
     z-index: 1;
@@ -852,6 +852,7 @@ svg:not(:root) {
     color: #fff;
     transition: color 0.3s ease, opacity 0.3s ease 0.65s;
     padding-left: 5%;
+    z-index: 10;
 
     @include stop-at(981px) {
         width: 85%;
@@ -1076,7 +1077,6 @@ canvas {
     justify-content: space-between;
     z-index: 3;
     min-height: 500px;
-
 
     @include stop-at($header-breakpoint) {
         display: none !important;
@@ -1314,7 +1314,6 @@ canvas {
             .menu-item-title {
                 font-size: 1.6em;
                 display: block;
-                font-family: Poppins, sans-serif;
                 -webkit-transition: color 0.3s;
                 transition: color 0.3s;
                 color: #fff;
@@ -1377,17 +1376,17 @@ canvas {
     }
 
     .header-nav-menu ul li:nth-child(2) {
-        -webkit-transition-delay: .3s !important;
-        transition-delay: .3s !important;
+        -webkit-transition-delay: 0.3s !important;
+        transition-delay: 0.3s !important;
     }
 
     .header-nav-menu ul li:nth-child(3) {
-        -webkit-transition-delay: .45s !important;
-        transition-delay: .45s !important;
+        -webkit-transition-delay: 0.45s !important;
+        transition-delay: 0.45s !important;
     }
     .header-nav-menu ul li:nth-child(4) {
-        -webkit-transition-delay: .6s !important;
-        transition-delay: .6s !important;
+        -webkit-transition-delay: 0.6s !important;
+        transition-delay: 0.6s !important;
     }
 
     .header-nav-menu ul li {
@@ -1413,4 +1412,37 @@ canvas {
     background-position: 58% 50%;
     background-size: 500%;
     animation: gradient-shift 30s ease infinite;
+}
+
+.intro-section {
+    padding-top: 20px;
+    a {
+        margin-right: 20px;
+
+        .btn {
+            display: inline-block;
+            background: transparent;
+            position: relative;
+            white-space: nowrap;
+            z-index: 1;
+            border: none;
+            color: #fff;
+            -webkit-transition: color 0.3s, background 0.3s, border 0.3s;
+            transition: color 0.3s, background 0.3s, border 0.3s;
+            font-size: 1.2rem;
+            line-height: 1.2;
+            padding: 23px 0px;
+            cursor: pointer;
+            text-decoration: none !important;
+
+            @include stop-at(1200px) {
+                font-size: 1.5em;
+                padding: 18px 0px;
+            }
+            @include stop-at(768px) {
+                font-size: 1.3em;
+                padding: 16px 0px;
+            }
+        }
+    }
 }

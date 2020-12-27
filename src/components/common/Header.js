@@ -1,8 +1,26 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "../css/Header.scss";
 import { Link } from "react-router-dom";
+import $ from "jquery";
 
 function Header(props) {
+    const [pathname, setPathname] = useState("");
+
+    useEffect(() => {
+        if (props.props && props.props.location && props.props.location.pathname) {
+            setPathname(props.props.location.pathname);
+        }
+        $("body").removeClass("nav--open");
+        $(".header__nav-btn").removeClass("header__nav-btn--active");
+        $(".header-nav").removeClass("header-nav-open");
+
+        $(".header__nav-btn").click(function () {
+            $("body").toggleClass("nav--open");
+            $(".header__nav-btn").toggleClass("header__nav-btn--active");
+            $(".header-nav").toggleClass("header-nav-open");
+        })
+    }, [])
+
     return (
         <Fragment>
             <header className="header-nav">
@@ -10,26 +28,26 @@ function Header(props) {
                     <nav className="header-nav-menu" aria-label="Main">
                         <ul>
                             <li>
-                                <Link aria-current="page" className="active" to={"/"}>
+                                <Link aria-current="page" className={pathname === "/" ? "active" : ""} to={"/"}>
                                     <span className="menu-item-title text-gradient">Home</span>
                                     <span>Introduction about me</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/about"}>
+                                <Link to={"/about"} className={pathname === "/about" ? "active" : ""} >
                                     <span className="menu-item-title text-gradient">About</span>
                                     <span>Professional skills and experience</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/portfolio"}>
+                                <Link to={"/portfolio"} className={pathname === "/portfolio" ? "active" : ""}>
                                     <span className="menu-item-title text-gradient">Portfolio</span>
                                     <span>Some of the projects I worked on</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/contact"}>
-                                    <span className="menu-item-title text-gradient">Contact</span>
+                                <Link to={"/contact"} className={pathname === "/contact" ? "active" : ""}>
+                                    <span className="menu-item-title text-gradient">Say Hello</span>
                                     <span>Get in touch, I will buy the coffee</span>
                                 </Link>
                             </li>
@@ -46,7 +64,7 @@ function Header(props) {
                         </Link>
                     </div>
                     <div className="site-header-burger">
-                        <div className="ml-3 burger js-menu-trigger">
+                        <div className="ml-3 burger" onClick={window.menuTriggerFunction}>
                             <span className="closed"><img src={"https://githubuniverse.com/assets/img/svgs/burger.svg"} alt="menu icon" /></span>
                             <span className="open"><img src={"https://githubuniverse.com/assets/img/svgs/close.svg"} alt="close icon" /></span>
                         </div>
@@ -63,17 +81,12 @@ function Header(props) {
                                     <span>Portfolio</span>
                                 </Link>
                             </li>
-                            <li className="watch-sub-nav service">
-                                <Link to={"/services"}>
-                                    <span>Services</span>
-                                </Link>
-                            </li>
                             <li className="watch-sub-nav about">
                                 <Link to={"/about"}>
                                     <span>About</span>
                                 </Link>
                             </li>
-                            <li className="contact">
+                            <li className="gradient-btn">
                                 <Link to={"/contact"}>
                                     <span>Say Hello</span>
                                 </Link>
@@ -89,11 +102,11 @@ function Header(props) {
                 </Link>
 
                 <nav className="en">
-                    <button type="button" class="header__nav-btn " aria-label="Toggle main navigation" aria-haspopup="true" aria-expanded="false">
-                        <span class="header__nav-btn-icon">
-                            <span class="span-1"></span>
-                            <span class="span-2"></span>
-                            <span class="span-3"></span>
+                    <button type="button" className="header__nav-btn " aria-label="Toggle main navigation" aria-haspopup="true" aria-expanded="false">
+                        <span className="header__nav-btn-icon">
+                            <span className="span-1"></span>
+                            <span className="span-2"></span>
+                            <span className="span-3"></span>
                         </span>
                     </button>
                 </nav>

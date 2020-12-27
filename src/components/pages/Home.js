@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from "../common/Header";
 
 function Home(props) {
 
+    useEffect(() => {
+        let checkInterval = setInterval(() => {
+            try {
+                window.threeJsAnimation();
+                window.wordSpinner();
+                window.textAnimation();
+                clearInterval(checkInterval);
+            } catch (e) {
+                
+            }
+        }, 100);
+    }, [])
+
     return (
         <div className="main-wrapper">
-            <Header />
+            <Header props={props} />
             <main id="content" className="main page-content" aria-label="Content">
                 <div className="container-full header-content" id="home-detail">
                     <div className="content__main">
                         <div className="main-hero-text">
                             <div className="content">
                                 <div className="text-loading-mask">
-                                    <h3 itemProp="specialty" className="main-hero-subtitle h5 hero-hi">Hi there,</h3>
+                                    <h3 itemProp="specialty" className="main-hero-subtitle h5 hero-hi">Hi there, I am</h3>
                                 </div>
                                 <div className="text-loading-mask">
                                     <h1 itemProp="author" className="main-hero-title text-gradient">Radhakishan Jangid</h1>
                                 </div>
                                 <div className="text-loading-mask">
                                     <h3 itemProp="specialty" className="main-hero-subtitle h5">
-                                        Interested in JavaScript, have over 3 years of professional experience in building the web and app project with technologies like
-                                    <span className="word-spinner">
+                                        In love with JavaScript, have over 3 years of professional experience in building the web and app project with technologies like
+                                        <span className="word-spinner">
                                             <span className="word-spinner-inner">
                                                 <span className="word-spinner-item">
                                                     <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/react.svg"} alt="React" />
@@ -49,6 +63,13 @@ function Home(props) {
                                             </span>
                                         </span>
                                     </h3>
+                                </div>
+                                <div className="intro-section">
+                                    <Link to={"/portflio"} className="gradient-btn">
+                                        <button type="button" className="btn">
+                                            My Portfolio
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
