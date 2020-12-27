@@ -1,9 +1,25 @@
+@-webkit-keyframes slide {
+    100% { left: 0; }
+}
+
+@keyframes slide {
+    100% { left: 0; }
+}
+.main-wrapper {
+    overflow: hidden;
+}
+
 body.page-home {
     position: relative;
     z-index: 1;
     padding-top: 0;
 }
 body.page-ready {
-    transition-delay: 1s ease;
+    /* transition-delay: 1s ease; */
     opacity: 1;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 0.5s forwards;
+    animation-delay: 2s;
+    z-index: 500;
 }
