@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from "../common/Header";
+import Loader from "../common/Loader";
 
 function Home(props) {
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         let checkInterval = setInterval(() => {
@@ -11,6 +13,7 @@ function Home(props) {
                 window.wordSpinner();
                 window.textAnimation();
                 clearInterval(checkInterval);
+                setIsLoading(false)
             } catch (e) {
                 
             }
@@ -19,6 +22,7 @@ function Home(props) {
 
     return (
         <div className="main-wrapper">
+            <Loader isLoading={isLoading} />
             <Header props={props} />
             <main id="content" className="main page-content" aria-label="Content">
                 <div className="container-full header-content" id="home-detail">
