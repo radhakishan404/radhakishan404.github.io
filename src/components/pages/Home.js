@@ -14,16 +14,19 @@ function Home(props) {
                 window.wordSpinner();
                 window.textAnimation();
                 clearInterval(checkInterval);
-                setIsLoading(false)
+
+                setTimeout(() => {
+                    setIsLoading(false)
+                }, 4000);
             } catch (e) {
-                
+
             }
         }, 100);
     }, [])
 
     return (
         <div className="main-wrapper">
-            {/* <Loader isLoading={isLoading} /> */}
+            <Loader isLoading={isLoading} bgColor="f2f2f2" icon="https://s.gravatar.com/avatar/d2ce5c403a09447328dc8354aaa915ba?size=100&default=retroa" />
             <Header props={props} />
             <main id="content" className="main page-content" aria-label="Content">
                 <div className="container-full header-content" id="home-detail">
