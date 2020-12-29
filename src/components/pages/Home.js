@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from "../common/Header";
-import Loader from "../common/Loader";
+// import Loader from "../common/Loader";
+import Loader from "react-animation-loader";
 
 function Home(props) {
     const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +23,7 @@ function Home(props) {
 
     return (
         <div className="main-wrapper">
-            <Loader isLoading={isLoading} />
+            {/* <Loader isLoading={isLoading} /> */}
             <Header props={props} />
             <main id="content" className="main page-content" aria-label="Content">
                 <div className="container-full header-content" id="home-detail">
