@@ -19,7 +19,11 @@ function Header(props) {
             $(".header__nav-btn").toggleClass("header__nav-btn--active");
             $(".header-nav").toggleClass("header-nav-open");
         })
-    }, [])
+    }, []);
+
+    const menuTriggerFunction = () => {
+        $('body').toggleClass('menu-is-active');
+    }
 
     return (
         <Fragment>
@@ -64,7 +68,7 @@ function Header(props) {
                         </Link>
                     </div>
                     <div className="site-header-burger">
-                        <div className="ml-3 burger" onClick={window.menuTriggerFunction}>
+                        <div className="ml-3 burger" onClick={() => menuTriggerFunction()}>
                             <span className="closed"><img src={"https://githubuniverse.com/assets/img/svgs/burger.svg"} alt="menu icon" /></span>
                             <span className="open"><img src={"https://githubuniverse.com/assets/img/svgs/close.svg"} alt="close icon" /></span>
                         </div>
