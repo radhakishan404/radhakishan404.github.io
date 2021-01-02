@@ -3,11 +3,6 @@ $(document).ready(function () {
     $('body').removeClass('no-js');
 })
 
-function menuTriggerFunction() {
-    ($('body').toggleClass('menu-is-active'));
-}
-
-
 function threeJsAnimation() {
     init();
     animate();
@@ -35,7 +30,7 @@ var container,
 
 function init() {
     container = document.createElement("div");
-    $("#home-detail").find(".content__main").append(container);
+    $(".content__main").append(container);
     document.body.style.overflow = "hidden";
 
     HEIGHT = window.innerHeight;
