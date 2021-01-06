@@ -31,7 +31,7 @@ var container,
 function init() {
     container = document.createElement("div");
     $(".content__main").append(container);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
 
     HEIGHT = window.innerHeight;
     WIDTH = window.innerWidth;
@@ -304,3 +304,11 @@ function renderText(a) {
         particles[i].render();
     }
 };
+
+$(".header-content").on("click", function() {
+    if ($("body").hasClass("nav--open")) {
+        $("body").removeClass("nav--open");
+        $(".header__nav-btn").removeClass("header__nav-btn--active");
+        $(".header-nav").removeClass("header-nav-open");
+    }
+});
