@@ -1,0 +1,73 @@
+@import "./Setting.scss";
+
+section {
+    padding: 5em 2em;
+    font-family: $second-font;
+}
+
+.intro {
+    position: relative;
+    @include start-at(600px) {
+        display: grid;
+        width: min-content;
+        margin: 0 auto;
+        grid-column-gap: 1em;
+        grid-template-areas:
+            "img title"
+            "img subtitle";
+        grid-template-columns: min-content max-content;
+    }
+
+    .intro-title {
+        font-weight: 900;
+        color: #fff !important;
+        transition: 2s;
+        margin-bottom: 0.25em;
+        font-size: 2rem;
+        padding-top: 25%;
+
+        @include start-at(766px) {
+            font-size: 4rem;
+            padding-top: 0;
+        }
+
+        strong {
+            display: block;
+            font-weight: bolder;
+        }
+    }
+
+    .intro-img {
+        box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25), 0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
+        @include start-at(600px) {
+            grid-area: img;
+            min-width: 250px;
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    .section-subtitle {
+        padding: 0.25em 1em;
+        margin-bottom: 1em;
+        content: "";
+        transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        z-index: -3;
+        background: linear-gradient(269.16deg, #ffe580 -15.83%, #ff7571 -4.97%, #ff7270 15.69%, #ea5dad 32.43%, #c2a0fd 50.09%, #9867f0 67.47%, #3bf0e4 84.13%, #33ce43 105.13%, #b2f4b6 123.24%);
+        background-position: 58% 50%;
+        background-size: 500%;
+        animation: gradient-shift 30s ease infinite;
+        border-radius: 50px;
+
+        @include start-at(600px) {
+            align-self: start;
+            grid-column: -1 / 1;
+            grid-row: 2;
+            text-align: right;
+            position: relative;
+            left: -1.5em;
+            width: calc(100% + 1.5em);
+        }
+    }
+}
