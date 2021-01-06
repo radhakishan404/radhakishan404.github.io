@@ -42,7 +42,7 @@ function Home(props) {
                     <div className="content__main">
                         <div className="main-hero-text">
                             <section className="intro" id="home">
-                                <h1 class="intro-title">
+                                <h1 className="intro-title">
                                     Hi I am,
                                     <strong className="text-gradient">Radhakishan</strong>
                                     <strong className="text-gradient">Jangid</strong>
@@ -80,57 +80,9 @@ function Home(props) {
                                 <LazyLoadImage
                                     src="https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/master/src/images/radhakishan-web-3.jpg"
                                     alt="Radhakishan Jangid image solving error"
-                                    class="intro-img"
+                                    className="intro-img"
                                 />
                             </section>
-                            {/* <div className="content">
-                                <div className="text-loading-mask">
-                                    <h3 itemProp="specialty" className="main-hero-subtitle h5 hero-hi">Hi there, I am</h3>
-                                </div>
-                                <div className="text-loading-mask">
-                                    <h1 itemProp="author" className="main-hero-title text-gradient">Radhakishan Jangid</h1>
-                                </div>
-                                <div className="text-loading-mask">
-                                    <h3 itemProp="specialty" className="main-hero-subtitle h5">
-                                        In love with JavaScript, have over 3 years of professional experience in building the web and app project with technologies like
-                                        <span className="word-spinner">
-                                            <span className="word-spinner-inner">
-                                                <span className="word-spinner-item">
-                                                    <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/react.svg"} alt="React" />
-                                                    <span className="word-spinner-word"> React </span>
-                                                </span>
-                                                <span className="word-spinner-item">
-                                                    <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/nodejs.svg"} alt="Node Js" />
-                                                    <span className="word-spinner-word"> Node Js </span>
-                                                </span>
-                                                <span className="word-spinner-item">
-                                                    <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/php.svg"} alt="PHP" />
-                                                    <span className="word-spinner-word"> PHP </span>
-                                                </span>
-                                                <span className="word-spinner-item">
-                                                    <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/js.svg"} alt="JS" />
-                                                    <span className="word-spinner-word"> JavaScript </span>
-                                                </span>
-                                                <span className="word-spinner-item">
-                                                    <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/73f96cd68a57439c6184cf1b97384e9c66608eee/src/images/git.svg"} alt="Git" />
-                                                    <span className="word-spinner-word"> Git </span>
-                                                </span>
-                                                <span className="word-spinner-item">
-                                                    <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/f232e0771ca6148b5e3d6339df7144ba1d347fc2/src/images/mysql.svg"} alt="MySQL" />
-                                                    <span className="word-spinner-word"> MySQL </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </h3>
-                                </div>
-                                <div className="intro-section">
-                                    <Link to={"/portflio"} className="gradient-btn">
-                                        <button type="button" className="btn">
-                                            My Portfolio
-                                        </button>
-                                    </Link>
-                                </div> 
-                            </div>*/}
                         </div>
 
                         <div style={{ position: "absolute" }} id="scene-canvas">
