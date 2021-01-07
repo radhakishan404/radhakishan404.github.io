@@ -52,6 +52,28 @@
                             "skillDesc": "Converting design files to interactive, responsive and optimized web applications."
                         }
                     ]
+                },
+                {
+                    "title": "Back End Development",
+                    "description": "Building Node.js web applications and <strong>RESTful API</strong> servers using technologies like <strong>Express, Core PHP and CodeIgniter</strong>.",
+                    "skillsList": [
+                        {
+                            "skillTitle": "RESTful API",
+                            "skillDesc": "Experienced in Design and development of RESTful API servers using Node, PHP and CodeIgniter Framework."
+                        },
+                        {
+                            "skillTitle": "Web Development",
+                            "skillDesc": "Experienced in Design and development of Web Application using React Js, PHP, CodeIgniter and Laravel Framework."
+                        },
+                        {
+                            "skillTitle": "E-commerce",
+                            "skillDesc": "Design and development of E-Commerece using React Js, PHP, CodeIgniter and Laravel Framework."
+                        },
+                        {
+                            "skillTitle": "Payment Gateway",
+                            "skillDesc": "Experienced in working on server side payment systems with both PHP and NodeJS platforms."
+                        }
+                    ]
                 }
             ]
         }
