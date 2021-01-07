@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import "../css/Header.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import $ from "jquery";
-import { useLocation } from 'react-router-dom';
 
 function Header(props) {
     const location = useLocation();
