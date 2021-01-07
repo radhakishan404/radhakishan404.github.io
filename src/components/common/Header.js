@@ -1,15 +1,14 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import "../css/Header.scss";
 import { Link } from "react-router-dom";
 import $ from "jquery";
+import { useLocation } from 'react-router-dom';
 
 function Header(props) {
-    const [pathname, setPathname] = useState("");
+    const location = useLocation();
 
     useEffect(() => {
-        if (props.props && props.props.location && props.props.location.pathname) {
-            setPathname(props.props.location.pathname);
-        }
+        $('body').removeClass('menu-is-active');
         $("body").removeClass("nav--open");
         $(".header__nav-btn").removeClass("header__nav-btn--active");
         $(".header-nav").removeClass("header-nav-open");
@@ -18,7 +17,7 @@ function Header(props) {
             $("body").toggleClass("nav--open");
             $(".header__nav-btn").toggleClass("header__nav-btn--active");
             $(".header-nav").toggleClass("header-nav-open");
-        })
+        });
     }, []);
 
     const menuTriggerFunction = () => {
@@ -32,25 +31,25 @@ function Header(props) {
                     <nav className="header-nav-menu" aria-label="Main">
                         <ul>
                             <li>
-                                <Link aria-current="page" className={pathname === "/" ? "active" : ""} to={"/"}>
+                                <Link aria-current="page" className={location.pathname === "/" ? "active" : ""} to={"/"}>
                                     <span className="menu-item-title text-gradient">Home</span>
                                     <span>Introduction about me</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/about"} className={pathname === "/about" ? "active" : ""} >
+                                <Link to={"/about"} className={location.pathname === "/about" ? "active" : ""} >
                                     <span className="menu-item-title text-gradient">About</span>
                                     <span>Professional skills and experience</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/portfolio"} className={pathname === "/portfolio" ? "active" : ""}>
+                                <Link to={"/portfolio"} className={location.pathname === "/portfolio" ? "active" : ""}>
                                     <span className="menu-item-title text-gradient">Portfolio</span>
                                     <span>Some of the projects I worked on</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/contact"} className={pathname === "/contact" ? "active" : ""}>
+                                <Link to={"/contact"} className={location.pathname === "/contact" ? "active" : ""}>
                                     <span className="menu-item-title text-gradient">Say Hello</span>
                                     <span>Get in touch, I will buy the coffee</span>
                                 </Link>
