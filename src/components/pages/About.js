@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Header from "../common/Header";
 import Loader from "react-animation-loader";
 import $ from "jquery";
@@ -75,6 +75,39 @@ function About(props) {
 
 
                             <div className="container container-narrow mt-40 professional-skill">
+                                {
+                                    softdata.skills.map(function (skillVal, skillKey) {
+                                        return (
+                                            <Fragment key={skillKey}>
+                                                <h3 className="mt-40">{skillVal.skillName}</h3>
+                                                <br />
+                                                {
+                                                    skillVal.skillType.map(function (skillTypeVal, skillTypeKey) {
+                                                        return (
+                                                            <Fragment key={skillTypeKey}>
+                                                                <h5 className="sub-accent text-gradient">{skillTypeVal.title}</h5>
+                                                                <p dangerouslySetInnerHTML={{ __html: skillTypeVal.description }}></p>
+                                                                <ul>
+                                                                    {
+                                                                        skillTypeVal.skillsList.map(function (skillListVal, skillListKey) {
+                                                                            return (
+                                                                                <Fragment key={skillListKey}>
+                                                                                    <li>
+                                                                                        <p> <strong>{skillListVal.skillTitle}</strong> - {skillListVal.skillDesc} </p>
+                                                                                    </li>
+                                                                                </Fragment>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </ul>
+                                                            </Fragment>
+                                                        )
+                                                    })
+                                                }
+                                            </Fragment>
+                                        )
+                                    })
+                                }
                                 <h3 className="mt-40">Professional skills</h3>
                                 <br />
                                 <h5 className="sub-accent text-gradient">Front End Development</h5>
