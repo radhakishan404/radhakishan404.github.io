@@ -1,5 +1,5 @@
 {
-    "experience" : [
+    "experience": [
         {
             "isCurrent": 1,
             "title": "Backend Developer",
@@ -29,6 +29,23 @@
             "from": "Aug 2018",
             "to": "July 2019",
             "description": "Responsible for feature development and maintenance of multiple project. I am in charge of main developing projects and writing end-to-end tests to ensure the best production quality."
+        }
+    ],
+    "skills": [
+        {
+            "skillName": "Professional skills",
+            "skillType": [
+                {
+                    "title": "Front End Development",
+                    "description": "Good sense of knowledge for <strong>Front End Development</strong>, building complex user interfaces with high level UX for both web and mobile.",
+                    "skillsList": [
+                        {
+                            "skillTitle": "JavaScript Development",
+                            "skillDesc": "Learning Architecting and building web/mobile applications with React, JavaScript/TypeScript."
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
