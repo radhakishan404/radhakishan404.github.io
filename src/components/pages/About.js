@@ -100,6 +100,7 @@ function About(props) {
                                                                         })
                                                                     }
                                                                 </ul>
+                                                                <br />
                                                             </Fragment>
                                                         )
                                                     })
@@ -108,46 +109,6 @@ function About(props) {
                                         )
                                     })
                                 }
-                                <h3 className="mt-40">Professional skills</h3>
-                                <br />
-                                <h5 className="sub-accent text-gradient">Front End Development</h5>
-                                <p>
-                                    Good sense of knowledge for <strong>Front End Development</strong>, building complex user interfaces with high level UX for both web and mobile.
-                                </p>
-                                <ul>
-                                    <li>
-                                        <p>
-                                            <strong>JavaScript Development</strong> - Learning Architecting and building web/mobile applications with React, JavaScript/TypeScript.
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p>
-                                            <strong>Responsive Design</strong> - adapting and optimizing web pages to work on all screen sizes (mobile and tablet devices).
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p>
-                                            <strong>Design to Web</strong> - converting design files to interactive, responsive and optimized web applications.
-                                        </p>
-                                    </li>
-                                </ul>
-                                <br />
-                                <h5 className="sub-accent text-gradient">Back End Development</h5>
-                                <p>Building Node.js web applications and <strong>RESTful API</strong> servers using technologies like <strong>Express, Core PHP and CodeIgniter</strong>.</p>
-                                <ul>
-                                    <li> <p> <strong>RESTful API</strong> - Experienced in Design and development of RESTful API servers using Node, PHP and CodeIgniter Framework. </p></li>
-                                    <li> <p> <strong>Web Development</strong> - Experienced in Design and development of Web Application using React Js, PHP, CodeIgniter and Laravel Framework. </p></li>
-                                    <li> <p> <strong>E-commerce</strong> - Design and development of E-Commerece using React Js, PHP, CodeIgniter and Laravel Framework. </p></li>
-                                    <li> <p> <strong>Payment Gateway</strong> - Experienced in working on server side payment systems with both PHP and NodeJS platforms. </p></li>
-                                </ul>
-                                <br />
-                                <h5 className="sub-accent text-gradient">Mobile App Development</h5>
-                                <p>Learning developing native and hybrid mobile applications using <strong>Ionic Framework</strong> and <strong>React Native Framework</strong>.</p>
-                                <ul>
-                                    <li><p><strong>Hybrid mobile apps</strong> - Learning development of hybrid mobile apps for Android, iOS and Windows Phone based on Ionic 3/Cordova or Ionic 4/Capacitor technologies.</p></li>
-                                    <li><p><strong>Native mobile apps</strong> - Learning development of native mobile apps for Android, iOS using React Native Framework.</p></li>
-                                </ul>
-                                <br />
                                 <h5 className="sub-accent text-gradient">Most used technologies</h5>
                                 <span className="skill-items">
                                     <span className="skill-item">
