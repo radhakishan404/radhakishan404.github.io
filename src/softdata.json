@@ -74,6 +74,20 @@
                             "skillDesc": "Experienced in working on server side payment systems with both PHP and NodeJS platforms."
                         }
                     ]
+                },
+                {
+                    "title": "Mobile App Development",
+                    "description": "Learning developing native and hybrid mobile applications using <strong>Ionic Framework</strong> and <strong>React Native Framework</strong>.",
+                    "skillsList": [
+                        {
+                            "skillTitle": "Hybrid mobile apps",
+                            "skillDesc": "Learning development of hybrid mobile apps for Android, iOS and Windows Phone based on Ionic 3/Cordova or Ionic 4/Capacitor technologies."
+                        },
+                        {
+                            "skillTitle": "Native mobile apps",
+                            "skillDesc": "Learning development of native mobile apps for Android, iOS using React Native Framework."
+                        }
+                    ]
                 }
             ]
         }
