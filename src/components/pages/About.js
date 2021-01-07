@@ -235,7 +235,7 @@ function About(props) {
                             </div>
 
                             <div className="container container-narrow mt-40">
-                                <h3 className="mt-40">Work Experience</h3>
+                                <h3 className="mt-40 main-title">Work Experience</h3>
 
                                 <ul className="work-experience">
                                     {

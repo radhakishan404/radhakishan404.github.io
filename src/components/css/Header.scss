@@ -1785,3 +1785,14 @@ canvas {
         margin: 10px 0 0;
     }
 }
+
+.work-experience>li+li {
+    margin-top: 40px;
+}
+
+.main-title {
+    font-size: 2em;
+    line-height: 1.2;
+    font-weight: 500;
+    color: #fff;
+}
