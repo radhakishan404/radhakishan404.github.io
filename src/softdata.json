@@ -42,6 +42,14 @@
                         {
                             "skillTitle": "JavaScript Development",
                             "skillDesc": "Learning Architecting and building web/mobile applications with React, JavaScript/TypeScript."
+                        },
+                        {
+                            "skillTitle": "Responsive Design",
+                            "skillDesc": "adapting and optimizing web pages to work on all screen sizes (mobile and tablet devices)."
+                        },
+                        {
+                            "skillTitle": "Design to Web",
+                            "skillDesc": "Converting design files to interactive, responsive and optimized web applications."
                         }
                     ]
                 }
