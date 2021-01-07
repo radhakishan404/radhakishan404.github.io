@@ -1,0 +1,34 @@
+{
+    "experience" : [
+        {
+            "isCurrent": 1,
+            "title": "Backend Developer",
+            "companyName": "TechStalwarts Software Development LLP",
+            "companyLink": "http://www.techstalwarts.com/",
+            "location": "Mumbai-Kurla",
+            "from": "September 2020",
+            "to": "Present",
+            "description": ""
+        },
+        {
+            "isCurrent": 0,
+            "title": "PHP Web Developer",
+            "companyName": "Innovins Softtech solutions Pvt. Ltd",
+            "companyLink": "https://www.innovins.com/",
+            "location": "Mumbai-Malad",
+            "from": "July 2019",
+            "to": "August 2020",
+            "description": "Responsible from feature development and maintenance of 4 different PHP Portal and Also creating New Project based on Core PHP and Making API in Core PHP."
+        },
+        {
+            "isCurrent": 0,
+            "title": "PHP Web Developer with CodeIgniter",
+            "companyName": "IMPAQ Technologies PVT. LTD",
+            "companyLink": "http://impaq.co.in/",
+            "location": "Mumbai-Lowerparel",
+            "from": "Aug 2018",
+            "to": "July 2019",
+            "description": "Responsible for feature development and maintenance of multiple project. I am in charge of main developing projects and writing end-to-end tests to ensure the best production quality."
+        }
+    ]
+}
