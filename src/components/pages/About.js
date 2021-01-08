@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Header from "../common/Header";
 import Loader from "react-animation-loader";
-import $ from "jquery";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import softdata from "../../softdata.json";
 
