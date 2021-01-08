@@ -5,7 +5,7 @@ import Loader from "react-animation-loader";
 import $ from "jquery";
 import "../css/Home.scss";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
+import softdata from "../../softdata.json";
 
 function Home(props) {
     const [isLoading, setIsLoading] = useState(true);
@@ -50,30 +50,16 @@ function Home(props) {
                                 <div className="section-subtitle">
                                     <span className="word-spinner">
                                         <span className="word-spinner-inner">
-                                            <span className="word-spinner-item">
-                                                <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/react.svg"} alt="React" />
-                                                <span className="word-spinner-word"> React </span>
-                                            </span>
-                                            <span className="word-spinner-item">
-                                                <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/nodejs.svg"} alt="Node Js" />
-                                                <span className="word-spinner-word"> Node Js </span>
-                                            </span>
-                                            <span className="word-spinner-item">
-                                                <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/php.svg"} alt="PHP" />
-                                                <span className="word-spinner-word"> PHP </span>
-                                            </span>
-                                            <span className="word-spinner-item">
-                                                <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/js.svg"} alt="JS" />
-                                                <span className="word-spinner-word"> JavaScript </span>
-                                            </span>
-                                            <span className="word-spinner-item">
-                                                <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/73f96cd68a57439c6184cf1b97384e9c66608eee/src/images/git.svg"} alt="Git" />
-                                                <span className="word-spinner-word"> Git </span>
-                                            </span>
-                                            <span className="word-spinner-item">
-                                                <img src={"https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/f232e0771ca6148b5e3d6339df7144ba1d347fc2/src/images/mysql.svg"} alt="MySQL" />
-                                                <span className="word-spinner-word"> MySQL </span>
-                                            </span>
+                                            {
+                                                softdata.skillSpiner.map(function (val, key) {
+                                                    return (
+                                                        <span className="word-spinner-item" key={key}>
+                                                            <img src={val.image} alt={val.title} />
+                                                            <span className="word-spinner-word"> {val.title} </span>
+                                                        </span>
+                                                    )
+                                                })
+                                            }
                                         </span>
                                     </span>
                                 </div>
