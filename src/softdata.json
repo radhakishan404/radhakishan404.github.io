@@ -91,5 +91,31 @@
                 }
             ]
         }
+    ],
+    "skillSpiner": [
+        {
+            "title": "React",
+            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/react.svg"
+        },
+        {
+            "title": "Node Js",
+            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/nodejs.svg"
+        },
+        {
+            "title": "PHP",
+            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/php.svg"
+        },
+        {
+            "title": "JavaScript",
+            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/js.svg"
+        },
+        {
+            "title": "Git",
+            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/73f96cd68a57439c6184cf1b97384e9c66608eee/src/images/git.svg"
+        },
+        {
+            "title": "MySQL",
+            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/f232e0771ca6148b5e3d6339df7144ba1d347fc2/src/images/mysql.svg"
+        }
     ]
 }
