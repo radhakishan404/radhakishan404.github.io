@@ -40,6 +40,17 @@ function Home(props) {
             <main id="content" className="main page-content" aria-label="Content" onClick={() => menuTriggerClose()}>
                 <div className="container-full header-content" id="home-detail">
                     <div className="content__main">
+
+                        <div style={{ position: "absolute" }} id="scene-canvas">
+                            <canvas id="scene" width="500px" height="500px"></canvas>
+                        </div>
+                        {
+                            isLoading
+                                ?
+                                <div className="loading-bg"></div>
+                                :
+                                null
+                        }
                         <div className="main-hero-text">
                             <section className="intro" id="home">
                                 <h1 className="intro-title">
@@ -69,10 +80,6 @@ function Home(props) {
                                     className="intro-img"
                                 />
                             </section>
-                        </div>
-
-                        <div style={{ position: "absolute" }} id="scene-canvas">
-                            <canvas id="scene" width="500px" height="500px"></canvas>
                         </div>
 
                         <ul className="social-vertical-stripe">
