@@ -42,7 +42,13 @@ function About(props) {
                         <div style={{ position: "absolute" }} id="scene-canvas">
                             <canvas id="scene" width="500px" height="500px"></canvas>
                         </div>
-
+                        {
+                            isLoading
+                                ?
+                                <div className="loading-bg"></div>
+                                :
+                                null
+                        }
                         <section className="section section-about">
                             <div className="container">
                                 <div className="card-box bg--dark">
@@ -53,7 +59,7 @@ function About(props) {
                                                 Hello Friends! I am Radhakishan Jangid. {myAge()} years old <strong className="text-gradient">Javascript and Backend developer</strong> based in Mumbai, India. My passion is web development. Over the past 2.5 year, I have gained a lot of experience with designing and developing numerious websites in React, Core PHP, Laravel, CodeIgniter, Node Js.
                                                 <br />
                                                 <br />
-                                                Currently, I work as Backend Developer at <strong className="text-gradient"><a href="http://www.techstalwarts.com/" target="_blank">TechStalwarts Software Development LLP</a></strong>.
+                                                Currently, I work as Backend Developer at <strong className="text-gradient"><a href="http://www.techstalwarts.com/" target="_blank" rel="noopener noreferrer">TechStalwarts Software Development LLP</a></strong>.
                                                 <br />
                                                 <br />
                                                 When not writing code, I really enjoy learning new stuff, playing games, doing workout in gym and specially chilling with friends. :).
