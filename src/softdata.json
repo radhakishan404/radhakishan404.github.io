@@ -117,5 +117,150 @@
             "title": "MySQL",
             "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/f232e0771ca6148b5e3d6339df7144ba1d347fc2/src/images/mysql.svg"
         }
+    ],
+    "filterTag": [
+        {
+            "title": "All"
+        },
+        {
+            "title": "React"
+        },
+        {
+            "title": "Node Js"
+        },
+        {
+            "title": "Design"
+        },
+        {
+            "title": "Front-end"
+        },
+        {
+            "title": "Back-end"
+        },
+        {
+            "title": "REST"
+        },
+        {
+            "title": "UX"
+        },
+        {
+            "title": "Website"
+        },
+        {
+            "title": "PHP"
+        }
+    ],
+    "project": [
+        {
+            "id": 1,
+            "title": "Nirulas",
+            "description": "Nirula's is India's oldest fast food restaurant chain.",
+            "logo": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-logo.png?raw=true",
+            "thumbnail": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-thumb.png?raw=true",
+            "gitAvailable": false,
+            "technology": "React, Express, Node Js, Javascript, Redux, Amazon, Google Analytics",
+            "date": "November 2020",
+            "onlineLink": "https://delivery.nirulas.com/",
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "Nirula's is India's oldest fast food restaurant chain. Based in North India and most popular in the <strong>NCR Delhi</strong>. It was Delhi's first fast food restaurant, opening in Connaught Place in 1977. The website was initially build on Angular Js but was later moved to <strong>React and Node Js</strong>. React used on the client-side input handling and Node Js is used for the server-side to handle connectivity between databases. It utilizes some advanced <strong>page transition</strong> and <strong>animations</strong>.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://delivery.nirulas.com/",
+                            "text": "Link to live demo"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Product Listing"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Add to cart with Animation"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Coupon Apply"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Place Order"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "OTP verify"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Live location fetch"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Location based delivery"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Responsibilities",
+                    "contentDescription": "Responsible for the development of the complete website both front-end and back-end which entailed:",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Converting the <strong>HTML/CSS to JSX</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Design and Architecture of <strong>React Application</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Architecture of <strong>Node Js Application</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>REST API</strong> Integration"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>UI/UX</strong> Improvements"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Third Party <strong>Google Analytics, Message and Facebook Pixel</strong> API Integration"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>Implementation of complete Front-end and Back-end</strong>"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Challenges",
+                    "contentDescription": "The first challenge that I faced <strong>designing and architecting the base structure</strong> of the application. Building a web app for fast and durable react was a perfect choice for future growth and maintainability. <strong>React Components, React-Redux, and Lazy loading modules</strong> made this whole project lot easier by allowing me to separate the app logic by modules (per feature). One of the biggest challenges during development was maintaining the <strong>product customization and pricing module</strong>. I have created a separate component for the customization and called API based on the product by that I handled the <strong>customization and pricing part in Node JS API</strong>. I <strong>learned</strong> many new things while building this project still I am getting new changes and new phases to work on.",
+                    "contentList": null
+                }
+            ]
+        }
     ]
 }
