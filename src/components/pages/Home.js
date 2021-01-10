@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Header from "../common/Header";
 import Loader from "react-animation-loader";
 import $ from "jquery";
@@ -17,9 +16,12 @@ function Home(props) {
                 window.wordSpinner();
                 window.textAnimation();
                 clearInterval(checkInterval);
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 2000);
+                let checkInterval2 = setInterval(() => {
+                    if (document.readyState == "complete") {
+                        setIsLoading(false);
+                        clearInterval(checkInterval2);
+                    }
+                }, 100);
             } catch (e) {
             }
         }, 100);
