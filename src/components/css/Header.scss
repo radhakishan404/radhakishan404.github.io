@@ -594,6 +594,7 @@ $max-logo-width: 202px;
     height: 100%;
     width: 100%;
     left: 0;
+    font-family: $second-font;
     background: rgba($black, 0.96);
     z-index: 10;
     bottom: $header-height;
@@ -1577,6 +1578,22 @@ canvas {
     }
 }
 
+.col-md-8 {
+    @include start-at(768px) {
+        -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+}
+
+.col-md-4 {
+    @include start-at(768px) {
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
 .col-md-9 {
     @include start-at(768px) {
         -ms-flex: 0 0 75%;
@@ -1894,6 +1911,7 @@ canvas {
             -webkit-transition: background 0.3s, border 0.3s;
             transition: background 0.3s, border 0.3s;
             overflow: visible;
+            font-family: $second-font;
 
             &:focus {
                 -webkit-box-shadow: 0 0 8px rgba(226, 120, 108, 0.5);
@@ -1960,6 +1978,7 @@ canvas {
                 padding: 3px 15px;
                 border: none;
                 color: inherit;
+                font-family: $second-font;
             }
 
             .project-tag {
@@ -2054,7 +2073,7 @@ canvas {
                 display: block;
                 width: 40px;
                 height: 40px;
-                background: #444857;
+                background: transparent;
                 overflow: hidden;
                 font: 10px/1 monospace;
                 border-radius: 4px;
@@ -2217,15 +2236,13 @@ canvas {
             height: 45px;
             z-index: 1;
             display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
             -webkit-box-align: center;
             -webkit-align-items: center;
             -ms-flex-align: center;
             align-items: center;
             font-size: 12px;
             overflow: hidden;
+            line-height: 50px;
 
             .single-stats {
                 -webkit-transform: translateY(-50%);
@@ -2392,5 +2409,128 @@ canvas {
         padding: 40px 0 0;
         background: $primary;
         background: linear-gradient(45deg, $primary, #2a3d6e);
+    }
+}
+
+.portfolio-info {
+    padding: 60px 0;
+
+    .carousel {
+        width: 100%;
+        margin-bottom: 60px;
+        overflow: hidden;
+
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+
+            .carousel-item {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                z-index: 1;
+                overflow: hidden;
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                opacity: 0;
+                visibility: hidden;
+                -webkit-transition: opacity 1s, visibility 1s;
+                transition: opacity 1s, visibility 1s;
+
+                .image-wrapper {
+                    position: relative;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+
+    .portfolio-sidebar {
+        position: sticky;
+        top: 30px;
+
+        .technology-info {
+            padding: 20px;
+
+            h5 {
+                margin: 0 0 10px;
+                font-size: 1.2em;
+            }
+
+            .tech-list {
+                list-style: none;
+                margin: 0 -3px;
+                padding: 0;
+                font-size: 1.2em;
+
+                li {
+                    font-size: 0.875rem;
+                    height: 28px;
+                    margin: 3px;
+                    padding: 0 8px;
+                    line-height: 28px;
+                    display: inline-block;
+                    background: rgba(0, 0, 0, 0.9);
+                    color: #fff;
+                    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+                    transition: opacity 0.3s, -webkit-transform 0.3s;
+                    transition: transform 0.3s, opacity 0.3s;
+                    transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+                    -webkit-transition-delay: 0s;
+                    transition-delay: 0s;
+                }
+            }
+        }
+
+        .date-info,
+        .online-info {
+            padding: 20px;
+            margin-top: 30px;
+
+            h5 {
+                margin: 0 0 10px;
+                font-size: 1.2em;
+            }
+            p {
+                margin: 0;
+            }
+        }
+    }
+}
+
+.post-content {
+    h2 {
+        font-size: 1.8rem;
+        margin: 40px 0 15px;
+        display: flex;
+
+        a {
+            align-self: center;
+            margin-right: 5px;
+        }
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.6;
+        font-weight: 300;
+
+    }
+
+    ul {
+        margin: 5px 0 5px 25px;
+        font-size: 18px;
+        line-height: 1.6;
+        font-weight: 300;
+        list-style-type: disc;
+
+        li {
+            margin: 5px 0 5px 25px;
+
+        }
     }
 }
