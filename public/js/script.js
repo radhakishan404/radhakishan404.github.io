@@ -313,7 +313,3 @@ $(".header-content").on("click", function () {
         $(".header-nav").removeClass("header-nav-open");
     }
 });
-
-jQuery(document).ready(function() {
-    console.log("loaded");
-});
