@@ -19,21 +19,21 @@ input,
 button,
 select,
 textarea {
-    font-family: $second-font;
+    font-family: $nova-font;
     font-size: $base-font-size;
     line-height: $base-line-height;
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-smoothing: antialiased;
-    color: hsla(0,0%,100%,.8);
+    color: hsla(0, 0%, 100%, 0.8);
     font-feature-settings: "ss02" on;
 }
 
 strong {
-    font-family: Poppins,sans-serif;
+    font-family: Poppins, sans-serif;
     font-weight: 500;
-    font-size: .925em;
+    font-size: 0.925em;
     color: #fff;
 }
 
@@ -103,7 +103,7 @@ hr {
 }
 
 body {
-    line-height: 1;
+    line-height: 1.6;
 }
 
 ol,
@@ -146,4 +146,12 @@ textarea {
 }
 .pt-10 {
     padding-top: 10px;
+}
+
+hr {
+    background: #fff;
+    height: 1px;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    border: none;
 }
