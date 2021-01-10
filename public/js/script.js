@@ -3,9 +3,10 @@ $(document).ready(function () {
     $('body').removeClass('no-js');
 })
 
-function threeJsAnimation() {
-    init();
-    animate();
+async function threeJsAnimation() {
+    await init();
+    await animate();
+    return true;
 }
 
 var scene, camera, renderer;
@@ -305,10 +306,14 @@ function renderText(a) {
     }
 };
 
-$(".header-content").on("click", function() {
+$(".header-content").on("click", function () {
     if ($("body").hasClass("nav--open")) {
         $("body").removeClass("nav--open");
         $(".header__nav-btn").removeClass("header__nav-btn--active");
         $(".header-nav").removeClass("header-nav-open");
     }
+});
+
+jQuery(document).ready(function() {
+    console.log("loaded");
 });
