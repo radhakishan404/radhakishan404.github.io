@@ -12,9 +12,12 @@ function About(props) {
             try {
                 window.threeJsAnimation();
                 clearInterval(checkInterval);
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 1000);
+                let checkInterval2 = setInterval(() => {
+                    if (document.readyState == "complete") {
+                        setIsLoading(false);
+                        clearInterval(checkInterval2);
+                    }
+                }, 100);
             } catch (e) {
             }
         }, 100);
