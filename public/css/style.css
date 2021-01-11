@@ -70,13 +70,27 @@ body.page-ready {
     outline: none;
 }
 
-.carousel .control-dots .dot.selected, .carousel .control-dots .dot:hover {
+.carousel .control-dots .dot.selected,
+.carousel .control-dots .dot:hover {
     transform: scale(1.4);
-    background: linear-gradient(270.97deg, #ffe580 -21.36%, #ff7571 -2.45%, #ea5dad 26.84%, #c2a0fd 64.15%, #3bf0e4 108.29%, #b2f4b6 159.03%) !important;
+    background: linear-gradient(
+        270.97deg,
+        #ffe580 -21.36%,
+        #ff7571 -2.45%,
+        #ea5dad 26.84%,
+        #c2a0fd 64.15%,
+        #3bf0e4 108.29%,
+        #b2f4b6 159.03%
+    ) !important;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
     background-position: 58% 50%;
     background-size: 500%;
     animation: gradient-shift 30s ease infinite;
+}
+
+.carousel .control-arrow:before,
+.carousel.carousel-slider .control-arrow:before {
+    content: none !important;
 }
