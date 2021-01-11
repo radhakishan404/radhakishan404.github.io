@@ -5,12 +5,26 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import softdata from "../../softdata.json";
 import { permalinkGenerate } from "../../Helper";
+import $ from "jquery";
 
 function PortfolioDetail(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [uniqueProject, setUniqueProject] = useState(false);
 
     useEffect(() => {
+
+        var inteval = setInterval(() => {
+            if ($(".control-prev") && $(".control-next")) {
+                $(".control-prev").html('');
+                $(".control-prev").append('<img src="https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/c220e60db6262aac2d0abe3cf646978507d2bd81/src/images/left.svg" alt="Previous slide">');
+                $(".control-prev").append('<img src="https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/c220e60db6262aac2d0abe3cf646978507d2bd81/src/images/left.svg" alt="Previous slide">');
+                $(".control-next").html('');
+                $(".control-next").append('<img src="https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/c220e60db6262aac2d0abe3cf646978507d2bd81/src/images/right.svg" alt="Next slide">');
+                $(".control-next").append('<img src="https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/c220e60db6262aac2d0abe3cf646978507d2bd81/src/images/right.svg" alt="Next slide">');
+                clearInterval(inteval);
+            }
+        }, 100);
+
         let checkInterval = setInterval(() => {
             try {
                 window.threeJsAnimation();
@@ -58,7 +72,9 @@ function PortfolioDetail(props) {
                         <section className="section portfolio-details">
                             <div className="bg--dark">
                                 <div className="container">
-                                    <h1>{uniqueProject.title}</h1>
+                                    <h1>
+                                        {uniqueProject.title}
+                                    </h1>
                                     <p>{uniqueProject.description}</p>
                                 </div>
                             </div>
@@ -79,6 +95,15 @@ function PortfolioDetail(props) {
                                                                 showStatus={false}
                                                                 useKeyboardArrows={true}
                                                             >
+                                                                {
+                                                                    uniqueProject.sliderImages.map(function (sliderVal, sliderKey) {
+                                                                        return (
+                                                                            <div key={sliderKey}>
+                                                                                <img src={sliderVal.image} alt="Slider Images" />
+                                                                            </div>
+                                                                        )
+                                                                    })
+                                                                }
                                                             </Carousel>
                                                         </div>
                                                     </div>
@@ -104,7 +129,7 @@ function PortfolioDetail(props) {
                                                                                                         ?
                                                                                                         <li><a className="text-gradient" href={listVal.link} target="_blank" rel="noreferrer"><strong>{listVal.text}</strong></a></li>
                                                                                                         :
-                                                                                                        <li dangerouslySetInnerHTML={{__html: listVal.text}}></li>
+                                                                                                        <li dangerouslySetInnerHTML={{ __html: listVal.text }}></li>
                                                                                                 }
                                                                                             </Fragment>
                                                                                         )
