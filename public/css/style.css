@@ -94,3 +94,21 @@ body.page-ready {
 .carousel.carousel-slider .control-arrow:before {
     content: none !important;
 }
+
+
+table {
+    display: block;
+    white-space: normal;
+    overflow-x: auto;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+td {
+    line-height: 1.4;
+}
+td, th {
+
+    padding: 9px 13px;
+    border: 1px solid #d8d8d8;
+}
