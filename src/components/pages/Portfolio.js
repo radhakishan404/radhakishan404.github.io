@@ -69,9 +69,9 @@ function Portfolio(props) {
                                 <div className="width-wrapper">
                                     <div className="item-grid pen-grid">
                                         {
-                                            softdata.project.map(function (proVal, proKey) {
+                                            softdata.project && softdata.project.filter(obj => activeFilterTag === "All" ? obj : obj.tag.includes(activeFilterTag)).map(function (proVal, proKey) {
                                                 return (
-                                                    <article className="single-pen single-item" data-component="Item" key={proKey}>
+                                                    <article className="single-pen single-item" data-component="Item" key={proKey} title={proVal.title}>
                                                         <header className="header">
                                                             <Link to={"/portfolio/" + permalinkGenerate(proVal.title)} className="authorAvatar">
                                                                 <img src={proVal.logo} alt={"Project Icon for " + proVal.title} className="user-avatar" width="40" height="40" />
@@ -84,7 +84,7 @@ function Portfolio(props) {
                                                             </div>
                                                         </header>
                                                         <div className="iframe-wrap">
-                                                            <img className="grid-preview-image" loading="lazy" alt="" src="https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-thumb.png?raw=true" />
+                                                            <img className="grid-preview-image" loading="lazy" alt="" src={proVal.thumbnail} />
                                                             <Link className="cover-link" to={"/portfolio/" + permalinkGenerate(proVal.title)}></Link>
                                                             <Link to={"/portfolio/" + permalinkGenerate(proVal.title)} className="item-share" data-popup-button="true">
                                                                 <button title="View Details">
@@ -98,7 +98,7 @@ function Portfolio(props) {
                                                                 proVal.gitAvailable
                                                                     ?
                                                                     <div className="project__ribbon">
-                                                                        <img src="https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/0810ee772225704f34d4c2264696c81b49819bc9/src/images/github.svg" alt="GitHub Icon" />
+                                                                        <img src="https://radhakishan.vpran.in/images/github.svg" alt="GitHub Icon" />
                                                                         <span>GitHub</span>
                                                                     </div>
                                                                     :
