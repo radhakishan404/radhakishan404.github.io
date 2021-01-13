@@ -95,27 +95,27 @@
     "skillSpiner": [
         {
             "title": "React",
-            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/react.svg"
+            "image": "https://radhakishan.vpran.in/images/react.svg"
         },
         {
             "title": "Node Js",
-            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/nodejs.svg"
+            "image": "https://radhakishan.vpran.in/images/nodejs.svg"
         },
         {
             "title": "PHP",
-            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/php.svg"
+            "image": "https://radhakishan.vpran.in/images/php.svg"
         },
         {
             "title": "JavaScript",
-            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/ffc4db411bd038b9d5d993ff89dadff5dd6e6cc1/src/images/js.svg"
+            "image": "https://radhakishan.vpran.in/images/js.svg"
         },
         {
             "title": "Git",
-            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/73f96cd68a57439c6184cf1b97384e9c66608eee/src/images/git.svg"
+            "image": "https://radhakishan.vpran.in/images/git.svg"
         },
         {
             "title": "MySQL",
-            "image": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/f232e0771ca6148b5e3d6339df7144ba1d347fc2/src/images/mysql.svg"
+            "image": "https://radhakishan.vpran.in/images/mysql.svg"
         }
     ],
     "filterTag": [
@@ -129,7 +129,31 @@
             "title": "Node Js"
         },
         {
+            "title": "JavaScript"
+        },
+        {
+            "title": "NPM"
+        },
+        {
+            "title": "GitHub"
+        },
+        {
             "title": "Design"
+        },
+        {
+            "title": "PHP"
+        },
+        {
+            "title": "MySql"
+        },
+        {
+            "title": "REST"
+        },
+        {
+            "title": "Application"
+        },
+        {
+            "title": "Website"
         },
         {
             "title": "Front-end"
@@ -138,16 +162,7 @@
             "title": "Back-end"
         },
         {
-            "title": "REST"
-        },
-        {
             "title": "UX"
-        },
-        {
-            "title": "Website"
-        },
-        {
-            "title": "PHP"
         }
     ],
     "project": [
@@ -155,27 +170,28 @@
             "id": 1,
             "title": "Nirulas",
             "description": "Nirula's is India's oldest fast food restaurant chain.",
-            "logo": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-logo.png?raw=true",
-            "thumbnail": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-thumb.png?raw=true",
+            "logo": "https://radhakishan.vpran.in/images/project/nirulas-logo.png",
+            "thumbnail": "https://radhakishan.vpran.in/images/project/nirulas-thumb.png",
             "gitAvailable": false,
-            "technology": "React, Express, Node Js, Javascript, Redux, Amazon, Google Analytics",
+            "tag": "React, Node Js, JavaScript, Front-end, Back-end, REST, UX, Website",
+            "technology": "React, Express, Node Js, JavaScript, Redux, Amazon, Google Analytics",
             "date": "November 2020",
             "onlineLink": "https://delivery.nirulas.com/",
             "sliderImages": [
                 {
-                    "image": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/slider-5.gif?raw=true"
+                    "image": "https://radhakishan.vpran.in/images/project/slider-5.gif"
                 },
                 {
-                    "image": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-slider-1.png?raw=true"
+                    "image": "https://radhakishan.vpran.in/images/project/nirulas-slider-1.png"
                 },
                 {
-                    "image": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-slider-2.png?raw=true"
+                    "image": "https://radhakishan.vpran.in/images/project/nirulas-slider-2.png"
                 },
                 {
-                    "image": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-slider-3.png?raw=true"
+                    "image": "https://radhakishan.vpran.in/images/project/nirulas-slider-3.png"
                 },
                 {
-                    "image": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-slider-4.png?raw=true"
+                    "image": "https://radhakishan.vpran.in/images/project/nirulas-slider-4.png"
                 }
             ],
             "content": [
@@ -269,6 +285,11 @@
                             "isLink": false,
                             "link": "",
                             "text": "<strong>Implementation of complete Front-end and Back-end</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>Deployment</strong> of both React and Node Js Application"
                         }
                     ]
                 },
@@ -283,38 +304,41 @@
             "id": 2,
             "title": "Covid-19 Tracker",
             "description": "Covid-19 Tracker is a simple React Native application.",
-            "logo": "https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/master/src/images/project/covid-19-logo.png",
-            "thumbnail": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-thumb.png?raw=true",
+            "logo": "https://radhakishan.vpran.in/images/project/covid/covid-19-logo.png",
+            "thumbnail": "https://radhakishan.vpran.in/images/project/covid/covid-19-thumb.png",
             "gitAvailable": true,
-            "technology": "React, Express, Node Js, Javascript, Redux, Amazon, Google Analytics",
-            "date": "November 2020",
-            "onlineLink": "https://delivery.nirulas.com/",
+            "tag": "React, JavaScript, Application, REST, UX, Design, GitHub",
+            "technology": "React Native, Expo, Mathdroid Covid API, Novelcovid API, React Navigation",
+            "date": "3 April, 2020 - 13 April, 2020",
+            "onlineLink": "http://radhakishan.vpran.in/covid-download.php",
             "sliderImages": [
                 {
-                    "image": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/slider-5.gif?raw=true"
+                    "image": "https://radhakishan.vpran.in/images/project/covid/covid-slider-1.png"
                 },
                 {
-                    "image": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-slider-1.png?raw=true"
+                    "image": "https://radhakishan.vpran.in/images/project/covid/covid-slider-2.png"
                 },
                 {
-                    "image": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-slider-2.png?raw=true"
+                    "image": "https://radhakishan.vpran.in/images/project/covid/covid-slider-3.png"
                 },
                 {
-                    "image": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-slider-3.png?raw=true"
-                },
-                {
-                    "image": "https://github.com/radhakishan404/radhakishan-jangid-portfolio/blob/master/src/images/project/nirulas-slider-4.png?raw=true"
+                    "image": "https://radhakishan.vpran.in/images/project/covid/covid-slider-4.png"
                 }
             ],
             "content": [
                 {
                     "contentTitle": "Technical Specification",
-                    "contentDescription": "Nirula's is India's oldest fast food restaurant chain. Based in North India and most popular in the <strong>NCR Delhi</strong>. It was Delhi's first fast food restaurant, opening in Connaught Place in 1977. The website was initially build on Angular Js but was later moved to <strong>React and Node Js</strong>. React used on the client-side input handling and Node Js is used for the server-side to handle connectivity between databases. It utilizes some advanced <strong>page transition</strong> and <strong>animations</strong>.",
+                    "contentDescription": "Covid-19 Tracker is a simple <strong>React Native</strong> application that shows you the Current and <strong>Total Infected, Recovered, and Deaths</strong> of people all around the globe and you can see data based on <strong>country selection</strong>.",
                     "contentList": [
                         {
                             "isLink": true,
-                            "link": "https://delivery.nirulas.com/",
-                            "text": "Link to live demo"
+                            "link": "https://radhakishan.vpran.in/covid-download.php",
+                            "text": "Link to download the apk file"
+                        },
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/covid-19-tracker",
+                            "text": "Source Code"
                         }
                     ]
                 },
@@ -325,43 +349,221 @@
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Product Listing"
+                            "text": "Country Selector"
                         },
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Add to cart with Animation"
+                            "text": "React Native Line and Bar Chart"
                         },
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Coupon Apply"
+                            "text": "Image gallery"
                         },
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Place Order"
+                            "text": "Stylish Bottom Navigation Bar"
                         },
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "OTP verify"
-                        },
-                        {
-                            "isLink": false,
-                            "link": "",
-                            "text": "Live location fetch"
-                        },
-                        {
-                            "isLink": false,
-                            "link": "",
-                            "text": "Location based delivery"
+                            "text": "Search country and get latest data"
                         }
                     ]
                 },
                 {
                     "contentTitle": "Responsibilities",
-                    "contentDescription": "Responsible for the development of the complete website both front-end and back-end which entailed:",
+                    "contentDescription": "My responsibilities for this project included design and development of a complete application.",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Design and Architecture of <strong>React Application</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>API</strong> Integration"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>UI/UX</strong> Improvements"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>Implementation of complete Application</strong>"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Challenges",
+                    "contentDescription": "This was my first <strong>React Native</strong> Application. I had some problems at the start but later I was able to <strong>understand the problem and solve them</strong>. The biggest challenge for me was the <strong>Image gallery</strong> section for making the images responsive, In the end, I was able to make all images <strong>proper and responsive</strong>.",
+                    "contentList": null
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Health Monitoring System",
+            "description": "Health Monitoring System - Patient-Doctor Live Chat!",
+            "logo": "https://radhakishan.vpran.in/images/project/hms/hms-logo.png",
+            "thumbnail": "https://radhakishan.vpran.in/images/project/hms/hms-thumb.png",
+            "gitAvailable": true,
+            "tag": "React, JavaScript, Back-end, REST, UX, Design, PHP, MySql, GitHub",
+            "technology": "React Js, React-Redux, PHP, MySql, HTML, CSS, JS, VS Code",
+            "date": "1 August, 2020 - 10 August, 2020",
+            "onlineLink": "https://healthmonitoring.radhakishan.vpran.in/",
+            "sliderImages": [
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-1.png"
+                },
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-2.png"
+                },
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-3.png"
+                },
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-4.png"
+                },
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-5.png"
+                },
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-6.png"
+                }
+            ],
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "<strong>Health Monitoring System</strong> is a simple web project where <strong>patients</strong> can add their <strong>readings</strong> and <strong>doctors</strong> can check patient's readings and can send direct <strong>messages to each other</strong> through the application. Both patients and doctors need to <strong>log in or register</strong> before proceeds. Both patient and doctors can <strong>live chat</strong> with each other.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://healthmonitoring.radhakishan.vpran.in/",
+                            "text": "Link to live demo"
+                        },
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/Health-Monitoring-System-Live-Chat",
+                            "text": "Front-end Source Code"
+                        },
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/Health-Monitoring-System-Live-Chat/tree/master/health-monitoring-php",
+                            "text": "API Source Code"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Login, Register, Forget Password"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Add, Edit, Delete, List (CRUD) for patient readings"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Chart view for Readings"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Profile Edit"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Doctors Message List"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Live Chat with doctors"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "List of patients"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Live search of patients"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Chart view details about patients"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Direct message to patients"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Live Chat with Patients"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "How to use?",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "First Install Node Js Version 14.8.0 from <a class='text-gradient' href='https://nodejs.org/en/' rel='nofollow'>Here ↩</a>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Clone the repo into your disk <br><strong class='code'>$ git clone git@github.com:ruanyf/react-demos.git</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Then go to your project directory using this command. <br><strong class='code'>$ cd project-directory</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "After navigating to your project directory run this command to download all the node modules. <br><strong class='code'>$ npm install</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "After the installation successful run this command to run the application. This command will start your react app and run it into the browser. <br><strong class='code'>$ npm start</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Hooray! Then play with the source files under the directories."
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>Note:</strong> After the start of the project, you have to integrate the <strong>PHP API</strong> for storing the data in the <strong>database</strong>."
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Responsibilities",
+                    "contentDescription": "Responsible for the development of the complete project both front-end and back-end which entailed:",
                     "contentList": [
                         {
                             "isLink": false,
@@ -376,7 +578,7 @@
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Architecture of <strong>Node Js Application</strong>"
+                            "text": "Architecture of <strong>PHP Application</strong>"
                         },
                         {
                             "isLink": false,
@@ -391,19 +593,642 @@
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Third Party <strong>Google Analytics, Message and Facebook Pixel</strong> API Integration"
-                        },
-                        {
-                            "isLink": false,
-                            "link": "",
-                            "text": "<strong>Implementation of complete Front-end and Back-end</strong>"
+                            "text": "<strong>Implementation of complete Application</strong>"
                         }
                     ]
                 },
                 {
                     "contentTitle": "Challenges",
-                    "contentDescription": "The first challenge that I faced <strong>designing and architecting the base structure</strong> of the application. Building a web app for fast and durable react was a perfect choice for future growth and maintainability. <strong>React Components, React-Redux, and Lazy loading modules</strong> made this whole project lot easier by allowing me to separate the app logic by modules (per feature). One of the biggest challenges during development was maintaining the <strong>product customization and pricing module</strong>. I have created a separate component for the customization and called API based on the product by that I handled the <strong>customization and pricing part in Node JS API</strong>. I <strong>learned</strong> many new things while building this project still I am getting new changes and new phases to work on.",
+                    "contentDescription": "I had only <strong>two main challenges</strong> in this project, one was the creation of a <strong>chat application between patients and doctors</strong>, and the second was the <strong>handling of two different users</strong> (Patients and Doctors) on the same panel. I used some of the online examples for <strong>chat systems</strong> and also my previous experience in other projects.",
                     "contentList": null
+                },
+                {
+                    "contentTitle": "Resources",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "ReactJS: Refer to <a href='https://reactjs.org/' class='text-gradient'>https://reactjs.org/</a> to understand the concepts of ReactJS."
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "React Bootstrap: Refer to <a class='text-gradient' href='https://react-bootstrap.github.io/getting-started/introduction/'>https://react-bootstrap.github.io/getting-started/introduction/</a> to understand how to use React Bootstrap."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "title": "react-native-stylish-accordion",
+            "description": "Simple Stylish React Native Accordion",
+            "logo": "https://radhakishan.vpran.in/images/project/npm/npm-logo.png",
+            "thumbnail": "https://radhakishan.vpran.in/images/project/npm/react-native-accordion-thumb.gif",
+            "gitAvailable": true,
+            "tag": "React, JavaScript, TypeScript, NPM, UX, Design, NPM Packages, GitHub",
+            "technology": "React, JavaScript, TypeScript, NPM, VS Code",
+            "date": "October 2020",
+            "isPackage": true,
+            "onlineLink": "https://github.com/radhakishan404/react-native-stylish-accordion",
+            "sliderImages": [
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/npm/react-native-accordion-thumb.gif"
+                }
+            ],
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "<strong>react-native-stylish-accordion</strong> is a simple <strong>React Native NPM Package</strong> that can be used in your <strong>React Native Expo Version Application</strong>. It has a total of <strong>9 versions</strong>, the latest version <strong>1.0.9</strong>. The file size is only <strong>675 kB</strong>.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/react-native-stylish-accordion",
+                            "text": "Link to source code"
+                        },
+                        {
+                            "isLink": true,
+                            "link": "https://www.npmjs.com/package/react-native-stylish-accordion",
+                            "text": "Link to NPM Package"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Colour"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Icon"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Transition Time"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Icon Size"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Style"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "How to use?",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong class='code'>$ npm install react-native-stylish-accordion</strong> OR <strong class='code'>$ yarn add react-native-stylish-accordion</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Now we need to install react-native-reanimated and react-native-animatable. If you are using Expo, to ensure that you get the compatible versions of the libraries, run: <br><strong class='code'>$ expo install react-native-reanimated react-native-gesture-handler react-native-redash</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "If you are not using Expo, run the following: <br><strong class='code'>$ yarn add react-native-reanimated react-native-gesture-handler react-native-redash</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>Note</strong>: This is created with the help of <strong>react-native-accordion-view</strong> package."
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Props",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>title</strong> (string)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>titleStyle</strong> (TextStyle)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>iconSize</strong> (number)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>headerStyle</strong> (ViewStyle)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>subContainerStyle</strong> (ViewStyle)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>style</strong> (ViewStyle)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>headerComponent</strong> (ReactNode)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>open</strong> (boolean)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>onPress</strong> (void)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>timingTransition</strong> (number default:400) opening speed"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>containerRadius</strong> (number)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "title": "validate-form-in-expo-style",
+            "description": "Simple form validation component with floating label for React-Native inspired by react-native-form-validator",
+            "logo": "https://radhakishan.vpran.in/images/project/npm/npm-logo.png",
+            "thumbnail": "https://radhakishan.vpran.in/images/project/npm/validate-form-expo-style-thumb.png",
+            "gitAvailable": true,
+            "tag": "React, JavaScript, NPM, UX, Design, NPM Packages, GitHub",
+            "technology": "React, JavaScript, NPM, VS Code",
+            "date": "November 2020",
+            "isPackage": true,
+            "onlineLink": "https://github.com/radhakishan404/validate-form-in-expo-style",
+            "sliderImages": [
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/npm/validate-form-expo-style-thumb.png"
+                }
+            ],
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "ℹ️ <strong>validate-form-in-expo-style</strong> is a Simple form validation component with floating label for React-Native inspired by <a class='text-gradient' href='https://github.com/NewOldMax/react-native-validator-form' rel='nofollow'>react-native-form-validator</a>. You can add <strong>floating label</strong> with this library and can validate form. I created this package for my personal use you can use it in yours too. <br> <br> My bad, that I don't have Mac or IPhone, so this library is tested only in android. Do check it in Mac and let me know if any problem occurs.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/validate-form-in-expo-style",
+                            "text": "Link to source code"
+                        },
+                        {
+                            "isLink": true,
+                            "link": "https://www.npmjs.com/package/validate-form-in-expo-style",
+                            "text": "Link to NPM Package"
+                        },
+                        {
+                            "isLink": true,
+                            "link": "https://youtu.be/y7bkVDu0LVA",
+                            "text": "Link to Example Video"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Regexp Rules"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Valid and Invalid Icon"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Left Icon"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Error Messages"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Style"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Validation"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Install",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong class='code'>$ npm install validate-form-in-expo-style</strong> OR <strong class='code'>$ yarn add validate-form-in-expo-style</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Now we need to install react-native-reanimated and react-native-animatable. If you are using Expo, to ensure that you get the compatible versions of the libraries, run: <br><strong class='code'>$ expo install react-native-reanimated react-native-gesture-handler react-native-redash</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "If you are not using Expo, run the following: <br><strong class='code'>$ yarn add react-native-reanimated react-native-gesture-handler react-native-redash</strong>"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "How to use?",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://www.npmjs.com/package/validate-form-in-expo-style#-how-to-use-",
+                            "text": "Link to the code example"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Supoorted types",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>TextInput</strong>"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Default Validation Rules",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>matchRegexp</strong> (To match any regexp validation)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>isEmail</strong> (Is email is valid or not)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>isEmpty</strong> (Is field is empty or not)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>required</strong> (Is field is required or not)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>trim</strong> (Trim the value of field)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>isNumber</strong> (Is the value is number or not)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>isFloat</strong> (Is the value is float or not)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>isPositive</strong> (Is the value is positive or not)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>minNumber</strong> (Min number to be entered)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>maxNumber</strong> (Max number can be entered)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>minFloat</strong> (Min float value to be entered)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>maxFloat</strong> (Max float value can be entered)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>minStringLength</strong> (Minimum length of string to be entered)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>maxStringLength</strong> (Maximum length of string can be entered)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>isString</strong> (Is value is string or not)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Some rules that are added in validationName can accept extra parameter for validation, like: <br> <strong class='code'><div class='highlight javascript'><pre class='editor editor-colors'><div class='line'><span class='source js'><span class='keyword operator comparison js'><span>&lt;</span></span><span>InputText</span></span></div><div class='line'><span class='source js'><span>&nbsp;&nbsp;&nbsp;</span><span class='meta brace curly js'><span>{</span></span><span class='keyword operator js'><span>...</span></span><span>otherProps</span><span class='meta brace curly js'><span>}</span></span></span></div><div class='line'><span class='source js'><span>&nbsp;&nbsp;&nbsp;validateNames</span><span class='keyword operator assignment js'><span>=</span></span><span class='meta brace curly js'><span>{</span></span><span class='meta brace square js'><span>[</span></span><span class='string quoted single js'><span class='punctuation definition string begin js'><span>'</span></span><span>minNumber:1</span><span class='punctuation definition string end js'><span>'</span></span></span><span class='meta delimiter object comma js'><span>,</span></span><span>&nbsp;</span><span class='string quoted single js'><span class='punctuation definition string begin js'><span>'</span></span><span>maxNumber:255</span><span class='punctuation definition string end js'><span>'</span></span></span><span class='meta delimiter object comma js'><span>,</span></span><span>&nbsp;</span><span class='string quoted single js'><span class='punctuation definition string begin js'><span>'</span></span><span>matchRegexp:^[0-9]$</span><span class='punctuation definition string end js'><span>'</span></span></span><span class='meta brace square js'><span>]</span></span><span class='meta brace curly js'><span>}</span></span></span></div><div class='line'><span class='source js'><span class='keyword operator js'><span>/</span></span><span class='keyword operator comparison js'><span>&gt;</span></span></span></div></pre></div></strong>"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Props",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>Form Props</strong> <br> <table> <thead> <tr> <th>Prop</th> <th>Required</th> <th>Type</th> <th>Default value</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td>onSubmit</td> <td>true</td> <td>function</td> <td></td> <td>Callback for form that fires when all validations are passed</td> </tr> <tr> <td>instantValidate</td> <td>false</td> <td>bool</td> <td>true</td> <td>If true, form will be validated after each field change. If false, form will be validated only after clicking submit button.</td> </tr> <tr> <td>onError</td> <td>false</td> <td>function</td> <td></td> <td>Callback for form that fires when some of validations are not passed. It will return array of elements which not valid.</td> </tr> <tr> <td>debounceTime</td> <td>false</td> <td>number</td> <td>0</td> <td>Debounce time for validation i.e. your validation will run after <code>debounceTime</code> ms when you stop changing your input</td> </tr> </tbody> </table>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>InputText Props</strong> <br> <table> <thead> <tr> <th>Prop</th> <th>Required</th> <th>Type</th> <th>Default value</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td>name</td> <td>true</td> <td>string</td> <td></td> <td>Name of input field</td> </tr> <tr> <td>label</td> <td>false</td> <td>string</td> <td></td> <td>Name of input Floating Label</td> </tr> <tr> <td>placeholder</td> <td>false</td> <td>string</td> <td></td> <td>Placeholder of input before any value</td> </tr> <tr> <td>validateNames</td> <td>false</td> <td>array</td> <td></td> <td>Array of validation. See list of default validation rules in above example.</td> </tr> <tr> <td>errorMessages</td> <td>false</td> <td>array</td> <td></td> <td>Array of error messages. Order of messages should be the same as <code>validateNames</code> prop.</td> </tr> <tr> <td>errorStyle</td> <td>false</td> <td>object</td> <td>{ container: { top: 0, left: 0, position: 'absolute' }, text: { color: 'red' }, underlineValidColor: 'gray', underlineInvalidColor: 'red' } }</td> <td>Add your own error styles</td> </tr> <tr> <td>validatorListener</td> <td>false</td> <td>function</td> <td></td> <td>It triggers after each validation. It will return <code>true</code> or <code>false</code></td> </tr> <tr> <td>withRequiredValidator</td> <td>false</td> <td>bool</td> <td></td> <td>Allow to use <code>required</code> validator in any validation trigger, not only form submit</td> </tr> <tr> <td>leftIcon</td> <td>false</td> <td>code, image</td> <td></td> <td>Either include image or add Icon tag code to display left icon see above example</td> </tr> <tr> <td>invalidIcon</td> <td>false</td> <td>code, image</td> <td></td> <td>Either include image or add Icon tag code to display error icon on right side see above example</td> </tr> <tr> <td>validIcon</td> <td>false</td> <td>code, image</td> <td></td> <td>Either include image or add Icon tag code to display success icon on right side see above example</td> </tr> <tr> <td>secureTextEntry</td> <td>false</td> <td>bool</td> <td>false</td> <td>If true than show hide icon will get added automatically</td> </tr> </tbody> </table>"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Methods",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>Form Methods</strong> <br> <table> <thead> <tr> <th>Name</th> <th>Params</th> <th>Return</th> <th>Descriptipon</th> </tr> </thead> <tbody> <tr> <td>resetValidations</td> <td></td> <td></td> <td>Reset validation messages for all validated inputs</td> </tr> <tr> <td>isFormValid</td> <td>dryRun: bool (default true)</td> <td>Promise</td> <td>Get form validation state in a Promise (<code>true</code> if whole form is valid). Run with <code>dryRun = false</code> to show validation errors on form</td> </tr> </tbody> </table>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>InputText Methods</strong> <br> <table> <thead> <tr> <th>Name</th> <th>Params</th> <th>Return</th> <th>Descriptipon</th> </tr> </thead> <tbody> <tr> <td>getErrorMessage</td> <td></td> <td></td> <td>Get error validation message</td> </tr> <tr> <td>validate</td> <td>value: any, includeRequired: bool</td> <td></td> <td>Run validation for current component</td> </tr> <tr> <td>isValid</td> <td></td> <td>bool</td> <td>Return current validation state</td> </tr> <tr> <td>makeInvalid</td> <td></td> <td></td> <td>Set invalid validation state</td> </tr> <tr> <td>makeValid</td> <td></td> <td></td> <td>Set valid validation state</td> </tr> </tbody> </table>"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "title": "react-animation-loader",
+            "description": "Simple animation loader with some css animation and an image with moving animation",
+            "logo": "https://radhakishan.vpran.in/images/project/npm/npm-logo.png",
+            "thumbnail": "https://radhakishan.vpran.in/images/project/npm/react-animation-loader-thumb.gif",
+            "gitAvailable": true,
+            "tag": "React, JavaScript, CSS, NPM, UX, Design, NPM Packages, GitHub",
+            "technology": "React, JavaScript, CSS, NPM, VS Code",
+            "date": "December 2020",
+            "isPackage": true,
+            "onlineLink": "https://github.com/radhakishan404/react-animation-loader",
+            "sliderImages": [
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/npm/react-animation-loader-thumb.gif"
+                }
+            ],
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "<strong>react-animation-loader</strong> simple animation loader with some <strong>css animation</strong> and an image with moving animation. Check it out. It has a total of <strong>5 versions</strong>, the latest version <strong>1.0.5</strong>. The file size is only <strong>11.3 kB</strong>.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/react-animation-loader",
+                            "text": "Link to source code"
+                        },
+                        {
+                            "isLink": true,
+                            "link": "https://www.npmjs.com/package/react-animation-loader",
+                            "text": "Link to NPM Package"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Colour"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Image"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Transition Time"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Image Size"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Style"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Install",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong class='code'>$ npm install Install</strong> OR <strong class='code'>$ yarn add Install</strong>"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Example",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/react-animation-loader#example",
+                            "text": "Link to code example"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Props",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>isLoading</strong> (bool) (required)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>bgColor</strong> (string) (required)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>icon</strong> (string)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "title": "Stock Money Makers",
+            "description": "Stock Money Makers provides the best online stock market courses in india which Includes exclusive banknifty intraday course, technical analysis course, bank nifty option course, stock market courses for beginners & much more.",
+            "logo": "https://radhakishan.vpran.in/images/project/npm/npm-logo.png",
+            "thumbnail": "https://radhakishan.vpran.in/images/project/npm/react-animation-loader-thumb.gif",
+            "gitAvailable": true,
+            "tag": "React, JavaScript, CSS, NPM, UX, Design, NPM Packages, GitHub",
+            "technology": "React, JavaScript, CSS, NPM, VS Code",
+            "date": "December 2020",
+            "isPackage": true,
+            "onlineLink": "https://github.com/radhakishan404/react-animation-loader",
+            "sliderImages": [
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/npm/react-animation-loader-thumb.gif"
+                }
+            ],
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "<strong>react-animation-loader</strong> simple animation loader with some <strong>css animation</strong> and an image with moving animation. Check it out. It has a total of <strong>5 versions</strong>, the latest version <strong>1.0.5</strong>. The file size is only <strong>11.3 kB</strong>.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/react-animation-loader",
+                            "text": "Link to source code"
+                        },
+                        {
+                            "isLink": true,
+                            "link": "https://www.npmjs.com/package/react-animation-loader",
+                            "text": "Link to NPM Package"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Colour"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Image"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Transition Time"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Image Size"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Custom Style"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Install",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong class='code'>$ npm install Install</strong> OR <strong class='code'>$ yarn add Install</strong>"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Example",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/react-animation-loader#example",
+                            "text": "Link to code example"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Props",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>isLoading</strong> (bool) (required)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>bgColor</strong> (string) (required)"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>icon</strong> (string)"
+                        }
+                    ]
                 }
             ]
         }
