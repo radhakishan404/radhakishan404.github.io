@@ -17,7 +17,7 @@ function Home(props) {
                 window.textAnimation();
                 clearInterval(checkInterval);
                 let checkInterval2 = setInterval(() => {
-                    if (document.readyState == "complete") {
+                    if (document.readyState === "complete") {
                         setIsLoading(false);
                         clearInterval(checkInterval2);
                     }
