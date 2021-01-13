@@ -4,15 +4,15 @@ import Loader from "react-animation-loader";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import softdata from "../../softdata.json";
-import { permalinkGenerate } from "../../Helper";
+import { permalinkGenerate, getPackageTotalDownload } from "../../Helper";
 import $ from "jquery";
 
 function PortfolioDetail(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [uniqueProject, setUniqueProject] = useState(false);
+    const [download, setDownloads] = useState(0);
 
     useEffect(() => {
-
         var inteval = setInterval(() => {
             if ($(".control-prev") && $(".control-next")) {
                 $(".control-prev").html('');
@@ -46,6 +46,13 @@ function PortfolioDetail(props) {
         let project = softdata.project.filter(obj => permalinkGenerate(obj.title) === permalink);
         if (project[0]) {
             setUniqueProject(project[0]);
+            if (project[0].isPackage) {
+                async function getDownloads() {
+                    let download = await getPackageTotalDownload(permalink);
+                    setDownloads(download);
+                }
+                getDownloads();
+            }
         } else {
             props.history.push("/portfolio");
         }
@@ -178,6 +185,18 @@ function PortfolioDetail(props) {
                                                                     <h5>Online</h5>
                                                                     <hr />
                                                                     <p><a className="text-gradient" href={uniqueProject.onlineLink} target="_blank" rel="noopener noreferrer">{uniqueProject.onlineLink}</a></p>
+                                                                </div>
+                                                                :
+                                                                null
+                                                        }
+                                                        {
+                                                            uniqueProject.isPackage
+                                                                ?
+
+                                                                <div className="online-info bg--dark">
+                                                                    <h5>Total Downloads</h5>
+                                                                    <hr />
+                                                                    <p><strong>{download}</strong></p>
                                                                 </div>
                                                                 :
                                                                 null
