@@ -1126,33 +1126,37 @@
             "id": 7,
             "title": "Stock Money Makers",
             "description": "Stock Money Makers provides the best online stock market courses in india which Includes exclusive banknifty intraday course, technical analysis course, bank nifty option course, stock market courses for beginners & much more.",
-            "logo": "https://radhakishan.vpran.in/images/project/npm/npm-logo.png",
-            "thumbnail": "https://radhakishan.vpran.in/images/project/npm/react-animation-loader-thumb.gif",
-            "gitAvailable": true,
-            "tag": "React, JavaScript, CSS, NPM, UX, Design, NPM Packages, GitHub",
-            "technology": "React, JavaScript, CSS, NPM, VS Code",
-            "date": "December 2020",
-            "isPackage": true,
-            "onlineLink": "https://github.com/radhakishan404/react-animation-loader",
+            "logo": "https://radhakishan.vpran.in/images/project/smm/logo.png",
+            "thumbnail": "https://radhakishan.vpran.in/images/project/smm/smm-1.png",
+            "gitAvailable": false,
+            "tag": "PHP, CodeIgniter, jQuery, JavaScript, MySql, HTML5, Mobirise",
+            "technology": "PHP, CodeIgniter, jQuery, JavaScript, MySQL, HTML5, Mobirise",
+            "date": "February 2020 - March 2020",
+            "isPackage": false,
+            "onlineLink": "https://stockmoneymakers.com/",
             "sliderImages": [
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/npm/react-animation-loader-thumb.gif"
+                    "image": "https://radhakishan.vpran.in/images/project/smm/smm-1.png"
+                },
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/smm/smm-2.png"
+                },
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/smm/smm-3.png"
+                },
+                {
+                    "image": "https://radhakishan.vpran.in/images/project/smm/smm-4.png"
                 }
             ],
             "content": [
                 {
                     "contentTitle": "Technical Specification",
-                    "contentDescription": "<strong>react-animation-loader</strong> simple animation loader with some <strong>css animation</strong> and an image with moving animation. Check it out. It has a total of <strong>5 versions</strong>, the latest version <strong>1.0.5</strong>. The file size is only <strong>11.3 kB</strong>.",
+                    "contentDescription": "Stock Market Trader/Investor/Consultancy/Financial Advisor. Stock Money Makers Team's Main Purpose Is To Help People Learn About The Stock Market.",
                     "contentList": [
                         {
                             "isLink": true,
-                            "link": "https://github.com/radhakishan404/react-animation-loader",
-                            "text": "Link to source code"
-                        },
-                        {
-                            "isLink": true,
-                            "link": "https://www.npmjs.com/package/react-animation-loader",
-                            "text": "Link to NPM Package"
+                            "link": "https://stockmoneymakers.com/",
+                            "text": "Link to live demo"
                         }
                     ]
                 },
@@ -1163,72 +1167,70 @@
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Custom Colour"
+                            "text": "Admin Panel"
                         },
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Custom Image"
+                            "text": "Paid Webinar Courses"
                         },
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Custom Transition Time"
+                            "text": "Blogs"
                         },
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Custom Image Size"
+                            "text": "Course uploading using plupload"
                         },
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "Custom Style"
+                            "text": "Payment Gateway"
                         }
                     ]
                 },
                 {
-                    "contentTitle": "Install",
-                    "contentDescription": "",
+                    "contentTitle": "Responsibilities",
+                    "contentDescription": "My responsibilities for this project included <strong>design and development</strong> of a complete website.",
                     "contentList": [
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "<strong class='code'>$ npm install Install</strong> OR <strong class='code'>$ yarn add Install</strong>"
-                        }
-                    ]
-                },
-                {
-                    "contentTitle": "Example",
-                    "contentDescription": "",
-                    "contentList": [
-                        {
-                            "isLink": true,
-                            "link": "https://github.com/radhakishan404/react-animation-loader#example",
-                            "text": "Link to code example"
-                        }
-                    ]
-                },
-                {
-                    "contentTitle": "Props",
-                    "contentDescription": "",
-                    "contentList": [
-                        {
-                            "isLink": false,
-                            "link": "",
-                            "text": "<strong>isLoading</strong> (bool) (required)"
+                            "text": "Layout, UI and UX design"
                         },
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "<strong>bgColor</strong> (string) (required)"
+                            "text": "Front End Development"
                         },
                         {
                             "isLink": false,
                             "link": "",
-                            "text": "<strong>icon</strong> (string)"
+                            "text": "Back End Development"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Integration with Google Analytics"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Responsive Design"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "User Experience"
                         }
                     ]
+                },
+                {
+                    "contentTitle": "Challenges",
+                    "contentDescription": "The first challenge that I occurred was <strong>designing and architecting</strong> the base structure of front-end. Building a web app with <strong>CodeIgniter</strong> a perfect choice for future growth and maintainability of a <strong>web application</strong>. CodeIgniter Framework made this a whole lot easier by allowing us to separate the <strong>Logic, Modules and View</strong>. One of the biggest challenges during development was uploading <strong>large video course</strong> of the web app in the back-end.",
+                    "contentList": null
                 }
             ]
         }
