@@ -10,6 +10,7 @@ function Home(props) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+
         let checkInterval = setInterval(() => {
             try {
                 window.threeJsAnimation();
@@ -37,7 +38,7 @@ function Home(props) {
 
     return (
         <div className="main-wrapper">
-            <Loader isLoading={isLoading} bgColor="161122" icon="https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/master/src/images/500%20x%20500%20logo.png" />
+            <Loader isLoading={isLoading} bgColor="161122" icon="https://radhakishan.vpran.in//images/500%20x%20500%20logo.png" />
             <Header props={props} />
             <main id="content" className="main page-content" aria-label="Content" onClick={() => menuTriggerClose()}>
                 <div className="container-full header-content" id="home-detail">
@@ -77,7 +78,7 @@ function Home(props) {
                                     </span>
                                 </div>
                                 <LazyLoadImage
-                                    src="https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/master/src/images/radhakishan-web-3.jpg"
+                                    src="https://radhakishan.vpran.in//images/radhakishan-web-3.jpg"
                                     alt="Radhakishan Jangid image solving error"
                                     className="intro-img"
                                 />
