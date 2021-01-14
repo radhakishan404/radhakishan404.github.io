@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Header from "../common/Header";
 import Loader from "react-animation-loader";
+import emailjs from 'emailjs-com';
+import $ from "jquery";
 
 function Contact(props) {
     const [isLoading, setIsLoading] = useState(true);
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         let checkInterval = setInterval(() => {
@@ -21,9 +24,24 @@ function Contact(props) {
         }, 100);
     }, []);
 
+    const submitForm = (e) => {
+        e.preventDefault();
+
+        $(e.target).find(".gradient-btn").attr('disabled', true);
+        $(e.target).find(".gradient-btn").html('Sending <span class="lds-dual-ring"></span>');
+
+        emailjs.sendForm('service_o91esuh', 'template_ai5s6x5', e.target, 'user_Di32uXdzGJ3xyE4Kjf5bJ')
+            .then((result) => {
+                setSuccess(true);
+            }, (error) => {
+                $(e.target).find(".gradient-btn").attr('disabled', false);
+                $(e.target).find(".gradient-btn").html('Send Message');
+            });
+    }
+
     return (
         <div className="main-wrapper">
-            <Loader isLoading={isLoading} bgColor="161122" icon="https://raw.githubusercontent.com/radhakishan404/radhakishan-jangid-portfolio/master/src/images/500%20x%20500%20logo.png" />
+            <Loader isLoading={isLoading} bgColor="161122" icon="https://radhakishan.vpran.in//images/500%20x%20500%20logo.png" />
             <Header props={props} />
 
             <main id="content" className="main page-content" aria-label="Content">
@@ -57,21 +75,29 @@ function Contact(props) {
                                         <p>You can also use the contact form on this page.</p>
                                     </div>
                                     <div className="col-md-6">
-                                        <form className="contact-form">
-                                            <div className="contact-form-inner">
-                                                <div className="row">
-                                                    <div className="col-md-6">
-                                                        <input className="form-control" name="contact_name" type="text" placeholder="Enter your full name..." required />
-                                                    </div>
-                                                    <div className="col-md-6">
-                                                        <input className="form-control" name="contact_email" type="email" placeholder="Enter your email..." required />
-                                                    </div>
-                                                </div>
-                                                <textarea className="form-control" name="contact_message" placeholder="Enter your message..." rows="5" aria-required="true" aria-invalid="false" required="" spellCheck="false"></textarea>
+                                        {
+                                            success
+                                                ?
+                                                <form className="contact-form">
+                                                    <em>Thank you for reaching out. I will get back to you as soon as possible.</em>
+                                                </form>
+                                                :
+                                                <form className="contact-form" onSubmit={(e) => submitForm(e)}>
+                                                    <div className="contact-form-inner">
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <input className="form-control" name="from_name" type="text" placeholder="Enter your full name..." required />
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <input className="form-control" name="from_email" type="email" placeholder="Enter your email..." required />
+                                                            </div>
+                                                        </div>
+                                                        <textarea className="form-control" name="from_message" placeholder="Enter your message..." rows="5" aria-required="true" aria-invalid="false" required="" spellCheck="false"></textarea>
 
-                                                <button className="gradient-btn contact-btn"> Send Message </button>
-                                            </div>
-                                        </form>
+                                                        <button className="gradient-btn contact-btn"> Send Message </button>
+                                                    </div>
+                                                </form>
+                                        }
                                     </div>
                                 </div>
                             </div>
