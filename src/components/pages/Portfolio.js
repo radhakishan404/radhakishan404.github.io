@@ -4,6 +4,7 @@ import Loader from "react-animation-loader";
 import { Link } from "react-router-dom";
 import softdata from "../../softdata.json";
 import { permalinkGenerate } from "../../Helper";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 function Portfolio(props) {
     const [isLoading, setIsLoading] = useState(true);
@@ -74,17 +75,23 @@ function Portfolio(props) {
                                                     <article className="single-pen single-item" data-component="Item" key={proKey} title={proVal.title}>
                                                         <header className="header">
                                                             <Link to={"/portfolio/" + permalinkGenerate(proVal.title)} className="authorAvatar">
-                                                                <img src={proVal.logo} alt={"Project Icon for " + proVal.title} className="user-avatar" width="40" height="40" />
+                                                                <LazyLoadImage
+                                                                    src={proVal.logo}
+                                                                    alt={"Project Icon for " + proVal.title} 
+                                                                    className="user-avatar" 
+                                                                    width="40" 
+                                                                    height="40"
+                                                                />
                                                             </Link>
                                                             <div className="titleAndAuthor">
-                                                                <h2 className="title"><Link to={"/portfolio/"+permalinkGenerate(proVal.title)}>{proVal.title}</Link></h2>
+                                                                <h2 className="title"><Link to={"/portfolio/" + permalinkGenerate(proVal.title)}>{proVal.title}</Link></h2>
                                                                 <address className="author">
-                                                                    <Link to={"/portfolio/"+permalinkGenerate(proVal.title)} className="authorName">{proVal.description}</Link>
+                                                                    <Link to={"/portfolio/" + permalinkGenerate(proVal.title)} className="authorName">{proVal.description}</Link>
                                                                 </address>
                                                             </div>
                                                         </header>
                                                         <div className="iframe-wrap">
-                                                            <img className="grid-preview-image" loading="lazy" alt="" src={proVal.thumbnail} />
+                                                            <LazyLoadImage className="grid-preview-image" loading="lazy" alt="" src={proVal.thumbnail} />
                                                             <Link className="cover-link" to={"/portfolio/" + permalinkGenerate(proVal.title)}></Link>
                                                             <Link to={"/portfolio/" + permalinkGenerate(proVal.title)} className="item-share" data-popup-button="true">
                                                                 <button title="View Details">
@@ -98,7 +105,7 @@ function Portfolio(props) {
                                                                 proVal.gitAvailable
                                                                     ?
                                                                     <div className="project__ribbon">
-                                                                        <img src="https://radhakishan.vpran.in/images/github.svg" alt="GitHub Icon" />
+                                                                        <LazyLoadImage src="https://radhakishan.vpran.in/images/github.svg" alt="GitHub Icon" />
                                                                         <span>GitHub</span>
                                                                     </div>
                                                                     :
