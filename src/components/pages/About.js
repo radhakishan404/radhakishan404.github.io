@@ -4,7 +4,7 @@ import Loader from "react-animation-loader";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import softdata from "../../softdata.json";
 import ReactGA from 'react-ga';
-ReactGA.initialize('G-27S94925NM');
+ReactGA.initialize('UA-187892763-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 function About(props) {
