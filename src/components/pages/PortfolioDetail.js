@@ -7,7 +7,7 @@ import softdata from "../../softdata.json";
 import { permalinkGenerate, getPackageTotalDownload } from "../../Helper";
 import $ from "jquery";
 import ReactGA from 'react-ga';
-ReactGA.initialize('G-27S94925NM');
+ReactGA.initialize('UA-187892763-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 function PortfolioDetail(props) {
