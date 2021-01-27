@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import softdata from "../../softdata.json";
 import { permalinkGenerate } from "../../Helper";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import ReactGA from 'react-ga';
+ReactGA.initialize('G-27S94925NM');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 function Portfolio(props) {
     const [isLoading, setIsLoading] = useState(true);

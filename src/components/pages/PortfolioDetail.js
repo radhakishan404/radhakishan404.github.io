@@ -6,6 +6,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import softdata from "../../softdata.json";
 import { permalinkGenerate, getPackageTotalDownload } from "../../Helper";
 import $ from "jquery";
+import ReactGA from 'react-ga';
+ReactGA.initialize('G-27S94925NM');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 function PortfolioDetail(props) {
     const [isLoading, setIsLoading] = useState(true);

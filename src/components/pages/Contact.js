@@ -3,6 +3,9 @@ import Header from "../common/Header";
 import Loader from "react-animation-loader";
 import emailjs from 'emailjs-com';
 import $ from "jquery";
+import ReactGA from 'react-ga';
+ReactGA.initialize('G-27S94925NM');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 function Contact(props) {
     const [isLoading, setIsLoading] = useState(true);

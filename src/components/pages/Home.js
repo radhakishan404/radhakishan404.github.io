@@ -5,6 +5,9 @@ import $ from "jquery";
 import "../css/Home.scss";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import softdata from "../../softdata.json";
+import ReactGA from 'react-ga';
+ReactGA.initialize('G-27S94925NM');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 function Home(props) {
     const [isLoading, setIsLoading] = useState(true);
@@ -14,18 +17,20 @@ function Home(props) {
         let checkInterval = setInterval(() => {
             try {
                 window.threeJsAnimation();
-                window.wordSpinner();
-                window.textAnimation();
                 clearInterval(checkInterval);
-                let checkInterval2 = setInterval(() => {
-                    if (document.readyState === "complete") {
-                        setIsLoading(false);
-                        clearInterval(checkInterval2);
-                    }
-                }, 100);
             } catch (e) {
             }
         }, 100);
+        let checkInterval2 = setInterval(() => {
+            if (document.readyState === "complete") {
+                setIsLoading(false);
+                clearInterval(checkInterval2);
+            }
+        }, 100);
+        setTimeout(() => {
+            window.wordSpinner();
+            window.textAnimation();
+        }, 4000);
     }, []);
 
     const menuTriggerClose = () => {
