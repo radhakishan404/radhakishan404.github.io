@@ -43,6 +43,8 @@ function PortfolioDetail(props) {
         }, 100);
     }, []);
 
+
+
     useEffect(() => {
         let permalink = props.match.params.topic;
 
