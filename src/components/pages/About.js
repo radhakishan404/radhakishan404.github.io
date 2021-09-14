@@ -40,7 +40,7 @@ function About(props) {
 
     return (
         <div className="main-wrapper">
-            <Loader isLoading={isLoading} bgColor="161122" icon="https://radhakishan.vpran.in//images/500%20x%20500%20logo.png" />
+            <Loader isLoading={isLoading} bgColor="161122" icon="https://radhakishan.site//images/500%20x%20500%20logo.png" />
             <Header props={props} />
             <main id="content" className="main page-content" aria-label="Content">
                 <div className="container-full header-content">
@@ -74,7 +74,7 @@ function About(props) {
                                         <div className="col-sm-12 col-md-3 align--center pt-10">
                                             <picture>
                                                 <LazyLoadImage
-                                                    src="https://radhakishan.vpran.in//images/radhakishan-web-2.jpg"
+                                                    src="https://radhakishan.site//images/radhakishan-web-2.jpg"
                                                     alt="Radhakishan Jangid in Kurta Payjama"
                                                     className="about-me-img"
                                                 />
@@ -124,121 +124,121 @@ function About(props) {
                                 <span className="skill-items">
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/react.svg" data-large="img/react.svg" className="blur-out" alt="React" />
+                                            <img src="https://radhakishan.site/img/react.svg" data-large="img/react.svg" className="blur-out" alt="React" />
                                         </span>
                                         <span>React</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/nodejs.svg" data-large="img/nodejs.svg" className="blur-out" alt="Node JS" />
+                                            <img src="https://radhakishan.site/img/nodejs.svg" data-large="img/nodejs.svg" className="blur-out" alt="Node JS" />
                                         </span>
                                         <span>Node.js</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/typescript.svg" data-large="img/typescript.svg" className="blur-out" alt="TypeScript" />
+                                            <img src="https://radhakishan.site/img/typescript.svg" data-large="img/typescript.svg" className="blur-out" alt="TypeScript" />
                                         </span>
                                         <span>TypeScript</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/npm.svg" data-large="img/npm.svg" className="blur-out" alt="NPM" />
+                                            <img src="https://radhakishan.site/img/npm.svg" data-large="img/npm.svg" className="blur-out" alt="NPM" />
                                         </span>
                                         <span>NPM</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/js.svg" data-large="img/js.svg" alt="JavaScript" className="blur-out" />
+                                            <img src="https://radhakishan.site/img/js.svg" data-large="img/js.svg" alt="JavaScript" className="blur-out" />
                                         </span>
                                         <span>JavaScript</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/php.svg" data-large="img/php.svg" alt="PHP" className="blur-out" />
+                                            <img src="https://radhakishan.site/img/php.svg" data-large="img/php.svg" alt="PHP" className="blur-out" />
                                         </span>
                                         <span>PHP</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/codeigniter.svg" data-large="img/codeigniter.svg" alt="CodeIgniter" className="blur-out" />
+                                            <img src="https://radhakishan.site/img/codeigniter.svg" data-large="img/codeigniter.svg" alt="CodeIgniter" className="blur-out" />
                                         </span>
                                         <span>CodeIgniter</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/jquery.svg" data-large="img/jquery.svg" alt="jQuery" className="blur-out" />
+                                            <img src="https://radhakishan.site/img/jquery.svg" data-large="img/jquery.svg" alt="jQuery" className="blur-out" />
                                         </span>
                                         <span>jQuery</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/html.svg" data-large="img/html.svg" alt="HTML" className="blur-out" />
+                                            <img src="https://radhakishan.site/img/html.svg" data-large="img/html.svg" alt="HTML" className="blur-out" />
                                         </span>
                                         <span>HTML</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/css.svg" data-large="img/css.svg" alt="CSS3" className="blur-out" />
+                                            <img src="https://radhakishan.site/img/css.svg" data-large="img/css.svg" alt="CSS3" className="blur-out" />
                                         </span>
                                         <span>CSS3</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/bootstrap.svg" data-large="img/bootstrap.svg" alt="Bootstrap" className="blur-out" />
+                                            <img src="https://radhakishan.site/img/bootstrap.svg" data-large="img/bootstrap.svg" alt="Bootstrap" className="blur-out" />
                                         </span>
                                         <span>Bootstrap</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/mysql.svg" data-large="img/mysql.svg" alt="MySQL" className="blur-out" />
+                                            <img src="https://radhakishan.site/img/mysql.svg" data-large="img/mysql.svg" alt="MySQL" className="blur-out" />
                                         </span>
                                         <span>MySQL</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/sql.png" data-large="img/sql.png" className="blur-out" alt="SQL" />
+                                            <img src="https://radhakishan.site/img/sql.png" data-large="img/sql.png" className="blur-out" alt="SQL" />
                                         </span>
                                         <span>SQL</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/phpadmin.svg" data-large="img/phpadmin.svg" className="blur-out" alt="PhpMyAdmin" />
+                                            <img src="https://radhakishan.site/img/phpadmin.svg" data-large="img/phpadmin.svg" className="blur-out" alt="PhpMyAdmin" />
                                         </span>
                                         <span>PhpMyAdmin</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/adminer.png" data-large="img/adminer.png" className="blur-out" alt="Adminer" />
+                                            <img src="https://radhakishan.site/img/adminer.png" data-large="img/adminer.png" className="blur-out" alt="Adminer" />
                                         </span>
                                         <span>Adminer</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/git.svg" data-large="img/git.svg" className="blur-out" alt="MySQL" />
+                                            <img src="https://radhakishan.site/img/git.svg" data-large="img/git.svg" className="blur-out" alt="MySQL" />
                                         </span>
                                         <span>Git</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/aws.png" data-large="img/aws.png" className="blur-out" alt="Amazon S3" />
+                                            <img src="https://radhakishan.site/img/aws.png" data-large="img/aws.png" className="blur-out" alt="Amazon S3" />
                                         </span>
                                         <span>Amazon S3</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/aws.png" data-large="img/aws.png" className="blur-out" alt="Amazon Web Services (AWS)" />
+                                            <img src="https://radhakishan.site/img/aws.png" data-large="img/aws.png" className="blur-out" alt="Amazon Web Services (AWS)" />
                                         </span>
                                         <span>Amazon Web Services (AWS)</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/ionic.svg" data-large="img/ionic.svg" className="blur-out" alt="Ionic" />
+                                            <img src="https://radhakishan.site/img/ionic.svg" data-large="img/ionic.svg" className="blur-out" alt="Ionic" />
                                         </span>
                                         <span>Ionic</span>
                                     </span>
                                     <span className="skill-item">
                                         <span>
-                                            <img src="https://radhakishan.vpran.in/img/photoshop.svg" data-large="img/photoshop.svg" className="blur-out" alt="Photoshop" />
+                                            <img src="https://radhakishan.site/img/photoshop.svg" data-large="img/photoshop.svg" className="blur-out" alt="Photoshop" />
                                         </span>
                                         <span>Photoshop</span>
                                     </span>

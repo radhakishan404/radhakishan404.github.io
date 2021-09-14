@@ -67,8 +67,8 @@ function Header(props) {
                     </div>
                     <div className="site-header-burger">
                         <div className="ml-3 burger" onClick={() => menuTriggerFunction()}>
-                            <span className="closed"><img src={"https://radhakishan.vpran.in/images/burger.svg"} alt="menu icon" /></span>
-                            <span className="open"><img src={"https://radhakishan.vpran.in/images/close.svg"} alt="close icon" /></span>
+                            <span className="closed"><img src={"https://radhakishan.site/images/burger.svg"} alt="menu icon" /></span>
+                            <span className="open"><img src={"https://radhakishan.site/images/close.svg"} alt="close icon" /></span>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@ function Header(props) {
 
             <div id="nav_bar">
                 <Link className="logo" to={"/"}>
-                    <img src="https://radhakishan.vpran.in/images/1000%20X%201000.png" alt="Wordpress Developer Logo, Web Developer Logo , Front End Developer Logo" />
+                    <img src="https://radhakishan.site/images/1000%20X%201000.png" alt="Wordpress Developer Logo, Web Developer Logo , Front End Developer Logo" />
                 </Link>
 
                 <nav className="en">

@@ -95,27 +95,27 @@
     "skillSpiner": [
         {
             "title": "React",
-            "image": "https://radhakishan.vpran.in/images/react.svg"
+            "image": "https://radhakishan.site/images/react.svg"
         },
         {
             "title": "Node Js",
-            "image": "https://radhakishan.vpran.in/images/nodejs.svg"
+            "image": "https://radhakishan.site/images/nodejs.svg"
         },
         {
             "title": "PHP",
-            "image": "https://radhakishan.vpran.in/images/php.svg"
+            "image": "https://radhakishan.site/images/php.svg"
         },
         {
             "title": "JavaScript",
-            "image": "https://radhakishan.vpran.in/images/js.svg"
+            "image": "https://radhakishan.site/images/js.svg"
         },
         {
             "title": "Git",
-            "image": "https://radhakishan.vpran.in/images/git.svg"
+            "image": "https://radhakishan.site/images/git.svg"
         },
         {
             "title": "MySQL",
-            "image": "https://radhakishan.vpran.in/images/mysql.svg"
+            "image": "https://radhakishan.site/images/mysql.svg"
         }
     ],
     "filterTag": [
@@ -170,8 +170,8 @@
             "id": 1,
             "title": "Nirulas",
             "description": "Nirula's is India's oldest fast food restaurant chain.",
-            "logo": "https://radhakishan.vpran.in/images/project/nirulas-logo.webp",
-            "thumbnail": "https://radhakishan.vpran.in/images/project/nirulas-thumb.webp",
+            "logo": "https://radhakishan.site/images/project/nirulas-logo.webp",
+            "thumbnail": "https://radhakishan.site/images/project/nirulas-thumb.webp",
             "gitAvailable": false,
             "tag": "React, Node Js, JavaScript, Front-end, Back-end, REST, UX, Website",
             "technology": "React, Express, Node Js, JavaScript, Redux, Amazon, Google Analytics",
@@ -179,19 +179,19 @@
             "onlineLink": "https://delivery.nirulas.com/",
             "sliderImages": [
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/nirulas-slider-5.gif"
+                    "image": "https://radhakishan.site/images/project/nirulas-slider-5.gif"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/nirulas-slider-1.webp"
+                    "image": "https://radhakishan.site/images/project/nirulas-slider-1.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/nirulas-slider-2.webp"
+                    "image": "https://radhakishan.site/images/project/nirulas-slider-2.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/nirulas-slider-3.webp"
+                    "image": "https://radhakishan.site/images/project/nirulas-slider-3.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/nirulas-slider-4.webp"
+                    "image": "https://radhakishan.site/images/project/nirulas-slider-4.webp"
                 }
             ],
             "content": [
@@ -301,28 +301,167 @@
             ]
         },
         {
+            "id": 8,
+            "title": "Nirulas POS",
+            "description": "Nirula's is India's oldest fast food restaurant chain.",
+            "logo": "https://radhakishan.site/images/project/nirulas-logo.webp",
+            "thumbnail": "https://radhakishan.site/images/project/POS-1.png",
+            "gitAvailable": false,
+            "tag": "React, Node Js, JavaScript, Front-end, Back-end, REST, UX, Website",
+            "technology": "React, Express, Node Js, JavaScript, Redux, Amazon, Google Analytics",
+            "date": "April 2021",
+            "onlineLink": "https://delivery.nirulas.com/",
+            "sliderImages": [
+                {
+                    "image": "https://radhakishan.site/images/project/POS-1.png"
+                },
+                {
+                    "image": "https://radhakishan.site/images/project/POS-2.png"
+                },
+                {
+                    "image": "https://radhakishan.site/images/project/POS-3.png"
+                },
+                {
+                    "image": "https://radhakishan.site/images/project/POS-4.png"
+                },
+                {
+                    "image": "https://radhakishan.site/images/project/POS-5.png"
+                }
+            ],
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "Nirula's is India's oldest fast food restaurant chain. Based in North India and most popular in the <strong>NCR Delhi</strong>. It was Delhi's first fast food restaurant, opening in Connaught Place in 1977. The website was initially build on Angular Js but was later moved to <strong>React and Node Js</strong>. React used on the client-side input handling and Node Js is used for the server-side to handle connectivity between databases. It utilizes some advanced <strong>page transition</strong> and <strong>animations</strong>.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://branch.nirulas.com/",
+                            "text": "Link to live demo"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Product Listing"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Add to cart with Animation"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Coupon Apply"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Place Order"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "OTP verify"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Product Stock"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Branch Orders"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Branch Dashboard"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Responsibilities",
+                    "contentDescription": "Responsible for the development of the complete website both front-end and back-end which entailed:",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Converting the <strong>HTML/CSS to JSX</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Design and Architecture of <strong>React Application</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Architecture of <strong>Node Js Application</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>REST API</strong> Integration"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>UI/UX</strong> Improvements"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Third Party <strong>Google Analytics, Message and Facebook Pixel</strong> API Integration"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>Implementation of complete Front-end and Back-end</strong>"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "<strong>Deployment</strong> of both React and Node Js Application"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Challenges",
+                    "contentDescription": "The first challenge that I faced <strong>designing and architecting the base structure</strong> of the application. Building a web app for fast and durable react was a perfect choice for future growth and maintainability. <strong>React Components, React-Redux, and Lazy loading modules</strong> made this whole project lot easier by allowing me to separate the app logic by modules (per feature). One of the biggest challenges during development was maintaining the <strong>product customization and pricing module</strong>. I have created a separate component for the customization and called API based on the product by that I handled the <strong>customization and pricing part in Node JS API</strong>. I <strong>learned</strong> many new things while building this project still I am getting new changes and new phases to work on.",
+                    "contentList": null
+                }
+            ]
+        },
+        {
             "id": 2,
             "title": "Covid-19 Tracker",
             "description": "Covid-19 Tracker is a simple React Native application.",
-            "logo": "https://radhakishan.vpran.in/images/project/covid/covid-19-logo.webp",
-            "thumbnail": "https://radhakishan.vpran.in/images/project/covid/covid-19-thumb.webp",
+            "logo": "https://radhakishan.site/images/project/covid/covid-19-logo.webp",
+            "thumbnail": "https://radhakishan.site/images/project/covid/covid-19-thumb.webp",
             "gitAvailable": true,
             "tag": "React, JavaScript, Application, REST, UX, Design, GitHub",
             "technology": "React Native, Expo, Mathdroid Covid API, Novelcovid API, React Navigation",
             "date": "3 April, 2020 - 13 April, 2020",
-            "onlineLink": "http://radhakishan.vpran.in/covid-download.php",
+            "onlineLink": "http://radhakishan.site/covid-download.php",
             "sliderImages": [
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/covid/covid-slider-1.webp"
+                    "image": "https://radhakishan.site/images/project/covid/covid-slider-1.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/covid/covid-slider-2.webp"
+                    "image": "https://radhakishan.site/images/project/covid/covid-slider-2.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/covid/covid-slider-3.webp"
+                    "image": "https://radhakishan.site/images/project/covid/covid-slider-3.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/covid/covid-slider-4.webp"
+                    "image": "https://radhakishan.site/images/project/covid/covid-slider-4.webp"
                 }
             ],
             "content": [
@@ -332,7 +471,7 @@
                     "contentList": [
                         {
                             "isLink": true,
-                            "link": "https://radhakishan.vpran.in/covid-download.php",
+                            "link": "https://radhakishan.site/covid-download.php",
                             "text": "Link to download the apk file"
                         },
                         {
@@ -410,31 +549,31 @@
             "id": 3,
             "title": "Health Monitoring System",
             "description": "Health Monitoring System - Patient-Doctor Live Chat!",
-            "logo": "https://radhakishan.vpran.in/images/project/hms/hms-logo.webp",
-            "thumbnail": "https://radhakishan.vpran.in/images/project/hms/hms-thumb.webp",
+            "logo": "https://radhakishan.site/images/project/hms/hms-logo.webp",
+            "thumbnail": "https://radhakishan.site/images/project/hms/hms-thumb.webp",
             "gitAvailable": true,
             "tag": "React, JavaScript, Back-end, REST, UX, Design, PHP, MySql, GitHub",
             "technology": "React Js, React-Redux, PHP, MySql, HTML, CSS, JS, VS Code",
             "date": "1 August, 2020 - 10 August, 2020",
-            "onlineLink": "https://healthmonitoring.radhakishan.vpran.in/",
+            "onlineLink": "https://healthmonitoring.radhakishan.site/",
             "sliderImages": [
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-1.webp"
+                    "image": "https://radhakishan.site/images/project/hms/hms-slider-1.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-2.webp"
+                    "image": "https://radhakishan.site/images/project/hms/hms-slider-2.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-3.webp"
+                    "image": "https://radhakishan.site/images/project/hms/hms-slider-3.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-4.webp"
+                    "image": "https://radhakishan.site/images/project/hms/hms-slider-4.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-5.webp"
+                    "image": "https://radhakishan.site/images/project/hms/hms-slider-5.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/hms/hms-slider-6.webp"
+                    "image": "https://radhakishan.site/images/project/hms/hms-slider-6.webp"
                 }
             ],
             "content": [
@@ -444,7 +583,7 @@
                     "contentList": [
                         {
                             "isLink": true,
-                            "link": "https://healthmonitoring.radhakishan.vpran.in/",
+                            "link": "https://healthmonitoring.radhakishan.site/",
                             "text": "Link to live demo"
                         },
                         {
@@ -624,8 +763,8 @@
             "id": 4,
             "title": "react-native-stylish-accordion",
             "description": "Simple Stylish React Native Accordion",
-            "logo": "https://radhakishan.vpran.in/images/project/npm/npm-logo.webp",
-            "thumbnail": "https://radhakishan.vpran.in/images/project/npm/react-native-accordion-thumb.webp",
+            "logo": "https://radhakishan.site/images/project/npm/npm-logo.webp",
+            "thumbnail": "https://radhakishan.site/images/project/npm/react-native-accordion-thumb.webp",
             "gitAvailable": true,
             "tag": "React, JavaScript, TypeScript, NPM, UX, Design, NPM Packages, GitHub",
             "technology": "React, JavaScript, TypeScript, NPM, VS Code",
@@ -634,7 +773,7 @@
             "onlineLink": "https://github.com/radhakishan404/react-native-stylish-accordion",
             "sliderImages": [
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/npm/react-native-accordion-thumb.webp"
+                    "image": "https://radhakishan.site/images/project/npm/react-native-accordion-thumb.webp"
                 }
             ],
             "content": [
@@ -778,8 +917,8 @@
             "id": 5,
             "title": "validate-form-in-expo-style",
             "description": "Simple form validation component with floating label for React-Native inspired by react-native-form-validator",
-            "logo": "https://radhakishan.vpran.in/images/project/npm/npm-logo.webp",
-            "thumbnail": "https://radhakishan.vpran.in/images/project/npm/validate-form-expo-style-thumb.webp",
+            "logo": "https://radhakishan.site/images/project/npm/npm-logo.webp",
+            "thumbnail": "https://radhakishan.site/images/project/npm/validate-form-expo-style-thumb.webp",
             "gitAvailable": true,
             "tag": "React, JavaScript, NPM, UX, Design, NPM Packages, GitHub",
             "technology": "React, JavaScript, NPM, VS Code",
@@ -788,7 +927,7 @@
             "onlineLink": "https://github.com/radhakishan404/validate-form-in-expo-style",
             "sliderImages": [
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/npm/validate-form-expo-style-thumb.webp"
+                    "image": "https://radhakishan.site/images/project/npm/validate-form-expo-style-thumb.webp"
                 }
             ],
             "content": [
@@ -1016,8 +1155,8 @@
             "id": 6,
             "title": "react-animation-loader",
             "description": "Simple animation loader with some css animation and an image with moving animation",
-            "logo": "https://radhakishan.vpran.in/images/project/npm/npm-logo.webp",
-            "thumbnail": "https://radhakishan.vpran.in/images/project/npm/react-animation-loader-thumb.webp",
+            "logo": "https://radhakishan.site/images/project/npm/npm-logo.webp",
+            "thumbnail": "https://radhakishan.site/images/project/npm/react-animation-loader-thumb.webp",
             "gitAvailable": true,
             "tag": "React, JavaScript, CSS, NPM, UX, Design, NPM Packages, GitHub",
             "technology": "React, JavaScript, CSS, NPM, VS Code",
@@ -1026,7 +1165,7 @@
             "onlineLink": "https://github.com/radhakishan404/react-animation-loader",
             "sliderImages": [
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/npm/react-animation-loader-thumb.webp"
+                    "image": "https://radhakishan.site/images/project/npm/react-animation-loader-thumb.webp"
                 }
             ],
             "content": [
@@ -1126,8 +1265,8 @@
             "id": 7,
             "title": "Stock Money Makers",
             "description": "Stock Money Makers provides the best online stock market courses in india which Includes exclusive banknifty intraday course, technical analysis course, bank nifty option course, stock market courses for beginners & much more.",
-            "logo": "https://radhakishan.vpran.in/images/project/smm/logo.webp",
-            "thumbnail": "https://radhakishan.vpran.in/images/project/smm/smm-1.webp",
+            "logo": "https://radhakishan.site/images/project/smm/logo.webp",
+            "thumbnail": "https://radhakishan.site/images/project/smm/smm-1.webp",
             "gitAvailable": false,
             "tag": "PHP, CodeIgniter, jQuery, JavaScript, MySql, HTML5, Mobirise",
             "technology": "PHP, CodeIgniter, jQuery, JavaScript, MySQL, HTML5, Mobirise",
@@ -1136,16 +1275,16 @@
             "onlineLink": "https://stockmoneymakers.com/",
             "sliderImages": [
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/smm/smm-1.webp"
+                    "image": "https://radhakishan.site/images/project/smm/smm-1.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/smm/smm-2.webp"
+                    "image": "https://radhakishan.site/images/project/smm/smm-2.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/smm/smm-3.webp"
+                    "image": "https://radhakishan.site/images/project/smm/smm-3.webp"
                 },
                 {
-                    "image": "https://radhakishan.vpran.in/images/project/smm/smm-4.webp"
+                    "image": "https://radhakishan.site/images/project/smm/smm-4.webp"
                 }
             ],
             "content": [
@@ -1230,6 +1369,118 @@
                 {
                     "contentTitle": "Challenges",
                     "contentDescription": "The first challenge that I occurred was <strong>designing and architecting</strong> the base structure of front-end. Building a web app with <strong>CodeIgniter</strong> a perfect choice for future growth and maintainability of a <strong>web application</strong>. CodeIgniter Framework made this a whole lot easier by allowing us to separate the <strong>Logic, Modules and View</strong>. One of the biggest challenges during development was uploading <strong>large video course</strong> of the web app in the back-end.",
+                    "contentList": null
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "title": "Bright Wood - Buy Furniture Online",
+            "description": "This project was created for one of my friend. He was my relative also so I gave me the best website to manage inventory and orders from site. In this project admin can create multiple variant of product with various type of colors and size of the product.",
+            "logo": "https://radhakishan.site/images/project/bright-wood-logo.png",
+            "thumbnail": "https://radhakishan.site/images/project/bright-wood-1.png",
+            "gitAvailable": false,
+            "tag": "PHP, jQuery, JavaScript, MySql, HTML5, Razorpay",
+            "technology": "PHP, jQuery, JavaScript, MySQL, HTML5, Razorpay",
+            "date": "July 2021 - September 2021",
+            "isPackage": false,
+            "onlineLink": "https://brightwood.in/",
+            "sliderImages": [
+                {
+                    "image": "https://radhakishan.site/images/project/bright-wood-1.png"
+                },
+                {
+                    "image": "https://radhakishan.site/images/project/bright-wood-2.png"
+                },
+                {
+                    "image": "https://radhakishan.site/images/project/bright-wood-3.png"
+                },
+                {
+                    "image": "https://radhakishan.site/images/project/bright-wood-4.png"
+                }
+            ],
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "Bright Wood Provide the best furniture in market, There designs are inspired by the new generation with a classic touch. Brightwood is proud to offer a wide range of solid wood furniture at great prices. Our full array of furniture includes living room, dining room, home office, bedroom, and kids furniture.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://brightwood.in/",
+                            "text": "Link to live demo"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Admin Panel"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Furniture Product"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Category"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Online Payment Gateway"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Filtered Product"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Responsibilities",
+                    "contentDescription": "My responsibilities for this project included <strong>design and development</strong> of a complete website.",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Layout, UI and UX design"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Front End Development"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Back End Development"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Integration with Google Analytics"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Responsive Design"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "User Experience"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Challenges",
+                    "contentDescription": "The first challenge that I occurred was <strong>designing and architecting</strong> the base structure of front-end. Building a ecommerece with <strong>PHP</strong> a perfect choice for future growth and maintainability of a <strong>web application</strong>. PHP made this a whole lot easier by allowing us to create website faster. One of the biggest challenges during development was maintaining <strong>Variants of product</strong> of the web app in the back-end.",
                     "contentList": null
                 }
             ]
