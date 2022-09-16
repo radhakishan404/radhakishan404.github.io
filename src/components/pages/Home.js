@@ -43,7 +43,7 @@ function Home(props) {
 
     return (
         <div className="main-wrapper">
-            <Loader isLoading={isLoading} bgColor="161122" icon="https://radhakishan.site//images/500%20x%20500%20logo.png" />
+            <Loader isLoading={isLoading} bgColor="161122" icon="/images/500%20x%20500%20logo.png" />
             <Header props={props} />
             <main id="content" className="main page-content" aria-label="Content" onClick={() => menuTriggerClose()}>
                 <div className="container-full header-content" id="home-detail">
@@ -83,7 +83,7 @@ function Home(props) {
                                     </span>
                                 </div>
                                 <LazyLoadImage
-                                    src="https://radhakishan.site//images/radhakishan-web-3.jpg"
+                                    src="/images/radhakishan-web-3.jpg"
                                     alt="Radhakishan Jangid image solving error"
                                     className="intro-img"
                                 />

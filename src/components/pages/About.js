@@ -40,7 +40,7 @@ function About(props) {
 
     return (
         <div className="main-wrapper">
-            <Loader isLoading={isLoading} bgColor="161122" icon="https://radhakishan.site//images/500%20x%20500%20logo.png" />
+            <Loader isLoading={isLoading} bgColor="161122" icon="/images/500%20x%20500%20logo.png" />
             <Header props={props} />
             <main id="content" className="main page-content" aria-label="Content">
                 <div className="container-full header-content">
@@ -74,7 +74,7 @@ function About(props) {
                                         <div className="col-sm-12 col-md-3 align--center pt-10">
                                             <picture>
                                                 <LazyLoadImage
-                                                    src="https://radhakishan.site//images/radhakishan-web-2.jpg"
+                                                    src="/images/radhakishan-web-2.jpg"
                                                     alt="Radhakishan Jangid in Kurta Payjama"
                                                     className="about-me-img"
                                                 />

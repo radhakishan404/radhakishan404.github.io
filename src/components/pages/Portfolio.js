@@ -31,7 +31,7 @@ function Portfolio(props) {
 
     return (
         <div className="main-wrapper">
-            <Loader isLoading={isLoading} bgColor="161122" icon="https://radhakishan.site//images/500%20x%20500%20logo.png" />
+            <Loader isLoading={isLoading} bgColor="161122" icon="/images/500%20x%20500%20logo.png" />
             <Header props={props} />
 
             <main id="content" className="main page-content" aria-label="Content">
@@ -108,7 +108,7 @@ function Portfolio(props) {
                                                                 proVal.gitAvailable
                                                                     ?
                                                                     <div className="project__ribbon">
-                                                                        <LazyLoadImage src="https://radhakishan.site/images/github.svg" alt="GitHub Icon" />
+                                                                        <LazyLoadImage src="/images/github.svg" alt="GitHub Icon" />
                                                                         <span>GitHub</span>
                                                                     </div>
                                                                     :
