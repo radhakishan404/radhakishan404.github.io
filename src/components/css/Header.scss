@@ -1839,6 +1839,66 @@ canvas {
     color: #fff;
 }
 
+.about-extra {
+    .about-extra-desc {
+        font-size: 1rem;
+        color: hsla(0, 0%, 100%, 0.75);
+        margin-top: 10px;
+    }
+
+    .about-extra-loading {
+        font-size: 0.95rem;
+        color: hsla(0, 0%, 100%, 0.7);
+    }
+
+    .about-extra-grid {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        grid-gap: 16px;
+    }
+
+    .about-extra-card {
+        padding: 18px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        transition: transform 0.3s ease, border-color 0.3s ease;
+
+        &:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        h5 {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            color: #fff;
+            word-break: break-word;
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: hsla(0, 0%, 100%, 0.75);
+            line-height: 1.6;
+            min-height: 44px;
+        }
+
+        .about-extra-meta {
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: hsla(0, 0%, 100%, 0.65);
+
+            span + span {
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
 .section-contact {
     display: -ms-flexbox;
     display: flex;

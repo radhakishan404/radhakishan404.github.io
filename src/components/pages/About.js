@@ -9,6 +9,10 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 
 function About(props) {
     const [isLoading, setIsLoading] = useState(true);
+    const [openSourceRepos, setOpenSourceRepos] = useState([]);
+    const [devPosts, setDevPosts] = useState([]);
+    const [isRepoLoading, setIsRepoLoading] = useState(true);
+    const [isPostLoading, setIsPostLoading] = useState(true);
 
     useEffect(() => {
         let checkInterval = setInterval(() => {
@@ -24,6 +28,53 @@ function About(props) {
             } catch (e) {
             }
         }, 100);
+    }, []);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        async function loadOpenSourceRepos() {
+            try {
+                const response = await fetch("https://api.github.com/users/radhakishan404/repos?per_page=100&sort=updated");
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    const repos = data
+                        .filter((repo) => !repo.fork && !repo.archived)
+                        .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+                        .slice(0, 6);
+                    if (isMounted) {
+                        setOpenSourceRepos(repos);
+                    }
+                }
+            } catch (error) {
+            } finally {
+                if (isMounted) {
+                    setIsRepoLoading(false);
+                }
+            }
+        }
+
+        async function loadDevPosts() {
+            try {
+                const response = await fetch("https://dev.to/api/articles?username=radhakishanjangid404&per_page=4");
+                const data = await response.json();
+                if (Array.isArray(data) && isMounted) {
+                    setDevPosts(data);
+                }
+            } catch (error) {
+            } finally {
+                if (isMounted) {
+                    setIsPostLoading(false);
+                }
+            }
+        }
+
+        loadOpenSourceRepos();
+        loadDevPosts();
+
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     const myAge = () => {
@@ -62,13 +113,13 @@ function About(props) {
                                         <div className="col-sm-12 col-md-9">
                                             <h1>Who's this guy?</h1>
                                             <p className="section-subtitle">
-                                                Hello Friends! I am Radhakishan Jangid. {myAge()} years old <strong className="text-gradient">Javascript and Backend developer</strong> based in Mumbai, India. My passion is web development. Over the past 2.5 year, I have gained a lot of experience with designing and developing numerious websites in React, Core PHP, Laravel, CodeIgniter, Node Js.
+                                                I am Radhakishan Jangid, {myAge()} years old <strong className="text-gradient">Senior Software Engineer</strong> based in Mumbai, India. I have 7+ years of experience building scalable web and mobile products with React, Node.js, Next.js, React Native, and cloud-native workflows.
                                                 <br />
                                                 <br />
-                                                Currently, I work as Backend Developer at <strong className="text-gradient"><a href="http://www.techstalwarts.com/" target="_blank" rel="noopener noreferrer">TechStalwarts Software Development LLP</a></strong>.
+                                                Currently, I work with <strong className="text-gradient"><a href="https://www.cachetech.com/" target="_blank" rel="noopener noreferrer">Cachetech Advisor Solutions (USA)</a></strong> on fintech systems across workflow automation, multi-tenancy architecture, and product engineering.
                                                 <br />
                                                 <br />
-                                                When not writing code, I really enjoy learning new stuff, playing games, doing workout in gym and specially chilling with friends. :).
+                                                I actively build and maintain open source projects, and also write engineering notes on DEV.to.
                                             </p>
                                         </div>
                                         <div className="col-sm-12 col-md-3 align--center pt-10">
@@ -264,6 +315,60 @@ function About(props) {
                                         })
                                     }
                                 </ul>
+                            </div>
+
+                            <div className="container container-narrow mt-40 about-extra">
+                                <h3 className="mt-40 main-title">Open Source & Public Work</h3>
+                                <p className="about-extra-desc">
+                                    Latest public repositories from GitHub.
+                                </p>
+                                <div className="about-extra-grid">
+                                    {
+                                        isRepoLoading
+                                            ?
+                                            <p className="about-extra-loading">Loading public repositories...</p>
+                                            :
+                                            openSourceRepos.map(function (repo, key) {
+                                                return (
+                                                    <a key={key} className="about-extra-card bg--dark" href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                                                        <h5>{repo.name}</h5>
+                                                        <p>{repo.description || "Open source repository"}</p>
+                                                        <div className="about-extra-meta">
+                                                            <span>{repo.language || "Code"}</span>
+                                                            <span>★ {repo.stargazers_count || 0}</span>
+                                                        </div>
+                                                    </a>
+                                                )
+                                            })
+                                    }
+                                </div>
+                            </div>
+
+                            <div className="container container-narrow mt-40 about-extra">
+                                <h3 className="mt-40 main-title">Latest DEV.to Posts</h3>
+                                <p className="about-extra-desc">
+                                    Recent technical posts and engineering notes.
+                                </p>
+                                <div className="about-extra-grid">
+                                    {
+                                        isPostLoading
+                                            ?
+                                            <p className="about-extra-loading">Loading DEV.to posts...</p>
+                                            :
+                                            devPosts.map(function (post, key) {
+                                                return (
+                                                    <a key={key} className="about-extra-card bg--dark" href={post.url} target="_blank" rel="noopener noreferrer">
+                                                        <h5>{post.title}</h5>
+                                                        <p>{post.description || "Read full post on DEV.to"}</p>
+                                                        <div className="about-extra-meta">
+                                                            <span>{post.readable_publish_date}</span>
+                                                            <span>❤ {post.public_reactions_count || 0}</span>
+                                                        </div>
+                                                    </a>
+                                                )
+                                            })
+                                    }
+                                </div>
                             </div>
                         </section>
                     </div>

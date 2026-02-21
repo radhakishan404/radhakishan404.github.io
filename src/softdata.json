@@ -2,33 +2,53 @@
     "experience": [
         {
             "isCurrent": 1,
-            "title": "Backend Developer",
+            "title": "Senior Software Engineer",
+            "companyName": "Cachetech Advisor Solutions (USA)",
+            "companyLink": "https://www.cachetech.com/",
+            "location": "Mumbai, India",
+            "from": "February 2024",
+            "to": "Present",
+            "description": "Working with US-based product and engineering teams to build scalable fintech systems, including workflow management, multi-tenancy architecture, and React Native mobile app delivery."
+        },
+        {
+            "isCurrent": 0,
+            "title": "Manager - Software Engineer",
+            "companyName": "Edubridge India Pvt Ltd",
+            "companyLink": "https://www.edubridgeindia.com/",
+            "location": "Mumbai, India",
+            "from": "December 2022",
+            "to": "January 2024",
+            "description": "Led migration from PHP to MERN stack, built a resume builder platform, and shipped microservice-based products with Jenkins + Docker CI/CD pipelines."
+        },
+        {
+            "isCurrent": 0,
+            "title": "Senior Software Engineer",
             "companyName": "TechStalwarts Software Development LLP",
             "companyLink": "http://www.techstalwarts.com/",
-            "location": "Mumbai-Kurla",
+            "location": "Mumbai, India",
             "from": "September 2020",
-            "to": "Present",
-            "description": ""
+            "to": "November 2022",
+            "description": "Handled ecommerce platform delivery across frontend, backend, AWS deployments, and third-party API integrations for high-traffic production systems."
         },
         {
             "isCurrent": 0,
             "title": "PHP Web Developer",
-            "companyName": "Innovins Softtech solutions Pvt. Ltd",
+            "companyName": "Innovins Softtech Solutions Pvt. Ltd",
             "companyLink": "https://www.innovins.com/",
-            "location": "Mumbai-Malad",
+            "location": "Mumbai, India",
             "from": "July 2019",
             "to": "August 2020",
-            "description": "Responsible from feature development and maintenance of 4 different PHP Portal and Also creating New Project based on Core PHP and Making API in Core PHP."
+            "description": "Maintained and developed multiple enterprise portals and internal productivity systems, including API and task management features."
         },
         {
             "isCurrent": 0,
             "title": "PHP Web Developer with CodeIgniter",
-            "companyName": "IMPAQ Technologies PVT. LTD",
+            "companyName": "IMPAQ Technologies Pvt. Ltd",
             "companyLink": "http://impaq.co.in/",
-            "location": "Mumbai-Lowerparel",
-            "from": "Aug 2018",
-            "to": "July 2019",
-            "description": "Responsible for feature development and maintenance of multiple project. I am in charge of main developing projects and writing end-to-end tests to ensure the best production quality."
+            "location": "Mumbai, India",
+            "from": "August 2018",
+            "to": "June 2019",
+            "description": "Delivered CMS and admission workflow modules, including business logic automation and platform maintenance for multiple client projects."
         }
     ],
     "skills": [
@@ -138,6 +158,9 @@
             "title": "GitHub"
         },
         {
+            "title": "Open Source"
+        },
+        {
             "title": "Design"
         },
         {
@@ -166,6 +189,168 @@
         }
     ],
     "project": [
+        {
+            "id": 11,
+            "title": "Notch Prompter",
+            "description": "A notch-aligned native macOS teleprompter built with SwiftUI.",
+            "logo": "/images/github.svg",
+            "thumbnail": "https://opengraph.githubassets.com/1/radhakishan404/notch-prompter",
+            "gitAvailable": true,
+            "tag": "Open Source, GitHub, Application, UX, Front-end",
+            "technology": "SwiftUI, macOS, Product Design",
+            "date": "2026",
+            "isPackage": false,
+            "onlineLink": "https://notch-prompter.vercel.app",
+            "sliderImages": [
+                {
+                    "image": "https://opengraph.githubassets.com/1/radhakishan404/notch-prompter"
+                },
+                {
+                    "image": "/images/project/POS-1.png"
+                }
+            ],
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "Notch Prompter is a <strong>native macOS utility</strong> focused on notch-aligned teleprompter usability with a clean and practical UI.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://notch-prompter.vercel.app",
+                            "text": "Project website"
+                        },
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/notch-prompter",
+                            "text": "GitHub repository"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Native SwiftUI experience"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Optimized reading layout near notch area"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Simple interaction model for creators"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Responsibilities",
+                    "contentDescription": "Built this project from idea to public release.",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Product concept and UI flow"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Implementation and testing"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Release and public showcase"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "title": "SSHipIt",
+            "description": "CD over SSH for Node.js, Next.js and React applications.",
+            "logo": "/images/github.svg",
+            "thumbnail": "https://opengraph.githubassets.com/1/radhakishan404/sshipit",
+            "gitAvailable": true,
+            "tag": "Open Source, GitHub, Node Js, React, JavaScript, DevOps, Back-end, Website",
+            "technology": "Node Js, JavaScript, CI/CD, SSH, React, Next.js",
+            "date": "2026",
+            "isPackage": false,
+            "onlineLink": "https://sshipit.vercel.app/",
+            "sliderImages": [
+                {
+                    "image": "https://opengraph.githubassets.com/1/radhakishan404/sshipit"
+                },
+                {
+                    "image": "/images/project/npm/react-animation-loader.webp"
+                }
+            ],
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "SSHipIt is an open source deployment utility to run reliable CD pipelines over SSH for <strong>Node.js, Next.js and React</strong> applications.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://sshipit.vercel.app/",
+                            "text": "Project website"
+                        },
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/sshipit",
+                            "text": "GitHub repository"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "SSH-based deployment flow"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Node.js / Next.js / React support"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Simple, self-hosted CI/CD pattern"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Responsibilities",
+                    "contentDescription": "Designed and built the project as an open source product.",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Architecture and implementation"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Documentation and onboarding guides"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Maintenance and enhancements"
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "id": 1,
             "title": "Nirulas",
