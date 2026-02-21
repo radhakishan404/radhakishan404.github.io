@@ -7,22 +7,14 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "emailjs-com": "^2.6.4",
-    "jquery": "^3.5.1",
-    "node-sass": "^4.14.1",
     "react": "^17.0.1",
-    "react-animation-loader": "^1.0.3",
     "react-dom": "^17.0.1",
-    "react-ga": "^3.3.0",
-    "react-lazy-load-image-component": "^1.5.1",
-    "react-responsive-carousel": "^3.2.11",
-    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
@@ -48,5 +40,8 @@
   },
   "devDependencies": {
     "gh-pages": "^4.0.0"
+  },
+  "overrides": {
+    "postcss-safe-parser": "4.0.2"
   }
 }
