@@ -26,7 +26,7 @@ function formatDate() {
 }
 
 export async function getPackageTotalDownload(name) {
-    const url = "https://api.npmjs.org/downloads/range/2020-08-01:"+formatDate()+"/"+name;
+    const url = "https://api.npmjs.org/downloads/range/2020-08-01:" + formatDate() + "/" + name;
     const response = await fetch(url, {
         method: 'GET'
     })
@@ -34,10 +34,21 @@ export async function getPackageTotalDownload(name) {
 
     let total = 0;
 
-    if(data && data.downloads) {
+    if (data && data.downloads) {
         for (let i = 0; i < data.downloads.length; i++) {
             total = total + data.downloads[i].downloads;
         }
     }
     return total;
+}
+
+export function calcDate() {
+    var diff = Math.floor(new Date().getTime() - new Date("2018,05,01").getTime());
+    var day = 1000 * 60 * 60 * 24;
+
+    var days = Math.floor(diff / day);
+    var months = Math.floor(days / 31);
+    var years = Math.floor(months / 12);
+
+    return years
 }
