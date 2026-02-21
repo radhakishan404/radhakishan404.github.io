@@ -12,15 +12,11 @@ const profile = {
   website: "https://radhakishan404.github.io/",
   linkedin: "https://www.linkedin.com/in/radhakishanjangid",
   github: "https://github.com/radhakishan404",
+  devto: "https://dev.to/radhakishanjangid404",
+  whatsapp: "https://wa.me/919820938440",
+  sponsor: "https://github.com/sponsors/radhakishan404",
   resume: "/Radhakishan-Updated-Resume.pdf",
 };
-
-const highlights = [
-  { label: "Experience", value: "7+ Years" },
-  { label: "Public Repositories", value: "40+" },
-  { label: "Core Focus", value: "Node.js, React, React Native" },
-  { label: "Current Role", value: "US Fintech Product Engineering" },
-];
 
 const skills = [
   "Node.js",
@@ -75,6 +71,39 @@ const experience = [
   },
 ];
 
+const caseStudies = [
+  {
+    title: "Workflow Platform for US Fintech",
+    summary:
+      "Designed and shipped a workflow engine with manual + automated execution paths and role-based task orchestration.",
+    impact: [
+      "Multi-tenant data architecture",
+      "Workflow visibility dashboard",
+      "Mobile companion in React Native",
+    ],
+  },
+  {
+    title: "Nirulas Commerce + POS",
+    summary:
+      "Built and supported ordering + branch operations experiences with scalable API integrations and ops-focused modules.",
+    impact: [
+      "Location-based order assignment",
+      "Third-party integration workflows",
+      "Frontend + backend ownership",
+    ],
+  },
+  {
+    title: "SSHipIt (Open Source)",
+    summary:
+      "Created a self-hosted CI/CD delivery approach over SSH to simplify deployments for Node.js, Next.js, and React apps.",
+    impact: [
+      "Practical release automation",
+      "DevOps-friendly architecture",
+      "Public docs and live demo",
+    ],
+  },
+];
+
 const featuredProjects = [
   {
     name: "SSHipIt",
@@ -119,31 +148,74 @@ const featuredProjects = [
   },
 ];
 
-const services = [
+const serviceOffers = [
   {
-    title: "Product Engineering",
-    desc: "Architecture, development, and scale-up for web products and internal tools.",
+    title: "MVP Engineering Sprint",
+    desc: "2-4 week focused build to ship your core product flow fast.",
+    cta: "Discuss MVP scope",
+    action: `mailto:${profile.email}?subject=MVP%20Engineering%20Sprint`,
   },
   {
-    title: "Mobile App Delivery",
-    desc: "React Native apps with strong API and workflow integration.",
+    title: "Monthly Engineering Retainer",
+    desc: "Dedicated full-stack support for feature velocity, stability, and releases.",
+    cta: "Ask for monthly plan",
+    action: `mailto:${profile.email}?subject=Monthly%20Engineering%20Retainer`,
   },
   {
-    title: "CI/CD + DevOps",
-    desc: "Self-hosted and cloud deployment pipelines, Dockerized delivery, and release reliability.",
+    title: "System Design + Scale Review",
+    desc: "Architecture deep-dive for scaling, reliability, and maintainability.",
+    cta: "Book architecture review",
+    action: `mailto:${profile.email}?subject=Architecture%20Review%20Request`,
+  },
+];
+
+const education = [
+  {
+    degree: "MBA - Information Technology",
+    school: "DPU ERP, Pune",
+    period: "Aug 2024 - Present",
   },
   {
-    title: "Legacy Modernization",
-    desc: "Move PHP/monolith products to MERN and microservice-friendly systems.",
+    degree: "BSc - Information Technology",
+    school: "University of Mumbai",
+    period: "Jun 2015 - Jun 2018",
   },
+];
+
+const community = [
+  "Member of Global Shapers Community, Udaipur Hub (World Economic Forum initiative).",
+  "Contributed to youth development, career guidance, and social impact initiatives.",
+  "Worked across diverse stakeholders, strengthening leadership and communication.",
 ];
 
 function App() {
   const [repos, setRepos] = useState([]);
   const [repoStatus, setRepoStatus] = useState("loading");
+  const [githubProfile, setGithubProfile] = useState(null);
+  const [devPosts, setDevPosts] = useState([]);
+  const [postStatus, setPostStatus] = useState("loading");
 
   useEffect(() => {
     let isMounted = true;
+
+    async function loadGitHubProfile() {
+      try {
+        const response = await fetch("https://api.github.com/users/radhakishan404");
+        const data = await response.json();
+
+        if (!data || typeof data !== "object" || !data.login) {
+          throw new Error("Unexpected profile response");
+        }
+
+        if (isMounted) {
+          setGithubProfile(data);
+        }
+      } catch (error) {
+        if (isMounted) {
+          setGithubProfile(null);
+        }
+      }
+    }
 
     async function loadRepos() {
       try {
@@ -153,7 +225,7 @@ function App() {
         const data = await response.json();
 
         if (!Array.isArray(data)) {
-          throw new Error("Unexpected GitHub response");
+          throw new Error("Unexpected repos response");
         }
 
         const curated = data
@@ -174,11 +246,60 @@ function App() {
       }
     }
 
+    async function loadDevPosts() {
+      try {
+        const response = await fetch(
+          "https://dev.to/api/articles?username=radhakishanjangid404&per_page=4"
+        );
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+          throw new Error("Unexpected dev.to response");
+        }
+
+        if (isMounted) {
+          setDevPosts(data);
+          setPostStatus("ready");
+        }
+      } catch (error) {
+        if (isMounted) {
+          setPostStatus("error");
+        }
+      }
+    }
+
+    loadGitHubProfile();
     loadRepos();
+    loadDevPosts();
+
     return () => {
       isMounted = false;
     };
   }, []);
+
+  const totalStars = useMemo(
+    () => repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0),
+    [repos]
+  );
+
+  const highlights = useMemo(
+    () => [
+      { label: "Experience", value: "7+ Years" },
+      {
+        label: "Public Repositories",
+        value: githubProfile ? `${githubProfile.public_repos}+` : "40+",
+      },
+      {
+        label: "GitHub Followers",
+        value: githubProfile ? `${githubProfile.followers}+` : "20+",
+      },
+      {
+        label: "Open Source Stars",
+        value: repoStatus === "ready" ? `${totalStars}+` : "Growing",
+      },
+    ],
+    [githubProfile, repoStatus, totalStars]
+  );
 
   const year = useMemo(() => new Date().getFullYear(), []);
 
@@ -194,8 +315,9 @@ function App() {
         </a>
         <nav>
           <a href="#work">Work</a>
+          <a href="#case-studies">Case Studies</a>
           <a href="#projects">Projects</a>
-          <a href="#github">GitHub</a>
+          <a href="#writing">Writing</a>
           <a href="#hire">Hire</a>
         </nav>
       </header>
@@ -203,17 +325,24 @@ function App() {
       <main>
         <section className="hero" id="home">
           <p className="eyebrow">Available for freelance, consulting, and product roles</p>
-          <h1>
-            Premium full-stack engineering for ambitious products.
-          </h1>
+          <h1>Premium full-stack engineering for ambitious products.</h1>
           <p className="hero-copy">{profile.tagline}</p>
 
           <div className="hero-cta">
-            <a className="btn btn-primary" href="mailto:radhakishanjangid404@gmail.com?subject=Project%20Inquiry%20from%20Portfolio">
+            <a
+              className="btn btn-primary"
+              href={`mailto:${profile.email}?subject=Project%20Inquiry%20from%20Portfolio`}
+            >
               Start a project
             </a>
             <a className="btn btn-ghost" href={profile.resume} target="_blank" rel="noreferrer">
               Download resume
+            </a>
+            <a
+              className="btn btn-ghost"
+              href={`mailto:${profile.email}?subject=Discovery%20Call%20Request`}
+            >
+              Book discovery call
             </a>
           </div>
 
@@ -241,7 +370,8 @@ function App() {
           <div className="section-head">
             <h2>Experience</h2>
             <p>
-              End-to-end ownership across architecture, implementation, release engineering, and stakeholder delivery.
+              End-to-end ownership across architecture, implementation, release engineering, and
+              stakeholder delivery.
             </p>
           </div>
           <div className="timeline">
@@ -255,6 +385,29 @@ function App() {
                     <li key={point}>{point}</li>
                   ))}
                 </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section" id="case-studies">
+          <div className="section-head">
+            <h2>Case Studies</h2>
+            <p>
+              Snapshot of problems solved and execution quality across product, architecture, and
+              delivery.
+            </p>
+          </div>
+          <div className="cards-grid">
+            {caseStudies.map((study) => (
+              <article key={study.title} className="project-card case-card">
+                <h3>{study.title}</h3>
+                <p>{study.summary}</p>
+                <div className="impact-pills">
+                  {study.impact.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
               </article>
             ))}
           </div>
@@ -326,9 +479,11 @@ function App() {
                   <p>{repo.description || "No description added yet."}</p>
                   <small>
                     {repo.language || "Code"} • Updated{" "}
-                    {new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric" }).format(
-                      new Date(repo.updated_at)
-                    )}
+                    {new Intl.DateTimeFormat("en", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    }).format(new Date(repo.updated_at))}
                   </small>
                   <div className="card-links">
                     <a href={repo.html_url} target="_blank" rel="noreferrer">
@@ -346,30 +501,118 @@ function App() {
           ) : null}
         </section>
 
+        <section className="section" id="writing">
+          <div className="section-head">
+            <h2>Writing & Reach</h2>
+            <p>
+              Content builds trust and project reach. These are your latest public DEV posts.
+            </p>
+          </div>
+
+          {postStatus === "loading" ? <p className="status">Loading latest articles...</p> : null}
+
+          {postStatus === "error" ? (
+            <p className="status">
+              Could not load articles now. Visit{" "}
+              <a href={profile.devto} target="_blank" rel="noreferrer">
+                DEV profile
+              </a>
+              .
+            </p>
+          ) : null}
+
+          {postStatus === "ready" ? (
+            <div className="cards-grid">
+              {devPosts.map((post) => (
+                <article key={post.id} className="repo-card">
+                  <h3>{post.title}</h3>
+                  <p>{post.description || "Engineering note from DEV."}</p>
+                  <small>
+                    {post.readable_publish_date} • {post.public_reactions_count || 0} reactions •{" "}
+                    {post.comments_count || 0} comments
+                  </small>
+                  <div className="card-links">
+                    <a href={post.url} target="_blank" rel="noreferrer">
+                      Read article
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : null}
+        </section>
+
         <section className="section" id="hire">
           <div className="section-head">
-            <h2>Work With Me</h2>
-            <p>Available for freelance product builds, retained engineering support, and consulting.</p>
+            <h2>Freelance Offers</h2>
+            <p>Productized services that help leads understand exactly how to work with you.</p>
           </div>
           <div className="cards-grid services-grid">
-            {services.map((service) => (
-              <article key={service.title} className="service-card">
-                <h3>{service.title}</h3>
-                <p>{service.desc}</p>
+            {serviceOffers.map((offer) => (
+              <article key={offer.title} className="service-card">
+                <h3>{offer.title}</h3>
+                <p>{offer.desc}</p>
+                <div className="card-links">
+                  <a href={offer.action}>{offer.cta}</a>
+                </div>
               </article>
             ))}
           </div>
 
           <div className="support-strip">
-            <a className="btn btn-primary" href={`mailto:${profile.email}?subject=Freelance%20Project%20Discussion`}>
+            <a
+              className="btn btn-primary"
+              href={`mailto:${profile.email}?subject=Freelance%20Project%20Discussion`}
+            >
               Hire Me
+            </a>
+            <a className="btn btn-ghost" href={profile.whatsapp} target="_blank" rel="noreferrer">
+              WhatsApp
             </a>
             <a className="btn btn-ghost" href={profile.linkedin} target="_blank" rel="noreferrer">
               Connect on LinkedIn
             </a>
-            <a className="btn btn-ghost" href="https://github.com/sponsors/radhakishan404" target="_blank" rel="noreferrer">
+            <a className="btn btn-ghost" href={profile.sponsor} target="_blank" rel="noreferrer">
               Sponsor on GitHub
             </a>
+          </div>
+
+          <div className="reach-note">
+            <p>
+              Add your Buy Me a Coffee link anytime and I can wire it into this support bar in one
+              quick update.
+            </p>
+          </div>
+        </section>
+
+        <section className="section education-section">
+          <div className="section-head">
+            <h2>Education & Leadership</h2>
+            <p>
+              Technical growth backed by continuous learning and community leadership.
+            </p>
+          </div>
+          <div className="cards-grid">
+            <article className="service-card">
+              <h3>Education</h3>
+              <ul className="plain-list">
+                {education.map((item) => (
+                  <li key={item.degree}>
+                    <strong>{item.degree}</strong>
+                    <span>{item.school}</span>
+                    <em>{item.period}</em>
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article className="service-card">
+              <h3>Community</h3>
+              <ul className="plain-list">
+                {community.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
           </div>
         </section>
       </main>

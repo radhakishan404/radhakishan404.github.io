@@ -96,6 +96,7 @@ main,
 .top-nav nav {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .top-nav nav a {
@@ -354,6 +355,26 @@ main {
   border-color: rgba(73, 197, 182, 0.26);
 }
 
+.case-card {
+  border-color: rgba(255, 142, 90, 0.25);
+}
+
+.impact-pills {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.impact-pills span {
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: #d5def9;
+  font-size: 0.82rem;
+}
+
 .status {
   margin: 0;
   color: var(--text-muted);
@@ -368,6 +389,40 @@ main {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.reach-note p {
+  margin: 12px 0 0;
+  color: var(--text-muted);
+}
+
+.plain-list {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.plain-list li {
+  color: #d4def9;
+  line-height: 1.6;
+}
+
+.plain-list li strong,
+.plain-list li span,
+.plain-list li em {
+  display: block;
+}
+
+.plain-list li span {
+  color: var(--text-muted);
+}
+
+.plain-list li em {
+  color: #9eb0d5;
+  font-style: normal;
+  font-size: 0.84rem;
 }
 
 .site-footer {
