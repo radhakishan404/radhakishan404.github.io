@@ -67,7 +67,7 @@ function Contact(props) {
 
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <p>Do you have an interesting project I can help with? Feel free to reach out to me by using one of the following:</p>
+                                        <p>If you would like to connect, collaborate, or discuss engineering ideas, feel free to reach out using one of the following:</p>
 
                                         <ul>
                                             <li> Email <strong className="text-gradient"><a href="mailto:radhakishanjangid404@gmail.com">radhakishanjangid404@gmail.com</a></strong> </li>
