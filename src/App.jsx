@@ -1,19 +1,88 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
+import SiteShell from "./components/SiteShell";
+import AboutPage from "./pages/AboutPage";
+import ArticleDetailPage from "./pages/ArticleDetailPage";
+import ArticlesPage from "./pages/ArticlesPage";
+import ContactPage from "./pages/ContactPage";
+import HomePage from "./pages/HomePage";
+import ProjectDetailPage from "./pages/ProjectDetailPage";
+import ProjectsPage from "./pages/ProjectsPage";
 
-import Home from './components/pages/Home';
-import About from './components/pages/About';
-import Contact from './components/pages/Contact';
-import Portfolio from './components/pages/Portfolio';
-import PortfolioDetail from './components/pages/PortfolioDetail';
+const gaMeasurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+
+function loadAnalytics() {
+    if (!gaMeasurementId || typeof window === "undefined" || window.gtag) {
+        return;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+        window.dataLayer.push(arguments);
+    };
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
+    document.head.appendChild(script);
+
+    window.gtag("js", new Date());
+    window.gtag("config", gaMeasurementId, { send_page_view: false });
+}
+
+function trackPageView(location) {
+    if (!gaMeasurementId || typeof window === "undefined" || !window.gtag) {
+        return;
+    }
+
+    window.gtag("event", "page_view", {
+        page_location: window.location.href,
+        page_path: location.pathname + location.search,
+        page_title: document.title
+    });
+}
+
+function AnalyticsTracker() {
+    const history = useHistory();
+
+    useEffect(() => {
+        loadAnalytics();
+        trackPageView(history.location);
+
+        const unlisten = history.listen((location) => {
+            trackPageView(location);
+        });
+
+        return unlisten;
+    }, [history]);
+
+    return null;
+}
+
+function AppRoutes() {
+    return (
+        <SiteShell>
+            <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route exact path="/about" component={AboutPage} />
+                <Route exact path="/projects" component={ProjectsPage} />
+                <Route exact path="/projects/:topic" component={ProjectDetailPage} />
+                <Route exact path="/portfolio" render={() => <Redirect to="/projects" />} />
+                <Route exact path="/portfolio/:topic" render={({ match }) => <Redirect to={`/projects/${match.params.topic}`} />} />
+                <Route exact path="/articles" component={ArticlesPage} />
+                <Route exact path="/articles/:slug" component={ArticleDetailPage} />
+                <Route exact path="/contact" component={ContactPage} />
+                <Route render={() => <Redirect to="/" />} />
+            </Switch>
+        </SiteShell>
+    );
+}
 
 function App() {
     return (
         <Router>
-            <Route exact={true} path="/" component={Home} />
-            <Route exact={true} path="/about" component={About} />
-            <Route exact={true} path="/contact" component={Contact} />
-            <Route exact={true} path="/portfolio" component={Portfolio} />
-            <Route exact={true} path="/portfolio/:topic" component={PortfolioDetail} />
+            <AnalyticsTracker />
+            <AppRoutes />
         </Router>
     );
 }

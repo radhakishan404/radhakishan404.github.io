@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Gemma — Complete Guide | rk.codex</title>
+<meta property="og:image" content="/images/rk-formal.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #f0ede8;
+    --muted: #888880;
+    --accent: #b5f23d;
+    --accent2: #3df2c8;
+    --accent3: #f2923d;
+    --google-blue: #4285f4;
+    --google-red: #ea4335;
+    --google-yellow: #fbbc04;
+    --google-green: #34a853;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', Georgia, serif;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 48px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+    width: fit-content;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(52px, 8vw, 110px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin-bottom: 32px;
+    max-width: 900px;
+  }
+
+  .hero h1 .g { color: var(--google-blue); }
+  .hero h1 .e { color: var(--google-red); }
+  .hero h1 .m { color: var(--google-yellow); }
+  .hero h1 .m2 { color: var(--google-blue); }
+  .hero h1 .a { color: var(--google-green); }
+  .hero h1 .rest { color: var(--text); }
+
+  .hero-sub {
+    font-size: 20px;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 48px;
+    font-style: italic;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .hero-meta span strong {
+    display: block;
+    color: var(--text);
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(66,133,244,0.08) 0%, transparent 70%);
+    top: -100px; right: -200px;
+    pointer-events: none;
+  }
+
+  /* TOC */
+  .toc-section {
+    padding: 0 48px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .toc-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .toc-item:hover {
+    border-color: var(--accent);
+    background: var(--surface2);
+  }
+
+  .toc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    min-width: 24px;
+  }
+
+  .toc-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 80px 48px;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+    color: var(--text);
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--text);
+    margin: 36px 0 14px;
+  }
+
+  p {
+    font-size: 17px;
+    color: #c8c4bc;
+    margin-bottom: 20px;
+    max-width: 740px;
+  }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+
+  .highlight-box p { margin: 0; color: var(--text); font-size: 16px; }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-size: 15px;
+  }
+
+  .compare-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .compare-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    color: #c8c4bc;
+    vertical-align: top;
+  }
+
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: var(--surface); }
+
+  .badge-yes {
+    background: rgba(181,242,61,0.12);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .badge-no {
+    background: rgba(242,146,61,0.12);
+    color: var(--accent3);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  /* CODE BLOCK */
+  .code-block {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .code-block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .code-block-label::before {
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .code-block pre {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: #e6edf3;
+    line-height: 1.8;
+    white-space: pre-wrap;
+  }
+
+  .code-block .cm { color: #8b949e; }
+  .code-block .ck { color: #ff7b72; }
+  .code-block .cs { color: #a5d6ff; }
+  .code-block .cv { color: #79c0ff; }
+  .code-block .cn { color: var(--accent); }
+
+  /* STEPS */
+  .steps { margin: 32px 0; }
+
+  .step {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .step::after {
+    content: '';
+    position: absolute;
+    left: 19px; top: 44px;
+    width: 2px;
+    height: calc(100% + 8px);
+    background: var(--border);
+  }
+  .step:last-child::after { display: none; }
+
+  .step-circle {
+    min-width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #0a0a0a;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-content h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 6px;
+    margin-top: 8px;
+  }
+
+  .step-content p { font-size: 15px; color: var(--muted); margin: 0; max-width: 600px; }
+
+  /* MODELS TABLE */
+  .models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 32px 0;
+  }
+
+  .model-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .model-card:hover { border-color: var(--accent2); }
+
+  .model-size {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--accent2);
+    margin-bottom: 4px;
+  }
+
+  .model-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .model-tag {
+    font-size: 12px;
+    color: #c8c4bc;
+    line-height: 1.4;
+  }
+
+  /* YOUTUBE SECTION */
+  .yt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .yt-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .yt-card:hover { border-color: #ff0000; transform: translateY(-4px); }
+
+  .yt-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .yt-play {
+    width: 52px; height: 52px;
+    background: #ff0000;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: transform 0.2s;
+  }
+  .yt-card:hover .yt-play { transform: scale(1.1); }
+
+  .yt-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #ff0000;
+    position: absolute;
+    top: 10px; left: 10px;
+    background: rgba(0,0,0,0.7);
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+
+  .yt-info {
+    padding: 16px 18px;
+  }
+
+  .yt-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .yt-channel {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* USE CASES */
+  .usecase-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 32px 0;
+  }
+
+  .usecase-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .usecase-icon {
+    font-size: 22px;
+    min-width: 32px;
+  }
+
+  .usecase-item h5 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .usecase-item p {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: linear-gradient(135deg, rgba(181,242,61,0.06) 0%, rgba(61,242,200,0.06) 100%);
+    border: 1px solid rgba(181,242,61,0.2);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 40px 0;
+    text-align: center;
+  }
+
+  .callout h3 { margin-top: 0; font-size: 28px; }
+  .callout p { max-width: 100%; color: var(--muted); margin-bottom: 0; }
+
+  /* INLINE CODE */
+  code {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: var(--surface2);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 48px;
+    text-align: center;
+  }
+
+  .footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #444;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--accent);
+    z-index: 200;
+    transition: width 0.1s;
+  }
+
+  /* SECTION DIVIDER LABEL */
+  .full-divider {
+    border-top: 1px solid var(--border);
+    position: relative;
+  }
+
+  /* ANIMATE IN */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero, .section, .toc-section { padding-left: 20px; padding-right: 20px; }
+    .usecase-list { grid-template-columns: 1fr; }
+    .hero-meta { gap: 24px; flex-wrap: wrap; }
+    footer { padding: 32px 20px; }
+    .footer-links { flex-wrap: wrap; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">rk.codex</a>
+  <ul class="nav-links">
+    <li><a href="#what">What is Gemma</a></li>
+    <li><a href="#models">Models</a></li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#usecases">Use Cases</a></li>
+    <li><a href="#videos">Videos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag">Complete Deep-Dive Guide · 2026</div>
+  <h1>
+    <span class="g">G</span><span class="e">E</span><span class="m">M</span><span class="m2">M</span><span class="a">A</span><br>
+    <span class="rest">BY GOOGLE.</span>
+  </h1>
+  <p class="hero-sub">Everything you need to know — from zero to building real AI apps. No fluff. No paid courses. Just the truth.</p>
+  <div class="hero-meta">
+    <span><strong>Free</strong>Open Source</span>
+    <span><strong>Runs Locally</strong>No API Cost</span>
+    <span><strong>2B–27B</strong>Model Sizes</span>
+    <span><strong>2026</strong>Latest Version</span>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc-section">
+  <p class="section-tag">What's Inside</p>
+  <div class="toc-grid">
+    <a href="#what" class="toc-item"><span class="toc-num">01</span><span class="toc-label">What is Gemma?</span></a>
+    <a href="#why" class="toc-item"><span class="toc-num">02</span><span class="toc-label">Why Use Gemma?</span></a>
+    <a href="#models" class="toc-item"><span class="toc-num">03</span><span class="toc-label">Gemma Model Sizes</span></a>
+    <a href="#vs" class="toc-item"><span class="toc-num">04</span><span class="toc-label">Gemma vs Others</span></a>
+    <a href="#setup" class="toc-item"><span class="toc-num">05</span><span class="toc-label">Complete Setup Guide</span></a>
+    <a href="#prompting" class="toc-item"><span class="toc-num">06</span><span class="toc-label">How to Prompt Gemma</span></a>
+    <a href="#usecases" class="toc-item"><span class="toc-num">07</span><span class="toc-label">Real Use Cases</span></a>
+    <a href="#projects" class="toc-item"><span class="toc-num">08</span><span class="toc-label">Project Ideas</span></a>
+    <a href="#videos" class="toc-item"><span class="toc-num">09</span><span class="toc-label">YouTube Resources</span></a>
+    <a href="#faq" class="toc-item"><span class="toc-num">10</span><span class="toc-label">FAQ</span></a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 1: WHAT IS GEMMA -->
+<section class="section fade-in" id="what">
+  <p class="section-tag">01 — Introduction</p>
+  <h2>What Exactly is Google Gemma?</h2>
+  <p>Gemma is a family of <strong style="color:var(--text)">open-source, lightweight AI models</strong> built by Google DeepMind. Released in early 2024 and updated through 2025–2026, Gemma gives developers and researchers direct access to powerful AI models they can run, modify, and deploy — completely for free.</p>
+  <p>Think of it as Google giving you a mini version of the same AI technology that powers Gemini — but one you can run on your own laptop, phone, or server without paying anyone a single rupee.</p>
+
+  <div class="highlight-box">
+    <p>🔑 <strong>The simplest way to understand Gemma:</strong> It's like having your own private ChatGPT that lives on your computer. No internet. No subscription. No data sharing. Just you and a powerful AI model.</p>
+  </div>
+
+  <h3>Where does Gemma come from?</h3>
+  <p>Gemma is built by <strong style="color:var(--text)">Google DeepMind</strong> — the same team behind Gemini (Google's most powerful AI). Gemma uses the same research, architecture, and training techniques as Gemini, but it's scaled down to run efficiently on consumer-grade hardware.</p>
+  <p>It's released under an open license — meaning developers, students, and companies can use it for both personal and commercial projects without any licensing fees.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">🏗️</span>
+      <h4>Built on Gemini Technology</h4>
+      <p>Same research and architecture as Google's flagship Gemini model — just smaller and open.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔓</span>
+      <h4>Truly Open Source</h4>
+      <p>Download, modify, fine-tune, and deploy. No hidden restrictions. No API gateway.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💻</span>
+      <h4>Runs on Consumer Hardware</h4>
+      <p>Gemma 2B runs on a basic laptop. No need for expensive cloud GPUs.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔒</span>
+      <h4>100% Private by Default</h4>
+      <p>Your data never leaves your device. Perfect for sensitive or confidential work.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 2: WHY GEMMA -->
+<section class="section fade-in" id="why">
+  <p class="section-tag">02 — The Case for Gemma</p>
+  <h2>Why Should You Use Gemma?</h2>
+  <p>There are hundreds of AI models available today. So why pick Gemma? Here's the honest answer — Gemma hits a sweet spot that very few models do: <em>it's powerful enough to be genuinely useful, but light enough to run anywhere.</em></p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">💰</span>
+      <h4>Zero Cost, Forever</h4>
+      <p>No API bills. No subscriptions. Download once, use infinitely. Perfect for students and indie developers.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">⚡</span>
+      <h4>Fast Response Time</h4>
+      <p>Running locally means no network latency. Responses are near-instant on modern hardware.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🛠️</span>
+      <h4>Fully Customizable</h4>
+      <p>Fine-tune it on your own data. Make it an expert in your specific domain. No one else can do this with GPT-4.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">📱</span>
+      <h4>Runs on Edge Devices</h4>
+      <p>Gemma 2B can even run on Android phones. Build on-device AI apps without any server.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌍</span>
+      <h4>Works Offline</h4>
+      <p>No internet? No problem. Perfect for remote areas, secure environments, or offline apps.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎓</span>
+      <h4>Best for Learning AI</h4>
+      <p>Want to understand how LLMs actually work? Gemma is open — you can inspect and learn from everything.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 3: MODELS -->
+<section class="section fade-in" id="models">
+  <p class="section-tag">03 — Model Lineup</p>
+  <h2>Gemma Model Sizes Explained</h2>
+  <p>Gemma comes in different sizes. The number (2B, 7B, 9B, 27B) refers to the number of <strong style="color:var(--text)">parameters</strong> — basically how "smart" and how "heavy" the model is. More parameters = more capable but needs more RAM.</p>
+
+  <div class="models-grid">
+    <div class="model-card">
+      <div class="model-size">2B</div>
+      <div class="model-name">GEMMA 2B</div>
+      <div class="model-tag">Runs on 4GB RAM<br>Perfect for laptops & mobile<br>Fastest responses</div>
+    </div>
+    <div class="model-card">
+      <div class="model-size">7B</div>
+      <div class="model-name">GEMMA 7B</div>
+      <div class="model-tag">Needs 8GB RAM<br>Great balance of speed & quality<br>Best for most developers</div>
+    </div>
+    <div class="model-card">
+      <div class="model-size">9B</div>
+      <div class="model-name">GEMMA 2 · 9B</div>
+      <div class="model-tag">Needs 10GB RAM<br>Latest generation<br>Significantly smarter than 7B</div>
+    </div>
+    <div class="model-card">
+      <div class="model-size">27B</div>
+      <div class="model-name">GEMMA 2 · 27B</div>
+      <div class="model-tag">Needs 20GB+ RAM<br>Near GPT-4 quality<br>Best for serious projects</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p>💡 <strong>Which one should you pick?</strong> If you have a normal laptop with 8–16GB RAM, start with <code>gemma2:9b</code> via Ollama. It gives the best quality-to-performance ratio for most use cases in 2026.</p>
+  </div>
+
+  <h3>Instruction-Tuned vs Base Models</h3>
+  <p>Each size comes in two variants. <strong style="color:var(--text)">Base model</strong> is raw — it just predicts the next word. <strong style="color:var(--text)">Instruction-tuned (IT)</strong> model is trained to follow instructions and have conversations. For 99% of use cases, always use the instruction-tuned version.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Variant</th>
+        <th>What it does</th>
+        <th>When to use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>gemma-2b</code></td>
+        <td>Predicts text, no conversation ability</td>
+        <td>Research, fine-tuning experiments</td>
+      </tr>
+      <tr>
+        <td><code>gemma-2b-it</code></td>
+        <td>Follows instructions, chat-ready</td>
+        <td>Chatbots, Q&A, coding help</td>
+      </tr>
+      <tr>
+        <td><code>gemma2-9b-it</code></td>
+        <td>Latest, smarter instruction following</td>
+        <td>Most production use cases</td>
+      </tr>
+      <tr>
+        <td><code>gemma2-27b-it</code></td>
+        <td>Highest quality responses</td>
+        <td>Complex reasoning, analysis</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 4: VS -->
+<section class="section fade-in" id="vs">
+  <p class="section-tag">04 — Comparison</p>
+  <h2>Gemma vs ChatGPT vs Llama vs Mistral</h2>
+  <p>How does Gemma stack up against the most popular AI models? Here's an honest, no-hype comparison.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Gemma</th>
+        <th>ChatGPT (GPT-4)</th>
+        <th>Llama 3</th>
+        <th>Mistral</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cost</td>
+        <td><span class="badge-yes">Free</span></td>
+        <td><span class="badge-no">Paid API</span></td>
+        <td><span class="badge-yes">Free</span></td>
+        <td><span class="badge-yes">Free</span></td>
+      </tr>
+      <tr>
+        <td>Runs Locally</td>
+        <td><span class="badge-yes">Yes</span></td>
+        <td><span class="badge-no">No</span></td>
+        <td><span class="badge-yes">Yes</span></td>
+        <td><span class="badge-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td>Privacy</td>
+        <td><span class="badge-yes">100% Local</span></td>
+        <td><span class="badge-no">Data to OpenAI</span></td>
+        <td><span class="badge-yes">100% Local</span></td>
+        <td><span class="badge-yes">100% Local</span></td>
+      </tr>
+      <tr>
+        <td>Fine-tuning</td>
+        <td><span class="badge-yes">Yes</span></td>
+        <td><span class="badge-no">Limited/Paid</span></td>
+        <td><span class="badge-yes">Yes</span></td>
+        <td><span class="badge-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td>Raw Intelligence</td>
+        <td>Very Good</td>
+        <td>Best in class</td>
+        <td>Excellent</td>
+        <td>Good</td>
+      </tr>
+      <tr>
+        <td>Mobile Deployment</td>
+        <td><span class="badge-yes">Yes (2B)</span></td>
+        <td><span class="badge-no">No</span></td>
+        <td><span class="badge-no">Limited</span></td>
+        <td><span class="badge-no">Limited</span></td>
+      </tr>
+      <tr>
+        <td>Google Ecosystem</td>
+        <td><span class="badge-yes">Native</span></td>
+        <td><span class="badge-no">No</span></td>
+        <td><span class="badge-no">No</span></td>
+        <td><span class="badge-no">No</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <p>🎯 <strong>Bottom line:</strong> If you need maximum intelligence and don't mind paying, use GPT-4. If you want a free, private, locally-running model you can actually build on — Gemma is your best friend.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 5: SETUP -->
+<section class="section fade-in" id="setup">
+  <p class="section-tag">05 — Setup Guide</p>
+  <h2>Complete Setup: 3 Ways to Run Gemma</h2>
+  <p>There are three main ways to run Gemma depending on your technical level and use case. We'll cover all three — from the easiest to the most advanced.</p>
+
+  <!-- METHOD 1 -->
+  <h3>Method 1: Ollama (Easiest — Recommended for Beginners)</h3>
+  <p>Ollama lets you run Gemma locally with a single command. It handles everything — downloads, configuration, and serving. This is how 90% of developers run local models.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-circle">1</div>
+      <div class="step-content">
+        <h4>Install Ollama</h4>
+        <p>Visit <strong>ollama.com</strong> and download for Mac, Windows, or Linux. It's a simple installer — takes 2 minutes.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <div class="step-content">
+        <h4>Pull the Gemma Model</h4>
+        <p>Open your terminal and run the command below. It will download the model automatically (around 5–18GB depending on size).</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <div class="step-content">
+        <h4>Start Chatting</h4>
+        <p>Run the second command below and Gemma will open right in your terminal. Start talking to it immediately.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">4</div>
+      <div class="step-content">
+        <h4>Use the API (Optional)</h4>
+        <p>Ollama also runs a local REST API on port 11434. You can use it to connect Gemma to your own apps.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-label">Terminal — Install & Run</div>
+    <pre><span class="cm"># Step 1: Pull Gemma model (choose your size)</span>
+<span class="cn">ollama pull gemma2:9b</span>       <span class="cm"># Best for most laptops</span>
+<span class="cn">ollama pull gemma2:2b</span>       <span class="cm"># If you have less than 8GB RAM</span>
+<span class="cn">ollama pull gemma2:27b</span>      <span class="cm"># If you have 20GB+ RAM</span>
+
+<span class="cm"># Step 2: Run it in terminal (chat mode)</span>
+<span class="cn">ollama run gemma2:9b</span>
+
+<span class="cm"># Step 3: Call via API from your code</span>
+<span class="ck">curl</span> http://localhost:11434/api/generate <span class="cv">-d</span> <span class="cs">'{
+  "model": "gemma2:9b",
+  "prompt": "Explain machine learning in simple words"
+}'</span></pre>
+  </div>
+
+  <!-- METHOD 2 -->
+  <h3>Method 2: Google Colab (No Installation Needed)</h3>
+  <p>If you don't want to install anything, Google Colab lets you run Gemma in the cloud for free using Google's GPUs. Perfect for experimentation and learning.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-circle">1</div>
+      <div class="step-content">
+        <h4>Go to Google Colab</h4>
+        <p>Visit <strong>colab.research.google.com</strong> and create a new notebook. Change runtime to GPU (T4 is free).</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <div class="step-content">
+        <h4>Accept Gemma License on Kaggle</h4>
+        <p>Go to Kaggle → search "Gemma" → accept the model license. This is required once before using via API.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <div class="step-content">
+        <h4>Install and Load the Model</h4>
+        <p>Paste and run the code below in your Colab notebook. The model will load in 2–3 minutes.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-label">Google Colab — Python</div>
+    <pre><span class="cm"># Install required libraries</span>
+<span class="ck">!pip install</span> <span class="cs">-q keras-nlp keras</span>
+
+<span class="cm"># Load Gemma model</span>
+<span class="ck">import</span> keras_nlp
+
+gemma_lm = keras_nlp.models.<span class="cn">GemmaCausalLM</span>.from_preset(<span class="cs">"gemma2_instruct_2b_en"</span>)
+
+<span class="cm"># Generate a response</span>
+response = gemma_lm.generate(
+    <span class="cs">"What is artificial intelligence? Explain simply."</span>,
+    max_length=<span class="cv">256</span>
+)
+<span class="ck">print</span>(response)</pre>
+  </div>
+
+  <!-- METHOD 3 -->
+  <h3>Method 3: Hugging Face Transformers (For Developers)</h3>
+  <p>For developers who want full control and want to integrate Gemma into Python projects — Hugging Face is the standard approach.</p>
+
+  <div class="code-block">
+    <div class="code-block-label">Python — Hugging Face</div>
+    <pre><span class="cm"># Install dependencies</span>
+<span class="ck">pip install</span> transformers torch accelerate
+
+<span class="cm"># ---- Your Python script ----</span>
+<span class="ck">from</span> transformers <span class="ck">import</span> AutoTokenizer, AutoModelForCausalLM
+<span class="ck">import</span> torch
+
+<span class="cm"># Load model and tokenizer from Hugging Face</span>
+model_id = <span class="cs">"google/gemma-2-9b-it"</span>
+
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id,
+    torch_dtype=torch.<span class="cv">bfloat16</span>,
+    device_map=<span class="cs">"auto"</span>
+)
+
+<span class="cm"># Create a chat message</span>
+messages = [
+    {<span class="cs">"role"</span>: <span class="cs">"user"</span>, <span class="cs">"content"</span>: <span class="cs">"Write a Python function to reverse a string"</span>}
+]
+
+<span class="cm"># Tokenize and generate</span>
+input_ids = tokenizer.apply_chat_template(
+    messages, return_tensors=<span class="cs">"pt"</span>, return_dict=<span class="cv">True</span>
+).to(<span class="cs">"cuda"</span>)
+
+outputs = model.generate(**input_ids, max_new_tokens=<span class="cv">256</span>)
+response = tokenizer.decode(outputs[<span class="cv">0</span>], skip_special_tokens=<span class="cv">True</span>)
+<span class="ck">print</span>(response)</pre>
+  </div>
+
+  <div class="highlight-box">
+    <p>⚠️ <strong>Note for Hugging Face:</strong> You need to accept the model license on <a href="https://huggingface.co/google/gemma-2-9b-it" target="_blank" style="color:var(--accent)">Hugging Face → google/gemma-2-9b-it</a> and log in with <code>huggingface-cli login</code> before downloading.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 6: PROMPTING -->
+<section class="section fade-in" id="prompting">
+  <p class="section-tag">06 — Getting the Most Out of It</p>
+  <h2>How to Prompt Gemma Effectively</h2>
+  <p>Gemma responds much better when you follow a clear prompting structure. Here are the patterns that work best.</p>
+
+  <h3>The 3-Part Prompt Formula</h3>
+
+  <div class="code-block">
+    <div class="code-block-label">Prompt Structure</div>
+    <pre><span class="cm"># ROLE → Tell Gemma who it is</span>
+<span class="cs">"You are an expert Python developer with 10 years of experience."</span>
+
+<span class="cm"># TASK → Tell it exactly what to do</span>
+<span class="cs">"Write a REST API endpoint using FastAPI that accepts a user's name
+and returns a personalised greeting message."</span>
+
+<span class="cm"># FORMAT → Tell it how to respond</span>
+<span class="cs">"Include comments in the code. Keep it under 30 lines. 
+Add a brief explanation after the code."</span></pre>
+  </div>
+
+  <h3>Good vs Bad Prompts</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>❌ Bad Prompt</th><th>✅ Good Prompt</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>"Explain AI"</td>
+        <td>"Explain artificial intelligence to a 15-year-old student in under 100 words with a real-life example."</td>
+      </tr>
+      <tr>
+        <td>"Fix my code"</td>
+        <td>"You are a Python expert. Find and fix the bug in this code. Explain what was wrong and why."</td>
+      </tr>
+      <tr>
+        <td>"Write an email"</td>
+        <td>"Write a professional follow-up email to a recruiter after an interview. Tone: confident but polite. Length: under 100 words."</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 7: USE CASES -->
+<section class="section fade-in" id="usecases">
+  <p class="section-tag">07 — Real World Applications</p>
+  <h2>What Can You Actually Build with Gemma?</h2>
+  <p>Here are practical, real-world use cases — not theoretical ones.</p>
+
+  <div class="usecase-list">
+    <div class="usecase-item">
+      <div class="usecase-icon">🤖</div>
+      <div>
+        <h5>Private AI Chatbot</h5>
+        <p>Build a chatbot for yourself or your company. 100% private — no data leaves your server.</p>
+      </div>
+    </div>
+    <div class="usecase-item">
+      <div class="usecase-icon">💻</div>
+      <div>
+        <h5>Coding Assistant</h5>
+        <p>Get code suggestions, debug errors, and generate boilerplate — all offline, all free.</p>
+      </div>
+    </div>
+    <div class="usecase-item">
+      <div class="usecase-icon">📄</div>
+      <div>
+        <h5>Document Summarizer</h5>
+        <p>Feed in PDFs, reports, or long articles and get clean summaries without any API cost.</p>
+      </div>
+    </div>
+    <div class="usecase-item">
+      <div class="usecase-icon">🎓</div>
+      <div>
+        <h5>Personal Study Tutor</h5>
+        <p>Ask it to explain any concept, quiz you on topics, or simplify complex subjects.</p>
+      </div>
+    </div>
+    <div class="usecase-item">
+      <div class="usecase-icon">📱</div>
+      <div>
+        <h5>On-Device Mobile AI</h5>
+        <p>Use Gemma 2B on Android apps. Build AI features that work without internet.</p>
+      </div>
+    </div>
+    <div class="usecase-item">
+      <div class="usecase-icon">🔍</div>
+      <div>
+        <h5>RAG Applications</h5>
+        <p>Combine Gemma with your own documents to build a knowledge base Q&A system.</p>
+      </div>
+    </div>
+    <div class="usecase-item">
+      <div class="usecase-icon">✍️</div>
+      <div>
+        <h5>Content Generator</h5>
+        <p>Auto-generate blog posts, social media captions, emails, and marketing copy.</p>
+      </div>
+    </div>
+    <div class="usecase-item">
+      <div class="usecase-icon">🏥</div>
+      <div>
+        <h5>Healthcare & Legal Tools</h5>
+        <p>Industries with strict data rules love local models. Gemma is HIPAA-friendly when self-hosted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 8: PROJECTS -->
+<section class="section fade-in" id="projects">
+  <p class="section-tag">08 — Build Something</p>
+  <h2>5 Beginner Projects to Start Today</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-circle">1</div>
+      <div class="step-content">
+        <h4>Terminal Chatbot</h4>
+        <p>Build a simple Python script that takes user input, sends it to Gemma via Ollama API, and prints the response. Great first project — takes 30 minutes.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <div class="step-content">
+        <h4>Resume Analyser</h4>
+        <p>Feed a resume as text to Gemma and ask it to give feedback, suggest improvements, and identify skill gaps. Genuinely useful tool.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <div class="step-content">
+        <h4>Study Notes Summarizer</h4>
+        <p>Upload lecture notes or textbook chapters. Gemma summarizes key points, creates flashcards, and generates quiz questions automatically.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">4</div>
+      <div class="step-content">
+        <h4>Local RAG Chatbot</h4>
+        <p>Combine Gemma + LangChain + a local vector database to build a chatbot that answers questions from your own documents and PDFs.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">5</div>
+      <div class="step-content">
+        <h4>Code Review Bot</h4>
+        <p>Paste your GitHub code into Gemma and ask for a full code review — style issues, bugs, improvements, and security concerns.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h3>🔥 Challenge for You</h3>
+    <p>Pick Project 1 (Terminal Chatbot) and build it today. Share it on LinkedIn or Instagram and tag <strong style="color:var(--accent)">@rk.codex</strong>. It takes under an hour and looks great on your portfolio.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 9: YOUTUBE -->
+<section class="section fade-in" id="videos">
+  <p class="section-tag">09 — Go Deeper</p>
+  <h2>Best YouTube Videos to Learn Gemma</h2>
+  <p>These are handpicked videos for different levels — from total beginners to developers wanting to fine-tune and deploy.</p>
+
+  <div class="yt-grid">
+    <a href="https://www.youtube.com/results?search_query=Google+Gemma+getting+started+tutorial+2024" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <span class="yt-label">▶ BEGINNER</span>
+        <div class="yt-play">▶</div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">Google Gemma — Getting Started Complete Tutorial</div>
+        <div class="yt-channel">Search: "Google Gemma getting started 2024" on YouTube</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Run+Gemma+locally+Ollama+tutorial" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <span class="yt-label">▶ SETUP</span>
+        <div class="yt-play">▶</div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">Run Gemma Locally with Ollama — Step by Step</div>
+        <div class="yt-channel">Search: "Run Gemma locally Ollama tutorial" on YouTube</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Gemma+fine+tuning+tutorial+python" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <span class="yt-label">▶ ADVANCED</span>
+        <div class="yt-play">▶</div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">Fine-Tuning Gemma on Your Own Data</div>
+        <div class="yt-channel">Search: "Gemma fine tuning tutorial python" on YouTube</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Build+RAG+app+Gemma+LangChain" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <span class="yt-label">▶ PROJECT</span>
+        <div class="yt-play">▶</div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">Build a RAG App with Gemma + LangChain</div>
+        <div class="yt-channel">Search: "Build RAG app Gemma LangChain" on YouTube</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Gemma+vs+GPT4+vs+Llama+comparison" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <span class="yt-label">▶ COMPARISON</span>
+        <div class="yt-play">▶</div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">Gemma vs GPT-4 vs Llama 3 — Full Comparison</div>
+        <div class="yt-channel">Search: "Gemma vs GPT4 vs Llama comparison" on YouTube</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Gemma+Google+Colab+tutorial+free+GPU" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <span class="yt-label">▶ FREE GPU</span>
+        <div class="yt-play">▶</div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">Run Gemma on Google Colab — Free GPU Tutorial</div>
+        <div class="yt-channel">Search: "Gemma Google Colab tutorial free GPU" on YouTube</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="highlight-box">
+    <p>📚 <strong>Also check out:</strong> The official Google DeepMind blog at <a href="https://blog.google/technology/ai/google-gemma-open-models/" target="_blank" style="color:var(--accent)">blog.google</a> and the Hugging Face model page at <a href="https://huggingface.co/google/gemma-2-9b-it" target="_blank" style="color:var(--accent)">huggingface.co/google/gemma-2-9b-it</a> for the most up-to-date documentation.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 10: FAQ -->
+<section class="section fade-in" id="faq">
+  <p class="section-tag">10 — Common Questions</p>
+  <h2>Frequently Asked Questions</h2>
+
+  <h3>Is Gemma really free to use commercially?</h3>
+  <p>Yes. Gemma is released under Google's custom open model license which allows commercial use. You can build and sell products using Gemma. Just don't use it to train competing foundation models or use the "Gemma" name in your product name.</p>
+
+  <h3>How good is Gemma compared to ChatGPT?</h3>
+  <p>Gemma 2 27B comes close to GPT-3.5 level quality on many benchmarks. It won't beat GPT-4 in raw intelligence, but for most practical tasks — coding help, summarization, writing, Q&A — Gemma 9B is surprisingly capable and completely free.</p>
+
+  <h3>Can I run Gemma on a basic laptop?</h3>
+  <p>Yes! Gemma 2B runs on any laptop with 4GB+ RAM. For Gemma 9B you ideally want 16GB RAM. If your laptop is older or lower spec, use Google Colab (free GPU) instead of running it locally.</p>
+
+  <h3>Do I need to know Python to use Gemma?</h3>
+  <p>Not for basic usage. With Ollama, you can chat with Gemma directly in your terminal without writing a single line of code. Python is only needed when you want to build apps or integrate Gemma into your own projects.</p>
+
+  <h3>What languages does Gemma support?</h3>
+  <p>Gemma is primarily trained on English data and performs best in English. It can understand and respond in many other languages including Hindi, but the quality will be lower than English responses.</p>
+
+  <h3>Can I use Gemma on my phone?</h3>
+  <p>Yes — Gemma 2B is small enough to run on Android devices using Google's MediaPipe or via the Ollama mobile server setup. iOS support is growing but still limited in 2026.</p>
+
+  <div class="callout">
+    <h3>Still have questions?</h3>
+    <p>Drop a comment on the Instagram post or DM <strong style="color:var(--accent)">@rk.codex</strong>. We answer every question. Every single one.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">rk.codex</div>
+  <p class="footer-sub">Daily AI tips, tools & workflows for developers who want to grow fast.</p>
+  <ul class="footer-links">
+    <li><a href="https://instagram.com/rk.codex" target="_blank">Instagram</a></li>
+    <li><a href="https://huggingface.co/google/gemma-2-9b-it" target="_blank">Gemma on HuggingFace</a></li>
+    <li><a href="https://ollama.com" target="_blank">Ollama</a></li>
+    <li><a href="https://colab.research.google.com" target="_blank">Google Colab</a></li>
+    <li><a href="https://ai.google.dev/gemma" target="_blank">Official Gemma Docs</a></li>
+  </ul>
+  <p class="footer-copy">Made with ❤️ by @rk.codex · This guide is free to share · 2026</p>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById('progress').style.width = progress + '%';
+  });
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

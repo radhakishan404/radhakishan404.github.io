@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Carousel Generator | rk.codex</title>
+<meta name="description" content="A clean workflow for generating developer Instagram carousel ideas and layouts with Claude, from hook to slide sequence.">
+<meta name="keywords" content="claude, carousel, ai content, developer content, instagram, prompt workflow">
+<meta name="date" content="2026-04-06T19:20:00+05:30">
+<meta name="category" content="Creator Workflow">
+<meta name="theme-color" content="#1f6fff">
+<meta property="og:image" content="/images/radhakishan-web-2.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c16;
+    --surface: #101624;
+    --surface-2: #151c2c;
+    --line: #27324a;
+    --text: #edf2ff;
+    --muted: #9daac7;
+    --accent: #6da8ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.65; }
+  .shell { width: min(1120px, calc(100vw - 40px)); margin: 0 auto; }
+  .hero { padding: 64px 0 28px; display: grid; grid-template-columns: minmax(0, 1.08fr) 360px; gap: 24px; align-items: start; }
+  .eyebrow { display: inline-flex; min-height: 32px; align-items: center; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.74rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 18px; }
+  h1, h2, h3 { font-family: 'Syne', sans-serif; letter-spacing: -0.04em; line-height: 0.95; }
+  h1 { font-size: clamp(3rem, 7vw, 5.2rem); max-width: 760px; margin-bottom: 18px; }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+  p { color: var(--muted); }
+  .panel { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid var(--line); border-radius: 24px; padding: 24px; }
+  .hero-side { display: grid; gap: 14px; }
+  .stack { display: grid; gap: 20px; padding-bottom: 72px; }
+  .two-col { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; }
+  .flow-list, .example-grid { display: grid; gap: 14px; margin-top: 18px; }
+  .flow-item { border: 1px solid var(--line); border-radius: 18px; background: var(--surface-2); padding: 16px; }
+  .flow-item strong { display: block; margin-bottom: 6px; color: var(--text); }
+  .example-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .example-card { aspect-ratio: 4 / 5; border-radius: 20px; padding: 18px; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; }
+  .example-card.dark { background: radial-gradient(circle at bottom right, rgba(109,168,255,0.18), transparent 30%), #0e1320; }
+  .example-card.light { background: #f3efe7; color: #0e1524; }
+  .example-card.light .kicker, .example-card.light .foot { color: rgba(14,21,36,0.6); }
+  .kicker { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
+  .big-copy { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 0.92; letter-spacing: -0.05em; }
+  .big-copy strong { color: var(--accent); }
+  .foot { color: var(--muted); font-size: 0.84rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .chip { min-height: 32px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-size: 0.84rem; }
+  @media (max-width: 920px) {
+    .hero, .two-col { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 660px) {
+    .example-grid { grid-template-columns: 1fr; }
+    .shell { width: min(100vw - 20px, 1120px); }
+  }
+</style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Claude Workflow</span>
+        <h1>Claude Carousel Generator for dev and AI content.</h1>
+        <p>Use Claude for structure first, not design first. Hooks, slide sequence, caption, and comments should be solved before you move to Figma, Canva, or code.</p>
+      </div>
+      <aside class="hero-side panel">
+        <h3>Best use</h3>
+        <p>Turn one vague topic into a creator-ready content packet: hook, 5–8 slides, CTA, caption, and engagement comments.</p>
+        <div class="chips">
+          <span class="chip">Claude</span>
+          <span class="chip">Hooks</span>
+          <span class="chip">Carousels</span>
+          <span class="chip">Developers</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="stack">
+      <article class="panel">
+        <h2>How I&apos;d structure the workflow</h2>
+        <div class="flow-list">
+          <div class="flow-item">
+            <strong>1. Start with one clear angle</strong>
+            Don&apos;t ask Claude for “a carousel on AI”. Ask for “a save-worthy carousel on mistakes devs make with ChatGPT”.
+          </div>
+          <div class="flow-item">
+            <strong>2. Force short slides</strong>
+            The model should optimize for scan speed, not explanation density.
+          </div>
+          <div class="flow-item">
+            <strong>3. Generate supporting pieces together</strong>
+            Slide deck, caption, and first comments should come in one response.
+          </div>
+          <div class="flow-item">
+            <strong>4. Only then move to visuals</strong>
+            Once the structure works, build the poster language around it.
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>Poster directions that work</h2>
+        <p>These are the kinds of layouts that stop the scroll quickly because they prioritize one idea, one dominant phrase, and one clean visual rhythm.</p>
+        <div class="example-grid">
+          <div class="example-card light">
+            <div class="kicker">AI + Productivity</div>
+            <div class="big-copy">YOU&apos;RE USING <strong>CLAUDE</strong> TOO RANDOMLY.</div>
+            <div class="foot">Turn prompts into systems, not one-off chats.</div>
+          </div>
+          <div class="example-card dark">
+            <div class="kicker">Open Source</div>
+            <div class="big-copy">SHOWCASE YOUR PRODUCT DEMO BETTER.</div>
+            <div class="foot">Make the value visible in one frame.</div>
+          </div>
+          <div class="example-card dark">
+            <div class="kicker">Interview Series</div>
+            <div class="big-copy">JAVASCRIPT INTERVIEW SERIES. EPISODE 1.</div>
+            <div class="foot">Turn one topic into recurring content.</div>
+          </div>
+          <div class="example-card light">
+            <div class="kicker">Career Growth</div>
+            <div class="big-copy">10 PROJECTS YOU SHOULD ADD TO YOUR RESUME.</div>
+            <div class="foot">Lists with career value get saved more.</div>
+          </div>
+        </div>
+      </article>
+
+      <section class="two-col">
+        <article class="panel">
+          <h2>What to ask Claude for</h2>
+          <div class="flow-list">
+            <div class="flow-item">
+              <strong>Hooks only mode</strong>
+              Ask for 20 one-line hooks first, then pick one.
+            </div>
+            <div class="flow-item">
+              <strong>More viral mode</strong>
+              Tell it to increase contrast, pain points, and curiosity.
+            </div>
+            <div class="flow-item">
+              <strong>More beginner mode</strong>
+              Ask for shorter language, more familiar examples, and simpler CTA.
+            </div>
+          </div>
+        </article>
+
+        <aside class="panel">
+          <h3>Good topic buckets</h3>
+          <div class="chips">
+            <span class="chip">AI tools</span>
+            <span class="chip">Coding mistakes</span>
+            <span class="chip">Hackathons</span>
+            <span class="chip">Prompting</span>
+            <span class="chip">Interviews</span>
+            <span class="chip">Open source</span>
+          </div>
+          <p style="margin-top:14px;">For your profile, the strongest mix is AI workflow content + dev career content + open source showcase posts.</p>
+        </aside>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
