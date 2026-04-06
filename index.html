@@ -4,39 +4,52 @@
     <meta charset="utf-8" />
     <link rel="icon" href="/images/Round with transparent and blue .png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Radhakishan Jangid portfolio website" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="description" content="Radhakishan Jangid portfolio and repository-backed article reader." />
+    <meta property="og:title" content="Radhakishan Jangid" />
+    <meta property="og:description" content="Radhakishan Jangid portfolio and repository-backed article reader." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/images/500 X 500 Transparent.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Radhakishan Jangid" />
+    <meta name="twitter:description" content="Radhakishan Jangid portfolio and repository-backed article reader." />
+    <meta name="twitter:image" content="/images/500 X 500 Transparent.png" />
     <meta
       name="google-site-verification"
       content="X3yExWHLcyhIPrHMHjKg6pIex1aSyL3Atw1hDdecGL0"
     />
     <link rel="apple-touch-icon" href="/images/Round with transparent and blue .png" />
     <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href="https://radhakishan404.github.io/" />
     <title>Radhakishan Jangid</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css"
-    />
-    <script type="module" crossorigin src="/assets/index-BfOCObBw.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BXakV8G6.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="/assets/index-CVjg_mUi.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BVlfRDNz.css">
   </head>
-  <body class="page-home">
+  <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script src="/js/jquery-3.3.1.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
-    <script src="/js/script.js"></script>
+    <script>
+      (function handleGitHubPagesRedirect() {
+        const query = window.location.search;
+        if (!query.startsWith("?p=")) {
+          return;
+        }
+
+        const params = new URLSearchParams(query);
+        const path = (params.get("p") || "/").replace(/~and~/g, "&");
+        const preservedQuery = params.get("q")
+          ? "?" + params.get("q").replace(/~and~/g, "&")
+          : "";
+
+        window.history.replaceState(
+          null,
+          null,
+          path + preservedQuery + window.location.hash
+        );
+      })();
+    </script>
   </body>
 </html>
