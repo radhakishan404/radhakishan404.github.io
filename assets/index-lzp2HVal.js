@@ -2143,7 +2143,13 @@ Every content piece must feel:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>rk.codex — Free Course Library 2026</title>
+<title>Free Courses. Real Skills. Zero Rupees. | rk.codex</title>
+<meta name="description" content="A sharp free course library for developers and AI learners who want real skills without wasting money or time.">
+<meta name="keywords" content="free courses, ai learning, developer resources, certifications, zero rupees, tech skills">
+<meta name="date" content="2026-04-08T14:04:00+05:30">
+<meta name="category" content="Free Resources">
+<meta name="theme-color" content="#2eff9a">
+<meta property="og:image" content="/images/rk-formal.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
