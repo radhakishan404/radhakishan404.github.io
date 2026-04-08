@@ -2,10 +2,12 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import ArticleFrame from "../components/ArticleFrame";
 import { getArticleBySlug } from "../content/articles";
+import useArticleViews from "../hooks/useArticleViews";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 
 function ArticleDetailPage({ match }) {
     const article = getArticleBySlug(match.params.slug);
+    const { views, viewsLabel } = useArticleViews(match.params.slug, true);
 
     useDocumentMeta({
         title: article ? `${article.title} | Articles | Radhakishan Jangid` : "Article | Radhakishan Jangid",
@@ -30,7 +32,12 @@ function ArticleDetailPage({ match }) {
             image: article.coverImage
                 ? `https://radhakishan404.github.io${article.coverImage}`
                 : "https://radhakishan404.github.io/images/rk-formal.jpg",
-            keywords: article.tags.join(", ")
+            keywords: article.tags.join(", "),
+            interactionStatistic: typeof views === "number" ? {
+                "@type": "InteractionCounter",
+                interactionType: "https://schema.org/ReadAction",
+                userInteractionCount: views
+            } : undefined
         } : undefined
     });
 
@@ -50,6 +57,7 @@ function ArticleDetailPage({ match }) {
                     <span className="meta-pill">{article.kind === "html" ? "HTML" : "Markdown"}</span>
                     <span>{article.readingTime}</span>
                     {article.date ? <span>{article.date}</span> : null}
+                    {viewsLabel ? <span>{viewsLabel}</span> : null}
                 </div>
                 <h1>{article.title}</h1>
                 <p className="lede article-lede">{article.excerpt}</p>

@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Courses. Real Skills. Zero Rupees. | rk.codex</title>
+<meta name="description" content="A sharp free course library for developers and AI learners who want real skills without wasting money or time.">
+<meta name="keywords" content="free courses, ai learning, developer resources, certifications, zero rupees, tech skills">
+<meta name="date" content="2026-04-08T14:04:00+05:30">
+<meta name="category" content="Free Resources">
+<meta name="theme-color" content="#2eff9a">
+<meta property="og:image" content="/images/rk-formal.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── DESIGN TOKENS ── */
+:root{
+  --bg:#0c0e14;
+  --bg2:#11141d;
+  --bg3:#161a26;
+  --bg4:#1c2130;
+  --surface:#1e2436;
+  --surface2:#232a3a;
+  --border:#2a3248;
+  --border2:#323d55;
+  --text-primary:#f4f1ea;
+  --text-secondary:#b8bfd4;
+  --text-muted:#7a8399;
+  --text-faint:#4a5570;
+  --accent:#2eff9a;
+  --accent-dim:#1db870;
+  --accent-bg:rgba(46,255,154,.08);
+  --accent-border:rgba(46,255,154,.2);
+  --blue:#4d9fff;
+  --blue-bg:rgba(77,159,255,.08);
+  --orange:#ff8c42;
+  --orange-bg:rgba(255,140,66,.08);
+  --purple:#a78bfa;
+  --purple-bg:rgba(167,139,250,.08);
+  --red:#ff5f6d;
+  --red-bg:rgba(255,95,109,.08);
+  --yellow:#fbbf24;
+  --yellow-bg:rgba(251,191,36,.08);
+  --teal:#2dd4bf;
+  --teal-bg:rgba(45,212,191,.08);
+  --pink:#f472b6;
+  --pink-bg:rgba(244,114,182,.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text-primary);font-family:'Manrope',sans-serif;overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:4px}
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:999;width:0%;transition:width .08s}
+
+/* ── SVG ICONS ── */
+.icon{display:inline-block;vertical-align:middle;flex-shrink:0}
+
+/* ── NAVBAR ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  height:60px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;
+  background:rgba(12,14,20,.97);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--accent);text-decoration:none;letter-spacing:-.03em;display:flex;align-items:center;gap:6px}
+.nav-logo em{color:var(--text-primary);font-style:normal}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-pill{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border);padding:5px 12px;border-radius:20px;letter-spacing:.06em}
+.nav-btn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-primary);background:var(--surface);border:1px solid var(--border2);padding:7px 16px;border-radius:6px;text-decoration:none;transition:all .2s}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 48px 80px;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:56px 56px;opacity:.18;mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,black,transparent)}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(46,255,154,.06) 0%,transparent 70%);top:-200px;right:-200px;pointer-events:none}
+.hero-glow2{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(77,159,255,.05) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:20px;padding:6px 16px;width:fit-content;margin-bottom:32px}
+.chip-pulse{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.chip-text{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(52px,7.5vw,108px);line-height:.88;letter-spacing:-.04em;margin-bottom:36px}
+.h1-white{display:block;color:var(--text-primary)}
+.h1-green{display:block;color:var(--accent)}
+.h1-ghost{display:block;color:transparent;-webkit-text-stroke:1.5px var(--border2)}
+.hero-p{font-size:17px;color:var(--text-secondary);max-width:560px;line-height:1.75;margin-bottom:44px}
+.hero-p strong{color:var(--text-primary);font-weight:700}
+.hero-stats{display:flex;gap:0;margin-bottom:44px;flex-wrap:wrap}
+.hs{padding:0 40px 0 0;border-right:1px solid var(--border);margin-right:40px}
+.hs:last-child{border:none}
+.hs-n{font-family:'Syne',sans-serif;font-weight:800;font-size:46px;color:var(--text-primary);line-height:1}
+.hs-n span{color:var(--accent)}
+.hs-l{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-faint);letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-g{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:var(--accent);color:#0c0e14;border:none;border-radius:8px;padding:13px 26px;cursor:pointer;letter-spacing:.04em;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-g:hover{background:#50ffaa;transform:translateY(-2px)}
+.btn-o{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-secondary);background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:13px 26px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-o:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── MARQUEE ── */
+.mq{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:11px 0;overflow:hidden;background:var(--bg2)}
+.mq-inner{display:flex;animation:scroll 40s linear infinite;width:max-content}
+.mq-item{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-faint);letter-spacing:.12em;text-transform:uppercase;padding:0 28px;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.mq-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── FILTER BAR ── */
+.fbar{position:sticky;top:60px;z-index:400;background:rgba(12,14,20,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:12px 48px}
+.fbar-inner{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-faint);letter-spacing:.14em;text-transform:uppercase;margin-right:8px;white-space:nowrap}
+.fb{font-family:'JetBrains Mono',monospace;font-size:10px;background:transparent;color:var(--text-muted);border:1px solid var(--border);border-radius:20px;padding:5px 13px;cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.04em;display:inline-flex;align-items:center;gap:5px}
+.fb:hover{color:var(--text-primary);border-color:var(--border2)}
+.fb.on{background:var(--accent-bg);color:var(--accent);border-color:var(--accent-border)}
+.fbar-right{margin-left:auto;position:relative}
+.srch{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg2);color:var(--text-primary);border:1px solid var(--border);border-radius:8px;padding:8px 14px 8px 38px;width:240px;outline:none;transition:border-color .2s;letter-spacing:.02em}
+.srch:focus{border-color:var(--accent)}
+.srch::placeholder{color:var(--text-faint)}
+.srch-ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none}
+
+/* ── SECTION ── */
+.sec{padding:72px 48px}
+.sec-ey{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-ey::before{content:'';display:block;width:20px;height:1px;background:var(--accent)}
+.sec-h{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(26px,3vw,44px);color:var(--text-primary);letter-spacing:-.03em;line-height:1.05;margin-bottom:8px}
+.sec-sub{font-size:15px;color:var(--text-secondary);margin-bottom:40px;max-width:580px;line-height:1.7}
+
+/* ── ROADMAP TABS ── */
+.rm-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.rm-tab{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--bg2);color:var(--text-muted);border:1px solid var(--border);border-radius:6px;padding:9px 18px;cursor:pointer;transition:all .2s;letter-spacing:.04em;display:inline-flex;align-items:center;gap:7px}
+.rm-tab:hover{color:var(--text-primary);border-color:var(--border2);background:var(--bg3)}
+.rm-tab.on{background:var(--accent-bg);color:var(--accent);border-color:var(--accent-border)}
+.rm-body{display:none}
+.rm-body.on{display:block}
+
+/* ── GOAL BOX ── */
+.goal-box{background:var(--bg2);border:1px solid var(--accent-border);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:18px 22px;margin-bottom:36px;display:flex;align-items:flex-start;gap:12px}
+.goal-text{font-size:14px;color:var(--text-secondary);line-height:1.65}
+.goal-text strong{color:var(--text-primary)}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:36px}
+.timeline::before{content:'';position:absolute;left:10px;top:12px;bottom:12px;width:2px;background:linear-gradient(to bottom,var(--accent) 0%,var(--blue) 50%,rgba(77,159,255,.1) 100%)}
+.phase{margin-bottom:48px;position:relative}
+.phase-dot{position:absolute;left:-36px;top:2px;width:24px;height:24px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center}
+.phase-dot-inner{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.phase-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.phase-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;background:var(--accent-bg);border:1px solid var(--accent-border);padding:2px 8px;border-radius:3px}
+.phase-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;color:var(--text-primary)}
+.phase-dur{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);background:var(--bg2);border:1px solid var(--border);padding:3px 10px;border-radius:12px;letter-spacing:.05em}
+.phase-desc{font-size:14px;color:var(--text-secondary);margin-bottom:16px;max-width:680px;line-height:1.65}
+.phase-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+
+/* ── COURSE CARD ── */
+.cc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px 18px;text-decoration:none;display:block;transition:all .22s;position:relative;overflow:hidden}
+.cc:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-2px)}
+.cc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;gap:8px}
+.cc-plat{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:4px;font-weight:700;white-space:nowrap}
+/* Platform colors — all high contrast */
+.p-yt{background:#ff000020;color:#ff6b6b;border:1px solid #ff000035}
+.p-google{background:#4285f420;color:#74a8ff;border:1px solid #4285f435}
+.p-mit{background:#8b000020;color:#ff8a8a;border:1px solid #cc000035}
+.p-harvard{background:#a51c3020;color:#ff9999;border:1px solid #a51c3035}
+.p-stanford{background:#8c1c1320;color:#ffaaaa;border:1px solid #8c1c1335}
+.p-coursera{background:#0056d220;color:#6baeff;border:1px solid #0056d235}
+.p-kaggle{background:#20a8e020;color:#5cc8f5;border:1px solid #20a8e035}
+.p-github{background:#ffffff10;color:#c9d1d9;border:1px solid #ffffff20}
+.p-free{background:#2eff9a15;color:#2eff9a;border:1px solid #2eff9a30}
+.p-ms{background:#0078d420;color:#60b0ff;border:1px solid #0078d435}
+.p-udacity{background:#02b3e420;color:#60d4f5;border:1px solid #02b3e435}
+.p-edx{background:#02262b20;color:#60cccc;border:1px solid #02262b35}
+.p-fast{background:#00a8d420;color:#60d4f5;border:1px solid #00a8d435}
+.p-book{background:#fbbf2420;color:#fcd34d;border:1px solid #fbbf2435}
+.p-odin{background:#d4461820;color:#f8896b;border:1px solid #d4461835}
+
+.cc-free-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--accent);background:var(--accent-bg);border:1px solid var(--accent-border);padding:3px 9px;border-radius:4px;letter-spacing:.06em}
+.cc-title{font-family:'Manrope',sans-serif;font-weight:700;font-size:13.5px;color:var(--text-primary);margin-bottom:4px;line-height:1.35}
+.cc-by{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);margin-bottom:10px;letter-spacing:.02em}
+.cc-tags{display:flex;gap:5px;flex-wrap:wrap}
+.cc-tag{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-faint);background:var(--bg3);border:1px solid var(--border);padding:2px 7px;border-radius:3px;letter-spacing:.03em}
+.cc-arr{position:absolute;bottom:14px;right:14px;color:var(--text-faint);transition:all .2s;font-size:13px}
+.cc:hover .cc-arr{color:var(--accent);transform:translate(2px,-2px)}
+
+/* ── CATEGORY BLOCKS ── */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.cat-block{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .25s}
+.cat-block:hover{border-color:var(--border2)}
+.cat-head{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.cat-ico{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cat-name{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--text-primary)}
+.cat-cnt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);margin-top:2px;letter-spacing:.04em}
+.cat-body{padding:6px 0 10px}
+.cat-link{display:flex;align-items:center;justify-content:space-between;padding:8px 20px;text-decoration:none;transition:background .18s;gap:10px}
+.cat-link:hover{background:var(--bg3)}
+.cat-link-l{display:flex;align-items:center;gap:9px;min-width:0}
+.cat-link-dot{width:5px;height:5px;border-radius:50%;background:var(--border2);flex-shrink:0;transition:background .2s}
+.cat-link:hover .cat-link-dot{background:var(--accent)}
+.cat-link-name{font-size:13px;color:var(--text-secondary);transition:color .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.cat-link:hover .cat-link-name{color:var(--text-primary)}
+.cat-link-plat{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-faint);flex-shrink:0;letter-spacing:.04em;border:1px solid var(--border);padding:2px 7px;border-radius:3px}
+
+/* ── TIPS ── */
+.tips-sec{padding:72px 48px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:36px}
+.tip-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:22px}
+.tip-n{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--border2);margin-bottom:10px}
+.tip-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--text-primary);margin-bottom:7px}
+.tip-desc{font-size:13px;color:var(--text-secondary);line-height:1.65;margin-bottom:13px}
+.tip-q{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:6px;padding:10px 13px;word-break:break-all;line-height:1.6}
+
+/* ── DIVIDER ── */
+.divider{border:none;border-top:1px solid var(--border)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:52px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;background:var(--bg2)}
+.foot-l{}
+.foot-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:30px;color:var(--accent);letter-spacing:-.04em}
+.foot-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-faint);margin-top:5px;letter-spacing:.04em}
+.foot-links{display:flex;gap:18px;flex-wrap:wrap}
+.foot-links a{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--accent)}
+
+/* ── NO RESULTS ── */
+.no-res{grid-column:1/-1;text-align:center;padding:60px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-faint)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .hero,.sec,.fbar,.tips-sec{padding-left:20px;padding-right:20px}
+  h1{font-size:clamp(42px,11vw,70px)}
+  .hero-stats{gap:20px}
+  .hs{padding-right:20px;margin-right:20px}
+  footer{padding:40px 20px;flex-direction:column;align-items:flex-start}
+  .fbar-right{width:100%;margin-left:0}
+  .srch{width:100%}
+}
+
+/* ── FADE ── */
+.fade{opacity:0;transform:translateY(18px);transition:opacity .55s,transform .55s}
+.fade.vis{opacity:1;transform:none}
+
+/* ── COUNT BADGE ── */
+.count-badge{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--surface);border:1px solid var(--border2);color:var(--text-muted);padding:3px 10px;border-radius:12px;margin-left:8px;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">rk<em>.codex</em></a>
+  <div class="nav-links">
+    <a href="#roadmaps">Roadmaps</a>
+    <a href="#categories">Categories</a>
+    <a href="#tricks">Search Tricks</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-pill">100% FREE</span>
+    <a href="https://instagram.com/rk.codex" target="_blank" class="nav-btn">@rk.codex</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-chip"><div class="chip-pulse"></div><span class="chip-text">Free Resources · 2026 Edition</span></div>
+  <h1>
+    <span class="h1-white">FREE COURSES.</span>
+    <span class="h1-green">REAL SKILLS.</span>
+    <span class="h1-ghost">ZERO RUPEES.</span>
+  </h1>
+  <p class="hero-p">Every course here is <strong>100% free, verified, and handpicked.</strong> No piracy. No illegal downloads. From Google, MIT, Harvard, Stanford, YouTube, and more — all in one place.</p>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-n">500<span>+</span></div><div class="hs-l">Free Courses</div></div>
+    <div class="hs"><div class="hs-n">30<span>+</span></div><div class="hs-l">Categories</div></div>
+    <div class="hs"><div class="hs-n">5</div><div class="hs-l">Full Roadmaps</div></div>
+    <div class="hs"><div class="hs-n">0<span>₹</span></div><div class="hs-l">Cost Forever</div></div>
+  </div>
+  <div class="hero-btns">
+    <a href="#roadmaps" class="btn-g">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Start a Roadmap
+    </a>
+    <a href="#categories" class="btn-o">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Browse Categories
+    </a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq"><div class="mq-inner" id="mq"></div></div>
+
+<!-- FILTER BAR -->
+<div class="fbar">
+  <div class="fbar-inner">
+    <span class="fl">Filter</span>
+    <button class="fb on" data-f="all">All</button>
+    <button class="fb" data-f="ai">AI &amp; ML</button>
+    <button class="fb" data-f="coding">Coding</button>
+    <button class="fb" data-f="webdev">Web Dev</button>
+    <button class="fb" data-f="data">Data Science</button>
+    <button class="fb" data-f="cloud">Cloud</button>
+    <button class="fb" data-f="security">Security</button>
+    <button class="fb" data-f="mobile">Mobile Dev</button>
+    <button class="fb" data-f="design">Design</button>
+    <button class="fb" data-f="career">Career</button>
+    <button class="fb" data-f="math">Math &amp; CS</button>
+    <button class="fb" data-f="marketing">Marketing</button>
+    <button class="fb" data-f="finance">Finance</button>
+    <button class="fb" data-f="language">Languages</button>
+    <button class="fb" data-f="productivity">Productivity</button>
+    <div class="fbar-right">
+      <svg class="srch-ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4a5570" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="srch" id="srch" type="text" placeholder="Search 500+ courses...">
+    </div>
+  </div>
+</div>
+
+<!-- ROADMAPS -->
+<section class="sec fade" id="roadmaps">
+  <div class="sec-ey">Step-by-Step Learning Paths</div>
+  <div class="sec-h">Complete Roadmaps</div>
+  <p class="sec-sub">Follow a structured path from zero to job-ready. Every phase has handpicked free courses in the exact right order.</p>
+
+  <div class="rm-tabs">
+    <button class="rm-tab on" data-rm="ai">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2V6a4 4 0 0 1 4-4z"/><circle cx="12" cy="13" r="2"/></svg>
+      AI &amp; Machine Learning
+    </button>
+    <button class="rm-tab" data-rm="web">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Full-Stack Web Dev
+    </button>
+    <button class="rm-tab" data-rm="data">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Data Science
+    </button>
+    <button class="rm-tab" data-rm="cloud">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+      Cloud &amp; DevOps
+    </button>
+    <button class="rm-tab" data-rm="dsa">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      DSA &amp; Interviews
+    </button>
+  </div>
+
+  <div id="rm-bodies"></div>
+</section>
+
+<hr class="divider">
+
+<!-- CATEGORIES -->
+<section class="sec fade" id="categories">
+  <div class="sec-ey">Browse Everything</div>
+  <div class="sec-h">All Courses by Category <span class="count-badge" id="catCount">Loading...</span></div>
+  <p class="sec-sub">500+ free courses across 30+ categories. Click any course to go directly to it.</p>
+  <div class="cat-grid" id="catGrid"></div>
+</section>
+
+<!-- TRICKS -->
+<section class="tips-sec fade" id="tricks">
+  <div class="sec-ey">The Smart Way</div>
+  <div class="sec-h">Secret Google Search Tricks</div>
+  <p class="sec-sub">Use these search operators to find thousands more free courses that nobody talks about.</p>
+  <div class="tips-grid" id="tipsGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-l">
+    <div class="foot-brand">rk.codex</div>
+    <div class="foot-sub">Free knowledge for every developer · Updated 2026</div>
+  </div>
+  <div class="foot-links">
+    <a href="https://instagram.com/rk.codex" target="_blank">Instagram</a>
+    <a href="https://freecodecamp.org" target="_blank">freeCodeCamp</a>
+    <a href="https://kaggle.com" target="_blank">Kaggle</a>
+    <a href="https://ocw.mit.edu" target="_blank">MIT OCW</a>
+    <a href="https://cs50.harvard.edu" target="_blank">Harvard CS50</a>
+    <a href="https://roadmap.sh" target="_blank">roadmap.sh</a>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   DATA
+══════════════════════════════════════════ */
+
+// Helper to make course objects
+const C=(title,by,plat,platClass,tags,url,cat)=>({title,by,plat,platClass,tags,url,cat});
+
+const ROADMAPS = {
+  ai:{
+    goal:"Go from complete beginner to building real AI applications and LLM-powered tools. Timeline: 6–9 months at 1–2 hrs/day. Salary after: ₹12–50 LPA.",
+    phases:[
+      {num:"01",title:"Python Fundamentals",dur:"4–6 Weeks",desc:"AI runs on Python. Master variables, loops, functions, OOP, file handling, and APIs before touching any ML library.",
+       courses:[
+        C("Python for Everybody","U. of Michigan","Coursera","p-coursera",["python","beginner"],"https://www.coursera.org/specializations/python","coding"),
+        C("Python Crash Course – Full 4hr Tutorial","freeCodeCamp","YouTube","p-yt",["python","beginner"],"https://www.youtube.com/watch?v=rfscVS0vtbw","coding"),
+        C("CS50P – Python by Harvard","Harvard","Harvard","p-harvard",["python","cs"],"https://cs50.harvard.edu/python/","coding"),
+        C("Automate the Boring Stuff with Python","Al Sweigart","Free Book","p-book",["python","automation"],"https://automatetheboringstuff.com/","coding"),
+        C("Python Tutorial – Official Docs","Python.org","Free","p-free",["python","reference"],"https://docs.python.org/3/tutorial/","coding"),
+        C("Learn Python – Codecademy","Codecademy","Free Tier","p-free",["python","interactive"],"https://www.codecademy.com/learn/learn-python-3","coding"),
+      ]},
+      {num:"02",title:"Math for ML",dur:"3–4 Weeks",desc:"Linear algebra, probability, and statistics. You don't need to be a mathematician — these courses make it visual and practical.",
+       courses:[
+        C("Mathematics for Machine Learning","Imperial College London","Coursera","p-coursera",["math","ml"],"https://www.coursera.org/specializations/mathematics-machine-learning","math"),
+        C("Linear Algebra – Full MIT Course","Gilbert Strang","MIT OCW","p-mit",["linear algebra","math"],"https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/","math"),
+        C("Statistics & Probability – Khan Academy","Khan Academy","Free","p-free",["statistics","probability"],"https://www.khanacademy.org/math/statistics-probability","math"),
+        C("3Blue1Brown – Essence of Linear Algebra","3Blue1Brown","YouTube","p-yt",["linear algebra","visual"],"https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab","math"),
+        C("StatQuest – Statistics for ML","Josh Starmer","YouTube","p-yt",["statistics","ml"],"https://www.youtube.com/@statquest","math"),
+      ]},
+      {num:"03",title:"Machine Learning Core",dur:"6–8 Weeks",desc:"Supervised & unsupervised learning, model evaluation, scikit-learn, and building your first ML models from scratch.",
+       courses:[
+        C("Machine Learning Specialization","Andrew Ng / Stanford","Coursera","p-coursera",["ml","supervised"],"https://www.coursera.org/specializations/machine-learning-introduction","ai"),
+        C("Google ML Crash Course","Google","Google","p-google",["ml","tensorflow"],"https://developers.google.com/machine-learning/crash-course","ai"),
+        C("fast.ai – Practical Machine Learning","fast.ai","fast.ai","p-fast",["ml","practical"],"https://www.fast.ai/","ai"),
+        C("Intro to Machine Learning","Kaggle","Kaggle","p-kaggle",["ml","sklearn"],"https://www.kaggle.com/learn/intro-to-machine-learning","ai"),
+        C("Intermediate Machine Learning","Kaggle","Kaggle","p-kaggle",["ml","feature eng"],"https://www.kaggle.com/learn/intermediate-machine-learning","ai"),
+        C("ML with Python – IBM","IBM","Coursera","p-coursera",["ml","python"],"https://www.coursera.org/learn/machine-learning-with-python","ai"),
+        C("Scikit-Learn Full Tutorial","freeCodeCamp","YouTube","p-yt",["sklearn","ml"],"https://www.youtube.com/watch?v=pqNCD_5r0IU","ai"),
+      ]},
+      {num:"04",title:"Deep Learning & Neural Networks",dur:"6–8 Weeks",desc:"CNNs, RNNs, Transformers, PyTorch. Build image classifiers, text generators, and understand how modern AI models actually work.",
+       courses:[
+        C("Deep Learning Specialization","Andrew Ng","Coursera","p-coursera",["deep learning","neural nets"],"https://www.coursera.org/specializations/deep-learning","ai"),
+        C("PyTorch Full Course","freeCodeCamp","YouTube","p-yt",["pytorch","deep learning"],"https://www.youtube.com/watch?v=GIsg-ZUy0MY","ai"),
+        C("fast.ai – Practical Deep Learning","fast.ai","fast.ai","p-fast",["deep learning","CNN"],"https://course.fast.ai/","ai"),
+        C("CS231n – CNNs for Visual Recognition","Stanford","Stanford","p-stanford",["CNN","computer vision"],"http://cs231n.stanford.edu/","ai"),
+        C("CS224N – NLP with Deep Learning","Stanford","Stanford","p-stanford",["NLP","transformers"],"http://web.stanford.edu/class/cs224n/","ai"),
+        C("Hugging Face NLP Course","Hugging Face","Free","p-free",["NLP","transformers"],"https://huggingface.co/learn/nlp-course/","ai"),
+        C("Andrej Karpathy – Neural Nets from Scratch","Andrej Karpathy","YouTube","p-yt",["neural nets","backprop"],"https://www.youtube.com/watch?v=VMj-3S1tku0","ai"),
+      ]},
+      {num:"05",title:"LLMs, Agents & AI Apps",dur:"4–6 Weeks",desc:"Build real AI products. LangChain, RAG, vector databases, AI agents, and deploying your own AI-powered applications.",
+       courses:[
+        C("LangChain Full Course","freeCodeCamp","YouTube","p-yt",["langchain","llm"],"https://www.youtube.com/watch?v=lG7Uxts9SXs","ai"),
+        C("Google Generative AI Learning Path","Google","Google","p-google",["gemini","genai"],"https://www.cloudskillsboost.google/paths/183","ai"),
+        C("Building LLM Apps – Karpathy","Andrej Karpathy","YouTube","p-yt",["llm","gpt"],"https://www.youtube.com/@AndrejKarpathy","ai"),
+        C("Hugging Face Agents Course","Hugging Face","Free","p-free",["agents","ai"],"https://huggingface.co/learn/agents-course/","ai"),
+        C("Prompt Engineering Guide","DAIR.AI","Free","p-free",["prompting","llm"],"https://www.promptingguide.ai/","ai"),
+        C("DeepLearning.AI Short Courses","Andrew Ng","Free","p-free",["llm","practical"],"https://www.deeplearning.ai/short-courses/","ai"),
+        C("RAG from Scratch","LangChain","YouTube","p-yt",["rag","vector db"],"https://www.youtube.com/watch?v=sVcwVQRHIc8","ai"),
+      ]},
+    ]
+  },
+  web:{
+    goal:"Build full-stack web applications and land a web developer job. Timeline: 5–8 months. Salary range: ₹5–30 LPA.",
+    phases:[
+      {num:"01",title:"HTML, CSS & JavaScript Basics",dur:"4–6 Weeks",desc:"Build your first websites, understand the DOM, and write your first JavaScript programs. The foundation of everything.",
+       courses:[
+        C("Responsive Web Design","freeCodeCamp","freeCodeCamp","p-odin",["html","css","responsive"],"https://www.freecodecamp.org/learn/2022/responsive-web-design/","webdev"),
+        C("HTML & CSS Full Course – 11 Hours","Dave Gray","YouTube","p-yt",["html","css"],"https://www.youtube.com/watch?v=mU6anWqZJcc","webdev"),
+        C("The Odin Project – Foundations","The Odin Project","Free","p-odin",["html","css","js"],"https://www.theodinproject.com/paths/foundations","webdev"),
+        C("MDN Learn Web Development","Mozilla","Free","p-free",["html","css","reference"],"https://developer.mozilla.org/en-US/docs/Learn","webdev"),
+        C("CS50W – Web Programming","Harvard","Harvard","p-harvard",["web","python","js"],"https://cs50.harvard.edu/web/","webdev"),
+        C("Web Dev Bootcamp – Scrimba","Scrimba","Free Tier","p-free",["html","css","interactive"],"https://scrimba.com/learn/htmlandcss","webdev"),
+      ]},
+      {num:"02",title:"JavaScript Deep Dive",dur:"4–5 Weeks",desc:"ES6+, async/await, closures, the event loop, DOM manipulation. JavaScript mastery separates great developers from average ones.",
+       courses:[
+        C("JavaScript Algorithms & Data Structures","freeCodeCamp","freeCodeCamp","p-odin",["javascript","dsa"],"https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/","webdev"),
+        C("JavaScript Full Course – 8 Hours","Bro Code","YouTube","p-yt",["javascript","full"],"https://www.youtube.com/watch?v=lfmg-EJ8gm4","webdev"),
+        C("JavaScript.info – The Complete Guide","Ilya Kantor","Free Book","p-book",["javascript","deep dive"],"https://javascript.info/","webdev"),
+        C("Eloquent JavaScript","Marijn Haverbeke","Free Book","p-book",["javascript","book"],"https://eloquentjavascript.net/","webdev"),
+        C("You Don't Know JS (Book Series)","Kyle Simpson","GitHub","p-github",["javascript","advanced"],"https://github.com/getify/You-Dont-Know-JS","webdev"),
+        C("JavaScript30 – 30 Day Challenge","Wes Bos","Free","p-free",["javascript","projects"],"https://javascript30.com/","webdev"),
+        C("Async JS – Full Course","freeCodeCamp","YouTube","p-yt",["async","promises","await"],"https://www.youtube.com/watch?v=ZYb_ZU8LNxs","webdev"),
+      ]},
+      {num:"03",title:"React & Frontend Frameworks",dur:"5–6 Weeks",desc:"Build interactive UIs with React. Hooks, state management, routing, API integration, and modern React patterns.",
+       courses:[
+        C("React Official Learn Docs","React Team","react.dev","p-free",["react","hooks"],"https://react.dev/learn","webdev"),
+        C("React Full Course 2024","Dave Gray","YouTube","p-yt",["react","hooks"],"https://www.youtube.com/watch?v=RVFAyFWO4go","webdev"),
+        C("Scrimba – Learn React","Scrimba","Free Tier","p-free",["react","interactive"],"https://scrimba.com/learn/learnreact","webdev"),
+        C("Next.js Full Course","freeCodeCamp","YouTube","p-yt",["nextjs","fullstack"],"https://www.youtube.com/watch?v=KjY94sAKLlw","webdev"),
+        C("Tailwind CSS Full Course","freeCodeCamp","YouTube","p-yt",["tailwind","css"],"https://www.youtube.com/watch?v=ft30zcMlFa8","webdev"),
+        C("TypeScript Full Course","Matt Pocock","YouTube","p-yt",["typescript","types"],"https://www.youtube.com/watch?v=SpwzRDUQ1GI","webdev"),
+      ]},
+      {num:"04",title:"Backend, APIs & Databases",dur:"5–6 Weeks",desc:"Node.js, Express, REST APIs, SQL, NoSQL. Build the server-side of your applications from scratch.",
+       courses:[
+        C("Node.js & Express Full Course","freeCodeCamp","YouTube","p-yt",["nodejs","express"],"https://www.youtube.com/watch?v=Oe421EPjeBE","webdev"),
+        C("SQL Full Course – 4 Hours","Bro Code","YouTube","p-yt",["sql","database"],"https://www.youtube.com/watch?v=5OdVJbNCSso","webdev"),
+        C("MongoDB Full Course","freeCodeCamp","YouTube","p-yt",["mongodb","nosql"],"https://www.youtube.com/watch?v=c2M-rlkkT5o","webdev"),
+        C("Full Stack Open – Helsinki University","U. of Helsinki","Free","p-free",["fullstack","react","node"],"https://fullstackopen.com/en/","webdev"),
+        C("Backend Roadmap 2026","roadmap.sh","Free","p-free",["backend","roadmap"],"https://roadmap.sh/backend","webdev"),
+        C("REST API Design – Best Practices","freeCodeCamp","YouTube","p-yt",["api","rest"],"https://www.youtube.com/watch?v=-MTSQjw5DrM","webdev"),
+      ]},
+      {num:"05",title:"Git, Deployment & Portfolio",dur:"2–3 Weeks",desc:"Version control, deploying your apps to the internet, and building a portfolio that actually gets you hired.",
+       courses:[
+        C("Git & GitHub Full Course","freeCodeCamp","YouTube","p-yt",["git","github"],"https://www.youtube.com/watch?v=RGOj5yH7evk","webdev"),
+        C("Deploy with Vercel & Netlify","Traversy Media","YouTube","p-yt",["deploy","hosting"],"https://www.youtube.com/watch?v=5I8nFyKHQFs","webdev"),
+        C("Docker for Web Developers","TechWorld with Nana","YouTube","p-yt",["docker","devops"],"https://www.youtube.com/watch?v=3c-iBn73dDE","webdev"),
+        C("Frontend Roadmap 2026","roadmap.sh","Free","p-free",["frontend","roadmap"],"https://roadmap.sh/frontend","webdev"),
+      ]},
+    ]
+  },
+  data:{
+    goal:"Become a data analyst or scientist and make data-driven decisions. Timeline: 5–7 months. Salary range: ₹6–35 LPA.",
+    phases:[
+      {num:"01",title:"Python + Pandas + NumPy",dur:"4–5 Weeks",desc:"Data science runs on Python. Learn data manipulation with Pandas and numerical computing with NumPy. These are non-negotiable.",
+       courses:[
+        C("Python for Data Science – IBM","IBM","Coursera","p-coursera",["python","data"],"https://www.coursera.org/learn/python-for-applied-data-science-ai","data"),
+        C("Pandas Full Course","Keith Galli","YouTube","p-yt",["pandas","data"],"https://www.youtube.com/watch?v=vmEHCJofslg","data"),
+        C("NumPy Complete Tutorial","freeCodeCamp","YouTube","p-yt",["numpy","arrays"],"https://www.youtube.com/watch?v=QUT1VHiLmmI","data"),
+        C("Kaggle Python Course","Kaggle","Kaggle","p-kaggle",["python","data"],"https://www.kaggle.com/learn/python","data"),
+        C("Kaggle Pandas Course","Kaggle","Kaggle","p-kaggle",["pandas","data cleaning"],"https://www.kaggle.com/learn/pandas","data"),
+      ]},
+      {num:"02",title:"SQL & Data Analysis",dur:"3–4 Weeks",desc:"SQL is the single most used skill in data jobs. Master querying, filtering, joining, and aggregating real datasets.",
+       courses:[
+        C("SQL Full Course – HackerRank Style","freeCodeCamp","YouTube","p-yt",["sql","queries"],"https://www.youtube.com/watch?v=HXV3zeQKqGY","data"),
+        C("Intro to SQL","Kaggle","Kaggle","p-kaggle",["sql","bigquery"],"https://www.kaggle.com/learn/intro-to-sql","data"),
+        C("Advanced SQL","Kaggle","Kaggle","p-kaggle",["sql","advanced"],"https://www.kaggle.com/learn/advanced-sql","data"),
+        C("Mode Analytics SQL Tutorial","Mode","Free","p-free",["sql","analytics"],"https://mode.com/sql-tutorial/","data"),
+        C("SQL for Data Analysis – Udacity","Udacity","Free Tier","p-udacity",["sql","data"],"https://www.udacity.com/course/sql-for-data-analysis--ud198","data"),
+      ]},
+      {num:"03",title:"Data Visualisation & Statistics",dur:"3–4 Weeks",desc:"Turn raw data into insights. Matplotlib, Seaborn, Tableau, and the statistical thinking behind good analysis.",
+       courses:[
+        C("Data Visualisation with Python","Kaggle","Kaggle","p-kaggle",["matplotlib","seaborn"],"https://www.kaggle.com/learn/data-visualization","data"),
+        C("Tableau Public Training","Tableau","Free","p-free",["tableau","dashboards"],"https://www.tableau.com/learn/training","data"),
+        C("StatQuest – Statistics Playlist","StatQuest","YouTube","p-yt",["statistics","distributions"],"https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9","math"),
+        C("Google Data Analytics Certificate","Google","Coursera","p-coursera",["analytics","spreadsheets"],"https://www.coursera.org/professional-certificates/google-data-analytics","data"),
+        C("Power BI Full Course","freeCodeCamp","YouTube","p-yt",["power bi","dashboards"],"https://www.youtube.com/watch?v=NNSHu0rkew8","data"),
+      ]},
+      {num:"04",title:"ML for Data Science",dur:"6–8 Weeks",desc:"Build predictive models, understand feature engineering, and evaluate models the way industry actually does it.",
+       courses:[
+        C("ML with Python – IBM","IBM","Coursera","p-coursera",["ml","python"],"https://www.coursera.org/learn/machine-learning-with-python","ai"),
+        C("Kaggle Intro to ML","Kaggle","Kaggle","p-kaggle",["ml","decision trees"],"https://www.kaggle.com/learn/intro-to-machine-learning","ai"),
+        C("Feature Engineering","Kaggle","Kaggle","p-kaggle",["features","data"],"https://www.kaggle.com/learn/feature-engineering","data"),
+        C("ML Explainability","Kaggle","Kaggle","p-kaggle",["xai","shap"],"https://www.kaggle.com/learn/machine-learning-explainability","ai"),
+        C("Time Series with Python","Kaggle","Kaggle","p-kaggle",["time series","forecasting"],"https://www.kaggle.com/learn/time-series","data"),
+      ]},
+    ]
+  },
+  cloud:{
+    goal:"Become a Cloud or DevOps engineer — one of the highest paying paths in tech. Timeline: 5–7 months. Salary: ₹12–60 LPA.",
+    phases:[
+      {num:"01",title:"Linux & Networking Basics",dur:"3–4 Weeks",desc:"Everything in cloud runs on Linux. Understand the command line, processes, networking fundamentals, and how the internet works.",
+       courses:[
+        C("Linux for Beginners","freeCodeCamp","YouTube","p-yt",["linux","cli"],"https://www.youtube.com/watch?v=sWbUDq4S6Y8","cloud"),
+        C("Linux Command Line Full Course","Joe Collins","YouTube","p-yt",["linux","terminal"],"https://www.youtube.com/watch?v=oxuRxtrO2Ag","cloud"),
+        C("Computer Networking Full Course","freeCodeCamp","YouTube","p-yt",["networking","tcp/ip"],"https://www.youtube.com/watch?v=qiQR5rTSshw","cloud"),
+        C("Professor Messer – CompTIA Network+","Professor Messer","Free","p-free",["networking","certif"],"https://www.professormesser.com/network-plus/n10-008/n10-008-video/n10-008-training-course/","cloud"),
+      ]},
+      {num:"02",title:"Cloud Platforms (AWS / GCP / Azure)",dur:"4–6 Weeks",desc:"Learn the core services of the major cloud platforms. All three have free tiers — practice hands-on without spending a rupee.",
+       courses:[
+        C("AWS Cloud Practitioner – Full Prep","freeCodeCamp","YouTube","p-yt",["aws","clf-c02"],"https://www.youtube.com/watch?v=SOTamWNgDKc","cloud"),
+        C("AWS Skill Builder – Free Courses","AWS","AWS","p-free",["aws","hands-on"],"https://skillbuilder.aws/","cloud"),
+        C("Google Cloud Free Training","Google","Google","p-google",["gcp","free tier"],"https://cloud.google.com/training/free","cloud"),
+        C("Microsoft Learn – Azure AZ-900","Microsoft","Microsoft","p-ms",["azure","certification"],"https://learn.microsoft.com/en-us/training/paths/az-900-describe-cloud-concepts/","cloud"),
+        C("Cloud Computing Full Course","freeCodeCamp","YouTube","p-yt",["cloud","concepts"],"https://www.youtube.com/watch?v=M988_fsOSWo","cloud"),
+      ]},
+      {num:"03",title:"Docker & Kubernetes",dur:"4–5 Weeks",desc:"Containerisation is the most in-demand DevOps skill. Learn to package and orchestrate applications at any scale.",
+       courses:[
+        C("Docker Full Course","TechWorld with Nana","YouTube","p-yt",["docker","containers"],"https://www.youtube.com/watch?v=3c-iBn73dDE","cloud"),
+        C("Kubernetes Full Course","TechWorld with Nana","YouTube","p-yt",["kubernetes","k8s"],"https://www.youtube.com/watch?v=X48VuDVv0do","cloud"),
+        C("Docker & Kubernetes – freeCodeCamp","freeCodeCamp","YouTube","p-yt",["docker","k8s"],"https://www.youtube.com/watch?v=Wf2eSG3owoA","cloud"),
+        C("Play with Docker – Free Lab","Docker","Free Lab","p-free",["docker","hands-on"],"https://labs.play-with-docker.com/","cloud"),
+        C("Kubernetes Playground","Killercoda","Free","p-free",["k8s","hands-on"],"https://killercoda.com/playgrounds/scenario/kubernetes","cloud"),
+      ]},
+      {num:"04",title:"CI/CD & Infrastructure as Code",dur:"3–4 Weeks",desc:"Automate everything. GitHub Actions, Terraform, Ansible — the DevOps practices modern teams actually use in production.",
+       courses:[
+        C("GitHub Actions Full Course","TechWorld with Nana","YouTube","p-yt",["github actions","ci/cd"],"https://www.youtube.com/watch?v=R8_veQiYBjI","cloud"),
+        C("Terraform Full Course","freeCodeCamp","YouTube","p-yt",["terraform","iac"],"https://www.youtube.com/watch?v=SLB_c_ayRMo","cloud"),
+        C("Ansible Full Course","TechWorld with Nana","YouTube","p-yt",["ansible","automation"],"https://www.youtube.com/watch?v=1id6ERvfozo","cloud"),
+        C("DevOps Roadmap 2026","roadmap.sh","Free","p-free",["devops","roadmap"],"https://roadmap.sh/devops","cloud"),
+      ]},
+    ]
+  },
+  dsa:{
+    goal:"Crack technical interviews at top tech companies. From zero DSA to confidently solving medium-hard problems. Timeline: 3–6 months.",
+    phases:[
+      {num:"01",title:"CS Fundamentals & Big O",dur:"2–3 Weeks",desc:"Understand how computers work, what Big O notation means, and how to think about time and space complexity before writing a single algorithm.",
+       courses:[
+        C("CS50 – Harvard Intro to CS","Harvard","Harvard","p-harvard",["cs","fundamentals"],"https://cs50.harvard.edu/x/","coding"),
+        C("Big O Notation – Full Explanation","freeCodeCamp","YouTube","p-yt",["big o","complexity"],"https://www.youtube.com/watch?v=Mo4vesaut8g","coding"),
+        C("Algorithms & Data Structures","freeCodeCamp","YouTube","p-yt",["dsa","beginner"],"https://www.youtube.com/watch?v=RBSGKlAvoiM","coding"),
+        C("Data Structures Easy to Advanced","William Fiset","YouTube","p-yt",["dsa","complete"],"https://www.youtube.com/watch?v=RBSGKlAvoiM","coding"),
+      ]},
+      {num:"02",title:"Core Data Structures",dur:"4–5 Weeks",desc:"Arrays, linked lists, stacks, queues, hash maps, trees, graphs. Understand when and why to use each structure.",
+       courses:[
+        C("NeetCode – DSA for Beginners","NeetCode","YouTube","p-yt",["dsa","patterns"],"https://www.youtube.com/@NeetCode","coding"),
+        C("Striver's A2Z DSA Sheet","Striver","takeUforward","p-free",["dsa","sheet","complete"],"https://takeuforward.org/strivers-a2z-dsa-course/","coding"),
+        C("LeetCode Study Plans","LeetCode","Free","p-free",["dsa","practice"],"https://leetcode.com/studyplan/","coding"),
+        C("Visualgo – Visualise Algorithms","Visualgo","Free","p-free",["dsa","visual"],"https://visualgo.net/","coding"),
+        C("CS61B – Data Structures – UC Berkeley","UC Berkeley","Free","p-free",["dsa","berkeley"],"https://sp21.datastructur.es/","coding"),
+      ]},
+      {num:"03",title:"Patterns & Algorithms",dur:"4–6 Weeks",desc:"Two pointers, sliding window, BFS/DFS, binary search, dynamic programming — learn the 15 patterns that cover 80% of interview problems.",
+       courses:[
+        C("Algorithms Part I – Princeton","Princeton / Sedgewick","Coursera","p-coursera",["algorithms","graphs"],"https://www.coursera.org/learn/algorithms-part1","coding"),
+        C("Algorithms Part II – Princeton","Princeton / Sedgewick","Coursera","p-coursera",["graphs","trees"],"https://www.coursera.org/learn/algorithms-part2","coding"),
+        C("NeetCode 150 – Complete Playlist","NeetCode","NeetCode","p-free",["patterns","150"],"https://neetcode.io/practice","coding"),
+        C("Graph Algorithms Full Course","freeCodeCamp","YouTube","p-yt",["graphs","bfs dfs"],"https://www.youtube.com/watch?v=tWVWeAqZ0WU","coding"),
+        C("CP Algorithms Reference","CP-Algorithms","Free","p-free",["algorithms","competitive"],"https://cp-algorithms.com/","coding"),
+      ]},
+      {num:"04",title:"DP, System Design & Mocks",dur:"4–6 Weeks",desc:"Dynamic programming is the hardest topic but fully learnable. Plus system design basics and mock interviews that actually prepare you.",
+       courses:[
+        C("Dynamic Programming Full Course","freeCodeCamp","YouTube","p-yt",["dp","recursion"],"https://www.youtube.com/watch?v=oBt53YbR9Kk","coding"),
+        C("DP Playlist – Aditya Verma","Aditya Verma","YouTube","p-yt",["dp","hindi"],"https://www.youtube.com/playlist?list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go","coding"),
+        C("System Design Primer","Donne Martin","GitHub","p-github",["system design","architecture"],"https://github.com/donnemartin/system-design-primer","coding"),
+        C("Pramp – Free Mock Interviews","Pramp","Free","p-free",["mock","interview"],"https://www.pramp.com/","career"),
+        C("Interviewing.io – Mock Interviews","Interviewing.io","Free","p-free",["mock","faang"],"https://interviewing.io/","career"),
+        C("Tech Interview Handbook","yangshun","GitHub","p-github",["interview","handbook"],"https://www.techinterviewhandbook.org/","career"),
+      ]},
+    ]
+  }
+};
+
+const CATEGORIES = [
+  {name:"AI & Machine Learning",tag:"ai",color:"var(--accent)",bg:"var(--accent-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2V6a4 4 0 0 1 4-4z"/><circle cx="12" cy="13" r="2"/></svg>`,
+   links:[
+    {n:"Google ML Crash Course",p:"Google",u:"https://developers.google.com/machine-learning/crash-course"},
+    {n:"ML Specialization – Andrew Ng",p:"Coursera",u:"https://www.coursera.org/specializations/machine-learning-introduction"},
+    {n:"fast.ai – Practical AI",p:"fast.ai",u:"https://www.fast.ai/"},
+    {n:"Kaggle – All ML Courses",p:"Kaggle",u:"https://www.kaggle.com/learn"},
+    {n:"Hugging Face NLP Course",p:"HuggingFace",u:"https://huggingface.co/learn/nlp-course/"},
+    {n:"Hugging Face Agents Course",p:"HuggingFace",u:"https://huggingface.co/learn/agents-course/"},
+    {n:"Google Generative AI Path",p:"Google",u:"https://www.cloudskillsboost.google/paths/183"},
+    {n:"Elements of AI – Helsinki",p:"Free",u:"https://www.elementsofai.com/"},
+    {n:"CS229 – Stanford ML",p:"Stanford",u:"https://cs229.stanford.edu/"},
+    {n:"Deep Learning Specialization",p:"Coursera",u:"https://www.coursera.org/specializations/deep-learning"},
+    {n:"Prompt Engineering Guide",p:"DAIR.AI",u:"https://www.promptingguide.ai/"},
+    {n:"DeepLearning.AI Short Courses",p:"Free",u:"https://www.deeplearning.ai/short-courses/"},
+    {n:"Andrej Karpathy – Neural Nets",p:"YouTube",u:"https://www.youtube.com/@AndrejKarpathy"},
+    {n:"MIT 6.S191 – Deep Learning",p:"MIT",u:"https://introtodeeplearning.com/"},
+    {n:"CS224N – Stanford NLP",p:"Stanford",u:"http://web.stanford.edu/class/cs224n/"},
+    {n:"LangChain Docs + Tutorials",p:"LangChain",u:"https://python.langchain.com/docs/tutorials/"},
+    {n:"Llama Index Tutorials",p:"Free",u:"https://docs.llamaindex.ai/en/stable/"},
+    {n:"OpenAI API Cookbook",p:"GitHub",u:"https://github.com/openai/openai-cookbook"},
+    {n:"Weights & Biases – MLOps",p:"W&B",u:"https://www.wandb.courses/"},
+    {n:"Made With ML – MLOps",p:"GitHub",u:"https://madewithml.com/"},
+  ]},
+  {name:"Python Programming",tag:"coding",color:"var(--blue)",bg:"var(--blue-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+   links:[
+    {n:"Python for Everybody – Michigan",p:"Coursera",u:"https://www.coursera.org/specializations/python"},
+    {n:"CS50P – Python by Harvard",p:"Harvard",u:"https://cs50.harvard.edu/python/"},
+    {n:"Automate the Boring Stuff",p:"Free Book",u:"https://automatetheboringstuff.com/"},
+    {n:"Real Python Tutorials",p:"RealPython",u:"https://realpython.com/"},
+    {n:"Python Crash Course – freeCodeCamp",p:"YouTube",u:"https://www.youtube.com/watch?v=rfscVS0vtbw"},
+    {n:"Python Official Tutorial",p:"Python.org",u:"https://docs.python.org/3/tutorial/"},
+    {n:"Python Design Patterns",p:"GitHub",u:"https://github.com/faif/python-patterns"},
+    {n:"Talk Python Training",p:"YouTube",u:"https://www.youtube.com/@TalkPython"},
+    {n:"Python OOP Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=JeznW_7DlB0"},
+    {n:"Corey Schafer – Python Tutorials",p:"YouTube",u:"https://www.youtube.com/@coreyms"},
+    {n:"Python Cookbook – O'Reilly Preview",p:"GitHub",u:"https://github.com/dabeaz/python-cookbook"},
+    {n:"FastAPI Official Tutorial",p:"FastAPI",u:"https://fastapi.tiangolo.com/tutorial/"},
+    {n:"Django Official Tutorial",p:"Django",u:"https://docs.djangoproject.com/en/stable/intro/tutorial01/"},
+    {n:"Flask Official Quickstart",p:"Flask",u:"https://flask.palletsprojects.com/en/stable/quickstart/"},
+    {n:"Fluent Python (Free Preview)",p:"GitHub",u:"https://github.com/fluentpython/example-code-2e"},
+  ]},
+  {name:"JavaScript & TypeScript",tag:"webdev",color:"var(--yellow)",bg:"var(--yellow-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+   links:[
+    {n:"JavaScript.info – Full Guide",p:"Free",u:"https://javascript.info/"},
+    {n:"Eloquent JavaScript",p:"Free Book",u:"https://eloquentjavascript.net/"},
+    {n:"You Don't Know JS (Series)",p:"GitHub",u:"https://github.com/getify/You-Dont-Know-JS"},
+    {n:"JavaScript30 – Build 30 Things",p:"Free",u:"https://javascript30.com/"},
+    {n:"freeCodeCamp JS Algorithms",p:"freeCodeCamp",u:"https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/"},
+    {n:"TypeScript Official Docs",p:"Free",u:"https://www.typescriptlang.org/docs/"},
+    {n:"Total TypeScript – Matt Pocock",p:"YouTube",u:"https://www.youtube.com/@mattpocockuk"},
+    {n:"Node.js Official Docs + Guides",p:"Node.js",u:"https://nodejs.org/en/learn/getting-started/introduction-to-nodejs"},
+    {n:"JavaScript Visualised – Lydia Hallie",p:"GitHub",u:"https://github.com/lydiahallie/javascript-visualized"},
+    {n:"Bun.js Documentation",p:"Free",u:"https://bun.sh/docs"},
+    {n:"Deno Official Docs",p:"Free",u:"https://docs.deno.com/"},
+    {n:"V8 Engine Internals",p:"YouTube",u:"https://www.youtube.com/watch?v=p-iiEDtpy6I"},
+    {n:"Web Dev Simplified – Kyle Cook",p:"YouTube",u:"https://www.youtube.com/@WebDevSimplified"},
+    {n:"Fireship – JS Concepts",p:"YouTube",u:"https://www.youtube.com/@Fireship"},
+    {n:"Traversy Media – JS Projects",p:"YouTube",u:"https://www.youtube.com/@TraversyMedia"},
+  ]},
+  {name:"React & Frontend Frameworks",tag:"webdev",color:"var(--teal)",bg:"var(--teal-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+   links:[
+    {n:"React Official Learn Docs",p:"react.dev",u:"https://react.dev/learn"},
+    {n:"Next.js Official Tutorial",p:"Next.js",u:"https://nextjs.org/learn"},
+    {n:"Scrimba – Learn React Free",p:"Scrimba",u:"https://scrimba.com/learn/learnreact"},
+    {n:"Vue.js Official Tutorial",p:"Vue.js",u:"https://vuejs.org/tutorial/"},
+    {n:"Svelte Official Tutorial",p:"Svelte",u:"https://svelte.dev/tutorial/basics"},
+    {n:"Angular Official Tour of Heroes",p:"Angular",u:"https://angular.dev/tutorials/learn-angular"},
+    {n:"Remix Official Docs",p:"Remix",u:"https://remix.run/docs/en/main/start/tutorial"},
+    {n:"Astro – Official Docs Tutorial",p:"Astro",u:"https://docs.astro.build/en/tutorial/0-introduction/"},
+    {n:"Tailwind CSS Official Docs",p:"Tailwind",u:"https://tailwindcss.com/docs"},
+    {n:"shadcn/ui – Components",p:"Free",u:"https://ui.shadcn.com/"},
+    {n:"Zustand State Management",p:"GitHub",u:"https://github.com/pmndrs/zustand"},
+    {n:"TanStack Query Docs",p:"Free",u:"https://tanstack.com/query/latest/docs/framework/react/overview"},
+    {n:"React Testing Library",p:"Free",u:"https://testing-library.com/docs/react-testing-library/intro/"},
+    {n:"Theo (T3) – React Deep Dives",p:"YouTube",u:"https://www.youtube.com/@t3dotgg"},
+    {n:"Vercel Blog – Frontend Patterns",p:"Vercel",u:"https://vercel.com/blog"},
+  ]},
+  {name:"Backend Development",tag:"webdev",color:"var(--orange)",bg:"var(--orange-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`,
+   links:[
+    {n:"Node.js Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=Oe421EPjeBE"},
+    {n:"Express.js Official Guide",p:"Express.js",u:"https://expressjs.com/en/guide/routing.html"},
+    {n:"Full Stack Open – Helsinki",p:"Free",u:"https://fullstackopen.com/en/"},
+    {n:"FastAPI Official Tutorial",p:"FastAPI",u:"https://fastapi.tiangolo.com/tutorial/"},
+    {n:"Django Girls Tutorial",p:"Free",u:"https://tutorial.djangogirls.org/"},
+    {n:"Go Official Tutorial",p:"Go.dev",u:"https://go.dev/tour/welcome/1"},
+    {n:"Go Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=un6ZyFkqFKo"},
+    {n:"Rust Official Book",p:"Free",u:"https://doc.rust-lang.org/book/"},
+    {n:"Spring Boot Official Guides",p:"Spring",u:"https://spring.io/guides"},
+    {n:"GraphQL Official Learn",p:"GraphQL",u:"https://graphql.org/learn/"},
+    {n:"REST API Best Practices",p:"YouTube",u:"https://www.youtube.com/watch?v=-MTSQjw5DrM"},
+    {n:"gRPC Official Docs",p:"Free",u:"https://grpc.io/docs/"},
+    {n:"Hono.js – Lightweight Backend",p:"Free",u:"https://hono.dev/docs/"},
+    {n:"Backend Roadmap 2026",p:"roadmap.sh",u:"https://roadmap.sh/backend"},
+    {n:"Hussein Nasser – Backend Eng",p:"YouTube",u:"https://www.youtube.com/@hnasr"},
+  ]},
+  {name:"Databases & SQL",tag:"data",color:"var(--purple)",bg:"var(--purple-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+   links:[
+    {n:"SQL Full Course – 4 Hours",p:"YouTube",u:"https://www.youtube.com/watch?v=5OdVJbNCSso"},
+    {n:"Kaggle Intro to SQL",p:"Kaggle",u:"https://www.kaggle.com/learn/intro-to-sql"},
+    {n:"Kaggle Advanced SQL",p:"Kaggle",u:"https://www.kaggle.com/learn/advanced-sql"},
+    {n:"Mode Analytics SQL Tutorial",p:"Free",u:"https://mode.com/sql-tutorial/"},
+    {n:"PostgreSQL Tutorial",p:"Free",u:"https://www.postgresqltutorial.com/"},
+    {n:"MongoDB University – Free",p:"MongoDB",u:"https://learn.mongodb.com/"},
+    {n:"Redis University – Free",p:"Redis",u:"https://university.redis.com/"},
+    {n:"CMU 15-445 – Database Systems",p:"CMU",u:"https://15445.courses.cs.cmu.edu/"},
+    {n:"MySQL Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=7S_tz1z_5bA"},
+    {n:"Prisma ORM Docs",p:"Free",u:"https://www.prisma.io/docs/getting-started"},
+    {n:"SQLite Official Docs",p:"Free",u:"https://www.sqlite.org/docs.html"},
+    {n:"Supabase Docs + Tutorials",p:"Free",u:"https://supabase.com/docs"},
+    {n:"Firebase Official Docs",p:"Google",u:"https://firebase.google.com/docs"},
+    {n:"PlanetScale Docs",p:"Free",u:"https://planetscale.com/docs"},
+    {n:"Database Design Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=ztHopE5Wnpc"},
+  ]},
+  {name:"Data Science & Analytics",tag:"data",color:"var(--blue)",bg:"var(--blue-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+   links:[
+    {n:"IBM Data Science Certificate",p:"Coursera",u:"https://www.coursera.org/professional-certificates/ibm-data-science"},
+    {n:"Google Data Analytics Certificate",p:"Coursera",u:"https://www.coursera.org/professional-certificates/google-data-analytics"},
+    {n:"Kaggle Data Science Track",p:"Kaggle",u:"https://www.kaggle.com/learn"},
+    {n:"StatQuest – Statistics & ML",p:"YouTube",u:"https://www.youtube.com/@statquest"},
+    {n:"Tableau Public Training",p:"Tableau",u:"https://www.tableau.com/learn/training"},
+    {n:"Power BI Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=NNSHu0rkew8"},
+    {n:"Data Science Handbook (Python)",p:"GitHub",u:"https://github.com/jakevdp/PythonDataScienceHandbook"},
+    {n:"Excel for Data Analysis",p:"YouTube",u:"https://www.youtube.com/watch?v=opJgMj1IUrc"},
+    {n:"Metabase – Free Analytics Tool",p:"Free",u:"https://www.metabase.com/learn/"},
+    {n:"Apache Spark Official Docs",p:"Free",u:"https://spark.apache.org/docs/latest/"},
+    {n:"dbt Official Docs + Courses",p:"dbt",u:"https://courses.getdbt.com/"},
+    {n:"Airflow Official Tutorial",p:"Apache",u:"https://airflow.apache.org/docs/apache-airflow/stable/tutorial/"},
+    {n:"Looker Studio (Google) Free",p:"Google",u:"https://lookerstudio.google.com/"},
+    {n:"Observable – Data Vis Framework",p:"Free",u:"https://observablehq.com/"},
+    {n:"Towards Data Science Blog",p:"Medium",u:"https://towardsdatascience.com/"},
+  ]},
+  {name:"Cloud & DevOps",tag:"cloud",color:"var(--teal)",bg:"var(--teal-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>`,
+   links:[
+    {n:"AWS Cloud Practitioner Prep",p:"YouTube",u:"https://www.youtube.com/watch?v=SOTamWNgDKc"},
+    {n:"AWS Skill Builder – Free",p:"AWS",u:"https://skillbuilder.aws/"},
+    {n:"Google Cloud Free Courses",p:"Google",u:"https://cloud.google.com/training/free"},
+    {n:"Microsoft Learn – Azure",p:"Microsoft",u:"https://learn.microsoft.com/en-us/training/"},
+    {n:"Docker Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=3c-iBn73dDE"},
+    {n:"Kubernetes Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=X48VuDVv0do"},
+    {n:"Terraform Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=SLB_c_ayRMo"},
+    {n:"GitHub Actions Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=R8_veQiYBjI"},
+    {n:"Linux Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=sWbUDq4S6Y8"},
+    {n:"Networking Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=qiQR5rTSshw"},
+    {n:"DevOps Roadmap 2026",p:"roadmap.sh",u:"https://roadmap.sh/devops"},
+    {n:"Ansible Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=1id6ERvfozo"},
+    {n:"Helm – Kubernetes Package Mgr",p:"Free",u:"https://helm.sh/docs/"},
+    {n:"Prometheus + Grafana Monitoring",p:"YouTube",u:"https://www.youtube.com/watch?v=h4Sl21AKiDg"},
+    {n:"SRE Book – Google Free",p:"Google",u:"https://sre.google/sre-book/table-of-contents/"},
+  ]},
+  {name:"Cybersecurity",tag:"security",color:"var(--red)",bg:"var(--red-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+   links:[
+    {n:"CS50 Cybersecurity – Harvard",p:"Harvard",u:"https://cs50.harvard.edu/cybersecurity/"},
+    {n:"Google Cybersecurity Certificate",p:"Coursera",u:"https://www.coursera.org/professional-certificates/google-cybersecurity"},
+    {n:"TryHackMe – Free Learning Paths",p:"Free",u:"https://tryhackme.com/paths"},
+    {n:"Hack The Box – Free Labs",p:"Free",u:"https://www.hackthebox.com/"},
+    {n:"Web Security Academy – PortSwigger",p:"PortSwigger",u:"https://portswigger.net/web-security"},
+    {n:"OWASP Top 10 Guide",p:"Free",u:"https://owasp.org/www-project-top-ten/"},
+    {n:"CompTIA Security+ Prep",p:"YouTube",u:"https://www.youtube.com/watch?v=9Nlehfu4VKA"},
+    {n:"Network Security Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=E03gh1huvW4"},
+    {n:"Cybrary – Free Security Courses",p:"Free Tier",u:"https://www.cybrary.it/"},
+    {n:"Ethical Hacking Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=3Kq1MIfTWCE"},
+    {n:"Cryptography – Stanford",p:"Coursera",u:"https://www.coursera.org/learn/crypto"},
+    {n:"SANS Reading Room – Free Papers",p:"SANS",u:"https://www.sans.org/white-papers/"},
+    {n:"Kali Linux Docs",p:"Free",u:"https://www.kali.org/docs/"},
+    {n:"CTF Time – Competitions",p:"Free",u:"https://ctftime.org/"},
+    {n:"OpenSecurityTraining2",p:"Free",u:"https://p.ost2.fyi/"},
+  ]},
+  {name:"Mobile App Development",tag:"mobile",color:"var(--purple)",bg:"var(--purple-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+   links:[
+    {n:"React Native Official Docs",p:"React Native",u:"https://reactnative.dev/docs/getting-started"},
+    {n:"Expo Tutorial – React Native",p:"Expo",u:"https://docs.expo.dev/tutorial/introduction/"},
+    {n:"Flutter Official Tutorial",p:"Flutter",u:"https://docs.flutter.dev/get-started/codelab"},
+    {n:"Flutter Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=CD1Y2DmL5JM"},
+    {n:"iOS Dev – Apple Free Tutorials",p:"Apple",u:"https://developer.apple.com/tutorials/swiftui"},
+    {n:"Swift Official Docs + Tour",p:"Apple",u:"https://docs.swift.org/swift-book/documentation/the-swift-programming-language/"},
+    {n:"Android Dev – Jetpack Compose",p:"Google",u:"https://developer.android.com/courses/android-basics-compose/course"},
+    {n:"Kotlin Official Docs",p:"JetBrains",u:"https://kotlinlang.org/docs/getting-started.html"},
+    {n:"React Native Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=0-S5a0eXPoc"},
+    {n:"Firebase for Mobile Apps",p:"Google",u:"https://firebase.google.com/docs"},
+    {n:"App Design – Figma Mobile",p:"YouTube",u:"https://www.youtube.com/watch?v=HZuk6Wkx_Eg"},
+    {n:"RevenueCat Docs – In-App Purchases",p:"Free",u:"https://www.revenuecat.com/docs/"},
+    {n:"Mobile Roadmap 2026",p:"roadmap.sh",u:"https://roadmap.sh/react-native"},
+    {n:"Awesome React Native",p:"GitHub",u:"https://github.com/jondot/awesome-react-native"},
+    {n:"notJust Dev – React Native",p:"YouTube",u:"https://www.youtube.com/@notjustdev"},
+  ]},
+  {name:"UI/UX & Product Design",tag:"design",color:"var(--pink)",bg:"var(--pink-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 1 0 4.93 19.07"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/></svg>`,
+   links:[
+    {n:"Google UX Design Certificate",p:"Coursera",u:"https://www.coursera.org/professional-certificates/google-ux-design"},
+    {n:"Figma Official Tutorials",p:"Figma",u:"https://www.figma.com/resource-library/"},
+    {n:"Figma Full Course – 6 Hours",p:"YouTube",u:"https://www.youtube.com/watch?v=HZuk6Wkx_Eg"},
+    {n:"Laws of UX",p:"Free",u:"https://lawsofux.com/"},
+    {n:"Refactoring UI – Design Tips",p:"Free",u:"https://refactoringui.com/"},
+    {n:"Mobbin – Real App Design Patterns",p:"Free Tier",u:"https://mobbin.com/"},
+    {n:"Design Systems Repo",p:"GitHub",u:"https://github.com/alexpate/awesome-design-systems"},
+    {n:"Adobe XD Tutorials",p:"Adobe",u:"https://helpx.adobe.com/xd/tutorials.html"},
+    {n:"Interaction Design Foundation Free",p:"IDF",u:"https://www.interaction-design.org/courses/free"},
+    {n:"Kevin Powell – CSS Mastery",p:"YouTube",u:"https://www.youtube.com/@KevinPowell"},
+    {n:"Canva Design School",p:"Canva",u:"https://www.canva.com/learn/"},
+    {n:"UI Gradients Reference",p:"Free",u:"https://uigradients.com/"},
+    {n:"Material Design 3 Guidelines",p:"Google",u:"https://m3.material.io/"},
+    {n:"Apple HIG – Design Guidelines",p:"Apple",u:"https://developer.apple.com/design/human-interface-guidelines"},
+    {n:"Flux Academy – UI/UX",p:"YouTube",u:"https://www.youtube.com/@FluxWithRanSegall"},
+  ]},
+  {name:"DSA & Interview Prep",tag:"coding",color:"var(--accent)",bg:"var(--accent-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+   links:[
+    {n:"NeetCode – Complete DSA",p:"YouTube",u:"https://www.youtube.com/@NeetCode"},
+    {n:"Striver's A2Z DSA Sheet",p:"takeUforward",u:"https://takeuforward.org/strivers-a2z-dsa-course/"},
+    {n:"LeetCode Study Plans",p:"LeetCode",u:"https://leetcode.com/studyplan/"},
+    {n:"CS50 – Intro to Computer Science",p:"Harvard",u:"https://cs50.harvard.edu/x/"},
+    {n:"Algorithms Part I – Princeton",p:"Coursera",u:"https://www.coursera.org/learn/algorithms-part1"},
+    {n:"Algorithms Part II – Princeton",p:"Coursera",u:"https://www.coursera.org/learn/algorithms-part2"},
+    {n:"Tech Interview Handbook",p:"GitHub",u:"https://www.techinterviewhandbook.org/"},
+    {n:"Blind 75 – Curated Problems",p:"LeetCode",u:"https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions"},
+    {n:"NeetCode 150 Practice",p:"Free",u:"https://neetcode.io/practice"},
+    {n:"Visualgo – Algorithm Visualiser",p:"Free",u:"https://visualgo.net/"},
+    {n:"Aditya Verma – DP Playlist",p:"YouTube",u:"https://www.youtube.com/playlist?list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go"},
+    {n:"CP Algorithms Reference",p:"Free",u:"https://cp-algorithms.com/"},
+    {n:"Codeforces – Competitive Programming",p:"Free",u:"https://codeforces.com/"},
+    {n:"Pramp – Free Mock Interviews",p:"Free",u:"https://www.pramp.com/"},
+    {n:"Interviewing.io",p:"Free",u:"https://interviewing.io/"},
+  ]},
+  {name:"Computer Science Fundamentals",tag:"math",color:"var(--orange)",bg:"var(--orange-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>`,
+   links:[
+    {n:"CS50 – Harvard Intro to CS",p:"Harvard",u:"https://cs50.harvard.edu/x/"},
+    {n:"MIT 6.006 – Intro to Algorithms",p:"MIT OCW",u:"https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/"},
+    {n:"CMU 15-445 – Database Systems",p:"CMU",u:"https://15445.courses.cs.cmu.edu/"},
+    {n:"Operating Systems – OSTEP Book",p:"Free",u:"https://pages.cs.wisc.edu/~remzi/OSTEP/"},
+    {n:"Nand to Tetris (Part 1)",p:"Coursera",u:"https://www.coursera.org/learn/build-a-computer"},
+    {n:"Structure & Interpretation – SICP",p:"MIT",u:"https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html"},
+    {n:"Discrete Mathematics",p:"YouTube",u:"https://www.youtube.com/playlist?list=PLl-gb0E4MII28GykmtuBXNUNoej-vY5Rz"},
+    {n:"Theory of Computation – MIT",p:"MIT OCW",u:"https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/"},
+    {n:"Computer Architecture – CMU",p:"CMU",u:"https://www.cs.cmu.edu/~213/"},
+    {n:"Compiler Design – LLVM Tutorial",p:"Free",u:"https://llvm.org/docs/tutorial/"},
+    {n:"CS61B – Data Structures – Berkeley",p:"Berkeley",u:"https://sp21.datastructur.es/"},
+    {n:"Programming Languages – Coursera",p:"Coursera",u:"https://www.coursera.org/learn/programming-languages"},
+    {n:"Category Theory – Free Book",p:"Free",u:"https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/"},
+    {n:"Computer Networks – Kurose",p:"Free",u:"https://gaia.cs.umass.edu/kurose_ross/lectures.php"},
+    {n:"Distributed Systems – MIT 6.824",p:"MIT",u:"https://pdos.csail.mit.edu/6.824/"},
+  ]},
+  {name:"Mathematics for Tech",tag:"math",color:"var(--yellow)",bg:"var(--yellow-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>`,
+   links:[
+    {n:"Khan Academy – All Math",p:"Khan Academy",u:"https://www.khanacademy.org/math"},
+    {n:"MIT OCW – Single Variable Calculus",p:"MIT OCW",u:"https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/"},
+    {n:"3Blue1Brown – Math Visual Series",p:"YouTube",u:"https://www.youtube.com/@3blue1brown"},
+    {n:"Linear Algebra Done Right (Book)",p:"Free",u:"https://linear.axler.net/"},
+    {n:"Statistics & Probability – Khan",p:"Khan Academy",u:"https://www.khanacademy.org/math/statistics-probability"},
+    {n:"StatQuest – Stats for ML",p:"YouTube",u:"https://www.youtube.com/@statquest"},
+    {n:"MIT OCW – Linear Algebra",p:"MIT OCW",u:"https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"},
+    {n:"Mathematics for ML – Coursera",p:"Coursera",u:"https://www.coursera.org/specializations/mathematics-machine-learning"},
+    {n:"Discrete Math – TrevTutor",p:"YouTube",u:"https://www.youtube.com/@Trevtutor"},
+    {n:"Probability – Harvard Stats 110",p:"YouTube",u:"https://www.youtube.com/playlist?list=PL2SOU6wwxB0uwwH80KTQ6ht66KWxbzTIo"},
+    {n:"Calculus Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=HfACrKJ_Y2w"},
+    {n:"Brilliant.org (Free Preview)",p:"Free Tier",u:"https://brilliant.org/"},
+    {n:"MIT OCW – Multivariable Calculus",p:"MIT OCW",u:"https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/"},
+    {n:"Number Theory – Explained",p:"YouTube",u:"https://www.youtube.com/watch?v=6uE6IcCZ4Dk"},
+    {n:"Graph Theory – Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=09_LlHjoEiY"},
+  ]},
+  {name:"Career & Job Prep",tag:"career",color:"var(--accent)",bg:"var(--accent-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+   links:[
+    {n:"Tech Interview Handbook",p:"GitHub",u:"https://www.techinterviewhandbook.org/"},
+    {n:"System Design Primer",p:"GitHub",u:"https://github.com/donnemartin/system-design-primer"},
+    {n:"Resume Tips – overleaf Template",p:"Free",u:"https://www.overleaf.com/latex/templates/tagged/cv"},
+    {n:"LinkedIn Learning (Free Trial)",p:"LinkedIn",u:"https://www.linkedin.com/learning/"},
+    {n:"Pramp – Free Mock Interviews",p:"Free",u:"https://www.pramp.com/"},
+    {n:"Interviewing.io – FAANG Prep",p:"Free",u:"https://interviewing.io/"},
+    {n:"Blind 75 – Problem List",p:"LeetCode",u:"https://leetcode.com/discuss/general-discussion/460599/"},
+    {n:"Salary Negotiation – Fearless",p:"YouTube",u:"https://www.youtube.com/watch?v=XY5SeCl_8NE"},
+    {n:"Glassdoor – Salary Research",p:"Free",u:"https://www.glassdoor.co.in/"},
+    {n:"Levels.fyi – Comp Data",p:"Free",u:"https://www.levels.fyi/"},
+    {n:"GitHub Student Developer Pack",p:"GitHub",u:"https://education.github.com/pack"},
+    {n:"Open Source Contribution Guide",p:"GitHub",u:"https://opensource.guide/how-to-contribute/"},
+    {n:"Google Summer of Code Guide",p:"Google",u:"https://summerofcode.withgoogle.com/"},
+    {n:"Dev.to – Developer Community",p:"Free",u:"https://dev.to/"},
+    {n:"The Pragmatic Programmer Book",p:"Free Preview",u:"https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/"},
+  ]},
+  {name:"Digital Marketing",tag:"marketing",color:"var(--orange)",bg:"var(--orange-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>`,
+   links:[
+    {n:"Google Digital Marketing Certificate",p:"Coursera",u:"https://www.coursera.org/professional-certificates/google-digital-marketing-ecommerce"},
+    {n:"Meta Social Media Marketing",p:"Coursera",u:"https://www.coursera.org/professional-certificates/facebook-social-media-marketing"},
+    {n:"HubSpot Academy – All Courses",p:"HubSpot",u:"https://academy.hubspot.com/courses"},
+    {n:"Google Analytics Academy",p:"Google",u:"https://analytics.google.com/analytics/academy/"},
+    {n:"Google Ads Free Certification",p:"Google",u:"https://skillshop.withgoogle.com/"},
+    {n:"SEO Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=xsVTqzratPs"},
+    {n:"Semrush Academy – Free Courses",p:"Semrush",u:"https://www.semrush.com/academy/"},
+    {n:"Ahrefs – SEO Training",p:"YouTube",u:"https://www.youtube.com/@AhrefsTV"},
+    {n:"Mailchimp Email Marketing Guides",p:"Free",u:"https://mailchimp.com/resources/"},
+    {n:"Content Marketing Institute",p:"Free",u:"https://contentmarketinginstitute.com/education/"},
+    {n:"Backlinko – SEO Blog",p:"Free",u:"https://backlinko.com/blog"},
+    {n:"Neil Patel – Digital Marketing",p:"YouTube",u:"https://www.youtube.com/@neilpatel"},
+    {n:"Growth Hacking Course – GrowthHackers",p:"Free Tier",u:"https://growthhackers.com/"},
+    {n:"CXL – Free Marketing Courses",p:"Free Tier",u:"https://cxl.com/institute/"},
+    {n:"Marketing Analytics – Coursera",p:"Coursera",u:"https://www.coursera.org/learn/marketing-analytics"},
+  ]},
+  {name:"Personal Finance & Investing",tag:"finance",color:"var(--accent)",bg:"var(--accent-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+   links:[
+    {n:"Personal Finance – Khan Academy",p:"Khan Academy",u:"https://www.khanacademy.org/college-careers-more/personal-finance"},
+    {n:"Yale Financial Markets – Robert Shiller",p:"Coursera",u:"https://www.coursera.org/learn/financial-markets-global"},
+    {n:"Zerodha Varsity – Indian Finance",p:"Free",u:"https://zerodha.com/varsity/"},
+    {n:"Investopedia – Financial Education",p:"Free",u:"https://www.investopedia.com/financial-term-dictionary-4769738"},
+    {n:"MIT 15.401 – Finance Theory",p:"MIT OCW",u:"https://ocw.mit.edu/courses/15-401-finance-theory-i-fall-2008/"},
+    {n:"Google Finance – Real Data",p:"Google",u:"https://finance.google.com"},
+    {n:"Zerodha – Trading & Investing",p:"Free",u:"https://zerodha.com/varsity/module/introduction-to-stock-markets/"},
+    {n:"CFA Institute – Free Resources",p:"CFA",u:"https://www.cfainstitute.org/en/membership/professional-development/refresher-readings"},
+    {n:"NISM Study Material – Free",p:"NISM",u:"https://www.nism.ac.in/"},
+    {n:"Stock Market Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=p7HKvqRI_Bo"},
+    {n:"Warren Buffett Letters Archive",p:"Free",u:"https://www.berkshirehathaway.com/letters/letters.html"},
+    {n:"Crypto Fundamentals – Coinbase",p:"Free",u:"https://www.coinbase.com/learn"},
+    {n:"Open Corporates – Business Data",p:"Free",u:"https://opencorporates.com/"},
+    {n:"Tax for Developers – India",p:"YouTube",u:"https://www.youtube.com/watch?v=m0wsMFM_qZs"},
+    {n:"SEBI Investor Education",p:"SEBI",u:"https://investor.sebi.gov.in/"},
+  ]},
+  {name:"English & Communication",tag:"language",color:"var(--blue)",bg:"var(--blue-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+   links:[
+    {n:"British Council – Free English",p:"Free",u:"https://www.britishcouncil.org/english"},
+    {n:"Coursera English Specializations",p:"Coursera",u:"https://www.coursera.org/courses?query=english%20communication"},
+    {n:"BBC Learning English",p:"BBC",u:"https://www.bbc.co.uk/learningenglish/"},
+    {n:"Duolingo – Language Learning",p:"Free",u:"https://www.duolingo.com/"},
+    {n:"Think Fast Talk Smart – Stanford",p:"Stanford",u:"https://www.youtube.com/@StanfordGSB"},
+    {n:"TED Talks – Public Speaking",p:"Free",u:"https://www.ted.com/playlists/226/before_public_speaking"},
+    {n:"Writing – Coursera Duke",p:"Coursera",u:"https://www.coursera.org/specializations/academic-english"},
+    {n:"Purdue OWL – Writing Guide",p:"Free",u:"https://owl.purdue.edu/owl/general_writing/"},
+    {n:"Harvard Writing Center",p:"Harvard",u:"https://writingcenter.fas.harvard.edu/pages/resources"},
+    {n:"Technical Writing – Google",p:"Google",u:"https://developers.google.com/tech-writing"},
+    {n:"Toastmasters – Free Resources",p:"Free",u:"https://www.toastmasters.org/resources"},
+    {n:"English Grammar in Use (Preview)",p:"Cambridge",u:"https://www.cambridge.org/elt/blog/2021/01/15/english-grammar-in-use-raymond-murphy/"},
+    {n:"Memrise – Vocabulary Building",p:"Free Tier",u:"https://www.memrise.com/"},
+    {n:"Anki – Flashcard System",p:"Free",u:"https://apps.ankiweb.net/"},
+    {n:"Voice & Accent Training",p:"YouTube",u:"https://www.youtube.com/watch?v=5_WEDfD4DFk"},
+  ]},
+  {name:"Productivity & Tools",tag:"productivity",color:"var(--yellow)",bg:"var(--yellow-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+   links:[
+    {n:"Getting Things Done – Official",p:"Free",u:"https://gettingthingsdone.com/resources/"},
+    {n:"Notion – Official Templates",p:"Free",u:"https://www.notion.so/templates"},
+    {n:"Obsidian – Personal Knowledge Mgmt",p:"Free",u:"https://obsidian.md/"},
+    {n:"VS Code Tips & Tricks",p:"YouTube",u:"https://www.youtube.com/watch?v=fnPhJHN0jTE"},
+    {n:"Git Complete Course",p:"YouTube",u:"https://www.youtube.com/watch?v=RGOj5yH7evk"},
+    {n:"Vim Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=H3o4l4GVLW0"},
+    {n:"Linux Terminal Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=oxuRxtrO2Ag"},
+    {n:"Regex in 100 seconds",p:"YouTube",u:"https://www.youtube.com/watch?v=sXQxhojSdZM"},
+    {n:"Make (Integromat) Free Tier",p:"Free Tier",u:"https://www.make.com/en/help/tutorials"},
+    {n:"Zapier University",p:"Free",u:"https://zapier.com/university"},
+    {n:"Obsidian + Claude MCP Guide",p:"Free",u:"https://github.com/obsidianmd/obsidian-api"},
+    {n:"Second Brain – Building PKM",p:"YouTube",u:"https://www.youtube.com/watch?v=OP3dA2GcAh8"},
+    {n:"Zettelkasten Method",p:"Free",u:"https://zettelkasten.de/posts/overview/"},
+    {n:"Time Management – Cal Newport",p:"YouTube",u:"https://www.youtube.com/@CalNewportMedia"},
+    {n:"Excalidraw – Free Diagramming",p:"Free",u:"https://excalidraw.com/"},
+  ]},
+  {name:"Open Source & Git",tag:"coding",color:"var(--teal)",bg:"var(--teal-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>`,
+   links:[
+    {n:"Git Official Docs",p:"Free",u:"https://git-scm.com/doc"},
+    {n:"Git & GitHub Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=RGOj5yH7evk"},
+    {n:"Pro Git Book – Free",p:"Free Book",u:"https://git-scm.com/book/en/v2"},
+    {n:"GitHub Skills – Interactive",p:"GitHub",u:"https://skills.github.com/"},
+    {n:"Open Source Contribution Guide",p:"GitHub",u:"https://opensource.guide/how-to-contribute/"},
+    {n:"First Contributions Repo",p:"GitHub",u:"https://github.com/firstcontributions/first-contributions"},
+    {n:"Good First Issues – Explorer",p:"GitHub",u:"https://goodfirstissues.com/"},
+    {n:"GitHub Actions Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=R8_veQiYBjI"},
+    {n:"Atlassian Git Tutorials",p:"Free",u:"https://www.atlassian.com/git/tutorials"},
+    {n:"Learn Git Branching – Interactive",p:"Free",u:"https://learngitbranching.js.org/"},
+    {n:"Oh My Git – Visual Game",p:"Free",u:"https://ohmygit.org/"},
+    {n:"GitLab CI/CD Docs",p:"GitLab",u:"https://docs.gitlab.com/ee/ci/"},
+    {n:"Conventional Commits Guide",p:"Free",u:"https://www.conventionalcommits.org/"},
+    {n:"Semantic Versioning",p:"Free",u:"https://semver.org/"},
+    {n:"Open Source Friday – GitHub",p:"GitHub",u:"https://opensourcefriday.com/"},
+  ]},
+  {name:"System Design",tag:"coding",color:"var(--purple)",bg:"var(--purple-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="16" y="3" width="6" height="6" rx="1"/><rect x="9" y="15" width="6" height="6" rx="1"/><path d="M5 9v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M12 13v2"/></svg>`,
+   links:[
+    {n:"System Design Primer",p:"GitHub",u:"https://github.com/donnemartin/system-design-primer"},
+    {n:"System Design Interview – Book",p:"GitHub",u:"https://github.com/G-Ke/system-design-interview-alex-xu"},
+    {n:"Grokking System Design",p:"Free Preview",u:"https://www.designgurus.io/course/grokking-the-system-design-interview"},
+    {n:"High Scalability Blog",p:"Free",u:"http://highscalability.com/"},
+    {n:"Martin Kleppmann – DDIA Book",p:"Free Preview",u:"https://dataintensive.net/"},
+    {n:"Gaurav Sen – System Design",p:"YouTube",u:"https://www.youtube.com/@gkcs"},
+    {n:"System Design Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=i53Gi_K3o7I"},
+    {n:"ByteByteGo – System Design",p:"YouTube",u:"https://www.youtube.com/@ByteByteGo"},
+    {n:"AWS Architecture Center",p:"AWS",u:"https://aws.amazon.com/architecture/"},
+    {n:"Google SRE Book – Free",p:"Google",u:"https://sre.google/sre-book/table-of-contents/"},
+    {n:"Distributed Systems – MIT 6.824",p:"MIT",u:"https://pdos.csail.mit.edu/6.824/"},
+    {n:"CAP Theorem Explained",p:"YouTube",u:"https://www.youtube.com/watch?v=BHqjEjzAicA"},
+    {n:"Microservices Pattern – Chris Richardson",p:"Free",u:"https://microservices.io/patterns/"},
+    {n:"Kafka Official Docs",p:"Apache",u:"https://kafka.apache.org/documentation/"},
+    {n:"roadmap.sh – System Design",p:"roadmap.sh",u:"https://roadmap.sh/system-design"},
+  ]},
+  {name:"Testing & QA",tag:"coding",color:"var(--red)",bg:"var(--red-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+   links:[
+    {n:"Jest Official Docs",p:"Jest",u:"https://jestjs.io/docs/getting-started"},
+    {n:"Testing Library Docs",p:"Free",u:"https://testing-library.com/"},
+    {n:"Playwright Official Tutorial",p:"Microsoft",u:"https://playwright.dev/docs/intro"},
+    {n:"Cypress Official Docs",p:"Cypress",u:"https://docs.cypress.io/"},
+    {n:"Selenium Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=j7VZsCCnptM"},
+    {n:"Pytest Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=cHYq1MRoyI0"},
+    {n:"Software Testing – Udacity",p:"Udacity",u:"https://www.udacity.com/course/software-testing--cs258"},
+    {n:"Test Driven Development – Kent Beck",p:"YouTube",u:"https://www.youtube.com/watch?v=qkblc5WRn-U"},
+    {n:"ISTQB Foundation Study Guide",p:"Free",u:"https://www.istqb.org/certifications/certified-tester-foundation-level"},
+    {n:"Performance Testing – k6",p:"k6",u:"https://k6.io/docs/"},
+    {n:"API Testing – Postman",p:"Postman",u:"https://learning.postman.com/docs/getting-started/introduction/"},
+    {n:"Contract Testing – Pact",p:"Free",u:"https://docs.pact.io/"},
+    {n:"Mutation Testing – Stryker",p:"Free",u:"https://stryker-mutator.io/docs/"},
+    {n:"Chaos Engineering – Principles",p:"Free",u:"https://principlesofchaos.org/"},
+    {n:"QA Roadmap 2026",p:"roadmap.sh",u:"https://roadmap.sh/qa"},
+  ]},
+  {name:"Blockchain & Web3",tag:"coding",color:"var(--purple)",bg:"var(--purple-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+   links:[
+    {n:"Blockchain Basics – Coursera",p:"Coursera",u:"https://www.coursera.org/learn/blockchain-basics"},
+    {n:"CryptoZombies – Solidity Game",p:"Free",u:"https://cryptozombies.io/"},
+    {n:"Solidity Official Docs",p:"Free",u:"https://soliditylang.org/docs/"},
+    {n:"Ethereum.org Docs + Learn",p:"Ethereum",u:"https://ethereum.org/en/learn/"},
+    {n:"Alchemy University – Free",p:"Alchemy",u:"https://university.alchemy.com/"},
+    {n:"Buildspace – Web3 Projects",p:"Free",u:"https://buildspace.so/"},
+    {n:"Patrick Collins – Solidity Course",p:"YouTube",u:"https://www.youtube.com/watch?v=gyMwXuJrbJQ"},
+    {n:"Hardhat Official Tutorial",p:"Free",u:"https://hardhat.org/tutorial"},
+    {n:"OpenZeppelin Docs",p:"Free",u:"https://docs.openzeppelin.com/"},
+    {n:"Blockchain Roadmap",p:"roadmap.sh",u:"https://roadmap.sh/blockchain"},
+    {n:"Web3.js Official Docs",p:"Free",u:"https://docs.web3js.org/"},
+    {n:"IPFS Official Docs",p:"Free",u:"https://docs.ipfs.tech/"},
+    {n:"DeFi Developer Roadmap",p:"GitHub",u:"https://github.com/OffcierCia/DeFi-Developer-Road-Map"},
+    {n:"Chainlink Docs + Tutorials",p:"Free",u:"https://docs.chain.link/"},
+    {n:"Moralis – Web3 Development",p:"YouTube",u:"https://www.youtube.com/@MoralisWeb3"},
+  ]},
+  {name:"Game Development",tag:"coding",color:"var(--orange)",bg:"var(--orange-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><rect x="6" y="11" width="4" height="6" rx="1"/><line x1="16" y1="13" x2="20" y2="13"/><line x1="18" y1="11" x2="18" y2="15"/><path d="M15 5l3.5 3.5M9 5L5.5 8.5M5 21l3.5-3.5M19 21l-3.5-3.5"/><circle cx="12" cy="12" r="10"/></svg>`,
+   links:[
+    {n:"Unity Official Learn Platform",p:"Unity",u:"https://learn.unity.com/"},
+    {n:"Unreal Engine Online Learning",p:"Epic Games",u:"https://www.unrealengine.com/en-US/onlinelearning-courses"},
+    {n:"Godot Official Docs + Tutorials",p:"Godot",u:"https://docs.godotengine.org/en/stable/getting_started/step_by_step/"},
+    {n:"CS50G – Game Dev Harvard",p:"Harvard",u:"https://cs50.harvard.edu/games/"},
+    {n:"Game Design – Coursera Michigan",p:"Coursera",u:"https://www.coursera.org/specializations/game-design"},
+    {n:"Brackeys – Unity Tutorials",p:"YouTube",u:"https://www.youtube.com/@Brackeys"},
+    {n:"Game Math – 3Blue1Brown",p:"YouTube",u:"https://www.youtube.com/@3blue1brown"},
+    {n:"OpenGL Full Tutorial",p:"YouTube",u:"https://www.youtube.com/watch?v=W3gAzLwfIP0"},
+    {n:"Phaser.js – 2D Web Games",p:"Free",u:"https://phaser.io/tutorials"},
+    {n:"pygame Official Tutorial",p:"Free",u:"https://www.pygame.org/docs/tut/newbieguide.html"},
+    {n:"GDevelop – No Code Game Dev",p:"Free",u:"https://wiki.gdevelop.io/gdevelop5/"},
+    {n:"LibGDX Java Game Framework",p:"Free",u:"https://libgdx.com/dev/"},
+    {n:"Game Programming Patterns Book",p:"Free",u:"https://gameprogrammingpatterns.com/"},
+    {n:"Kenney.nl – Free Game Assets",p:"Free",u:"https://kenney.nl/assets"},
+    {n:"Itch.io Game Dev Resources",p:"Free",u:"https://itch.io/game-assets/free"},
+  ]},
+  {name:"Freelancing & Entrepreneurship",tag:"career",color:"var(--yellow)",bg:"var(--yellow-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+   links:[
+    {n:"Freelancing Full Guide – freeCodeCamp",p:"YouTube",u:"https://www.youtube.com/watch?v=oxuRxtrO2Ag"},
+    {n:"Upwork Success Guide",p:"Free",u:"https://www.upwork.com/resources/"},
+    {n:"Toptal Application Tips",p:"Free",u:"https://www.toptal.com/developers/blog"},
+    {n:"How to Start a Startup – Stanford",p:"YouTube",u:"https://www.youtube.com/playlist?list=PL5q_lef6zVkaTY_cT1k7qFNF2TidHCe21"},
+    {n:"YC Startup School – Free",p:"Y Combinator",u:"https://www.startupschool.org/"},
+    {n:"Indie Hackers – Community",p:"Free",u:"https://www.indiehackers.com/"},
+    {n:"Product Hunt – Launch Guide",p:"Free",u:"https://www.producthunt.com/stories"},
+    {n:"No-Code Tools Overview",p:"YouTube",u:"https://www.youtube.com/watch?v=3X9SvZ3x1lQ"},
+    {n:"Bubble.io Official Docs",p:"Bubble",u:"https://manual.bubble.io/"},
+    {n:"Webflow University",p:"Free",u:"https://university.webflow.com/"},
+    {n:"Financial Modelling for Startups",p:"YouTube",u:"https://www.youtube.com/watch?v=sTLTLuCCVRE"},
+    {n:"Email First Business – ConvertKit",p:"Free",u:"https://convertkit.com/resources"},
+    {n:"Seth Godin – Marketing Blog",p:"Free",u:"https://seths.blog/"},
+    {n:"Paul Graham Essays",p:"Free",u:"http://paulgraham.com/articles.html"},
+    {n:"Stripe Atlas – Startup Formation",p:"Free",u:"https://stripe.com/atlas/guides"},
+  ]},
+  {name:"Video Editing & Content Creation",tag:"productivity",color:"var(--red)",bg:"var(--red-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>`,
+   links:[
+    {n:"DaVinci Resolve Official Training",p:"Blackmagic",u:"https://www.blackmagicdesign.com/products/davinciresolve/training"},
+    {n:"Premiere Pro Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=Hls3Tp7JS8E"},
+    {n:"CapCut Tutorials",p:"YouTube",u:"https://www.youtube.com/results?search_query=capcut+tutorial"},
+    {n:"After Effects Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=vBsQV9PkXpg"},
+    {n:"YouTube Algorithm – Creator Academy",p:"YouTube",u:"https://creatoracademy.youtube.com/"},
+    {n:"Short Form Content Strategy",p:"YouTube",u:"https://www.youtube.com/watch?v=PeSAMEHIVQU"},
+    {n:"Audacity – Audio Editing Free",p:"Audacity",u:"https://support.audacityteam.org/"},
+    {n:"Canva Video Editor",p:"Canva",u:"https://www.canva.com/video-editor/"},
+    {n:"OBS Studio – Free Recording",p:"OBS",u:"https://obsproject.com/wiki/"},
+    {n:"Runway ML – AI Video Editing",p:"Free Tier",u:"https://runwayml.com/"},
+    {n:"ElevenLabs – AI Voice (Free Tier)",p:"Free Tier",u:"https://elevenlabs.io/"},
+    {n:"Color Grading – Full Guide",p:"YouTube",u:"https://www.youtube.com/watch?v=JWdpT09F-HU"},
+    {n:"Podcast Production Guide",p:"YouTube",u:"https://www.youtube.com/watch?v=s01-Y3Dqa9Q"},
+    {n:"Motion Design – After Effects",p:"YouTube",u:"https://www.youtube.com/watch?v=vBsQV9PkXpg"},
+    {n:"Video SEO for YouTube",p:"YouTube",u:"https://www.youtube.com/watch?v=NU8UE8VFzQ8"},
+  ]},
+  {name:"3D & Graphics",tag:"design",color:"var(--purple)",bg:"var(--purple-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>`,
+   links:[
+    {n:"Blender Official Tutorials",p:"Blender",u:"https://www.blender.org/support/tutorials/"},
+    {n:"Blender Guru – Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=nIoXOplUvAw"},
+    {n:"Three.js Official Journey (Free Parts)",p:"Three.js",u:"https://threejs.org/manual/"},
+    {n:"WebGL Fundamentals",p:"Free",u:"https://webglfundamentals.org/"},
+    {n:"Unity Learn Platform",p:"Unity",u:"https://learn.unity.com/"},
+    {n:"Adobe Illustrator Official Tutorials",p:"Adobe",u:"https://helpx.adobe.com/illustrator/tutorials.html"},
+    {n:"Inkscape Official Docs",p:"Free",u:"https://inkscape.org/learn/"},
+    {n:"GIMP Tutorials",p:"Free",u:"https://www.gimp.org/tutorials/"},
+    {n:"Stable Diffusion – Getting Started",p:"YouTube",u:"https://www.youtube.com/watch?v=DHaL56P3f9A"},
+    {n:"Midjourney Official Docs",p:"Free",u:"https://docs.midjourney.com/"},
+    {n:"Procreate – iPad Art Tutorials",p:"YouTube",u:"https://www.youtube.com/results?search_query=procreate+tutorial+beginner"},
+    {n:"CSS Art – Full Guide",p:"YouTube",u:"https://www.youtube.com/watch?v=Xc3oaupSTnA"},
+    {n:"SVG Essentials – Full Course",p:"YouTube",u:"https://www.youtube.com/watch?v=wc9_56e0TNEM"},
+    {n:"Spline – 3D for Web",p:"Free",u:"https://spline.design/"},
+    {n:"Rive Animation – Free",p:"Free",u:"https://rive.app/learn-rive/"},
+  ]},
+  {name:"IoT & Embedded Systems",tag:"coding",color:"var(--teal)",bg:"var(--teal-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/></svg>`,
+   links:[
+    {n:"Arduino Official Tutorials",p:"Arduino",u:"https://docs.arduino.cc/learn/"},
+    {n:"Raspberry Pi Official Docs",p:"Raspberry Pi",u:"https://www.raspberrypi.com/documentation/"},
+    {n:"MIT 6.004 – Computation Structures",p:"MIT OCW",u:"https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/"},
+    {n:"Electronics Basics – Khan Academy",p:"Khan Academy",u:"https://www.khanacademy.org/science/electrical-engineering"},
+    {n:"IoT Full Course – Edureka",p:"YouTube",u:"https://www.youtube.com/watch?v=h0gWfVCSGQQ"},
+    {n:"Embedded Systems – Coursera",p:"Coursera",u:"https://www.coursera.org/specializations/embedded-systems-software-and-hardware-architecture"},
+    {n:"ESP32 Full Tutorial",p:"YouTube",u:"https://www.youtube.com/watch?v=iASSZoinfNQ"},
+    {n:"MQTT Protocol Explained",p:"YouTube",u:"https://www.youtube.com/watch?v=EIxdz-2rhLs"},
+    {n:"C for Embedded Systems",p:"YouTube",u:"https://www.youtube.com/watch?v=KJgsSFOSQv0"},
+    {n:"FreeRTOS Official Docs",p:"Free",u:"https://www.freertos.org/Documentation/"},
+    {n:"STM32 Tutorial Series",p:"YouTube",u:"https://www.youtube.com/watch?v=hyZS2p1tW-g"},
+    {n:"TinyML – Harvard",p:"Free",u:"https://pll.harvard.edu/course/introduction-to-embedded-machine-learning"},
+    {n:"Home Automation – Home Assistant",p:"Free",u:"https://www.home-assistant.io/docs/"},
+    {n:"AWS IoT Core Docs",p:"AWS",u:"https://docs.aws.amazon.com/iot/"},
+    {n:"Practical Electronics for Inventors",p:"Free Preview",u:"https://www.mhprofessional.com/9781259587542-usa-practical-electronics-for-inventors-fourth-edition"},
+  ]},
+  {name:"Hardware & Electronics",tag:"coding",color:"var(--orange)",bg:"var(--orange-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><polyline points="6.8 6.8 3 12 6.8 17.2"/><polyline points="17.2 6.8 21 12 17.2 17.2"/><line x1="3" y1="12" x2="21" y2="12"/></svg>`,
+   links:[
+    {n:"nand2tetris – Computer from Scratch",p:"Coursera",u:"https://www.coursera.org/learn/build-a-computer"},
+    {n:"Khan Academy – Electrical Engineering",p:"Khan Academy",u:"https://www.khanacademy.org/science/electrical-engineering"},
+    {n:"MIT 6.002 – Circuits and Electronics",p:"MIT OCW",u:"https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/"},
+    {n:"Electronics Tutorial – All About Circuits",p:"Free",u:"https://www.allaboutcircuits.com/textbook/"},
+    {n:"FPGA Tutorial – Nandland",p:"Free",u:"https://nandland.com/"},
+    {n:"Digital Logic Design",p:"YouTube",u:"https://www.youtube.com/watch?v=M0mx8S05v60"},
+    {n:"PCB Design – EasyEDA",p:"Free",u:"https://docs.easyeda.com/en/"},
+    {n:"Circuit Simulator – Falstad",p:"Free",u:"https://www.falstad.com/circuit/"},
+    {n:"Ben Eater – Build a CPU",p:"YouTube",u:"https://www.youtube.com/@BenEater"},
+    {n:"RISC-V Explained",p:"YouTube",u:"https://www.youtube.com/watch?v=Fy8pMqrGd74"},
+    {n:"Verilog Full Tutorial",p:"YouTube",u:"https://www.youtube.com/watch?v=ER_R1rkRFHc"},
+    {n:"VLSI Design Basics",p:"YouTube",u:"https://www.youtube.com/watch?v=oZqMOCzHYNc"},
+    {n:"Oscilloscope Tutorial",p:"YouTube",u:"https://www.youtube.com/watch?v=uU3FhH7_MWo"},
+    {n:"Solar & Renewable Energy – Coursera",p:"Coursera",u:"https://www.coursera.org/learn/solar-energy"},
+    {n:"3D Printing Beginner Guide",p:"YouTube",u:"https://www.youtube.com/watch?v=7_J1QSWtpFQ"},
+  ]},
+  {name:"Science & Research Skills",tag:"math",color:"var(--blue)",bg:"var(--blue-bg)",icon:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>`,
+   links:[
+    {n:"MIT OpenCourseWare – Full Library",p:"MIT OCW",u:"https://ocw.mit.edu/"},
+    {n:"Coursera – All Free Audit Courses",p:"Coursera",u:"https://www.coursera.org/courses?query=free"},
+    {n:"edX – Free Courses Library",p:"edX",u:"https://www.edx.org/course/subject/computer-science"},
+    {n:"arXiv.org – Free Research Papers",p:"Free",u:"https://arxiv.org/"},
+    {n:"Semantic Scholar – AI Papers",p:"Free",u:"https://www.semanticscholar.org/"},
+    {n:"Papers With Code",p:"Free",u:"https://paperswithcode.com/"},
+    {n:"Connected Papers – Graph",p:"Free",u:"https://www.connectedpapers.com/"},
+    {n:"Zotero – Reference Manager",p:"Free",u:"https://www.zotero.org/"},
+    {n:"Latex Tutorial – Overleaf",p:"Free",u:"https://www.overleaf.com/learn"},
+    {n:"Research Methods – Coursera",p:"Coursera",u:"https://www.coursera.org/learn/quantitative-methods"},
+    {n:"Google Scholar",p:"Google",u:"https://scholar.google.com/"},
+    {n:"JSTOR – Free Access",p:"Free",u:"https://www.jstor.org/"},
+    {n:"Project MUSE – Humanities",p:"Free",u:"https://muse.jhu.edu/"},
+    {n:"Springer Open Access",p:"Free",u:"https://www.springeropen.com/"},
+    {n:"PubMed – Medical Research",p:"Free",u:"https://pubmed.ncbi.nlm.nih.gov/"},
+  ]},
+];
+
+const TIPS = [
+  {n:"01",title:"Google Drive Search",desc:"Educators upload complete courses to Google Drive and forget to make them private. Google indexes these public links.",q:"machine learning course site:drive.google.com"},
+  {n:"02",title:"GitHub Awesome Lists",desc:"The developer community compiles massive collections of free course links, books, and tools on GitHub. Search any topic.",q:"awesome python learning resources site:github.com"},
+  {n:"03",title:"Udemy Free Coupons",desc:"Instructors release 100% off coupons regularly. Reddit communities track them in real-time.",q:'udemy free coupon "react" 2026 site:reddit.com'},
+  {n:"04",title:"PDF Textbooks (.edu)",desc:"University websites host textbooks and lecture notes that are publicly accessible. The best CS books — completely free.",q:'"deep learning" textbook filetype:pdf site:edu'},
+  {n:"05",title:"Internet Archive",desc:"Archive.org legally hosts thousands of books, courses, and resources you can read or borrow for free online.",q:'site:archive.org "programming" "2024" course'},
+  {n:"06",title:"University Lecture Notes",desc:"Stanford, MIT, CMU, and Berkeley publicly post their course materials. Some of the best content in the world, free.",q:'machine learning course notes site:stanford.edu OR site:mit.edu'},
+  {n:"07",title:"YouTube + Full Course",desc:"Adding 'full course' to any YouTube search surfaces complete multi-hour courses that replace paid bootcamps.",q:'python full course for beginners 2026 site:youtube.com'},
+  {n:"08",title:"Scribd Free Preview",desc:"Scribd has most technical books available for a 30-day free trial — enough to read 2-3 books completely free.",q:'site:scribd.com "javascript" programming guide 2024'},
+  {n:"09",title:"SlideShare Lecture Slides",desc:"Professors upload their complete course slide decks to SlideShare. Hundreds of university-level lectures, free.",q:'machine learning lecture slides site:slideshare.net'},
+  {n:"10",title:"Notion Free Resources",desc:"Developers share curated resource databases on Notion. Search for community-built learning guides.",q:'notion.site "free courses" developer resources 2026'},
+  {n:"11",title:"Dev.to Tutorial Series",desc:"Developers publish complete, structured tutorial series on Dev.to — often better than paid courses.",q:'site:dev.to "complete guide" javascript 2026 series'},
+  {n:"12",title:"Hashnode Tech Blogs",desc:"Thousands of developers document their learning on Hashnode. Real-world tutorials with working code.",q:'site:hashnode.dev "tutorial" react complete 2026'},
+];
+
+/* ══════════════════════════════════════════
+   BUILD UI
+══════════════════════════════════════════ */
+
+// Roadmap phases
+function buildCC(c){
+  return `<a href="${c.url}" target="_blank" rel="noopener" class="cc" data-cat="${c.cat}">
+    <div class="cc-top">
+      <span class="cc-plat ${c.platClass}">${c.plat}</span>
+      <span class="cc-free-badge">FREE</span>
+    </div>
+    <div class="cc-title">${c.title}</div>
+    <div class="cc-by">by ${c.by}</div>
+    <div class="cc-tags">${c.tags.map(t=>`<span class="cc-tag">${t}</span>`).join('')}</div>
+    <div class="cc-arr">↗</div>
+  </a>`;
+}
+
+const rmBodies = document.getElementById('rm-bodies');
+Object.entries(ROADMAPS).forEach(([key,rm])=>{
+  const div = document.createElement('div');
+  div.className = `rm-body${key==='ai'?' on':''}`;
+  div.id = `rm-${key}`;
+  div.innerHTML = `<div class="goal-box"><div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">Goal</div>
+    <div class="goal-text">${rm.goal}</div>
+  </div></div>
+  <div class="timeline">${rm.phases.map(ph=>`
+    <div class="phase">
+      <div class="phase-dot"><div class="phase-dot-inner"></div></div>
+      <div class="phase-head">
+        <span class="phase-num">Phase ${ph.num}</span>
+        <span class="phase-title">${ph.title}</span>
+        <span class="phase-dur">${ph.dur}</span>
+      </div>
+      <p class="phase-desc">${ph.desc}</p>
+      <div class="phase-grid">${ph.courses.map(buildCC).join('')}</div>
+    </div>
+  `).join('')}</div>`;
+  rmBodies.appendChild(div);
+});
+
+// Roadmap tabs
+document.querySelectorAll('.rm-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.rm-tab').forEach(t=>t.classList.remove('on'));
+    document.querySelectorAll('.rm-body').forEach(b=>b.classList.remove('on'));
+    tab.classList.add('on');
+    document.getElementById(`rm-${tab.dataset.rm}`).classList.add('on');
+    document.getElementById('roadmaps').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// Category blocks
+const catGrid = document.getElementById('catGrid');
+let totalLinks = 0;
+CATEGORIES.forEach(cat=>{
+  totalLinks += cat.links.length;
+  const block = document.createElement('div');
+  block.className = 'cat-block';
+  block.dataset.catf = cat.tag;
+  block.innerHTML = `<div class="cat-head">
+    <div class="cat-ico" style="background:${cat.bg}">${cat.icon}</div>
+    <div>
+      <div class="cat-name">${cat.name}</div>
+      <div class="cat-cnt">${cat.links.length} free courses</div>
+    </div>
+  </div>
+  <div class="cat-body">
+    ${cat.links.map(l=>`<a href="${l.u}" target="_blank" rel="noopener" class="cat-link">
+      <div class="cat-link-l"><div class="cat-link-dot"></div><span class="cat-link-name">${l.n}</span></div>
+      <span class="cat-link-plat">${l.p}</span>
+    </a>`).join('')}
+  </div>`;
+  catGrid.appendChild(block);
+});
+document.getElementById('catCount').textContent = `${totalLinks}+ links`;
+
+// Tips
+const tipsGrid = document.getElementById('tipsGrid');
+TIPS.forEach(t=>{
+  const div = document.createElement('div');
+  div.className = 'tip-card';
+  div.innerHTML = `<div class="tip-n">${t.n}</div>
+    <div class="tip-title">${t.title}</div>
+    <div class="tip-desc">${t.desc}</div>
+    <div class="tip-q">${t.q}</div>`;
+  tipsGrid.appendChild(div);
+});
+
+// Filter
+document.querySelectorAll('.fb').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    const f = btn.dataset.f;
+    let shown = 0;
+    document.querySelectorAll('.cat-block').forEach(block=>{
+      const vis = f==='all' || block.dataset.catf===f;
+      block.style.display = vis ? '' : 'none';
+      if(vis) shown++;
+    });
+  });
+});
+
+// Search
+document.getElementById('srch').addEventListener('input',e=>{
+  const q = e.target.value.toLowerCase().trim();
+  if(!q){
+    document.querySelectorAll('.cat-link').forEach(l=>l.style.display='');
+    document.querySelectorAll('.cat-block').forEach(b=>b.style.display='');
+    return;
+  }
+  document.querySelectorAll('.cat-block').forEach(block=>{
+    let anyVis = false;
+    block.querySelectorAll('.cat-link').forEach(link=>{
+      const txt = link.querySelector('.cat-link-name').textContent.toLowerCase();
+      const vis = txt.includes(q);
+      link.style.display = vis ? '' : 'none';
+      if(vis) anyVis = true;
+    });
+    block.style.display = anyVis ? '' : 'none';
+  });
+});
+
+// Marquee
+const mqItems = ['MIT OpenCourseWare','Harvard CS50','Google Certifications','Kaggle Learn','fast.ai','freeCodeCamp','Hugging Face','NeetCode','Stanford Online','LangChain','The Odin Project','roadmap.sh','100% Free','Verified Links','Updated 2026','No Piracy','Real Skills'];
+const mq = document.getElementById('mq');
+[...mqItems,...mqItems,...mqItems].forEach(item=>{
+  const s = document.createElement('span');
+  s.className = 'mq-item';
+  s.innerHTML = `<div class="mq-dot"></div>${item}`;
+  mq.appendChild(s);
+});
+
+// Progress
+window.addEventListener('scroll',()=>{
+  const s = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (s/h*100)+'%';
+});
+
+// Fade in
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('vis'); });
+},{threshold:.05});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

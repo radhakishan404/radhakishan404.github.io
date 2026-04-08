@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useArticleViews from "../hooks/useArticleViews";
 
 function ArticleCard({ article }) {
+    const { viewsLabel } = useArticleViews(article.slug);
     const coverStyle = article.coverImage
         ? { backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.62)), url(${article.coverImage})` }
         : article.accent
@@ -28,6 +30,7 @@ function ArticleCard({ article }) {
                     <span className="meta-pill">{article.category || "Article"}</span>
                     <span>{article.readingTime}</span>
                     {article.date ? <span>{article.date}</span> : null}
+                    {viewsLabel ? <span>{viewsLabel}</span> : null}
                 </div>
 
                 <h3>
