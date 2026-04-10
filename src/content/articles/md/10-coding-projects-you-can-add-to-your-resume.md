@@ -4,7 +4,7 @@ date: "2026-04-06T19:10:00+05:30"
 tags: [projects, resume, career, developers]
 category: "Career Growth"
 accent: "#ef7d2f"
-cover: "/images/rk-formal.jpg"
+cover: "/rk-images/walking-black-suit.png"
 excerpt: "Ten practical project directions that look stronger on a resume than another basic to-do app."
 featured: false
 ---

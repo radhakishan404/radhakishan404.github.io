@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import ArticleFrame from "../components/ArticleFrame";
 import { getArticleBySlug } from "../content/articles";
+import { profileImages } from "../data/images";
 import useArticleViews from "../hooks/useArticleViews";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 
@@ -12,7 +13,7 @@ function ArticleDetailPage({ match }) {
     useDocumentMeta({
         title: article ? `${article.title} | Articles | Radhakishan Jangid` : "Article | Radhakishan Jangid",
         description: article?.excerpt || "Article detail",
-        image: article?.coverImage || "/images/rk-formal.jpg",
+        image: article?.coverImage || profileImages.article,
         type: "article",
         structuredData: article ? {
             "@context": "https://schema.org",
@@ -31,7 +32,7 @@ function ArticleDetailPage({ match }) {
             mainEntityOfPage: `https://radhakishan404.github.io/articles/${article.slug}`,
             image: article.coverImage
                 ? `https://radhakishan404.github.io${article.coverImage}`
-                : "https://radhakishan404.github.io/images/rk-formal.jpg",
+                : `https://radhakishan404.github.io${profileImages.article}`,
             keywords: article.tags.join(", "),
             interactionStatistic: typeof views === "number" ? {
                 "@type": "InteractionCounter",
@@ -51,8 +52,8 @@ function ArticleDetailPage({ match }) {
 
     return (
         <div className="page-shell shell">
-            <section className="article-detail-header">
-                <Link className="back-link" to="/articles">Back to articles</Link>
+            <section className="article-detail-header" data-reveal>
+                <Link className="back-link" to="/articles">[ back_to_articles ]</Link>
                 <div className="article-card-meta">
                     <span className="meta-pill">{article.kind === "html" ? "HTML" : "Markdown"}</span>
                     <span>{article.readingTime}</span>
@@ -70,7 +71,7 @@ function ArticleDetailPage({ match }) {
                 ) : null}
             </section>
 
-            <article className="article-prose" dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
+            <article className="article-prose" data-reveal dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
         </div>
     );
 }

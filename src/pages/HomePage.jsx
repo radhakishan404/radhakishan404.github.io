@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import HeroImageShowcase from "../components/HeroImageShowcase";
 import { articles } from "../content/articles";
+import { logoImages, profileImages } from "../data/images";
 import { heroStats } from "../data/site";
+import useTypewriter from "../hooks/useTypewriter";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 import usePublicRepos from "../hooks/usePublicRepos";
 import { slugify } from "../lib/slug";
@@ -11,11 +14,33 @@ function HomePage() {
     const featuredProjects = softdata.project.slice(0, 4);
     const featuredArticles = articles.slice(0, 3);
     const { repos } = usePublicRepos();
+    const terminalStats = [
+        { key: "experience", value: `${heroStats[0]?.value || "7+"} years` },
+        { key: "frontend", value: heroStats[1]?.value || "React" },
+        { key: "backend", value: heroStats[2]?.value === "Node" ? "Node.js" : heroStats[2]?.value || "Node.js" }
+    ];
+    const typedTitle = useTypewriter({
+        phrases: [
+            "Senior software engineer",
+            "Full stack builder",
+            "React + Node specialist",
+            "Product-focused developer"
+        ],
+        typingSpeed: 80,
+        deletingSpeed: 40,
+        pauseDuration: 1800
+    });
+    const terminalLines = [
+        "$ whoami",
+        "> Senior SWE, Mumbai",
+        "> React · Node · Mobile",
+        "> AI prototypes + product"
+    ];
 
     useDocumentMeta({
         title: "Radhakishan Jangid",
         description: "Senior software engineer building product systems, frontend experiences, public software projects, and AI-focused technical content.",
-        image: "/images/rk-formal.jpg",
+        image: profileImages.hero,
         type: "website",
         structuredData: {
             "@context": "https://schema.org",
@@ -25,7 +50,7 @@ function HomePage() {
                     name: "Radhakishan Jangid",
                     jobTitle: "Senior Software Engineer",
                     url: "https://radhakishan404.github.io/",
-                    image: "https://radhakishan404.github.io/images/rk-formal.jpg",
+                    image: `https://radhakishan404.github.io${profileImages.hero}`,
                     sameAs: [
                         "https://github.com/radhakishan404",
                         "https://www.linkedin.com/in/radhakishanjangid",
@@ -43,91 +68,126 @@ function HomePage() {
 
     return (
         <div className="page-shell shell">
-            <section className="home-hero">
-                <div className="home-hero-copy motion-rise">
-                    <span className="eyebrow">Radhakishan Jangid</span>
-                    <h1>Senior software engineer building fast, useful products.</h1>
+            <section className="home-hero" data-reveal>
+                <div className="home-hero-copy">
+                    <span className="eyebrow">// hello, world</span>
+                    <h1 className="hero-name">
+                        <span>RADHAKISHAN</span>
+                        <span>JANGID</span>
+                    </h1>
+                    <p className="hero-typing">
+                        <span>{typedTitle}</span>
+                        <span className="typing-cursor" aria-hidden="true">|</span>
+                    </p>
                     <p className="lede">
                         Mumbai based. Focused on React, Node.js, mobile apps, internal systems, and public-facing product builds.
                     </p>
+
                     <div className="hero-actions">
-                        <Link className="button-primary" to="/projects">View projects</Link>
-                        <Link className="button-secondary" to="/articles">Read articles</Link>
+                        <Link className="button-primary" to="/projects">[ view_projects.sh ]</Link>
+                        <Link className="button-secondary" to="/articles">[ read_articles.md ]</Link>
                     </div>
+
                     <div className="hero-stat-row">
-                        {heroStats.map((item) => (
-                            <div key={item.label} className="hero-stat">
+                        {terminalStats.map((item) => (
+                            <div key={item.key} className="hero-stat">
+                                <span>{item.key}</span>
+                                <span>→</span>
                                 <strong>{item.value}</strong>
-                                <span>{item.label}</span>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <div className="portrait-panel motion-rise motion-delay-1">
-                    <img src="/images/radhakishan-web-2.jpg" alt="Radhakishan Jangid portrait" />
-                    <div className="portrait-caption">
-                        <span>Current focus</span>
-                        <strong>React interfaces, backend delivery, AI prototypes, and product execution.</strong>
+                <div className="hero-side" data-reveal>
+                    <HeroImageShowcase />
+                    <div className="terminal-card">
+                        <div className="terminal-brand">
+                            <img src={logoImages.stack} alt="Radhakishan logo" />
+                        </div>
+                        <div className="terminal-card-head">
+                            <span className="terminal-control is-red" />
+                            <span className="terminal-control is-yellow" />
+                            <span className="terminal-control is-green" />
+                        </div>
+                        {terminalLines.map((line, index) => (
+                            <p
+                                key={line}
+                                className={`terminal-line${index === terminalLines.length - 1 ? " is-last" : ""}`}
+                                style={{ animationDelay: `${index * 260 + 220}ms` }}
+                            >
+                                {line}
+                                {index === terminalLines.length - 1 ? <span className="terminal-line-cursor">|</span> : null}
+                            </p>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            <section className="section-stack">
+            <div className="ascii-divider" aria-hidden="true">/* ────────────────────── */</div>
+
+            <section className="section-stack" data-reveal>
                 <div className="section-heading section-heading-row">
                     <div>
-                        <span className="eyebrow">Selected work</span>
+                        <span className="eyebrow">/* selected_work */</span>
                         <h2>Featured projects</h2>
                     </div>
-                    <Link className="inline-link" to="/projects">All projects</Link>
+                    <Link className="inline-link" to="/projects">[ all_projects ]</Link>
                 </div>
-                <div className="project-grid">
-                    {featuredProjects.map((project, index) => (
-                        <article key={project.id} className="surface-card project-card motion-rise" style={{ animationDelay: `${index * 90}ms` }}>
+                <div className="project-grid project-grid-home">
+                    {featuredProjects.map((project) => (
+                        <article key={project.id} className="surface-card project-card" data-reveal>
+                            <div className="project-card-path">~/projects/{slugify(project.title)}</div>
                             <div className="project-visual">
                                 <img src={project.thumbnail} alt={`${project.title} preview`} />
                             </div>
                             <div className="project-card-top">
-                                <img className="project-logo" src={project.logo} alt={`${project.title} logo`} />
+                                <h3>{project.title}</h3>
                                 <span className="meta-pill">{project.date || "Case study"}</span>
                             </div>
-                            <h3>{project.title}</h3>
                             <p>{project.description}</p>
                             <div className="tag-row">
                                 {project.technology.split(",").slice(0, 4).map((item) => (
-                                    <span key={item} className="tag-chip tag-chip-static">{item.trim()}</span>
+                                    <span key={item} className="tag-chip tag-chip-static">&lt;{item.trim().toLowerCase()}&gt;</span>
                                 ))}
                             </div>
                             <div className="project-card-links">
-                                <Link className="inline-link" to={`/projects/${slugify(project.title)}`}>Case study</Link>
-                                {project.onlineLink ? <a className="inline-link" href={project.onlineLink} target="_blank" rel="noreferrer">Live link</a> : null}
+                                <Link className="inline-link" to={`/projects/${slugify(project.title)}`}>[ case_study ]</Link>
+                                {project.onlineLink ? <a className="inline-link" href={project.onlineLink} target="_blank" rel="noreferrer">[ live_link ]</a> : null}
                             </div>
                         </article>
                     ))}
                 </div>
             </section>
 
+            <div className="ascii-divider" aria-hidden="true">// ==================== //</div>
+
             {repos.length ? (
-                <section className="section-stack">
+                <section className="section-stack" data-reveal>
                     <div className="section-heading section-heading-row">
                         <div>
-                            <span className="eyebrow">Public work</span>
+                            <span className="eyebrow">/* github_recent */</span>
                             <h2>Recent GitHub projects</h2>
                         </div>
-                        <a className="inline-link" href="https://github.com/radhakishan404?tab=repositories" target="_blank" rel="noreferrer">GitHub profile</a>
+                        <a className="inline-link" href="https://github.com/radhakishan404?tab=repositories" target="_blank" rel="noreferrer">[ github_profile ]</a>
                     </div>
                     <div className="public-grid">
-                        {repos.slice(0, 3).map((repo, index) => (
-                            <article key={repo.id} className="surface-card public-card motion-rise" style={{ animationDelay: `${index * 100}ms` }}>
-                                <div className="public-card-top">
-                                    <span className="meta-pill">Public</span>
+                        {repos.slice(0, 3).map((repo) => (
+                            <article key={repo.id} className="surface-card public-card" data-reveal>
+                                <div className="public-card-top terminal-window-top">
+                                    <span className="terminal-window-title">
+                                        <span className="terminal-dot" />
+                                        {repo.name}
+                                    </span>
                                     <span className="public-star">★ {repo.stargazers_count}</span>
                                 </div>
-                                <h3>{repo.name}</h3>
                                 <p>{repo.description || "Public GitHub repository."}</p>
+                                <div className="tag-row">
+                                    <span className="meta-pill">[PUBLIC]</span>
+                                </div>
                                 <div className="project-card-links">
-                                    <a className="inline-link" href={repo.html_url} target="_blank" rel="noreferrer">GitHub</a>
-                                    {repo.homepage ? <a className="inline-link" href={repo.homepage} target="_blank" rel="noreferrer">Live demo</a> : null}
+                                    <a className="inline-link" href={repo.html_url} target="_blank" rel="noreferrer">$ git clone</a>
+                                    {repo.homepage ? <a className="inline-link" href={repo.homepage} target="_blank" rel="noreferrer">[ live_demo ]</a> : null}
                                 </div>
                             </article>
                         ))}
@@ -135,26 +195,34 @@ function HomePage() {
                 </section>
             ) : null}
 
-            <section className="section-stack">
+            <div className="ascii-divider" aria-hidden="true">/* ────────────────────── */</div>
+
+            <section className="section-stack" data-reveal>
                 <div className="section-heading section-heading-row">
                     <div>
-                        <span className="eyebrow">Writing</span>
+                        <span className="eyebrow">/* writing */</span>
                         <h2>Recent articles</h2>
                     </div>
-                    <Link className="inline-link" to="/articles">All articles</Link>
+                    <Link className="inline-link" to="/articles">[ all_articles ]</Link>
                 </div>
-                <div className="info-grid">
-                    {featuredArticles.map((article, index) => (
-                        <article key={article.slug} className="surface-card compact-article-card motion-rise" style={{ animationDelay: `${index * 120}ms` }}>
-                            <div className="article-card-meta">
-                                <span className="meta-pill">{article.kind === "html" ? "HTML" : "Markdown"}</span>
-                                <span>{article.readingTime}</span>
-                            </div>
-                            <h3>{article.title}</h3>
-                                <p>{article.excerpt}</p>
-                            <Link className="inline-link" to={`/articles/${article.slug}`}>Read article</Link>
-                        </article>
-                    ))}
+
+                <div className="surface-card article-directory" data-reveal>
+                    <p className="directory-head">drwxr-xr-x  articles/</p>
+                    <div className="directory-list">
+                        {featuredArticles.map((article, index) => {
+                            const extension = article.kind === "html" ? "html" : "md";
+                            const branch = index === featuredArticles.length - 1 ? "└──" : "├──";
+
+                            return (
+                                <Link key={article.slug} className="directory-row" to={`/articles/${article.slug}`}>
+                                    <span className="directory-branch">{branch}</span>
+                                    <span className="directory-kind">[{article.kind === "html" ? "HTML" : "MD"}]</span>
+                                    <span className="directory-file">{article.slug}.{extension}</span>
+                                    <span className="directory-time">{article.readingTime}</span>
+                                </Link>
+                            );
+                        })}
+                    </div>
                 </div>
             </section>
         </div>

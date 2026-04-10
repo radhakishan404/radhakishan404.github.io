@@ -20,8 +20,8 @@ function AboutPage() {
 
     return (
         <div className="page-shell shell">
-            <section className="page-hero page-hero-tight">
-                <span className="eyebrow">About</span>
+            <section className="page-hero page-hero-tight" data-reveal>
+                <span className="eyebrow">/* about */</span>
                 <h1>Engineering depth, product focus, and shipping discipline.</h1>
                 <p className="lede">
                     I’m Radhakishan Jangid, a {getAge()} year old software engineer based in Mumbai. My work sits at the intersection of product UI,
@@ -29,15 +29,15 @@ function AboutPage() {
                 </p>
             </section>
 
-            <section className="info-grid">
-                <div className="surface-card">
+            <section className="info-grid" data-reveal>
+                <div className="surface-card" data-reveal>
                     <h2>Current position</h2>
                     <p>
                         Senior Software Engineer at <a href="https://www.cachetech.com/" target="_blank" rel="noreferrer">Cachetech Advisor Solutions</a>,
                         working on fintech systems, multi-tenant workflows, and product engineering across web and mobile.
                     </p>
                 </div>
-                <div className="surface-card">
+                <div className="surface-card" data-reveal>
                     <h2>Working style</h2>
                     <p>
                         Strong on frontend architecture, pragmatic on backend delivery, and comfortable turning rough product intent into production-ready systems.
@@ -45,14 +45,16 @@ function AboutPage() {
                 </div>
             </section>
 
-            <section className="section-stack">
+            <div className="ascii-divider" aria-hidden="true">// ==================== //</div>
+
+            <section className="section-stack" data-reveal>
                 <div className="section-heading">
-                    <span className="eyebrow">Experience</span>
+                    <span className="eyebrow">/* experience */</span>
                     <h2>Recent roles</h2>
                 </div>
                 <div className="timeline-list">
                     {softdata.experience.map((item) => (
-                        <article key={`${item.companyName}-${item.from}`} className="timeline-item">
+                        <article key={`${item.companyName}-${item.from}`} className="timeline-item" data-reveal>
                             <div className="timeline-meta">
                                 <span>{item.from} to {item.to}</span>
                                 <span>{item.location}</span>
@@ -69,14 +71,16 @@ function AboutPage() {
                 </div>
             </section>
 
-            <section className="section-stack">
+            <div className="ascii-divider" aria-hidden="true">/* ────────────────────── */</div>
+
+            <section className="section-stack" data-reveal>
                 <div className="section-heading">
-                    <span className="eyebrow">Capabilities</span>
+                    <span className="eyebrow">/* capabilities */</span>
                     <h2>Core skill areas</h2>
                 </div>
                 <div className="capability-grid">
                     {softdata.skills[0].skillType.map((group) => (
-                        <article key={group.title} className="surface-card">
+                        <article key={group.title} className="surface-card" data-reveal>
                             <h3>{group.title}</h3>
                             <p dangerouslySetInnerHTML={{ __html: group.description }} />
                             <ul className="clean-list">

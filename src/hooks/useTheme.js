@@ -12,7 +12,7 @@ function getInitialTheme() {
         return storedTheme;
     }
 
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return "dark";
 }
 
 function useTheme() {
@@ -26,7 +26,7 @@ function useTheme() {
 
         const themeMeta = document.querySelector('meta[name="theme-color"]');
         if (themeMeta) {
-            themeMeta.setAttribute("content", theme === "dark" ? "#050505" : "#ffffff");
+            themeMeta.setAttribute("content", theme === "dark" ? "#080808" : "#f3efdf");
         }
     }, [theme]);
 

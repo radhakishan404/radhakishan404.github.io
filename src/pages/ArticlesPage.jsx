@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ArticleCard from "../components/ArticleCard";
 import { articles, getArticleTags } from "../content/articles";
+import { profileImages } from "../data/images";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 
 function ArticlesPage() {
@@ -27,7 +28,7 @@ function ArticlesPage() {
     useDocumentMeta({
         title: "Articles | Radhakishan Jangid",
         description: "AI prompts, developer content systems, carousel workflows, public write-ups, and practical technical articles for developers and creators.",
-        image: featuredArticle?.coverImage || "/images/rk-formal.jpg",
+        image: featuredArticle?.coverImage || profileImages.article,
         type: "website",
         structuredData: {
             "@context": "https://schema.org",
@@ -46,9 +47,9 @@ function ArticlesPage() {
 
     return (
         <div className="page-shell shell">
-            <section className="articles-hero">
+            <section className="articles-hero" data-reveal>
                 <div className="articles-hero-copy">
-                    <span className="eyebrow">Articles</span>
+                    <span className="eyebrow">/* articles */</span>
                     <h1>Prompts, AI workflows, dev content, and creator systems.</h1>
                     <p className="lede">
                         Better articles for AI learners, developers, and tech creators. Less filler, more useful content.
@@ -70,7 +71,7 @@ function ArticlesPage() {
                 </div>
 
                 {featuredArticle ? (
-                    <Link className="featured-article" to={`/articles/${featuredArticle.slug}`}>
+                    <Link className="featured-article" to={`/articles/${featuredArticle.slug}`} data-reveal>
                         <div
                             className={`featured-article-media${featuredArticle.coverImage ? " has-image" : ""}`}
                             style={featuredArticle.coverImage ? { backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.14), rgba(0,0,0,0.7)), url(${featuredArticle.coverImage})` } : undefined}
@@ -90,7 +91,9 @@ function ArticlesPage() {
                 ) : null}
             </section>
 
-            <section className="surface-card filter-panel">
+            <div className="ascii-divider" aria-hidden="true">/* ────────────────────── */</div>
+
+            <section className="surface-card filter-panel" data-reveal>
                 <div className="filter-panel-row">
                     <label className="search-field">
                         <span>Search</span>
@@ -145,7 +148,7 @@ function ArticlesPage() {
                 </div>
             </section>
 
-            <section className="article-grid article-grid-large">
+            <section className="article-grid article-grid-large" data-reveal>
                 {filteredArticles.map((article) => (
                     <ArticleCard key={article.slug} article={article} />
                 ))}

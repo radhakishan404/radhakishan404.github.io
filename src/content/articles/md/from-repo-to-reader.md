@@ -3,7 +3,7 @@ title: "From Repo to Reader"
 date: "April 2026"
 tags: [react, markdown, content]
 category: "Developer Workflow"
-cover: "/images/radhakishan-web-2.jpg"
+cover: "/rk-images/leaning-smile-black-suit.png"
 excerpt: "A simple Markdown article showing how repository-backed writing now flows into the site automatically."
 ---
 

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { logoImages } from "../data/images";
 import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
@@ -12,13 +13,33 @@ const navItems = [
 
 function SiteHeader({ theme, onToggleTheme }) {
     const [menuOpen, setMenuOpen] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [location.pathname]);
+
+    useEffect(() => {
+        document.body.classList.toggle("nav-open", menuOpen);
+        return () => {
+            document.body.classList.remove("nav-open");
+        };
+    }, [menuOpen]);
 
     return (
         <header className="site-header">
             <div className="shell header-shell">
                 <Link className="brand-mark" to="/" onClick={() => setMenuOpen(false)}>
-                    <span className="brand-mark-label">Radhakishan Jangid</span>
-                    <span className="brand-mark-subtitle">Senior software engineer</span>
+                    <span className="brand-mark-heading">
+                        <span className="brand-mark-logo-wrap">
+                            <img className="brand-mark-logo" src={logoImages.icon} alt="Radhakishan logo icon" />
+                        </span>
+                        <span className="brand-mark-label">
+                            radhakishan_jangid
+                            <span className="brand-cursor" aria-hidden="true">_</span>
+                        </span>
+                    </span>
+                    <span className="brand-mark-subtitle">// senior software engineer</span>
                 </Link>
 
                 <button
@@ -28,8 +49,7 @@ function SiteHeader({ theme, onToggleTheme }) {
                     aria-expanded={menuOpen}
                     onClick={() => setMenuOpen((current) => !current)}
                 >
-                    <span />
-                    <span />
+                    {menuOpen ? "[x]" : "[≡]"}
                 </button>
 
                 <div className={`header-panel${menuOpen ? " is-open" : ""}`}>
@@ -39,6 +59,7 @@ function SiteHeader({ theme, onToggleTheme }) {
                                 key={item.to}
                                 exact={item.to === "/"}
                                 activeClassName="is-active"
+                                className="primary-nav-link"
                                 to={item.to}
                                 onClick={() => setMenuOpen(false)}
                             >
@@ -48,7 +69,7 @@ function SiteHeader({ theme, onToggleTheme }) {
                     </nav>
 
                     <div className="header-actions">
-                        <Link className="header-cta" to="/contact" onClick={() => setMenuOpen(false)}>Let&apos;s talk</Link>
+                        <Link className="header-cta" to="/contact" onClick={() => setMenuOpen(false)}>[ ./contact ]</Link>
                         <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
                     </div>
                 </div>

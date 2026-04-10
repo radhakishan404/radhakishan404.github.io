@@ -18,9 +18,9 @@ function ProjectDetailPage({ match }) {
 
     return (
         <div className="page-shell shell">
-            <section className="page-hero page-hero-tight">
-                <Link className="back-link" to="/projects">Back to projects</Link>
-                <span className="eyebrow">Project</span>
+            <section className="page-hero page-hero-tight" data-reveal>
+                <Link className="back-link" to="/projects">[ back_to_projects ]</Link>
+                <span className="eyebrow">/* project */</span>
                 <h1>{project.title}</h1>
                 <p className="lede">{project.description}</p>
                 <div className="tag-row">
@@ -30,18 +30,18 @@ function ProjectDetailPage({ match }) {
                 </div>
             </section>
 
-            <section className="project-detail-layout">
+            <section className="project-detail-layout" data-reveal>
                 <div className="project-gallery">
                     {(project.sliderImages || []).map((item, index) => (
-                        <figure key={`${project.id}-${index}`} className="project-shot">
+                        <figure key={`${project.id}-${index}`} className="project-shot" data-reveal>
                             <img src={item.image} alt={`${project.title} screenshot ${index + 1}`} />
                         </figure>
                     ))}
                 </div>
 
-                <aside className="surface-card project-sidebar">
+                <aside className="surface-card project-sidebar" data-reveal>
                     {project.onlineLink ? (
-                        <a className="button-primary button-block" href={project.onlineLink} target="_blank" rel="noreferrer">Visit project</a>
+                        <a className="button-primary button-block" href={project.onlineLink} target="_blank" rel="noreferrer">[ visit_project ]</a>
                     ) : null}
                     <div className="sidebar-block">
                         <span className="sidebar-label">Date</span>
@@ -54,9 +54,9 @@ function ProjectDetailPage({ match }) {
                 </aside>
             </section>
 
-            <section className="section-stack project-detail-content">
+            <section className="section-stack project-detail-content" data-reveal>
                 {(project.content || []).map((section) => (
-                    <article key={section.contentTitle} className="surface-card">
+                    <article key={section.contentTitle} className="surface-card" data-reveal>
                         <h2>{section.contentTitle}</h2>
                         {section.contentDescription ? (
                             <p dangerouslySetInnerHTML={{ __html: section.contentDescription }} />

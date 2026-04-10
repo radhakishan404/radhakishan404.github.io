@@ -4,7 +4,7 @@ date: "2026-04-06T19:00:00+05:30"
 tags: [open-source, content, creators, tools]
 category: "Creator Workflow"
 accent: "#2dde98"
-cover: "/images/rk-formal.jpg"
+cover: "/rk-images/mirror-selfie-black-suit.png"
 excerpt: "A better way to create open source showcase posts for developer audiences without making them feel like product ads."
 featured: false
 ---

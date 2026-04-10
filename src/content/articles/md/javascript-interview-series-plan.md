@@ -4,7 +4,7 @@ date: "2026-04-06T18:50:00+05:30"
 tags: [javascript, interviews, content, career]
 category: "Interview Content"
 accent: "#7f88ff"
-cover: "/images/radhakishan-web-3.jpg"
+cover: "/rk-images/black-suit-looking-down.png"
 excerpt: "A simple repeatable format for turning JavaScript interview prep into short-form or carousel content."
 featured: false
 ---

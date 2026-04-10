@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
+import BootScreen from "./components/BootScreen";
 import SiteShell from "./components/SiteShell";
 import AboutPage from "./pages/AboutPage";
 import ArticleDetailPage from "./pages/ArticleDetailPage";
@@ -10,6 +11,7 @@ import ProjectDetailPage from "./pages/ProjectDetailPage";
 import ProjectsPage from "./pages/ProjectsPage";
 
 const gaMeasurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+const bootStorageKey = "rk-boot-screen-complete";
 
 function loadAnalytics() {
     if (!gaMeasurementId || typeof window === "undefined" || window.gtag) {
@@ -79,10 +81,30 @@ function AppRoutes() {
 }
 
 function App() {
+    const [bootComplete, setBootComplete] = useState(() => {
+        if (typeof window === "undefined") {
+            return true;
+        }
+
+        const hasSeenBoot = window.sessionStorage.getItem(bootStorageKey) === "true";
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        return hasSeenBoot || prefersReducedMotion;
+    });
+
+    const handleBootComplete = () => {
+        if (typeof window !== "undefined") {
+            window.sessionStorage.setItem(bootStorageKey, "true");
+        }
+        setBootComplete(true);
+    };
+
     return (
         <Router>
-            <AnalyticsTracker />
-            <AppRoutes />
+            {!bootComplete ? <BootScreen onComplete={handleBootComplete} /> : null}
+            <div className={`app-frame${bootComplete ? " is-ready" : ""}`}>
+                <AnalyticsTracker />
+                <AppRoutes />
+            </div>
         </Router>
     );
 }

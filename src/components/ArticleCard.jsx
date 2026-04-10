@@ -11,7 +11,7 @@ function ArticleCard({ article }) {
             : undefined;
 
     return (
-        <article className="article-card">
+        <article className="article-card" data-reveal>
             <Link className="article-card-preview" to={`/articles/${article.slug}`} aria-label={`Open ${article.title}`}>
                 <div className={`article-card-cover${article.coverImage ? " has-image" : ""}`} style={coverStyle}>
                     <div className="article-card-cover-top">
@@ -48,7 +48,7 @@ function ArticleCard({ article }) {
                     </div>
                 ) : null}
 
-                <Link className="inline-link" to={`/articles/${article.slug}`}>Open article</Link>
+                <Link className="inline-link" to={`/articles/${article.slug}`}>[ open_article ]</Link>
             </div>
         </article>
     );

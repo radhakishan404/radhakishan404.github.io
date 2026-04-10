@@ -5,10 +5,7 @@ function ThemeToggle({ theme, onToggleTheme }) {
 
     return (
         <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle color theme">
-            <span className="theme-toggle-track">
-                <span className={`theme-toggle-thumb${isDark ? " is-dark" : ""}`} />
-            </span>
-            <span className="theme-toggle-label">{isDark ? "Dark" : "Light"}</span>
+            <span className="theme-toggle-label">[theme: {isDark ? "dark" : "light"}]</span>
         </button>
     );
 }
