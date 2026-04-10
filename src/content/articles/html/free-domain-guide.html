@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Dev Domain Guide — rk.codex</title>
+<meta name="description" content="A practical guide to the best free domains for developers, creators, side projects, docs, demos, and personal brands in 2026.">
+<meta name="keywords" content="free domain, developer domain, is-a.dev, github pages, personal website, free domain guide, dev tools">
+<meta name="date" content="2026-04-11T09:10:00+05:30">
+<meta name="category" content="Free Resources">
+<meta name="theme-color" content="#16a34a">
+<meta property="article:published_time" content="2026-04-11T09:10:00+05:30">
+<meta property="og:image" content="/articles/free-domain-guide.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg2: #f8f8f7;
+  --bg3: #f0efed;
+  --surface: #ffffff;
+  --text: #1a1916;
+  --text2: #4a4845;
+  --text3: #8a8784;
+  --border: #e8e6e3;
+  --border2: #d8d5d0;
+  --accent: #16a34a;
+  --accent-bg: #f0fdf4;
+  --accent-border: #bbf7d0;
+  --accent-text: #15803d;
+  --blue: #2563eb;
+  --blue-bg: #eff6ff;
+  --blue-border: #bfdbfe;
+  --blue-text: #1d4ed8;
+  --orange: #ea580c;
+  --orange-bg: #fff7ed;
+  --orange-border: #fed7aa;
+  --orange-text: #c2410c;
+  --code-bg: #1e1e1e;
+  --code-text: #d4d4d4;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+}
+[data-theme="dark"] {
+  --bg: #111110;
+  --bg2: #1a1917;
+  --bg3: #222120;
+  --surface: #1a1917;
+  --text: #f0ece4;
+  --text2: #b0aca4;
+  --text3: #706c64;
+  --border: #2e2b27;
+  --border2: #3e3b36;
+  --accent: #22c55e;
+  --accent-bg: #0f2318;
+  --accent-border: #166534;
+  --accent-text: #4ade80;
+  --blue: #60a5fa;
+  --blue-bg: #0f1f3d;
+  --blue-border: #1e3a5f;
+  --blue-text: #93c5fd;
+  --orange: #fb923c;
+  --orange-bg: #2a1505;
+  --orange-border: #7c2d12;
+  --orange-text: #fdba74;
+  --code-bg: #0d0d0d;
+  --code-text: #d4d4d4;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Geist', system-ui, sans-serif;
+  line-height: 1.65;
+  transition: background 0.25s, color 0.25s;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.25s, border-color 0.25s;
+}
+.nav-l { display: flex; align-items: center; gap: 10px; }
+.nav-brand {
+  font-size: 16px; font-weight: 700;
+  color: var(--text); text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.nav-brand span { color: var(--accent); }
+.nav-sep { color: var(--border2); }
+.nav-title {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--text3);
+  letter-spacing: 0.03em;
+}
+.nav-r { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 34px; height: 20px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 10px; cursor: pointer; position: relative;
+  transition: background 0.25s;
+}
+.theme-btn::after {
+  content: ''; position: absolute;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--text3); top: 2px; left: 2px;
+  transition: transform 0.22s ease;
+}
+[data-theme="dark"] .theme-btn::after { transform: translateX(14px); background: var(--accent); }
+.lang-switcher {
+  display: flex; gap: 0;
+  border: 1px solid var(--border2); border-radius: 6px; overflow: hidden;
+}
+.lang-btn {
+  font-size: 11px; font-weight: 600;
+  padding: 4px 10px; cursor: pointer;
+  background: transparent; border: none;
+  color: var(--text3); transition: all 0.2s;
+  font-family: 'Geist', sans-serif;
+}
+.lang-btn.active { background: var(--text); color: var(--bg); }
+
+/* HERO */
+.hero {
+  max-width: 720px; margin: 0 auto;
+  padding: 56px 24px 40px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+  background: var(--accent-bg); color: var(--accent-text);
+  border: 1px solid var(--accent-border);
+  margin-bottom: 20px;
+  font-family: 'Geist Mono', monospace;
+}
+.badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+h1 {
+  font-size: clamp(28px, 4.5vw, 44px);
+  font-weight: 700; letter-spacing: -0.035em;
+  line-height: 1.1; margin-bottom: 16px;
+  color: var(--text);
+}
+.hero-sub {
+  font-size: 17px; color: var(--text2);
+  max-width: 560px; line-height: 1.7; margin-bottom: 28px;
+}
+.hero-demo {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 16px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px; color: var(--text2);
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+}
+.hero-demo:hover { border-color: var(--accent); color: var(--accent-text); }
+.hero-demo .demo-url { color: var(--accent-text); font-weight: 500; }
+.hero-stats {
+  display: flex; gap: 0; margin-top: 28px;
+  flex-wrap: wrap;
+}
+.hstat {
+  padding: 0 28px 0 0; border-right: 1px solid var(--border);
+  margin-right: 28px;
+}
+.hstat:last-child { border: none; }
+.hstat-n { font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: -0.03em; }
+.hstat-n span { color: var(--accent); }
+.hstat-l { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+/* MAIN LAYOUT */
+.page-wrap { max-width: 720px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* TOC */
+.toc-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px 24px; margin: 36px 0;
+}
+.toc-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px; color: var(--text3); letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.toc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.toc-list a {
+  font-size: 13px; color: var(--text2); text-decoration: none;
+  display: flex; align-items: center; gap: 7px;
+  padding: 4px 0; transition: color 0.2s;
+}
+.toc-list a:hover { color: var(--accent-text); }
+.toc-n { font-family: 'Geist Mono', monospace; font-size: 10px; color: var(--text3); min-width: 18px; }
+
+/* SECTIONS */
+.section { margin: 48px 0; }
+.section-tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent-text); margin-bottom: 8px;
+}
+h2 {
+  font-size: clamp(20px, 2.8vw, 28px); font-weight: 700;
+  letter-spacing: -0.025em; margin-bottom: 14px; color: var(--text);
+}
+h3 {
+  font-size: 17px; font-weight: 600;
+  color: var(--text); margin: 24px 0 10px;
+  letter-spacing: -0.01em;
+}
+p { font-size: 15px; color: var(--text2); margin-bottom: 14px; max-width: 660px; line-height: 1.72; }
+p:last-child { margin-bottom: 0; }
+
+/* STEP CARD */
+.steps { margin: 20px 0; }
+.step {
+  display: grid; grid-template-columns: 40px 1fr;
+  gap: 0 16px; margin-bottom: 4px;
+  position: relative;
+}
+.step + .step .step-content { border-top: 1px solid var(--border); }
+.step-left { display: flex; flex-direction: column; align-items: center; padding-top: 18px; }
+.step-circle {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--bg); border: 1.5px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--text2);
+  flex-shrink: 0; z-index: 1; transition: all 0.2s;
+  font-family: 'Geist Mono', monospace;
+}
+.step:hover .step-circle {
+  border-color: var(--accent); color: var(--accent-text);
+  background: var(--accent-bg);
+}
+.step-line { width: 1.5px; flex: 1; background: var(--border); margin: 6px 0; }
+.step:last-child .step-line { display: none; }
+.step-content { padding: 18px 0 22px; }
+.step-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.step-body { font-size: 14px; color: var(--text2); line-height: 1.65; }
+.step-body p { font-size: 14px; margin-bottom: 8px; }
+
+/* CODE BLOCK */
+.code-block {
+  background: var(--code-bg); border-radius: 8px;
+  overflow: hidden; margin: 12px 0;
+}
+.code-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.code-lang {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px; color: rgba(255,255,255,0.3);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.copy-btn {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px; color: rgba(255,255,255,0.4);
+  background: transparent; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px; padding: 3px 8px; cursor: pointer;
+  transition: all 0.2s; letter-spacing: 0.04em;
+}
+.copy-btn:hover { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.3); }
+.copy-btn.done { color: #4ade80; border-color: #4ade80; }
+pre { padding: 16px; overflow-x: auto; }
+code {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px; color: var(--code-text); line-height: 1.75;
+  white-space: pre;
+}
+.ck { color: #c586c0; }
+.cs { color: #ce9178; }
+.cn { color: #9cdcfe; }
+.cv { color: #4ec9b0; }
+.cm { color: #6a9955; }
+
+/* INLINE CODE */
+:not(pre) > code {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12.5px; background: var(--bg3);
+  color: var(--accent-text); padding: 2px 6px;
+  border-radius: 4px; border: 1px solid var(--border);
+}
+
+/* CALLOUT */
+.callout {
+  border-radius: 8px; padding: 14px 16px; margin: 16px 0;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.callout-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.callout-text { font-size: 14px; line-height: 1.6; }
+.callout.green {
+  background: var(--accent-bg); border: 1px solid var(--accent-border);
+}
+.callout.green .callout-text { color: var(--accent-text); }
+.callout.blue {
+  background: var(--blue-bg); border: 1px solid var(--blue-border);
+}
+.callout.blue .callout-text { color: var(--blue-text); }
+.callout.orange {
+  background: var(--orange-bg); border: 1px solid var(--orange-border);
+}
+.callout.orange .callout-text { color: var(--orange-text); }
+
+/* DOMAIN TABLE */
+.domain-table {
+  width: 100%; border-collapse: collapse;
+  margin: 16px 0; font-size: 14px;
+}
+.domain-table th {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text3);
+  padding: 9px 14px; border-bottom: 1px solid var(--border);
+  text-align: left; background: var(--bg2);
+}
+.domain-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text2); }
+.domain-table tr:last-child td { border-bottom: none; }
+.domain-table tr:hover td { background: var(--bg2); }
+.domain-table .mono { font-family: 'Geist Mono', monospace; font-size: 12.5px; color: var(--accent-text); }
+.table-wrap { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 16px 0; }
+
+/* REPO LINKS */
+.repo-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+.repo-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px; text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s; display: block;
+}
+.repo-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+.repo-card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.repo-icon { color: var(--text3); }
+.repo-name { font-size: 13px; font-weight: 600; color: var(--text); font-family: 'Geist Mono', monospace; }
+.repo-desc { font-size: 12.5px; color: var(--text3); line-height: 1.5; }
+.repo-tag {
+  display: inline-block; margin-top: 8px;
+  font-size: 10px; font-family: 'Geist Mono', monospace;
+  padding: 2px 7px; border-radius: 3px;
+  background: var(--accent-bg); color: var(--accent-text);
+  border: 1px solid var(--accent-border);
+}
+
+/* LANG CONTENT */
+.lang-en, .lang-hi { }
+.lang-hi { display: none; }
+body.hindi .lang-en { display: none; }
+body.hindi .lang-hi { display: block; }
+
+/* TAG INLINE */
+.tag {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-family: 'Geist Mono', monospace;
+  padding: 2px 8px; border-radius: 4px; font-weight: 500;
+}
+.tag.green { background: var(--accent-bg); color: var(--accent-text); }
+.tag.blue { background: var(--blue-bg); color: var(--blue-text); }
+.tag.orange { background: var(--orange-bg); color: var(--orange-text); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border); padding: 28px 24px;
+  max-width: 720px; margin: 0 auto;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.foot-l { font-size: 13px; color: var(--text3); }
+.foot-l a { color: var(--text3); text-decoration: none; }
+.foot-l a:hover { color: var(--accent-text); }
+.foot-r { display: flex; gap: 16px; }
+.foot-r a { font-size: 13px; color: var(--text3); text-decoration: none; transition: color 0.2s; }
+.foot-r a:hover { color: var(--text); }
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.shown { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .toc-list { grid-template-columns: 1fr; }
+  .repo-cards { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+  .hstat { padding-right: 16px; margin-right: 16px; }
+  h1 { font-size: 26px; }
+}
+</style>
+</head>
+<body id="body">
+
+<!-- LANGUAGE SELECT MODAL -->
+<div id="lang-modal" style="position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:36px;max-width:400px;width:100%;text-align:center;box-shadow:var(--shadow-md)">
+    <div style="font-size:32px;margin-bottom:12px">👋</div>
+    <div style="font-size:20px;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:8px">
+      Choose your language
+    </div>
+    <div style="font-size:14px;color:var(--text3);margin-bottom:24px;line-height:1.6">
+      Read the guide in English or Hinglish — your choice.<br>
+      <span style="font-size:12px">आप English या Hinglish में guide पढ़ सकते हो।</span>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button onclick="setLang('en')" style="flex:1;padding:13px 20px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;background:var(--text);color:var(--bg);border:none;font-family:'Geist',sans-serif;transition:opacity 0.2s" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        English
+      </button>
+      <button onclick="setLang('hi')" style="flex:1;padding:13px 20px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;background:var(--accent-bg);color:var(--accent-text);border:1px solid var(--accent-border);font-family:'Geist',sans-serif;transition:all 0.2s" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        Hinglish 🇮🇳
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-l">
+    <a href="#" class="nav-brand">rk<span>.codex</span></a>
+    <span class="nav-sep">/</span>
+    <span class="nav-title">free-domain-guide</span>
+  </div>
+  <div class="nav-r">
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btn-hi" onclick="setLang('hi')">हि</button>
+    </div>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode"></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><div class="badge-dot"></div><span>Free · Open Source · No Credit Card</span></div>
+
+  <div class="lang-en">
+    <h1>Get a free developer<br>domain in 10 minutes.</h1>
+    <p class="hero-sub">No credit card. No billing. No annual fees. Just a GitHub pull request — and your custom domain is live. This guide shows you exactly how to get yours using <strong>is-a-dev</strong> and <strong>open-domains</strong>.</p>
+  </div>
+  <div class="lang-hi" style="display:none">
+    <h1>10 minutes mein free<br>developer domain lo.</h1>
+    <p class="hero-sub">Koi credit card nahi. Koi billing nahi. Koi annual fees nahi. Bas ek GitHub pull request — aur tumhara custom domain live. Yeh guide exactly batayegi kaise <strong>is-a-dev</strong> aur <strong>open-domains</strong> se apna domain milega.</p>
+  </div>
+
+  <a href="https://radhakishan404.is-a.dev" target="_blank" class="hero-demo">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <span>Live example:</span>
+    <span class="demo-url">radhakishan404.is-a.dev</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+  </a>
+
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">₹<span>0</span></div><div class="hstat-l">Cost forever</div></div>
+    <div class="hstat"><div class="hstat-n"><span>10</span> min</div><div class="hstat-l">Setup time</div></div>
+    <div class="hstat"><div class="hstat-n"><span>20+</span></div><div class="hstat-l">Free domains available</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<main class="page-wrap">
+
+  <!-- TOC -->
+  <div class="toc-card reveal">
+    <div class="toc-label">On this page</div>
+    <ol class="toc-list">
+      <li><a href="#what"><span class="toc-n">01</span>What are these repos?</a></li>
+      <li><a href="#domains"><span class="toc-n">02</span>Available free domains</a></li>
+      <li><a href="#is-a-dev"><span class="toc-n">03</span>is-a-dev setup guide</a></li>
+      <li><a href="#open-domains"><span class="toc-n">04</span>open-domains setup guide</a></li>
+      <li><a href="#github-pages"><span class="toc-n">05</span>Connect to GitHub Pages</a></li>
+      <li><a href="#tips"><span class="toc-n">06</span>Tips & common errors</a></li>
+    </ol>
+  </div>
+
+  <!-- SECTION 1 -->
+  <span id="what" style="display:block;position:relative;top:-70px;visibility:hidden"></span>
+  <div class="section reveal">
+    <div class="section-tag">01 — Overview</div>
+    <div class="lang-en">
+      <h2>What are these repos?</h2>
+      <p>Both <code>is-a-dev/register</code> and <code>open-domains/register</code> are open-source GitHub repositories maintained by the developer community. They let you register a free custom subdomain by submitting a simple JSON file via a GitHub pull request.</p>
+      <p>No sign-up. No dashboard. No payment. You just edit a file, raise a PR, and within 24-48 hours your domain is live and pointing to your website.</p>
+    </div>
+    <div class="lang-hi">
+      <h2>Yeh repos kya hain?</h2>
+      <p>Dono <code>is-a-dev/register</code> aur <code>open-domains/register</code> open-source GitHub repositories hain jo developer community maintain karti hai. Yeh tumhe ek free custom subdomain register karne dete hain — bas ek simple JSON file GitHub pull request se submit karke.</p>
+      <p>Koi sign-up nahi. Koi dashboard nahi. Koi payment nahi. Bas ek file edit karo, PR raise karo, aur 24-48 ghante mein tumhara domain live ho jaata hai.</p>
+    </div>
+
+    <div class="repo-cards">
+      <a href="https://github.com/is-a-dev/register" target="_blank" class="repo-card">
+        <div class="repo-card-top">
+          <svg class="repo-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          <span class="repo-name">is-a-dev/register</span>
+        </div>
+        <div class="repo-desc">Get a .is-a.dev subdomain. Most popular. Trusted by thousands of developers worldwide.</div>
+        <span class="repo-tag">Recommended</span>
+      </a>
+      <a href="https://github.com/open-domains/register" target="_blank" class="repo-card">
+        <div class="repo-card-top">
+          <svg class="repo-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          <span class="repo-name">open-domains/register</span>
+        </div>
+        <div class="repo-desc">More domain options — .is-cool.dev, .is-a-fullstack.dev, .is-a-designer.dev, and many more.</div>
+        <span class="repo-tag">More Options</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <span id="domains" style="display:block;position:relative;top:-70px;visibility:hidden"></span>
+  <div class="section reveal">
+    <div class="section-tag">02 — Available Domains</div>
+    <div class="lang-en">
+      <h2>What free domains can you get?</h2>
+      <p>Here are some of the most popular options available. Pick the one that fits your identity as a developer.</p>
+    </div>
+    <div class="lang-hi">
+      <h2>Kaun se free domains mil sakte hain?</h2>
+      <p>Yahan kuch popular options hain. Apni developer identity ke hisaab se choose karo.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="domain-table">
+        <thead>
+          <tr><th>Domain</th><th>Example</th><th>Best for</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono">.is-a.dev</td><td class="mono">yourname.is-a.dev</td><td>Any developer</td><td><span class="tag green">is-a-dev</span></td></tr>
+          <tr><td class="mono">.is-a-fullstack.dev</td><td class="mono">john.is-a-fullstack.dev</td><td>Full stack devs</td><td><span class="tag blue">open-domains</span></td></tr>
+          <tr><td class="mono">.is-a-frontend.dev</td><td class="mono">alice.is-a-frontend.dev</td><td>Frontend devs</td><td><span class="tag blue">open-domains</span></td></tr>
+          <tr><td class="mono">.is-a-backend.dev</td><td class="mono">raj.is-a-backend.dev</td><td>Backend devs</td><td><span class="tag blue">open-domains</span></td></tr>
+          <tr><td class="mono">.is-cool.dev</td><td class="mono">priya.is-cool.dev</td><td>Any project</td><td><span class="tag blue">open-domains</span></td></tr>
+          <tr><td class="mono">.is-a-designer.dev</td><td class="mono">maya.is-a-designer.dev</td><td>UI/UX designers</td><td><span class="tag blue">open-domains</span></td></tr>
+          <tr><td class="mono">.is-an-engineer.dev</td><td class="mono">dev.is-an-engineer.dev</td><td>Engineers</td><td><span class="tag blue">open-domains</span></td></tr>
+          <tr><td class="mono">.is-a-student.dev</td><td class="mono">neo.is-a-student.dev</td><td>Students</td><td><span class="tag blue">open-domains</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout green">
+      <svg class="callout-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      <span class="callout-text lang-en">The creator of this guide uses <strong>radhakishan404.is-a.dev</strong> — live example you can visit right now.</span>
+      <span class="callout-text lang-hi" style="display:none">Is guide ke creator ka domain hai <strong>radhakishan404.is-a.dev</strong> — abhi visit kar sakte ho.</span>
+    </div>
+  </div>
+
+  <!-- SECTION 3 — IS-A-DEV -->
+  <span id="is-a-dev" style="display:block;position:relative;top:-70px;visibility:hidden"></span>
+  <div class="section reveal">
+    <div class="section-tag">03 — is-a-dev Setup Guide</div>
+    <div class="lang-en"><h2>How to get your .is-a.dev domain</h2><p>Follow these 6 steps exactly. Takes about 10 minutes to set up. Review takes 24–48 hours.</p></div>
+    <div class="lang-hi"><h2>Apna .is-a.dev domain kaise lo</h2><p>Yeh 6 steps exactly follow karo. Setup mein lagbhag 10 minutes lagte hain. Review mein 24–48 ghante lagte hain.</p></div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">1</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Fork the repository</div>
+          <div class="step-title lang-hi" style="display:none">Repository fork karo</div>
+          <div class="step-body">
+            <p class="lang-en">Go to <a href="https://github.com/is-a-dev/register" target="_blank" style="color:var(--accent-text)">github.com/is-a-dev/register</a> and click the <strong>Fork</strong> button in the top-right corner. This creates a copy of the repo in your own GitHub account. Make sure you are logged into your GitHub account first.</p>
+            <p class="lang-hi" style="display:none"><a href="https://github.com/is-a-dev/register" target="_blank" style="color:var(--accent-text)">github.com/is-a-dev/register</a> pe jao aur top-right corner mein <strong>Fork</strong> button click karo. Yeh repo ki ek copy tumhare GitHub account mein bana deta hai. Pehle apne GitHub account mein login karo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">2</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Go to the domains/ folder</div>
+          <div class="step-title lang-hi" style="display:none">domains/ folder mein jao</div>
+          <div class="step-body">
+            <p class="lang-en">In your forked repo, open the <code>domains/</code> folder. This is where all registered domain files live. Click <strong>Add file → Create new file</strong>.</p>
+            <p class="lang-hi" style="display:none">Apne forked repo mein <code>domains/</code> folder open karo. Yahan sab registered domain files rehti hain. <strong>Add file → Create new file</strong> click karo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">3</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Name your file correctly</div>
+          <div class="step-title lang-hi" style="display:none">File ka naam sahi rakho</div>
+          <div class="step-body">
+            <p class="lang-en">The file name becomes your subdomain. If you want <code>yourname.is-a.dev</code>, name the file <code>yourname.json</code>. Use only lowercase letters, numbers, and hyphens. No spaces.</p>
+            <p class="lang-hi" style="display:none">File ka naam hi tumhara subdomain banega. Agar tumhe <code>yourname.is-a.dev</code> chahiye, toh file ka naam <code>yourname.json</code> rakho. Sirf lowercase letters, numbers, aur hyphens use karo. Spaces nahi.</p>
+            <div class="callout orange">
+              <svg class="callout-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span class="callout-text lang-en">Check first if your desired subdomain is already taken by searching in the domains/ folder.</span>
+              <span class="callout-text lang-hi" style="display:none">Pehle check karo ki tumhara chahuta subdomain already liya gaya hai ya nahi — domains/ folder mein search karo.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">4</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Add your JSON content</div>
+          <div class="step-title lang-hi" style="display:none">JSON content add karo</div>
+          <div class="step-body">
+            <p class="lang-en">Paste the following JSON into your new file. Replace all placeholder values with your own details.</p>
+            <p class="lang-hi" style="display:none">Yeh JSON niche di gayi file mein paste karo. Sab placeholder values apni details se replace karo.</p>
+
+            <div class="code-block">
+              <div class="code-top">
+                <span class="code-lang">yourname.json</span>
+                <button class="copy-btn" onclick="copyCode(this, 'iad-json')">Copy</button>
+              </div>
+              <pre><code id="iad-json">{
+  <span class="cs">"description"</span>: <span class="cn">"Your name — Developer Portfolio"</span>,
+  <span class="cs">"repo"</span>: <span class="cn">"https://github.com/yourusername/yourrepo"</span>,
+  <span class="cs">"owner"</span>: {
+    <span class="cs">"username"</span>: <span class="cn">"yourgithubusername"</span>,
+    <span class="cs">"email"</span>: <span class="cn">"your@email.com"</span>
+  },
+  <span class="cs">"record"</span>: {
+    <span class="cs">"CNAME"</span>: <span class="cn">"yourgithubusername.github.io"</span>
+  }
+}</code></pre>
+            </div>
+
+            <div class="callout blue">
+              <svg class="callout-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div>
+                <span class="callout-text lang-en"><strong>CNAME</strong> is for GitHub Pages sites. If your site is on Vercel or Netlify, the CNAME value will be different — check their custom domain docs for the exact value.</span>
+                <span class="callout-text lang-hi" style="display:none"><strong>CNAME</strong> GitHub Pages sites ke liye hai. Agar tumhari site Vercel ya Netlify pe hai, toh CNAME value alag hogi — unke custom domain docs check karo exact value ke liye.</span>
+              </div>
+            </div>
+
+            <h3 class="lang-en" style="margin-top:16px;font-size:14px">Using Vercel instead of GitHub Pages?</h3>
+            <h3 class="lang-hi" style="display:none;margin-top:16px;font-size:14px">GitHub Pages ki jagah Vercel use kar rahe ho?</h3>
+            <div class="code-block">
+              <div class="code-top">
+                <span class="code-lang">for vercel</span>
+                <button class="copy-btn" onclick="copyCode(this, 'vercel-json')">Copy</button>
+              </div>
+              <pre><code id="vercel-json">{
+  <span class="cs">"description"</span>: <span class="cn">"Your name — Portfolio"</span>,
+  <span class="cs">"repo"</span>: <span class="cn">"https://github.com/yourusername/yourrepo"</span>,
+  <span class="cs">"owner"</span>: {
+    <span class="cs">"username"</span>: <span class="cn">"yourgithubusername"</span>,
+    <span class="cs">"email"</span>: <span class="cn">"your@email.com"</span>
+  },
+  <span class="cs">"record"</span>: {
+    <span class="cs">"CNAME"</span>: <span class="cn">"cname.vercel-dns.com"</span>
+  }
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">5</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Commit and open a Pull Request</div>
+          <div class="step-title lang-hi" style="display:none">Commit karo aur Pull Request open karo</div>
+          <div class="step-body">
+            <p class="lang-en">Scroll down and click <strong>Commit new file</strong>. Then GitHub will show a prompt — click <strong>Open Pull Request</strong>. Add a clear title like: <em>"Register yourname.is-a.dev for my portfolio"</em>. Then click <strong>Create pull request</strong>.</p>
+            <p class="lang-hi" style="display:none">Scroll down karo aur <strong>Commit new file</strong> click karo. Phir GitHub ek prompt dikhayega — <strong>Open Pull Request</strong> click karo. Ek clear title add karo jaise: <em>"Register yourname.is-a.dev for my portfolio"</em>. Phir <strong>Create pull request</strong> click karo.</p>
+            <div class="callout orange">
+              <svg class="callout-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span class="callout-text lang-en"><strong>Important:</strong> The is-a-dev team warns against AI-generated PRs. Write your PR description yourself in simple English. Say what your site is about and why you want this domain.</span>
+              <span class="callout-text lang-hi" style="display:none"><strong>Important:</strong> is-a-dev team AI-generated PRs accept nahi karte. Apna PR description khud likho simple English mein. Batao tumhari site kiske baare mein hai aur yeh domain kyun chahiye.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">6</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Wait for review and go live</div>
+          <div class="step-title lang-hi" style="display:none">Review ka wait karo aur live ho jao</div>
+          <div class="step-body">
+            <p class="lang-en">Maintainers review your PR within 24–48 hours. If changes are requested, make them quickly. Once your PR is merged, your DNS records go live within a few minutes. Your domain is ready.</p>
+            <p class="lang-hi" style="display:none">Maintainers tumhara PR 24–48 ghante mein review karte hain. Agar changes request kiye gaye, unhe jaldi karo. Ek baar PR merge ho jaata hai, tumhare DNS records kuch minutes mein live ho jaate hain. Tumhara domain ready hai.</p>
+            <div class="callout green">
+              <svg class="callout-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="callout-text lang-en">After merge, go to your GitHub Pages repo → Settings → Pages → Custom domain, add your new domain, and enable Enforce HTTPS.</span>
+              <span class="callout-text lang-hi" style="display:none">Merge ke baad, apne GitHub Pages repo mein jao → Settings → Pages → Custom domain, apna naya domain add karo aur Enforce HTTPS enable karo.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 4 — OPEN-DOMAINS -->
+  <span id="open-domains" style="display:block;position:relative;top:-70px;visibility:hidden"></span>
+  <div class="section reveal">
+    <div class="section-tag">04 — open-domains Setup Guide</div>
+    <div class="lang-en"><h2>How to get an open-domains subdomain</h2><p>The process is almost identical to is-a-dev. The main difference is the repo URL and the available domain extensions.</p></div>
+    <div class="lang-hi"><h2>open-domains subdomain kaise lo</h2><p>Process almost is-a-dev jaisi hi hai. Main difference repo URL aur available domain extensions hain.</p></div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-circle">1</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Fork open-domains/register</div>
+          <div class="step-title lang-hi" style="display:none">open-domains/register fork karo</div>
+          <div class="step-body">
+            <p class="lang-en">Go to <a href="https://github.com/open-domains/register" target="_blank" style="color:var(--accent-text)">github.com/open-domains/register</a> and click Fork. Same as before.</p>
+            <p class="lang-hi" style="display:none"><a href="https://github.com/open-domains/register" target="_blank" style="color:var(--accent-text)">github.com/open-domains/register</a> pe jao aur Fork click karo. Pehle jaisa hi.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">2</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Choose your domain type and create the file</div>
+          <div class="step-title lang-hi" style="display:none">Domain type choose karo aur file banao</div>
+          <div class="step-body">
+            <p class="lang-en">In the forked repo, navigate to <code>domains/is-cool.dev/</code> (or whichever domain type you want). Create a new file named <code>yourname.json</code> inside that folder.</p>
+            <p class="lang-hi" style="display:none">Forked repo mein <code>domains/is-cool.dev/</code> folder mein jao (ya jo bhi domain type tumhe chahiye). Uss folder ke andar <code>yourname.json</code> naam ki naye file banao.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">3</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Add the JSON — same format</div>
+          <div class="step-title lang-hi" style="display:none">JSON add karo — same format</div>
+          <div class="step-body">
+            <p class="lang-en">The JSON structure is the same as is-a-dev. Copy the template from step 4 above and update your details.</p>
+            <p class="lang-hi" style="display:none">JSON structure is-a-dev jaisi hi hai. Upar step 4 ka template copy karo aur apni details update karo.</p>
+            <div class="code-block">
+              <div class="code-top">
+                <span class="code-lang">yourname.json</span>
+                <button class="copy-btn" onclick="copyCode(this, 'od-json')">Copy</button>
+              </div>
+              <pre><code id="od-json">{
+  <span class="cs">"description"</span>: <span class="cn">"Your name — Developer Portfolio"</span>,
+  <span class="cs">"repo"</span>: <span class="cn">"https://github.com/yourusername/yourrepo"</span>,
+  <span class="cs">"owner"</span>: {
+    <span class="cs">"username"</span>: <span class="cn">"yourgithubusername"</span>,
+    <span class="cs">"email"</span>: <span class="cn">"your@email.com"</span>
+  },
+  <span class="cs">"records"</span>: {
+    <span class="cs">"CNAME"</span>: <span class="cn">"yourgithubusername.github.io"</span>
+  }
+}</code></pre>
+            </div>
+            <div class="callout blue">
+              <svg class="callout-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span class="callout-text lang-en">Note: open-domains uses <code>"records"</code> (plural) while is-a-dev uses <code>"record"</code> (singular). Don't mix them up.</span>
+              <span class="callout-text lang-hi" style="display:none">Note: open-domains mein <code>"records"</code> (plural) hai jabki is-a-dev mein <code>"record"</code> (singular) hai. Inhe mix mat karo.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">4</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Commit and raise a Pull Request</div>
+          <div class="step-title lang-hi" style="display:none">Commit karo aur Pull Request raise karo</div>
+          <div class="step-body">
+            <p class="lang-en">Same as is-a-dev — commit the file, then open a pull request with a clear description of your site. Wait for the maintainers to review and merge.</p>
+            <p class="lang-hi" style="display:none">is-a-dev jaisa hi — file commit karo, phir apni site ki clear description ke saath pull request open karo. Maintainers ke review aur merge ka wait karo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 — GITHUB PAGES -->
+  <span id="github-pages" style="display:block;position:relative;top:-70px;visibility:hidden"></span>
+  <div class="section reveal">
+    <div class="section-tag">05 — Connecting to GitHub Pages</div>
+    <div class="lang-en"><h2>Connect your new domain to your site</h2><p>Once your PR is merged, do these steps to make your domain actually point to your website.</p></div>
+    <div class="lang-hi"><h2>Apna naya domain site se connect karo</h2><p>Ek baar PR merge ho jaaye, yeh steps karo taaki tumhara domain actually tumhari website pe point kare.</p></div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-circle">1</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Go to your GitHub Pages repository settings</div>
+          <div class="step-title lang-hi" style="display:none">Apne GitHub Pages repository settings mein jao</div>
+          <div class="step-body">
+            <p class="lang-en">Open your portfolio repo on GitHub. Click <strong>Settings</strong> in the top menu bar. Scroll down to the <strong>Pages</strong> section in the left sidebar.</p>
+            <p class="lang-hi" style="display:none">Apna portfolio repo GitHub pe open karo. Top menu bar mein <strong>Settings</strong> click karo. Left sidebar mein <strong>Pages</strong> section tak scroll karo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">2</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Add your custom domain</div>
+          <div class="step-title lang-hi" style="display:none">Custom domain add karo</div>
+          <div class="step-body">
+            <p class="lang-en">In the <strong>Custom domain</strong> field, type your new domain (e.g. <code>yourname.is-a.dev</code>) and click <strong>Save</strong>. GitHub will verify it automatically — this takes a minute or two.</p>
+            <p class="lang-hi" style="display:none"><strong>Custom domain</strong> field mein apna naya domain type karo (jaise <code>yourname.is-a.dev</code>) aur <strong>Save</strong> click karo. GitHub automatically verify karega — isme ek-do minute lagte hain.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left"><div class="step-circle">3</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title lang-en">Enable HTTPS</div>
+          <div class="step-title lang-hi" style="display:none">HTTPS enable karo</div>
+          <div class="step-body">
+            <p class="lang-en">Once verification is complete, tick the <strong>Enforce HTTPS</strong> checkbox below the custom domain input. Your site now loads on HTTPS — secure and professional.</p>
+            <p class="lang-hi" style="display:none">Verification complete hone ke baad, custom domain input ke neeche <strong>Enforce HTTPS</strong> checkbox tick karo. Tumhari site ab HTTPS pe load hogi — secure aur professional.</p>
+            <div class="callout green">
+              <svg class="callout-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span class="callout-text lang-en">Your site is now live at <code>yourname.is-a.dev</code>. DNS can take up to a few hours to propagate globally — if you see a 404, wait and try again.</span>
+              <span class="callout-text lang-hi" style="display:none">Tumhari site ab <code>yourname.is-a.dev</code> pe live hai. DNS globally propagate hone mein kuch ghante lag sakte hain — agar 404 dikhaye, wait karo aur dobara try karo.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 — TIPS -->
+  <span id="tips" style="display:block;position:relative;top:-70px;visibility:hidden"></span>
+  <div class="section reveal">
+    <div class="section-tag">06 — Tips & Common Errors</div>
+    <div class="lang-en"><h2>Things to keep in mind</h2></div>
+    <div class="lang-hi"><h2>Kuch important baatein</h2></div>
+
+    <h3 class="lang-en">Common mistakes to avoid</h3>
+    <h3 class="lang-hi" style="display:none">Common mistakes jo avoid karne chahiye</h3>
+
+    <div class="callout orange" style="margin-bottom:10px">
+      <svg class="callout-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div>
+        <span class="callout-text lang-en"><strong>Don't use AI to generate your PR.</strong> The is-a-dev team explicitly warns about this and will reject or block AI-generated pull requests. Write it yourself.</span>
+        <span class="callout-text lang-hi" style="display:none"><strong>PR generate karne ke liye AI mat use karo.</strong> is-a-dev team explicitly iske baare mein warn karti hai aur AI-generated pull requests reject ya block kar deti hai. Khud likho.</span>
+      </div>
+    </div>
+
+    <div class="callout orange" style="margin-bottom:10px">
+      <svg class="callout-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div>
+        <span class="callout-text lang-en"><strong>Your site must have content.</strong> Empty pages or "coming soon" pages will be rejected. Your portfolio should have something real — even a basic page works.</span>
+        <span class="callout-text lang-hi" style="display:none"><strong>Tumhari site mein content hona chahiye.</strong> Empty pages ya "coming soon" pages reject ho jaate hain. Tumhara portfolio mein kuch real hona chahiye — even basic page bhi kaam karta hai.</span>
+      </div>
+    </div>
+
+    <div class="callout orange" style="margin-bottom:20px">
+      <svg class="callout-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div>
+        <span class="callout-text lang-en"><strong>Don't use Netlify with is-a-dev.</strong> open-domains also has issues with Netlify subdomain verification. Use GitHub Pages or Vercel instead.</span>
+        <span class="callout-text lang-hi" style="display:none"><strong>is-a-dev ke saath Netlify mat use karo.</strong> open-domains ko bhi Netlify subdomain verification mein issues hain. GitHub Pages ya Vercel use karo.</span>
+      </div>
+    </div>
+
+    <h3 class="lang-en">Quick answers</h3>
+    <h3 class="lang-hi" style="display:none">Quick answers</h3>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px">
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px" class="lang-en">How long does approval take?</div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;display:none" class="lang-hi">Approval mein kitna time lagta hai?</div>
+        <div style="font-size:13.5px;color:var(--text2)" class="lang-en">Usually 24–48 hours. Keep an eye on your PR for review comments and respond quickly if changes are requested.</div>
+        <div style="font-size:13.5px;color:var(--text2);display:none" class="lang-hi">Usually 24–48 ghante. Apna PR review comments ke liye dekhte raho aur agar changes request hue toh jaldi respond karo.</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px">
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px" class="lang-en">Is it really free forever?</div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;display:none" class="lang-hi">Kya yeh sach mein hamesha ke liye free hai?</div>
+        <div style="font-size:13.5px;color:var(--text2)" class="lang-en">Yes. Both repos are community-maintained and free. is-a-dev is sponsored by Cloudflare's Project Alexandria, so it's stable and well-supported.</div>
+        <div style="font-size:13.5px;color:var(--text2);display:none" class="lang-hi">Haan. Dono repos community-maintained aur free hain. is-a-dev Cloudflare ke Project Alexandria se sponsored hai, toh stable aur well-supported hai.</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px">
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px" class="lang-en">Can I update or delete my domain later?</div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;display:none" class="lang-hi">Kya main baad mein domain update ya delete kar sakta hoon?</div>
+        <div style="font-size:13.5px;color:var(--text2)" class="lang-en">Yes. To update — edit your JSON file in the domains/ folder via another PR. To delete — delete the file via a PR with a note explaining why.</div>
+        <div style="font-size:13.5px;color:var(--text2);display:none" class="lang-hi">Haan. Update karne ke liye — domains/ folder mein apni JSON file another PR se edit karo. Delete karne ke liye — ek PR se file delete karo aur reason explain karo.</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px">
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px" class="lang-en">I see a 404 after my PR was merged. What do I do?</div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;display:none" class="lang-hi">PR merge hone ke baad 404 aa raha hai. Kya karoon?</div>
+        <div style="font-size:13.5px;color:var(--text2)" class="lang-en">Go to your portfolio repo → Settings → Pages → Custom Domain. Add your domain there and enable Enforce HTTPS. DNS propagation can also take a few hours — wait and try again.</div>
+        <div style="font-size:13.5px;color:var(--text2);display:none" class="lang-hi">Apne portfolio repo mein jao → Settings → Pages → Custom Domain. Wahan apna domain add karo aur Enforce HTTPS enable karo. DNS propagation mein kuch ghante lag sakte hain — wait karo aur dobara try karo.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="reveal" style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:32px;text-align:center;margin:48px 0 0">
+    <div style="font-size:22px;font-weight:700;letter-spacing:-0.025em;color:var(--text);margin-bottom:8px" class="lang-en">Got stuck somewhere?</div>
+    <div style="font-size:22px;font-weight:700;letter-spacing:-0.025em;color:var(--text);margin-bottom:8px;display:none" class="lang-hi">Kahin atak gaye?</div>
+    <div style="font-size:14px;color:var(--text3);margin-bottom:20px" class="lang-en">Comment "DEV" on the Instagram post and I'll help you set this up personally.</div>
+    <div style="font-size:14px;color:var(--text3);margin-bottom:20px;display:none" class="lang-hi">Instagram post pe "DEV" comment karo aur main personally help karunga.</div>
+    <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+      <a href="https://instagram.com/rk.codex" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:var(--text);color:var(--bg);padding:11px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:opacity 0.2s" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @rk.codex
+      </a>
+      <a href="https://github.com/is-a-dev/register" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:var(--accent-bg);color:var(--accent-text);padding:11px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid var(--accent-border);transition:opacity 0.2s" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+        Open is-a-dev
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-l">Made by <a href="https://instagram.com/rk.codex">@rk.codex</a> · <a href="https://radhakishan404.is-a.dev" target="_blank">radhakishan404.is-a.dev</a></div>
+  <div class="foot-r">
+    <a href="https://github.com/is-a-dev/register" target="_blank">is-a-dev</a>
+    <a href="https://github.com/open-domains/register" target="_blank">open-domains</a>
+    <a href="https://instagram.com/rk.codex" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+const body = document.getElementById('body');
+const html = document.documentElement;
+
+function setLang(lang) {
+  const modal = document.getElementById('lang-modal');
+  if(modal) modal.style.display = 'none';
+  if(lang === 'hi') {
+    body.classList.add('hindi');
+    document.querySelectorAll('.lang-hi').forEach(el => el.style.display = '');
+    document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+    document.getElementById('btn-en').classList.remove('active');
+    document.getElementById('btn-hi').classList.add('active');
+  } else {
+    body.classList.remove('hindi');
+    document.querySelectorAll('.lang-en').forEach(el => el.style.display = '');
+    document.querySelectorAll('.lang-hi').forEach(el => el.style.display = 'none');
+    document.getElementById('btn-en').classList.add('active');
+    document.getElementById('btn-hi').classList.remove('active');
+  }
+  localStorage.setItem('rk-lang', lang);
+}
+
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('rk-theme', isDark ? 'light' : 'dark');
+});
+
+function copyCode(btn, id) {
+  const el = document.getElementById(id);
+  const text = el.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 2000);
+  });
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('shown'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+window.addEventListener('load', () => {
+  const savedTheme = localStorage.getItem('rk-theme');
+  if(savedTheme) html.setAttribute('data-theme', savedTheme);
+  else if(window.matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+  const savedLang = localStorage.getItem('rk-lang');
+  if(savedLang) { setLang(savedLang); }
+});
+</script>
+</body>
+</html>

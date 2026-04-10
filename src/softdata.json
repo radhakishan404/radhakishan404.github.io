@@ -190,6 +190,85 @@
     ],
     "project": [
         {
+            "id": 12,
+            "title": "MacEdits",
+            "description": "Local-first macOS reel editor built with SwiftUI + AVFoundation.",
+            "logo": "/images/github.svg",
+            "thumbnail": "https://raw.githubusercontent.com/radhakishan404/MacEdits/main/assets/screenshots/home-full.png",
+            "gitAvailable": true,
+            "tag": "Open Source, GitHub, Application, UX, Front-end, macOS",
+            "technology": "Swift, SwiftUI, AVFoundation, ScreenCaptureKit, macOS",
+            "date": "2026",
+            "isPackage": false,
+            "onlineLink": "https://github.com/radhakishan404/MacEdits",
+            "sliderImages": [
+                {
+                    "image": "https://raw.githubusercontent.com/radhakishan404/MacEdits/main/assets/screenshots/home-full.png"
+                },
+                {
+                    "image": "https://raw.githubusercontent.com/radhakishan404/MacEdits/main/assets/screenshots/recording-full.png"
+                },
+                {
+                    "image": "https://raw.githubusercontent.com/radhakishan404/MacEdits/main/assets/screenshots/editor-full.png"
+                }
+            ],
+            "content": [
+                {
+                    "contentTitle": "Technical Specification",
+                    "contentDescription": "MacEdits is a <strong>local-first macOS creator tool</strong> focused on fast reel editing, screen recording, timeline control, and export workflows without a backend dependency.",
+                    "contentList": [
+                        {
+                            "isLink": true,
+                            "link": "https://github.com/radhakishan404/MacEdits",
+                            "text": "GitHub repository"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Features",
+                    "contentDescription": "",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Recording studio for camera, screen, and screen + camera workflows"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Timeline editing with trim, split, reorder, and ripple controls"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Creator-first text, captions, transitions, and export tooling"
+                        }
+                    ]
+                },
+                {
+                    "contentTitle": "Responsibilities",
+                    "contentDescription": "Built and shipped the open source macOS editor from product direction through implementation.",
+                    "contentList": [
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Product concept, workflow design, and feature planning"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "SwiftUI app architecture and AVFoundation-based media workflows"
+                        },
+                        {
+                            "isLink": false,
+                            "link": "",
+                            "text": "Build in public release, documentation, and repository setup"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "id": 11,
             "title": "Notch Prompter",
             "description": "A notch-aligned native macOS teleprompter built with SwiftUI.",

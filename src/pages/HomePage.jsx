@@ -12,7 +12,13 @@ import softdata from "../softdata.json";
 
 function HomePage() {
     const featuredProjects = softdata.project.slice(0, 4);
-    const featuredArticles = articles.slice(0, 3);
+    const featuredArticles = [...articles]
+        .sort((a, b) => {
+            const dateA = a.sortDate ? new Date(a.sortDate).getTime() : 0;
+            const dateB = b.sortDate ? new Date(b.sortDate).getTime() : 0;
+            return dateB - dateA;
+        })
+        .slice(0, 3);
     const { repos } = usePublicRepos();
     const terminalStats = [
         { key: "experience", value: `${heroStats[0]?.value || "7+"} years` },

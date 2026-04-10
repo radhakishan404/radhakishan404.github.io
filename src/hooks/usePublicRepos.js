@@ -26,14 +26,17 @@ function usePublicRepos() {
                     .filter((repo) => !repo.fork && !repo.archived && !excludedRepos.has(repo.name))
                     .filter((repo) => repo.description || repo.homepage || repo.stargazers_count > 0)
                     .sort((a, b) => {
+                        const updatedA = new Date(a.updated_at).getTime();
+                        const updatedB = new Date(b.updated_at).getTime();
+
+                        if (updatedA !== updatedB) {
+                            return updatedB - updatedA;
+                        }
+
                         const scoreA = (a.stargazers_count * 5) + (a.homepage ? 2 : 0);
                         const scoreB = (b.stargazers_count * 5) + (b.homepage ? 2 : 0);
 
-                        if (scoreA !== scoreB) {
-                            return scoreB - scoreA;
-                        }
-
-                        return new Date(b.updated_at) - new Date(a.updated_at);
+                        return scoreB - scoreA;
                     })
                     .slice(0, 6);
 
