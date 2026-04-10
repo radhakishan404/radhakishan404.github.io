@@ -41,6 +41,10 @@ function fileNameFromPath(path) {
     return path.split("/").pop().replace(/\.(md|html)$/, "");
 }
 
+function inferredCoverImage(slug) {
+    return `/articles/${slug}.png`;
+}
+
 function stripTags(value) {
     return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
@@ -144,6 +148,7 @@ function buildMarkdownArticle([path, raw]) {
     const excerpt = attributes.excerpt || plainText.slice(0, 180).trim();
     const title = attributes.title || (firstHeadingMatch ? firstHeadingMatch[1].trim() : fileNameFromPath(path));
     const slug = attributes.slug || slugify(fileNameFromPath(path));
+    const coverImage = inferredCoverImage(slug);
 
     return {
         slug,
@@ -155,7 +160,7 @@ function buildMarkdownArticle([path, raw]) {
         readingTime: getReadingTime(plainText),
         kind: "markdown",
         category: attributes.category || "Article",
-        coverImage: attributes.cover || "",
+        coverImage: coverImage || attributes.cover || "",
         accent: attributes.accent || "",
         featured: parseBoolean(attributes.featured || "false"),
         bodyHtml: marked.parse(body),
@@ -176,17 +181,18 @@ function buildHtmlArticle([path, raw]) {
         doc.querySelector('meta[name="date"]')?.content ||
         "";
     const category = doc.querySelector('meta[name="category"]')?.content || "Article";
-    const coverImage =
-        doc.querySelector('meta[property="og:image"]')?.content ||
-        doc.querySelector('meta[name="cover"]')?.content ||
-        "";
+    const slug = slugify(fileNameFromPath(path));
+    const coverImage = inferredCoverImage(slug)
+        || doc.querySelector('meta[property="og:image"]')?.content
+        || doc.querySelector('meta[name="cover"]')?.content
+        || "";
     const accent = doc.querySelector('meta[name="theme-color"]')?.content || "";
     const featured = parseBoolean(doc.querySelector('meta[name="featured"]')?.content || "false");
     const excerpt = metaDescription || firstParagraph || "Standalone HTML article rendered inside the React reader.";
     const plainText = stripTags(doc.body?.innerHTML || raw);
 
     return {
-        slug: slugify(fileNameFromPath(path)),
+        slug,
         title,
         date: formatDisplayDate(articleDate),
         sortDate: articleDate,
