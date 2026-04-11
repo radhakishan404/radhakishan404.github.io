@@ -18,10 +18,6 @@ function ArticleCard({ article }) {
                         <span className="article-cover-category">{article.category || "Article"}</span>
                         <span className="article-cover-kind">{article.kind === "html" ? "HTML" : "Markdown"}</span>
                     </div>
-                    <div className="article-card-cover-body">
-                        <h4>{article.title}</h4>
-                        <p>{article.excerpt}</p>
-                    </div>
                 </div>
             </Link>
 
