@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermes Agent — Complete Guide | rk.codex</title>
+<meta name="description" content="A practical guide to Hermes Agent: what it is, why it matters, and how to use it for fast, reliable agent workflows.">
+<meta name="keywords" content="Hermes Agent, Nous Research, agents, LLM, tools, workflow, prompt engineering">
+<meta name="date" content="2026-04-13T12:10:00+05:30">
+<meta name="category" content="AI Agents">
+<meta name="theme-color" content="#7c6af7">
+<meta property="article:published_time" content="2026-04-13T12:10:00+05:30">
+<meta property="og:image" content="/articles/hermes-agent-guide.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── HERMES THEME TOKENS ──
+   Matching NousResearch's dark purple palette */
+:root {
+  --bg:        #0b0b10;
+  --bg2:       #111118;
+  --bg3:       #16161f;
+  --bg4:       #1c1c28;
+  --surface:   #13131c;
+  --border:    #2a2a3d;
+  --border2:   #363650;
+  --text:      #eeeef5;
+  --text2:     #a0a0c0;
+  --text3:     #5a5a7a;
+  --text4:     #36364a;
+  --accent:    #7c6af7;   /* Hermes purple */
+  --accent2:   #9d8fff;
+  --accent-bg: rgba(124,106,247,0.08);
+  --accent-bd: rgba(124,106,247,0.22);
+  --green:     #34d399;
+  --green-bg:  rgba(52,211,153,0.08);
+  --green-bd:  rgba(52,211,153,0.2);
+  --red:       #f87171;
+  --red-bg:    rgba(248,113,113,0.08);
+  --red-bd:    rgba(248,113,113,0.2);
+  --amber:     #fbbf24;
+  --amber-bg:  rgba(251,191,36,0.08);
+  --amber-bd:  rgba(251,191,36,0.2);
+  --code-bg:   #08080e;
+  --shadow:    0 1px 4px rgba(0,0,0,0.5);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.6);
+}
+[data-theme="light"] {
+  --bg:        #f7f7fc;
+  --bg2:       #eeeef8;
+  --bg3:       #e6e6f4;
+  --bg4:       #ddddf0;
+  --surface:   #ffffff;
+  --border:    #d4d4e8;
+  --border2:   #bebede;
+  --text:      #14141e;
+  --text2:     #40405a;
+  --text3:     #8080a0;
+  --text4:     #c0c0d8;
+  --accent:    #5b48e8;
+  --accent2:   #7c6af7;
+  --accent-bg: rgba(91,72,232,0.07);
+  --accent-bd: rgba(91,72,232,0.2);
+  --green:     #16a34a;
+  --green-bg:  rgba(22,163,74,0.07);
+  --green-bd:  rgba(22,163,74,0.2);
+  --red:       #dc2626;
+  --red-bg:    rgba(220,38,38,0.07);
+  --red-bd:    rgba(220,38,38,0.2);
+  --amber:     #d97706;
+  --amber-bg:  rgba(217,119,6,0.07);
+  --amber-bd:  rgba(217,119,6,0.2);
+  --code-bg:   #f0f0fa;
+  --shadow:    0 1px 4px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  line-height:1.65;
+  transition:background .3s,color .3s;
+  overflow-x:hidden;
+}
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--bg2); }
+::-webkit-scrollbar-thumb { background:var(--accent); border-radius:4px; }
+
+/* ── NAV ── */
+nav {
+  position:sticky; top:0; z-index:200;
+  background:rgba(11,11,16,.93);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  padding:0 28px; height:54px;
+  display:flex; align-items:center; justify-content:space-between;
+  transition:background .3s,border-color .3s;
+}
+[data-theme="light"] nav { background:rgba(247,247,252,.93); }
+
+.nav-l { display:flex; align-items:center; gap:10px; }
+.logo {
+  font-size:16px; font-weight:800;
+  color:var(--text); text-decoration:none;
+  letter-spacing:-.025em;
+}
+.logo span { color:var(--accent); }
+.sep { color:var(--border2); }
+.nav-slug {
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px; color:var(--text3);
+}
+.nav-r { display:flex; align-items:center; gap:10px; }
+
+/* lang toggle */
+.lang-sw {
+  display:flex; border:1px solid var(--border2);
+  border-radius:6px; overflow:hidden;
+}
+.lbtn {
+  font-size:11px; font-weight:600;
+  padding:4px 11px; cursor:pointer;
+  background:transparent; border:none;
+  color:var(--text3); font-family:'Inter',sans-serif;
+  transition:all .2s;
+}
+.lbtn.on { background:var(--accent); color:#fff; }
+
+/* theme toggle */
+.thm {
+  width:36px; height:21px;
+  background:var(--bg3); border:1px solid var(--border2);
+  border-radius:11px; cursor:pointer; position:relative;
+  transition:background .3s;
+}
+.thm::after {
+  content:''; position:absolute;
+  width:15px; height:15px; border-radius:50%;
+  background:var(--accent); top:2px; left:2px;
+  transition:transform .22s ease;
+}
+[data-theme="light"] .thm::after { transform:translateX(15px); background:var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  max-width:760px; margin:0 auto;
+  padding:60px 28px 48px;
+  position:relative;
+}
+.hero-glyph {
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  padding:5px 12px; border-radius:20px;
+  background:var(--accent-bg); border:1px solid var(--accent-bd);
+  color:var(--accent); margin-bottom:22px;
+}
+.glyph-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:blink 2s ease infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+h1 {
+  font-size:clamp(32px,5.5vw,58px);
+  font-weight:800; letter-spacing:-.04em; line-height:1.05;
+  margin-bottom:18px; color:var(--text);
+}
+h1 em { font-style:normal; color:var(--accent); }
+
+.hero-sub {
+  font-size:17px; color:var(--text2);
+  max-width:580px; line-height:1.72; margin-bottom:30px;
+}
+
+.hero-install {
+  background:var(--code-bg);
+  border:1px solid var(--border);
+  border-radius:10px; overflow:hidden; margin-bottom:28px;
+}
+.install-top {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:9px 16px; border-bottom:1px solid var(--border);
+}
+.install-lang {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; color:var(--text3); letter-spacing:.1em;
+}
+.copy-btn {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; padding:3px 10px; border-radius:4px;
+  background:transparent; border:1px solid var(--border2);
+  color:var(--text3); cursor:pointer; transition:all .2s;
+}
+.copy-btn:hover { color:var(--accent); border-color:var(--accent); }
+.copy-btn.done { color:var(--green); border-color:var(--green); }
+.install-code {
+  padding:16px 18px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px; color:var(--accent); line-height:1.7;
+  word-break:break-all;
+}
+
+.hero-stats {
+  display:flex; flex-wrap:wrap; gap:0;
+}
+.hstat { padding:0 32px 0 0; border-right:1px solid var(--border); margin-right:32px; }
+.hstat:last-child { border:none; padding:0; margin:0; }
+.hstat-n { font-size:28px; font-weight:800; letter-spacing:-.03em; color:var(--text); line-height:1; }
+.hstat-n em { color:var(--accent); font-style:normal; }
+.hstat-l { font-size:12px; color:var(--text3); margin-top:3px; }
+
+/* ── LAYOUT ── */
+.page { max-width:760px; margin:0 auto; padding:0 28px 90px; }
+hr.div { border:none; border-top:1px solid var(--border); margin:0; }
+
+/* ── TOC ── */
+.toc {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:22px 26px; margin:36px 0;
+}
+.toc-lbl {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--text3); margin-bottom:14px;
+}
+.toc-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px; list-style:none; }
+.toc-grid a {
+  display:flex; align-items:center; gap:8px;
+  font-size:13.5px; color:var(--text2); text-decoration:none;
+  padding:5px 0; transition:color .2s;
+}
+.toc-grid a:hover { color:var(--accent); }
+.tn { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text4); min-width:18px; }
+
+/* ── SECTIONS ── */
+.sec { margin:52px 0; }
+.sec-tag {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:8px;
+}
+h2 {
+  font-size:clamp(22px,3vw,34px); font-weight:800;
+  letter-spacing:-.03em; margin-bottom:14px; color:var(--text);
+  line-height:1.1;
+}
+h3 {
+  font-size:17px; font-weight:700; color:var(--text);
+  margin:26px 0 10px; letter-spacing:-.015em;
+}
+p { font-size:15px; color:var(--text2); margin-bottom:14px; max-width:680px; line-height:1.75; }
+p:last-child { margin-bottom:0; }
+strong { color:var(--text); font-weight:600; }
+
+/* ── CALLOUT ── */
+.callout {
+  border-radius:8px; padding:14px 16px; margin:18px 0;
+  display:flex; gap:12px; align-items:flex-start;
+}
+.callout svg { flex-shrink:0; margin-top:1px; }
+.callout-body { font-size:14px; line-height:1.65; }
+.ca { background:var(--accent-bg); border:1px solid var(--accent-bd); }
+.ca .callout-body { color:var(--accent2); }
+.cg { background:var(--green-bg); border:1px solid var(--green-bd); }
+.cg .callout-body { color:var(--green); }
+.cr { background:var(--red-bg); border:1px solid var(--red-bd); }
+.cr .callout-body { color:var(--red); }
+.cam { background:var(--amber-bg); border:1px solid var(--amber-bd); }
+.cam .callout-body { color:var(--amber); }
+
+/* ── STEPS ── */
+.steps { margin:20px 0; }
+.step {
+  display:grid; grid-template-columns:44px 1fr;
+  gap:0 16px; margin-bottom:4px;
+}
+.step + .step .step-body { border-top:1px solid var(--border); }
+.step-l { display:flex; flex-direction:column; align-items:center; padding-top:18px; }
+.step-c {
+  width:34px; height:34px; border-radius:50%;
+  background:var(--bg); border:1.5px solid var(--border2);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px; font-weight:700; color:var(--text3);
+  flex-shrink:0; z-index:1;
+  transition:border-color .2s,color .2s,background .2s;
+}
+.step:hover .step-c { border-color:var(--accent); color:var(--accent); background:var(--accent-bg); }
+.step-line { width:1.5px; flex:1; background:var(--border); margin:6px 0; }
+.step:last-child .step-line { display:none; }
+.step-body { padding:18px 0 24px; }
+.step-title { font-size:15px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.step-desc { font-size:14px; color:var(--text2); line-height:1.68; }
+.step-desc p { font-size:14px; margin-bottom:8px; }
+.step-desc p:last-child { margin-bottom:0; }
+
+/* ── CODE BLOCK ── */
+.code {
+  background:var(--code-bg); border:1px solid var(--border);
+  border-radius:9px; overflow:hidden; margin:12px 0;
+}
+.code-top {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 14px; border-bottom:1px solid var(--border);
+  background:var(--bg2);
+}
+.code-lang {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; color:var(--text3); letter-spacing:.08em; text-transform:uppercase;
+}
+pre { padding:16px; overflow-x:auto; }
+code {
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px; color:var(--text2); line-height:1.8;
+}
+.cm { color:var(--text4); }
+.ck { color:#f0a0a0; }
+.cs { color:var(--accent); }
+.cv { color:var(--green); }
+[data-theme="light"] .ck { color:#c0392b; }
+[data-theme="light"] .cs { color:var(--accent); }
+[data-theme="light"] .cv { color:#16a34a; }
+
+/* ── FEATURE CARDS ── */
+.feat-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:14px; margin:20px 0;
+}
+.feat-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:20px; transition:border-color .2s,transform .2s;
+}
+.feat-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+.feat-icon {
+  width:38px; height:38px; border-radius:9px;
+  background:var(--accent-bg); border:1px solid var(--accent-bd);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:12px;
+}
+.feat-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.feat-desc { font-size:13px; color:var(--text3); line-height:1.6; }
+
+/* ── PLATFORM CHIPS ── */
+.plat-wrap { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+.plat-chip {
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:7px; padding:8px 14px;
+  font-size:13px; font-weight:500; color:var(--text2);
+  transition:border-color .2s,color .2s;
+}
+.plat-chip:hover { border-color:var(--accent); color:var(--accent); }
+
+/* ── COMPARE TABLE ── */
+.table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); margin:18px 0; }
+table { width:100%; border-collapse:collapse; }
+th {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--text3); padding:11px 16px;
+  border-bottom:1px solid var(--border); text-align:left;
+  background:var(--bg2);
+}
+td { padding:12px 16px; border-bottom:1px solid var(--border); font-size:14px; color:var(--text2); }
+tr:last-child td { border-bottom:none; }
+tr:hover td { background:var(--bg3); }
+.t-yes { color:var(--green); font-weight:600; }
+.t-no  { color:var(--red);   font-weight:600; }
+.t-em  { color:var(--text);  font-weight:600; }
+
+/* ── INLINE CODE ── */
+:not(pre)>code {
+  font-family:'JetBrains Mono',monospace;
+  font-size:12.5px; background:var(--bg3);
+  color:var(--accent); padding:2px 7px;
+  border-radius:4px; border:1px solid var(--border);
+}
+
+/* ── LANG VISIBILITY ── */
+.en, .hi { }
+.hi { display:none; }
+body.hindi .en { display:none; }
+body.hindi .hi { display:block; }
+
+/* ── CTA ── */
+.cta-wrap {
+  background:var(--surface); border:1px solid var(--accent-bd);
+  border-radius:14px; padding:36px; text-align:center; margin:48px 0 0;
+}
+.cta-h {
+  font-size:clamp(20px,3vw,32px); font-weight:800;
+  letter-spacing:-.03em; color:var(--text); margin-bottom:10px;
+}
+.cta-sub { font-size:15px; color:var(--text3); margin-bottom:24px; }
+.btn-row { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+.btn-p {
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--accent); color:#fff;
+  padding:12px 24px; border-radius:8px;
+  font-size:14px; font-weight:700; text-decoration:none;
+  transition:opacity .2s,transform .2s;
+}
+.btn-p:hover { opacity:.85; transform:translateY(-1px); }
+.btn-s {
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--accent-bg); color:var(--accent2);
+  padding:12px 24px; border-radius:8px;
+  font-size:14px; font-weight:700; text-decoration:none;
+  border:1px solid var(--accent-bd); transition:opacity .2s;
+}
+.btn-s:hover { opacity:.8; }
+
+/* ── FOOTER ── */
+footer {
+  border-top:1px solid var(--border); padding:28px;
+  max-width:760px; margin:0 auto;
+  display:flex; justify-content:space-between;
+  align-items:center; flex-wrap:wrap; gap:12px;
+}
+.foot-l { font-size:13px; color:var(--text3); }
+.foot-l a { color:var(--text3); text-decoration:none; }
+.foot-l a:hover { color:var(--accent); }
+.foot-r { display:flex; gap:18px; }
+.foot-r a { font-size:13px; color:var(--text3); text-decoration:none; transition:color .2s; }
+.foot-r a:hover { color:var(--accent); }
+
+/* ── SCROLL REVEAL ── */
+.rv { opacity:0; transform:translateY(18px); transition:opacity .55s,transform .55s; }
+.rv.vis { opacity:1; transform:none; }
+
+/* ── ANCHOR OFFSET ── */
+.anc { display:block; position:relative; top:-72px; visibility:hidden; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  nav { padding:0 16px; }
+  .nav-slug { display:none; }
+  .hero,.page { padding-left:16px; padding-right:16px; }
+  .hero { padding-top:48px; }
+  .toc-grid { grid-template-columns:1fr; }
+  .hstat { padding-right:20px; margin-right:20px; }
+  h1 { font-size:28px; }
+}
+</style>
+</head>
+<body id="bd">
+
+<!-- LANGUAGE MODAL -->
+<div id="lm" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 32px;max-width:380px;width:100%;text-align:center;box-shadow:var(--shadow-lg)">
+    <div style="width:52px;height:52px;border-radius:50%;background:var(--accent-bg);border:1px solid var(--accent-bd);display:flex;align-items:center;justify-content:center;margin:0 auto 18px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" fill="var(--accent)"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+    <div style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-.025em">Choose your language</div>
+    <div style="font-size:14px;color:var(--text3);margin-bottom:24px;line-height:1.6">Read this guide in English or Hinglish.<br><span style="font-size:12px">English ya Hinglish mein padhna chahte ho?</span></div>
+    <div style="display:flex;gap:10px">
+      <button onclick="setLang('en')" style="flex:1;padding:13px;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;background:var(--accent);color:#fff;border:none;font-family:'Inter',sans-serif;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">English</button>
+      <button onclick="setLang('hi')" style="flex:1;padding:13px;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;background:var(--accent-bg);color:var(--accent2);border:1px solid var(--accent-bd);font-family:'Inter',sans-serif;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Hinglish 🇮🇳</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-l">
+    <a href="#" class="logo">rk<span>.codex</span></a>
+    <span class="sep">/</span>
+    <span class="nav-slug">hermes-agent-guide</span>
+  </div>
+  <div class="nav-r">
+    <div class="lang-sw">
+      <button class="lbtn on" id="ben" onclick="setLang('en')">EN</button>
+      <button class="lbtn" id="bhi" onclick="setLang('hi')">हि</button>
+    </div>
+    <button class="thm" id="thm" aria-label="Toggle theme"></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glyph"><div class="glyph-dot"></div><span>Nous Research · Open Source · MIT</span></div>
+
+  <div class="en">
+    <h1>The AI agent that<br><em>grows with you.</em></h1>
+    <p class="hero-sub">Hermes Agent lives on your server, remembers everything, talks to you on Telegram, and gets smarter every single day. This is what personal AI actually looks like.</p>
+  </div>
+  <div class="hi" style="display:none">
+    <h1>Woh AI agent jo<br><em>tumhare saath badhta hai.</em></h1>
+    <p class="hero-sub">Hermes Agent tumhare server pe rehta hai, har cheez yaad rakhta hai, Telegram pe baat karta hai, aur har roz thoda aur smart hota jaata hai. Yahi hai real personal AI.</p>
+  </div>
+
+  <div class="hero-install">
+    <div class="install-top">
+      <span class="install-lang">Install — one command</span>
+      <button class="copy-btn" onclick="cp(this,'ic')">Copy</button>
+    </div>
+    <div class="install-code" id="ic">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">64<em>k+</em></div><div class="hstat-l">GitHub Stars</div></div>
+    <div class="hstat"><div class="hstat-n">200<em>+</em></div><div class="hstat-l">AI Models</div></div>
+    <div class="hstat"><div class="hstat-n">$5</div><div class="hstat-l">Min server/month</div></div>
+    <div class="hstat"><div class="hstat-n">MIT</div><div class="hstat-l">Free Forever</div></div>
+  </div>
+</section>
+
+<hr class="div">
+
+<main class="page">
+
+  <!-- TOC -->
+  <div class="toc rv">
+    <div class="toc-lbl">On this page</div>
+    <ol class="toc-grid">
+      <li><a href="#what"><span class="tn">01</span><span class="en">What is Hermes?</span><span class="hi" style="display:none">Hermes kya hai?</span></a></li>
+      <li><a href="#why"><span class="tn">02</span><span class="en">Why do you need it?</span><span class="hi" style="display:none">Kyun chahiye?</span></a></li>
+      <li><a href="#features"><span class="tn">03</span><span class="en">Key features</span><span class="hi" style="display:none">Key features</span></a></li>
+      <li><a href="#learning"><span class="tn">04</span><span class="en">The learning loop</span><span class="hi" style="display:none">Learning loop</span></a></li>
+      <li><a href="#install"><span class="tn">05</span><span class="en">Installation guide</span><span class="hi" style="display:none">Install guide</span></a></li>
+      <li><a href="#setup"><span class="tn">06</span><span class="en">First-time setup</span><span class="hi" style="display:none">Pehli baar setup</span></a></li>
+      <li><a href="#models"><span class="tn">07</span><span class="en">Which AI model to use</span><span class="hi" style="display:none">Kaun sa model?</span></a></li>
+      <li><a href="#compare"><span class="tn">08</span><span class="en">Vs ChatGPT / Claude</span><span class="hi" style="display:none">ChatGPT se farq</span></a></li>
+    </ol>
+  </div>
+
+  <!-- 01 WHAT IS HERMES -->
+  <span class="anc" id="what"></span>
+  <div class="sec rv">
+    <div class="sec-tag">01 — Overview</div>
+    <div class="en"><h2>What exactly is Hermes Agent?</h2>
+      <p>Hermes Agent is an <strong>open-source AI agent</strong> built by Nous Research — the same team behind the famous Hermes series of language models. Unlike ChatGPT or Claude which are web chatbots you visit, Hermes is something you <strong>install and run yourself</strong> on any server or computer.</p>
+      <p>Think of it like the difference between going to a restaurant vs having a personal chef. ChatGPT is the restaurant — you visit it, it serves you, and when you leave, it forgets you. Hermes is the personal chef who lives in your house, knows your taste, and gets better at cooking for you over time.</p>
+      <p>It is the only AI agent with a <strong>built-in learning loop</strong> — meaning it creates skills from experience and improves those skills every time it uses them.</p>
+    </div>
+    <div class="hi" style="display:none"><h2>Hermes Agent exactly kya hai?</h2>
+      <p>Hermes Agent ek <strong>open-source AI agent</strong> hai jo Nous Research ne banaya hai — wahi team jo famous Hermes language models banaati hai. ChatGPT ya Claude jaisi web chatbots ke unlike, Hermes ek cheez hai jo tum khud kisi bhi server ya computer pe <strong>install karke run karte ho</strong>.</p>
+      <p>Isko samjhne ka ek aasaan tarika — restaurant vs personal chef. ChatGPT restaurant hai — tum jaate ho, serve karta hai, aur jaate hi bhool jaata hai. Hermes personal chef hai jo tumhare ghar rehta hai, tumhara taste jaanta hai, aur time ke saath aur better hota jaata hai.</p>
+      <p>Yeh pehla aur abhi tak ka akaila AI agent hai jisme <strong>built-in learning loop</strong> hai — matlab experience se skills banata hai aur use karne ke saath unhe improve karta rehta hai.</p>
+    </div>
+
+    <div class="callout ca" style="margin-top:20px">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <div class="callout-body en">
+        <strong>Built by Nous Research</strong> — one of the most respected open-source AI labs. Same team that made Hermes 3 and Hermes 4 models used by millions of developers worldwide.
+      </div>
+      <div class="callout-body hi" style="display:none">
+        <strong>Nous Research ne banaya</strong> — ek bohot respected open-source AI lab. Same team jo Hermes 3 aur Hermes 4 models banayi jise duniya bhar ke millions developers use karte hain.
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 WHY -->
+  <span class="anc" id="why"></span>
+  <div class="sec rv">
+    <div class="sec-tag">02 — The Need</div>
+    <div class="en"><h2>Why do you actually need this?</h2>
+      <p>Current AI tools have a fundamental problem — they are <strong>stateless</strong>. Every conversation starts fresh. They don't know your projects, your preferences, or what you worked on yesterday. You are the memory. You paste context every single time.</p>
+    </div>
+    <div class="hi" style="display:none"><h2>Tumhe actually yeh kyun chahiye?</h2>
+      <p>Current AI tools ka ek fundamental problem hai — yeh <strong>stateless</strong> hote hain. Har conversation fresh start hoti hai. Unhe tumhare projects, preferences, ya kal ka kaam pata nahi. Tum hi memory ho. Har baar context paste karte ho.</p>
+    </div>
+
+    <div class="table-wrap" style="margin-top:20px">
+      <table>
+        <thead><tr>
+          <th class="en">Problem with normal AI</th>
+          <th class="hi" style="display:none">Normal AI ka problem</th>
+          <th class="en">What Hermes does instead</th>
+          <th class="hi" style="display:none">Hermes kya karta hai</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="en">Forgets you after every chat</td>
+            <td class="hi t-no" style="display:none">Har chat ke baad bhool jaata hai</td>
+            <td class="t-yes en">Persistent memory across all sessions</td>
+            <td class="t-yes hi" style="display:none">Sab sessions mein yaad rakhta hai</td>
+          </tr>
+          <tr>
+            <td class="en">Tied to one app or website</td>
+            <td class="hi t-no" style="display:none">Ek hi app ya site pe kaam karta hai</td>
+            <td class="t-yes en">Telegram, Discord, WhatsApp, Slack, Email</td>
+            <td class="t-yes hi" style="display:none">Telegram, Discord, WhatsApp, Slack, Email pe</td>
+          </tr>
+          <tr>
+            <td class="en">Can't work while you're offline</td>
+            <td class="hi t-no" style="display:none">Offline pe kuch nahi karta</td>
+            <td class="t-yes en">Runs on your server 24/7, works while you sleep</td>
+            <td class="t-yes hi" style="display:none">Server pe 24/7 chalta hai, neend mein bhi kaam karta hai</td>
+          </tr>
+          <tr>
+            <td class="en">Same quality day 1 vs day 365</td>
+            <td class="hi t-no" style="display:none">Day 1 aur day 365 same quality</td>
+            <td class="t-yes en">Gets smarter with every interaction</td>
+            <td class="t-yes hi" style="display:none">Har interaction se aur smart hota hai</td>
+          </tr>
+          <tr>
+            <td class="en">Expensive monthly subscriptions</td>
+            <td class="hi t-no" style="display:none">Mehenga monthly subscription</td>
+            <td class="t-yes en">Free and open source, just pay for AI API</td>
+            <td class="t-yes hi" style="display:none">Free aur open source, sirf AI API ka cost</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 03 FEATURES -->
+  <span class="anc" id="features"></span>
+  <div class="sec rv">
+    <div class="sec-tag">03 — What It Can Do</div>
+    <div class="en"><h2>Six things that make Hermes different</h2><p>These are the core capabilities — every one of them is genuinely useful, not just a feature checkbox.</p></div>
+    <div class="hi" style="display:none"><h2>Six cheezein jo Hermes ko alag banati hain</h2><p>Yeh core capabilities hain — har ek genuinely useful hai, sirf feature list ke liye nahi.</p></div>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="feat-title en">Talk from Any App</div>
+        <div class="feat-title hi" style="display:none">Kisi bhi App Se Baat Karo</div>
+        <div class="feat-desc en">Telegram, Discord, WhatsApp, Slack, Signal, Email, or terminal. Start a task on Telegram, check progress on Discord.</div>
+        <div class="feat-desc hi" style="display:none">Telegram, Discord, WhatsApp, Slack, Signal, Email ya terminal. Telegram pe task shuru karo, Discord pe progress check karo.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="feat-title en">Grows Over Time</div>
+        <div class="feat-title hi" style="display:none">Time Ke Saath Badhta Hai</div>
+        <div class="feat-desc en">Auto-generates skills from experience. If it solves a problem once, it packages that solution as a reusable skill for next time.</div>
+        <div class="feat-desc hi" style="display:none">Experience se auto skills banata hai. Ek baar problem solve ki, toh next time ke liye reusable skill bana deta hai.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="feat-title en">Scheduled Automation</div>
+        <div class="feat-title hi" style="display:none">Scheduled Automation</div>
+        <div class="feat-desc en">Just say "send me a daily report at 9am" or "run a backup every Sunday." It sets up the cron job and runs it automatically.</div>
+        <div class="feat-desc hi" style="display:none">Bas kaho "roz 9am ko report bhejo" ya "har Sunday backup lo." Khud cron job set karke automatically run karta hai.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="m8 21 4-4 4 4"/></svg>
+        </div>
+        <div class="feat-title en">Full Browser Control</div>
+        <div class="feat-title hi" style="display:none">Full Browser Control</div>
+        <div class="feat-desc en">Web search, browser automation, screenshots, vision, image generation, text-to-speech — all built in.</div>
+        <div class="feat-desc hi" style="display:none">Web search, browser automation, screenshots, vision, image generation, TTS — sab built-in hai.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="feat-title en">Subagents & Delegation</div>
+        <div class="feat-title hi" style="display:none">Subagents & Delegation</div>
+        <div class="feat-desc en">Can spin up isolated sub-agents to work on tasks in parallel — like managing a team of AI workers for complex jobs.</div>
+        <div class="feat-desc hi" style="display:none">Complex tasks ke liye parallel sub-agents spin up kar sakta hai — jaise ek AI team manage karna.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+        </div>
+        <div class="feat-title en">Runs Anywhere</div>
+        <div class="feat-title hi" style="display:none">Kahin Bhi Chalta Hai</div>
+        <div class="feat-desc en">Local machine, Docker, SSH server, cloud GPU, or a $5 VPS. Serverless options too — costs nearly nothing when idle.</div>
+        <div class="feat-desc hi" style="display:none">Local machine, Docker, SSH server, cloud GPU, ya $5 VPS. Idle rehne pe almost free — serverless bhi option hai.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 LEARNING LOOP -->
+  <span class="anc" id="learning"></span>
+  <div class="sec rv">
+    <div class="sec-tag">04 — The Core Idea</div>
+    <div class="en"><h2>The learning loop — simply explained</h2>
+      <p>This is the thing that makes Hermes genuinely different. Every other AI agent gives you the same quality on day 100 as day 1. Hermes does not. Here is exactly how the loop works.</p>
+    </div>
+    <div class="hi" style="display:none"><h2>Learning loop — seedha samjho</h2>
+      <p>Yahi cheez Hermes ko genuinely different banati hai. Baaki sab AI agents day 1 aur day 100 mein same quality dete hain. Hermes nahi. Exactly yahan samjho loop kaise kaam karta hai.</p>
+    </div>
+
+    <div class="steps" style="margin-top:24px">
+      <div class="step">
+        <div class="step-l"><div class="step-c">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">You give it a task</div>
+          <div class="step-title hi" style="display:none">Tum ek task dete ho</div>
+          <div class="step-desc">
+            <p class="en">You say something like — "debug this Python error" or "summarize this article every morning." Hermes starts working on it using the tools and skills it already has.</p>
+            <p class="hi" style="display:none">Tum kuch kehte ho jaise — "is Python error ko debug karo" ya "har subah yeh article summarize karo." Hermes apne existing tools aur skills use karke kaam shuru karta hai.</p>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-l"><div class="step-c">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">It solves the task and remembers how</div>
+          <div class="step-title hi" style="display:none">Task solve karta hai aur yaad rakhta hai kaise</div>
+          <div class="step-desc">
+            <p class="en">After completing the task, Hermes writes a <strong>skill file</strong> — a reusable solution packed with the exact steps it used. Next time you ask something similar, it reads that skill first.</p>
+            <p class="hi" style="display:none">Task complete karne ke baad, Hermes ek <strong>skill file</strong> likhta hai — ek reusable solution jisme exact steps hain jo usne use kiye. Agli baar same cheez poochho, pehle woh skill padhi jaati hai.</p>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-l"><div class="step-c">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">The skill improves every time it's used</div>
+          <div class="step-title hi" style="display:none">Har use ke saath skill improve hoti hai</div>
+          <div class="step-desc">
+            <p class="en">Skills are not static. When Hermes uses a skill and finds a better approach, it updates the skill file. So the same task gets done faster and better over time, automatically.</p>
+            <p class="hi" style="display:none">Skills static nahi hain. Jab Hermes skill use karta hai aur better approach milti hai, toh skill file update ho jaati hai. Same task automatically time ke saath faster aur better hota jaata hai.</p>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-l"><div class="step-c">4</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">It builds a model of who you are</div>
+          <div class="step-title hi" style="display:none">Yeh tumhare baare mein ek model banata hai</div>
+          <div class="step-desc">
+            <p class="en">Across all your conversations, Hermes builds up a picture of your preferences, your projects, your working style. It can search its own past conversations to recall context you've long forgotten.</p>
+            <p class="hi" style="display:none">Tumhari saari conversations mein, Hermes tumhari preferences, projects, working style ka ek picture banata hai. Apni past conversations search kar sakta hai un cheezein yaad karne ke liye jo tum bhool gaye ho.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout cg">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="callout-body en">The result: Hermes on day 30 is noticeably better than Hermes on day 1 — and that gap keeps growing. No other free AI agent does this.</div>
+      <div class="callout-body hi" style="display:none">Result yeh hai: Day 30 ka Hermes day 1 se clearly better hota hai — aur yeh gap badhta rehta hai. Koi doosra free AI agent yeh nahi karta.</div>
+    </div>
+  </div>
+
+  <!-- 05 INSTALLATION -->
+  <span class="anc" id="install"></span>
+  <div class="sec rv">
+    <div class="sec-tag">05 — Installation</div>
+    <div class="en"><h2>How to install Hermes Agent</h2>
+      <p>Works on Linux, macOS, WSL2 (Windows), and Android via Termux. One command installs everything.</p>
+    </div>
+    <div class="hi" style="display:none"><h2>Hermes Agent kaise install karein</h2>
+      <p>Linux, macOS, WSL2 (Windows), aur Android Termux pe kaam karta hai. Ek command mein sab install ho jaata hai.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-l"><div class="step-c">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">Run the installer</div>
+          <div class="step-title hi" style="display:none">Installer run karo</div>
+          <div class="step-desc">
+            <p class="en">Open your terminal and run this single command. It auto-detects your platform and installs everything needed.</p>
+            <p class="hi" style="display:none">Terminal kholo aur yeh ek command run karo. Automatically tumhara platform detect karta hai aur sab kuch install karta hai.</p>
+            <div class="code">
+              <div class="code-top"><span class="code-lang">Terminal</span><button class="copy-btn" onclick="cp(this,'c1')">Copy</button></div>
+              <pre><code id="c1">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-l"><div class="step-c">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">Run the setup wizard</div>
+          <div class="step-title hi" style="display:none">Setup wizard run karo</div>
+          <div class="step-desc">
+            <p class="en">After installation, run the setup wizard. It asks you step by step for your AI provider API key, messaging platform setup (Telegram, etc.), and other preferences. Takes about 3 minutes.</p>
+            <p class="hi" style="display:none">Install ke baad, setup wizard run karo. Yeh step by step poochta hai — AI provider API key, messaging platform setup (Telegram, etc.), aur preferences. Lagbhag 3 minutes lagenge.</p>
+            <div class="code">
+              <div class="code-top"><span class="code-lang">Terminal</span><button class="copy-btn" onclick="cp(this,'c2')">Copy</button></div>
+              <pre><code id="c2">hermes setup</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-l"><div class="step-c">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">Start Hermes</div>
+          <div class="step-title hi" style="display:none">Hermes start karo</div>
+          <div class="step-desc">
+            <p class="en">Launch the terminal interface to start chatting immediately. Or run the gateway to connect your messaging apps.</p>
+            <p class="hi" style="display:none">Terminal interface launch karo aur turant baat shuru karo. Ya messaging apps connect karne ke liye gateway run karo.</p>
+            <div class="code">
+              <div class="code-top"><span class="code-lang">Terminal — two options</span><button class="copy-btn" onclick="cp(this,'c3')">Copy</button></div>
+              <pre><code id="c3"><span class="cm"># Option 1: Start terminal chat (simplest way)</span>
+hermes
+
+<span class="cm"># Option 2: Start messaging gateway (Telegram, Discord etc)</span>
+hermes gateway start</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-l"><div class="step-c">4</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">Alternative — manual install from GitHub</div>
+          <div class="step-title hi" style="display:none">Alternative — GitHub se manual install</div>
+          <div class="step-desc">
+            <p class="en">If you prefer more control or want to develop on Hermes, you can clone and install manually. Requires Python 3.11.</p>
+            <p class="hi" style="display:none">Agar zyada control chahiye ya Hermes pe develop karna ho, toh manually clone karke install karo. Python 3.11 chahiye.</p>
+            <div class="code">
+              <div class="code-top"><span class="code-lang">Git + Python</span><button class="copy-btn" onclick="cp(this,'c4')">Copy</button></div>
+              <pre><code id="c4"><span class="cv">git</span> clone https://github.com/NousResearch/hermes-agent.git
+<span class="cv">cd</span> hermes-agent
+
+<span class="cm"># Install uv (fast Python package manager)</span>
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+<span class="cm"># Create virtual environment and install</span>
+uv venv venv --python 3.11
+source venv/bin/activate
+uv pip install -e ".[all]"
+
+<span class="cm"># Now run setup</span>
+hermes setup</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout cam">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div class="callout-body en">Windows native is <strong>not supported</strong>. Use WSL2 on Windows. Android users can use Termux — follow the official Termux guide in the docs.</div>
+      <div class="callout-body hi" style="display:none">Windows native <strong>supported nahi</strong> hai. Windows pe WSL2 use karo. Android users Termux use kar sakte hain — official Termux guide docs mein hai.</div>
+    </div>
+  </div>
+
+  <!-- 06 FIRST TIME SETUP -->
+  <span class="anc" id="setup"></span>
+  <div class="sec rv">
+    <div class="sec-tag">06 — First Session</div>
+    <div class="en"><h2>What happens the first time you run it</h2><p>The setup wizard guides you through everything. Here's what you'll be asked and what to answer.</p></div>
+    <div class="hi" style="display:none"><h2>Pehli baar run karne pe kya hota hai</h2><p>Setup wizard sab guide karta hai. Yahan bataya hai kya poochha jaayega aur kya answer karna hai.</p></div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-l"><div class="step-c">A</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">Choose your AI provider</div>
+          <div class="step-title hi" style="display:none">AI provider choose karo</div>
+          <div class="step-desc">
+            <p class="en">You pick which AI model powers Hermes. The easiest starting options are <strong>OpenAI</strong> (GPT-4o) or <strong>Nous Portal</strong> (free tier available). You can change this anytime with <code>hermes model</code>.</p>
+            <p class="hi" style="display:none">Choose karo kaun sa AI model Hermes ko power karega. Start karne ke liye sabse aasaan options hain <strong>OpenAI</strong> (GPT-4o) ya <strong>Nous Portal</strong> (free tier available). Kabhi bhi <code>hermes model</code> se change kar sakte ho.</p>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-l"><div class="step-c">B</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">Enter your API key</div>
+          <div class="step-title hi" style="display:none">API key daalo</div>
+          <div class="step-desc">
+            <p class="en">Get your API key from the provider you chose (e.g. platform.openai.com → API keys). Paste it when prompted. Stored securely in <code>~/.hermes/.env</code> on your machine.</p>
+            <p class="hi" style="display:none">Jo provider choose kiya usse API key lo (jaise platform.openai.com → API keys). Prompt aane par paste karo. Secure <code>~/.hermes/.env</code> mein store hoti hai tumhare machine pe.</p>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-l"><div class="step-c">C</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">Connect Telegram (optional but recommended)</div>
+          <div class="step-title hi" style="display:none">Telegram connect karo (optional but recommended)</div>
+          <div class="step-desc">
+            <p class="en">Go to <a href="https://t.me/BotFather" target="_blank" style="color:var(--accent)">@BotFather</a> on Telegram, create a new bot, copy the bot token. Paste it in setup. Then you can talk to Hermes from your phone anywhere in the world.</p>
+            <p class="hi" style="display:none">Telegram pe <a href="https://t.me/BotFather" target="_blank" style="color:var(--accent)">@BotFather</a> pe jao, naya bot banao, bot token copy karo. Setup mein paste karo. Phir duniya mein kahin se bhi phone se Hermes se baat kar sakte ho.</p>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-l"><div class="step-c">D</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title en">Start your first conversation</div>
+          <div class="step-title hi" style="display:none">Pehli conversation shuru karo</div>
+          <div class="step-desc">
+            <p class="en">Just start talking naturally. Try: <em>"What can you do?"</em> to see all capabilities. Or ask it to do something real — search the web, write a script, set a daily reminder. The more you use it, the smarter it gets.</p>
+            <p class="hi" style="display:none">Naturally baat shuru karo. Try karo: <em>"What can you do?"</em> sab capabilities dekhne ke liye. Ya kuch real karne kaho — web search, script likhna, daily reminder set karna. Jitna use karoge, utna smart hoga.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 MODELS -->
+  <span class="anc" id="models"></span>
+  <div class="sec rv">
+    <div class="sec-tag">07 — Choosing a Model</div>
+    <div class="en"><h2>Which AI model should you use?</h2><p>Hermes works with 200+ models via OpenRouter alone. Here's a simple guide to picking the right one based on your needs and budget.</p></div>
+    <div class="hi" style="display:none"><h2>Kaun sa AI model use karna chahiye?</h2><p>Hermes sirf OpenRouter se 200+ models ke saath kaam karta hai. Yahan simple guide hai apni needs aur budget ke hisaab se sahi model choose karne ki.</p></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Model</th>
+          <th class="en">Best for</th><th class="hi" style="display:none">Best for</th>
+          <th class="en">Cost</th><th class="hi" style="display:none">Cost</th>
+          <th class="en">Speed</th><th class="hi" style="display:none">Speed</th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="t-em">Nous Portal</td><td class="en">Beginners, free trial</td><td class="hi" style="display:none">Beginners, free trial</td><td class="t-yes">Free tier</td><td class="t-yes">Fast</td></tr>
+          <tr><td class="t-em">GPT-4o mini</td><td class="en">Everyday tasks, low cost</td><td class="hi" style="display:none">Everyday tasks, low cost</td><td class="t-yes">Very cheap</td><td class="t-yes">Very fast</td></tr>
+          <tr><td class="t-em">GPT-4o</td><td class="en">Complex reasoning, quality</td><td class="hi" style="display:none">Complex reasoning, quality</td><td>Moderate</td><td class="t-yes">Fast</td></tr>
+          <tr><td class="t-em">Claude Sonnet</td><td class="en">Long docs, coding</td><td class="hi" style="display:none">Long docs, coding</td><td>Moderate</td><td class="t-yes">Fast</td></tr>
+          <tr><td class="t-em">Gemini Flash</td><td class="en">Large context, multimodal</td><td class="hi" style="display:none">Large context, multimodal</td><td class="t-yes">Very cheap</td><td class="t-yes">Very fast</td></tr>
+          <tr><td class="t-em">Kimi / Moonshot</td><td class="en">Chinese content, long context</td><td class="hi" style="display:none">Chinese content, long context</td><td class="t-yes">Cheap</td><td>Medium</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout ca">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <div class="callout-body en">Switch models anytime — just type <code>hermes model</code> in your terminal. No config files to edit, no restart needed. The switch takes effect immediately on the next message.</div>
+      <div class="callout-body hi" style="display:none">Kabhi bhi model switch karo — terminal mein bas <code>hermes model</code> type karo. Koi config file edit nahi, koi restart nahi. Next message se turant effect aata hai.</div>
+    </div>
+
+    <!-- Platforms -->
+    <h3 class="en" style="margin-top:32px">Connect it to your messaging apps</h3>
+    <h3 class="hi" style="display:none;margin-top:32px">Messaging apps se connect karo</h3>
+    <p class="en">After running <code>hermes gateway start</code>, you can talk to Hermes from any of these platforms.</p>
+    <p class="hi" style="display:none">After <code>hermes gateway start</code> run karne ke baad, yeh sab platforms se Hermes se baat kar sakte ho.</p>
+
+    <div class="plat-wrap">
+      <div class="plat-chip">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="var(--accent)" stroke="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.7 7.95c-.13.58-.48.72-.97.45l-2.68-1.97-1.29 1.24c-.14.14-.26.26-.54.26l.19-2.73 5-4.52c.22-.19-.05-.3-.34-.1l-6.17 3.88-2.66-.83c-.58-.18-.59-.58.12-.86l10.39-4.01c.48-.17.9.12.75.24z"/></svg>
+        Telegram
+      </div>
+      <div class="plat-chip">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="var(--accent)"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Discord
+      </div>
+      <div class="plat-chip">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="var(--accent)"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.687 8.834a2.528 2.528 0 0 1-2.521 2.521 2.528 2.528 0 0 1-2.522-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.312zM15.166 18.956a2.528 2.528 0 0 1 2.521 2.522A2.528 2.528 0 0 1 15.166 24a2.528 2.528 0 0 1-2.522-2.522v-2.522h2.522zM15.166 17.687a2.528 2.528 0 0 1-2.522-2.521 2.528 2.528 0 0 1 2.522-2.522h6.313A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.521 2.521h-6.313z"/></svg>
+        Slack
+      </div>
+      <div class="plat-chip">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="var(--accent)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+        WhatsApp
+      </div>
+      <div class="plat-chip">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.47 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Signal
+      </div>
+      <div class="plat-chip">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email
+      </div>
+      <div class="plat-chip">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        CLI Terminal
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 COMPARE -->
+  <span class="anc" id="compare"></span>
+  <div class="sec rv">
+    <div class="sec-tag">08 — Honest Comparison</div>
+    <div class="en"><h2>Hermes vs ChatGPT vs Claude</h2><p>An honest side-by-side. Hermes is not better at everything — but for persistent personal AI use, it wins clearly.</p></div>
+    <div class="hi" style="display:none"><h2>Hermes vs ChatGPT vs Claude</h2><p>Ek honest comparison. Hermes har cheez mein better nahi — lekin persistent personal AI use ke liye clearly better hai.</p></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th class="en">Feature</th><th class="hi" style="display:none">Feature</th>
+          <th>Hermes Agent</th>
+          <th>ChatGPT</th>
+          <th>Claude</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="en">Memory across sessions</td><td class="hi" style="display:none">Memory across sessions</td>
+            <td class="t-yes">Full persistent</td><td>Basic (paid)</td><td>Projects (paid)</td>
+          </tr>
+          <tr>
+            <td class="en">Self-improving skills</td><td class="hi" style="display:none">Self-improving skills</td>
+            <td class="t-yes">Yes, built-in</td><td class="t-no">No</td><td class="t-no">No</td>
+          </tr>
+          <tr>
+            <td class="en">Talk via Telegram/Discord</td><td class="hi" style="display:none">Telegram/Discord se baat</td>
+            <td class="t-yes">Yes</td><td class="t-no">No</td><td class="t-no">No</td>
+          </tr>
+          <tr>
+            <td class="en">Run scheduled tasks</td><td class="hi" style="display:none">Scheduled tasks</td>
+            <td class="t-yes">Yes (cron)</td><td class="t-no">No</td><td class="t-no">No</td>
+          </tr>
+          <tr>
+            <td class="en">Works offline / on VPS</td><td class="hi" style="display:none">Offline / VPS pe</td>
+            <td class="t-yes">Yes</td><td class="t-no">No</td><td class="t-no">No</td>
+          </tr>
+          <tr>
+            <td class="en">Cost</td><td class="hi" style="display:none">Cost</td>
+            <td class="t-yes">Free + API</td><td>$20/month+</td><td>$20/month+</td>
+          </tr>
+          <tr>
+            <td class="en">Model flexibility</td><td class="hi" style="display:none">Model flexibility</td>
+            <td class="t-yes">200+ models</td><td class="t-no">GPT only</td><td class="t-no">Claude only</td>
+          </tr>
+          <tr>
+            <td class="en">Raw AI intelligence</td><td class="hi" style="display:none">Raw AI intelligence</td>
+            <td>Depends on model</td><td class="t-yes">GPT-4o quality</td><td class="t-yes">Excellent</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout cg" style="margin-top:20px">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="callout-body en"><strong>Bottom line:</strong> If you want the smartest one-off answer, use Claude. If you want an AI that truly learns you, runs 24/7, and costs you almost nothing — use Hermes.</div>
+      <div class="callout-body hi" style="display:none"><strong>Bottom line:</strong> Agar ek baar ka smartest answer chahiye, Claude use karo. Agar ek AI chahiye jo genuinely tumhe jaane, 24/7 chale, aur almost free ho — Hermes use karo.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap rv">
+    <div style="width:48px;height:48px;border-radius:50%;background:var(--accent-bg);border:1px solid var(--accent-bd);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" fill="var(--accent)"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+    <div class="cta-h en">Ready to install Hermes?</div>
+    <div class="cta-h hi" style="display:none">Hermes install karne ke liye taiyaar ho?</div>
+    <div class="cta-sub en">64,000+ developers already running it. Open source. Free forever. One command.</div>
+    <div class="cta-sub hi" style="display:none">64,000+ developers already use kar rahe hain. Open source. Free forever. Ek command.</div>
+    <div class="btn-row">
+      <a href="https://github.com/NousResearch/hermes-agent" target="_blank" class="btn-p">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+        View on GitHub
+      </a>
+      <a href="https://hermes-agent.nousresearch.com/docs" target="_blank" class="btn-s">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Official Docs
+      </a>
+      <a href="https://instagram.com/rk.codex" target="_blank" class="btn-s">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @rk.codex
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-l">Made by <a href="https://instagram.com/rk.codex">@rk.codex</a> · Based on <a href="https://github.com/NousResearch/hermes-agent" target="_blank">NousResearch/hermes-agent</a></div>
+  <div class="foot-r">
+    <a href="https://hermes-agent.nousresearch.com" target="_blank">Official Site</a>
+    <a href="https://hermes-agent.nousresearch.com/docs" target="_blank">Docs</a>
+    <a href="https://discord.gg/NousResearch" target="_blank">Discord</a>
+  </div>
+</footer>
+
+<script>
+const html = document.documentElement;
+const bd = document.getElementById('bd');
+
+function setLang(l) {
+  document.getElementById('lm').style.display = 'none';
+  const isHi = l === 'hi';
+  bd.classList.toggle('hindi', isHi);
+  document.querySelectorAll('.en').forEach(e => e.style.display = isHi ? 'none' : '');
+  document.querySelectorAll('.hi').forEach(e => e.style.display = isHi ? '' : 'none');
+  document.getElementById('ben').classList.toggle('on', !isHi);
+  document.getElementById('bhi').classList.toggle('on', isHi);
+  localStorage.setItem('rk-lang', l);
+}
+
+document.getElementById('thm').addEventListener('click', () => {
+  const d = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', d ? 'light' : 'dark');
+  localStorage.setItem('rk-theme', d ? 'light' : 'dark');
+});
+
+function cp(btn, id) {
+  const el = document.getElementById(id);
+  navigator.clipboard.writeText(el.textContent.replace(/\s+/g, ' ').trim()).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 2000);
+  });
+}
+
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); }), { threshold:.07 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+window.addEventListener('load', () => {
+  const t = localStorage.getItem('rk-theme');
+  if(t) html.setAttribute('data-theme', t);
+  const l = localStorage.getItem('rk-lang');
+  if(l) setLang(l);
+});
+</script>
+</body>
+</html>
