@@ -86,9 +86,10 @@ function App() {
             return true;
         }
 
+        const isArticleRoute = window.location.pathname.startsWith("/articles");
         const hasSeenBoot = window.sessionStorage.getItem(bootStorageKey) === "true";
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        return hasSeenBoot || prefersReducedMotion;
+        return isArticleRoute || hasSeenBoot || prefersReducedMotion;
     });
 
     const handleBootComplete = () => {
