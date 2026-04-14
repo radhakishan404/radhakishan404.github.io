@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Caveman Mode is a no-fluff prompting style that cuts token usage by ~75% while keeping output quality intact.">
+<meta name="keywords" content="prompt engineering, token reduction, caveman mode, Claude Code, cost savings, developer workflow">
+<meta name="date" content="2026-04-14T10:00:00+05:30">
+<meta name="category" content="Prompt Workflow">
+<meta name="theme-color" content="#0a0806">
+<meta property="article:published_time" content="2026-04-14T10:00:00+05:30">
+<meta property="og:image" content="/articles/caveman-mode-guide.png">
+<title>Caveman Mode — 75% Fewer Tokens | rk.codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root[data-theme="dark"]{
+  --bg:#0a0806;--bg2:#110f0b;--bg3:#1a1712;--bg4:#221f18;
+  --border:rgba(255,200,80,0.07);--border2:rgba(255,200,80,0.15);
+  --text:#f5ead8;--muted:#6b5e45;--muted2:#a89070;
+  --acc:#f5a623;--acc-dim:rgba(245,166,35,0.08);--acc-border:rgba(245,166,35,0.25);--acc-text:#ffc85a;
+  --red:#c0392b;--red-dim:rgba(192,57,43,0.08);--red-border:rgba(192,57,43,0.25);--red-text:#e74c3c;
+  --code-bg:#0d0b08;--card-bg:#110f0b;
+  --bone:#d4b896;--stone:#8c7b6b;
+}
+:root[data-theme="light"]{
+  --bg:#fdf8f0;--bg2:#f5ede0;--bg3:#ece1d0;--bg4:#e0d1bc;
+  --border:rgba(100,70,30,0.08);--border2:rgba(100,70,30,0.15);
+  --text:#2a1f0e;--muted:#a08060;--muted2:#6b4f32;
+  --acc:#c47d0e;--acc-dim:rgba(196,125,14,0.08);--acc-border:rgba(196,125,14,0.25);--acc-text:#8b5800;
+  --red:#922b21;--red-dim:rgba(146,43,33,0.06);--red-border:rgba(146,43,33,0.2);--red-text:#922b21;
+  --code-bg:#ede3d5;--card-bg:#fff8ef;
+  --bone:#8b6840;--stone:#7a6352;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7;transition:background .2s,color .2s;position:relative;}
+
+/* grain overlay */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.35;}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:0 24px;height:48px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(8px);}
+.h-left{display:flex;align-items:center;gap:6px;font-size:13px;}
+.h-brand{font-family:'Space Mono',monospace;font-weight:700;font-size:13px;color:var(--acc-text);letter-spacing:.01em;}
+.h-sep{color:var(--border2);font-size:18px;line-height:1;margin:0 2px;}
+.h-page{color:var(--muted);font-size:12px;font-family:'Space Mono',monospace;}
+.h-right{display:flex;align-items:center;gap:8px;}
+.lang-pill{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--border2);border-radius:20px;padding:2px;gap:2px;}
+.lbtn{padding:3px 11px;border-radius:14px;font-size:11px;font-weight:700;cursor:pointer;color:var(--muted);border:none;background:transparent;letter-spacing:.04em;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.lbtn.active{background:var(--acc);color:#0a0806;}
+.theme-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:background .15s;font-family:'DM Sans',sans-serif;}
+.theme-btn:hover{background:var(--bg4);}
+
+/* HERO */
+.hero-wrap{position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero-bg-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,var(--border) 39px,var(--border) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,var(--border) 39px,var(--border) 40px);opacity:.4;pointer-events:none;}
+.hero-glow{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(245,166,35,0.06) 0%,transparent 65%);pointer-events:none;}
+.hero{max-width:760px;margin:0 auto;padding:72px 24px 60px;position:relative;}
+
+/* big caveman emoji */
+.cave-emoji{font-size:64px;line-height:1;margin-bottom:20px;display:block;filter:drop-shadow(0 4px 24px rgba(245,166,35,0.25));animation:cave-float 3s ease-in-out infinite;}
+@keyframes cave-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+.badge-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.badge{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border2);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted2);background:var(--bg2);text-transform:uppercase;font-family:'Space Mono',monospace;}
+.badge.g{border-color:var(--acc-border);color:var(--acc-text);background:var(--acc-dim);}
+.badge.r{border-color:var(--red-border);color:var(--red-text);background:var(--red-dim);}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--acc);display:inline-block;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,10vw,100px);font-weight:400;line-height:.95;letter-spacing:.02em;margin-bottom:18px;text-transform:uppercase;}
+h1 .acc{color:var(--acc);}
+h1 .sub-h{display:block;font-size:clamp(20px,4vw,38px);color:var(--muted2);letter-spacing:.04em;margin-top:6px;}
+
+.hero-sub{font-size:16px;color:var(--muted2);max-width:520px;margin-bottom:32px;line-height:1.65;}
+.hero-sub strong{color:var(--text);}
+
+.install-box{background:var(--code-bg);border:1px solid var(--acc-border);border-radius:10px;padding:16px 20px;margin-bottom:40px;display:inline-block;}
+.install-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-family:'Space Mono',monospace;}
+.install-cmd{font-family:'Space Mono',monospace;font-size:14px;color:var(--acc-text);}
+.install-cmd::before{content:'$ ';color:var(--muted);}
+
+.stats-row{display:flex;gap:0;border-top:1px solid var(--border);padding-top:32px;}
+.stat{flex:1;padding-right:28px;border-right:1px solid var(--border);margin-right:28px;}
+.stat:last-child{border-right:none;margin-right:0;}
+.sv{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--acc);letter-spacing:.02em;line-height:1;}
+.sl{font-size:11px;color:var(--muted);margin-top:2px;font-family:'Space Mono',monospace;}
+
+/* PAGE */
+.page{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+
+/* TOC */
+.toc{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin:40px 0 52px;}
+.toc-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:16px;font-family:'Space Mono',monospace;}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;}
+.toc-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted2);text-decoration:none;transition:color .15s;}
+.toc-item:hover{color:var(--text);}
+.tn{font-size:11px;color:var(--acc);font-weight:700;min-width:20px;font-family:'Space Mono',monospace;}
+
+/* SECTIONS */
+.section{margin-bottom:64px;scroll-margin-top:60px;}
+.slabel{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:10px;font-family:'Space Mono',monospace;}
+h2{font-family:'Bebas Neue',sans-serif;font-size:36px;font-weight:400;margin-bottom:14px;letter-spacing:.03em;text-transform:uppercase;line-height:1.1;}
+p{color:var(--muted2);margin-bottom:12px;font-size:15px;}
+
+/* COMPARE BOX */
+.compare-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+.compare-card{border-radius:12px;padding:18px 20px;border:1px solid var(--border2);background:var(--bg2);}
+.compare-card.bad{border-color:var(--red-border);background:var(--red-dim);}
+.compare-card.good{border-color:var(--acc-border);background:var(--acc-dim);}
+.compare-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;font-family:'Space Mono',monospace;}
+.compare-card.bad .compare-label{color:var(--red-text);}
+.compare-card.good .compare-label{color:var(--acc-text);}
+.compare-text{font-family:'Space Mono',monospace;font-size:12px;line-height:1.8;color:var(--text);}
+.compare-card.good .compare-text{color:var(--acc-text);}
+.token-pill{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;font-family:'Space Mono',monospace;letter-spacing:.05em;}
+.compare-card.bad .token-pill{background:var(--red-dim);color:var(--red-text);border:1px solid var(--red-border);}
+.compare-card.good .token-pill{background:var(--acc-dim);color:var(--acc-text);border:1px solid var(--acc-border);}
+
+.info-box{background:var(--acc-dim);border:1px solid var(--acc-border);border-radius:10px;padding:14px 18px;font-size:13px;color:var(--acc-text);margin:16px 0;line-height:1.65;}
+.warn-box{background:var(--red-dim);border:1px solid var(--red-border);border-radius:10px;padding:14px 18px;font-size:13px;color:var(--red-text);margin:16px 0;line-height:1.65;}
+.note-box{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:14px 18px;font-size:13px;color:var(--muted2);margin:16px 0;line-height:1.65;}
+
+.code-block{background:var(--code-bg);border:1px solid var(--border2);border-radius:10px;padding:14px 20px;font-family:'Space Mono',monospace;font-size:13px;margin:12px 0;overflow-x:auto;line-height:2;}
+.cmd{color:var(--acc-text);}
+.cmd::before{content:'$ ';color:var(--muted);}
+.comment{color:var(--muted);}
+code{font-family:'Space Mono',monospace;font-size:12px;background:var(--bg3);color:var(--acc-text);padding:2px 7px;border-radius:4px;border:1px solid var(--border2);}
+
+/* STEPS */
+.steps{margin:24px 0;}
+.step{display:grid;grid-template-columns:44px 1fr;gap:0 18px;padding:28px 0;border-bottom:1px solid var(--border);}
+.step:first-child{border-top:1px solid var(--border);}
+.snum{width:36px;height:36px;border-radius:8px;background:var(--acc-dim);border:1px solid var(--acc-border);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--acc-text);margin-top:2px;letter-spacing:.02em;}
+.step-body h3{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--text);}
+.step-body p{font-size:13px;margin-bottom:8px;}
+
+/* STATS SECTION */
+.stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0;}
+.stat-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.stat-card .big{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--acc);line-height:1;letter-spacing:.02em;}
+.stat-card .desc{font-size:12px;color:var(--muted2);margin-top:4px;line-height:1.5;}
+
+/* INSTAGRAM SECTION */
+.reel-section{margin:40px 0;}
+.reel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px;}
+.reel-embed{border-radius:12px;overflow:hidden;border:1px solid var(--border2);}
+.ig-cta{display:flex;align-items:center;gap:12px;background:var(--acc-dim);border:1px solid var(--acc-border);border-radius:12px;padding:16px 20px;margin-top:20px;text-decoration:none;transition:background .15s;}
+.ig-cta:hover{background:rgba(245,166,35,0.14);}
+.ig-cta .ig-icon{font-size:28px;}
+.ig-cta-text .big-label{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--acc-text);letter-spacing:.04em;}
+.ig-cta-text .sub-label{font-size:12px;color:var(--muted2);}
+
+/* FAQ */
+.faq-item{padding:18px 0;border-bottom:1px solid var(--border);}
+.faq-item:first-child{border-top:1px solid var(--border);}
+.fq{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--text);}
+.fa{font-size:13px;color:var(--muted2);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:24px;max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;}
+footer a{color:var(--acc-text);text-decoration:none;}
+
+/* LANG */
+.hi{display:none;}
+html[data-lang="hi"] .en{display:none;}
+html[data-lang="hi"] .hi{display:inline;}
+p.hi,div.hi,h2.hi,h3.hi,li.hi{display:none;}
+html[data-lang="hi"] p.en,html[data-lang="hi"] div.en,html[data-lang="hi"] h2.en,html[data-lang="hi"] h3.en,html[data-lang="hi"] li.en{display:none;}
+html[data-lang="hi"] p.hi,html[data-lang="hi"] div.hi,html[data-lang="hi"] h2.hi,html[data-lang="hi"] h3.hi,html[data-lang="hi"] li.hi{display:block;}
+
+@media(max-width:600px){
+  .compare-wrap{grid-template-columns:1fr;}
+  .reel-grid{grid-template-columns:1fr;}
+  .stat-cards{grid-template-columns:1fr 1fr;}
+  .toc-grid{grid-template-columns:1fr;}
+  .stats-row{flex-wrap:wrap;gap:20px;}
+  .stat{border-right:none;margin-right:0;padding-right:0;}
+  .h-page{display:none;}
+  .reel-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-left">
+    <span class="h-brand">rk.codex</span>
+    <span class="h-sep">/</span>
+    <span class="h-page">caveman-mode-guide</span>
+  </div>
+  <div class="h-right">
+    <div class="lang-pill">
+      <button class="lbtn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lbtn" id="btn-hi" onclick="setLang('hi')">हि</button>
+    </div>
+    <button class="theme-btn" id="tbtn" onclick="toggleTheme()">☀</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero">
+    <span class="cave-emoji">🦴</span>
+    <div class="badge-row">
+      <span class="badge g"><span class="dot"></span> AI Tool of the Day</span>
+      <span class="badge">Claude Code</span>
+      <span class="badge r">75% Token Savings</span>
+    </div>
+
+    <h1>
+      <span class="acc">Caveman</span> Mode
+      <span class="sub-h en">Brain big. Mouth smaller.</span>
+      <span class="sub-h hi">Dimag bada. Muh chhota.</span>
+    </h1>
+
+    <p class="hero-sub en">
+      <strong>Maine Claude ko caveman bana diya</strong> — aur seriously mera bill 75% kam ho gaya. Same accuracy. Zero fluff. One command install.
+    </p>
+    <p class="hero-sub hi">
+      <strong>Claude ko caveman bana diya</strong> — bill 75% kam ho gaya. Same accuracy. Zero fluff. Ek command install.
+    </p>
+
+    <div class="install-box">
+      <div class="install-label en">Install for Claude Code / Cursor</div>
+      <div class="install-label hi">Claude Code / Cursor ke liye install</div>
+      <div class="install-cmd">npx skills add JuliusBrussee/caveman</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="sv">75%</div>
+        <div class="sl en">Fewer tokens per response</div>
+        <div class="sl hi">Kam tokens per response</div>
+      </div>
+      <div class="stat">
+        <div class="sv">+26%</div>
+        <div class="sl en">Accuracy improvement (Mar 2026)</div>
+        <div class="sl hi">Accuracy improvement (Mar 2026)</div>
+      </div>
+      <div class="stat">
+        <div class="sv">14K</div>
+        <div class="sl en">GitHub stars · #1 trending</div>
+        <div class="sl hi">GitHub stars · #1 trending tha</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE CONTENT -->
+<div class="page">
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-lbl">Contents</div>
+    <div class="toc-grid">
+      <a href="#problem" class="toc-item"><span class="tn">01</span> <span class="en">The Token Problem</span><span class="hi">Token Problem</span></a>
+      <a href="#install" class="toc-item"><span class="tn">02</span> <span class="en">Install in 60 Seconds</span><span class="hi">60 Second Install</span></a>
+      <a href="#compare" class="toc-item"><span class="tn">03</span> <span class="en">Normal vs Caveman</span><span class="hi">Normal vs Caveman</span></a>
+      <a href="#science" class="toc-item"><span class="tn">04</span> <span class="en">The Science</span><span class="hi">Research aur Science</span></a>
+      <a href="#reels" class="toc-item"><span class="tn">05</span> <span class="en">Watch the Reel</span><span class="hi">Reel Dekho</span></a>
+      <a href="#faq" class="toc-item"><span class="tn">06</span> <span class="en">FAQ</span><span class="hi">FAQ</span></a>
+    </div>
+  </div>
+
+  <!-- 01 PROBLEM -->
+  <div class="section" id="problem">
+    <div class="slabel">01 — The Problem</div>
+    <h2 class="en">Your AI is costing you <span style="color:var(--acc)">extra money</span> for saying nothing</h2>
+    <h2 class="hi">Tumhara AI <span style="color:var(--acc)">extra paisa</span> le raha hai kuch bhi kehne ke liye</h2>
+
+    <p class="en">Every time Claude Code responds, it burns tokens on filler phrases. <strong>"Sure! I'd be happy to help you with that."</strong> — you've seen it a thousand times. These aren't just annoying. They're billable tokens. Tokens = money. And you've been paying for them silently, every single session.</p>
+    <p class="hi">Har baar jab Claude Code respond karta hai, filler phrases pe tokens burn hote hain. <strong>"Sure! I'd be happy to help you with that."</strong> — yeh hazaar baar dekha hoga. Yeh sirf irritating nahi — yeh billable tokens hain. Tokens = paisa. Aur tum chup-chaap pay karte raha ho, har session mein.</p>
+
+    <div class="warn-box">
+      <span class="en">⚠️ <strong>Token waste is invisible</strong> — it doesn't show up as a line item, but it compounds across every conversation. Heavy Claude Code users can easily waste $30–50/month on filler text alone.</span>
+      <span class="hi">⚠️ <strong>Token waste invisible hai</strong> — yeh line item mein nahi dikhta, par har conversation mein compound hota hai. Heavy users easily ₹2500–4000/month waste karte hain sirf filler text pe.</span>
+    </div>
+
+    <p class="en">A developer named Julius Brussee had a simple idea: what if Claude spoke like a caveman? Short. Direct. No pleasantries. Just the answer.</p>
+    <p class="hi">Julius Brussee naam ke developer ne socha: kya hoga agar Claude caveman ki tarah bole? Short. Direct. No pleasantries. Sirf answer.</p>
+  </div>
+
+  <!-- 02 INSTALL -->
+  <div class="section" id="install">
+    <div class="slabel">02 — Install</div>
+    <h2 class="en">One command. <span style="color:var(--acc)">Done.</span></h2>
+    <h2 class="hi">Ek command. <span style="color:var(--acc)">Khatam.</span></h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="snum">1</div>
+        <div class="step-body">
+          <h3 class="en">For Claude Code (npx method)</h3>
+          <h3 class="hi">Claude Code ke liye (npx method)</h3>
+          <p class="en">Run this in your terminal. Node.js required.</p>
+          <p class="hi">Terminal mein run karo. Node.js chahiye.</p>
+          <div class="code-block">
+            <div class="cmd">npx skills add JuliusBrussee/caveman</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum">2</div>
+        <div class="step-body">
+          <h3 class="en">For Claude Code (plugin marketplace)</h3>
+          <h3 class="hi">Claude Code (plugin marketplace) ke liye</h3>
+          <p class="en">Alternative method via the Claude plugin system:</p>
+          <p class="hi">Claude plugin system se alternative method:</p>
+          <div class="code-block">
+            <div class="cmd">claude plugin marketplace add JuliusBrussee/caveman</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum">3</div>
+        <div class="step-body">
+          <h3 class="en">For Cursor, Windsurf, Copilot</h3>
+          <h3 class="hi">Cursor, Windsurf, Copilot ke liye</h3>
+          <p class="en">Add the caveman system prompt to your editor's custom instructions / rules section. Works everywhere that accepts system prompts.</p>
+          <p class="hi">Caveman system prompt apne editor ke custom instructions / rules section mein daalo. Har jagah kaam karta hai jahan system prompts accept hote hain.</p>
+          <div class="info-box">
+            <span class="en">🦴 Once installed — auto-activates every session. No config needed.</span>
+            <span class="hi">🦴 Install karo ek baar — har session mein auto-activate. Koi config nahi.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="en">GitHub repository: <a href="https://github.com/JuliusBrussee/caveman" target="_blank" style="color:var(--acc-text);text-decoration:none;font-family:'Space Mono',monospace;font-size:13px;">github.com/JuliusBrussee/caveman ↗</a></p>
+    <p class="hi">GitHub repository: <a href="https://github.com/JuliusBrussee/caveman" target="_blank" style="color:var(--acc-text);text-decoration:none;font-family:'Space Mono',monospace;font-size:13px;">github.com/JuliusBrussee/caveman ↗</a></p>
+  </div>
+
+  <!-- 03 COMPARE -->
+  <div class="section" id="compare">
+    <div class="slabel">03 — Side by Side</div>
+    <h2 class="en">Normal Claude <span style="color:var(--acc)">vs</span> Caveman Mode</h2>
+    <h2 class="hi">Normal Claude <span style="color:var(--acc)">vs</span> Caveman Mode</h2>
+    <p class="en">Same question. Same correct answer. One is expensive. One is a caveman.</p>
+    <p class="hi">Same sawaal. Same sahi jawab. Ek mehenga. Ek caveman.</p>
+
+    <div class="compare-wrap">
+      <div class="compare-card bad">
+        <div class="compare-label">😩 Normal Claude</div>
+        <div class="compare-text">The reason your React component is re-rendering is likely because you're creating a new object reference on each render cycle. I'd recommend using useMemo to memoize the object and prevent unnecessary re-renders.</div>
+        <div class="token-pill">~42 tokens</div>
+      </div>
+      <div class="compare-card good">
+        <div class="compare-label">🦴 Caveman Mode</div>
+        <div class="compare-text">New object ref each render. Wrap in useMemo.</div>
+        <div class="token-pill">~11 tokens • 75% saved</div>
+      </div>
+    </div>
+
+    <div class="compare-wrap">
+      <div class="compare-card bad">
+        <div class="compare-label">😩 Normal Claude</div>
+        <div class="compare-text">Great question! The issue with your async function is that you're not awaiting the Promise. I'd be happy to help you fix this — simply add the await keyword before your fetch call.</div>
+        <div class="token-pill">~38 tokens</div>
+      </div>
+      <div class="compare-card good">
+        <div class="compare-label">🦴 Caveman Mode</div>
+        <div class="compare-text">Missing await before fetch. Add it.</div>
+        <div class="token-pill">~7 tokens • 82% saved</div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <span class="en">💡 <strong>Same fix. Same accuracy.</strong> Caveman strips the fluff, not the knowledge. Claude's brain doesn't get smaller — just its mouth.</span>
+      <span class="hi">💡 <strong>Same fix. Same accuracy.</strong> Caveman sirf fluff hataata hai, knowledge nahi. Claude ka dimag chota nahi hota — sirf muh chota hota hai.</span>
+    </div>
+  </div>
+
+  <!-- 04 SCIENCE -->
+  <div class="section" id="science">
+    <div class="slabel">04 — The Science</div>
+    <h2 class="en">It's not just about <span style="color:var(--acc)">cost</span></h2>
+    <h2 class="hi">Sirf <span style="color:var(--acc)">paisa</span> ki baat nahi</h2>
+
+    <p class="en">Here's the plot twist: a March 2026 research paper proved that brevity actually <em>improves</em> Claude's accuracy. Fewer words = fewer chances to confuse itself or drift off-topic.</p>
+    <p class="hi">Plot twist: March 2026 ke research paper ne prove kiya ki brevity se Claude ki accuracy actually <em>improve</em> hoti hai. Kam words = confusion aur drift ka kam chance.</p>
+
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="big">26<span style="font-size:28px;color:var(--muted2)">pp</span></div>
+        <div class="desc en">Accuracy improvement from brief responses (March 2026 paper)</div>
+        <div class="desc hi">Brief responses se accuracy improvement (March 2026 paper)</div>
+      </div>
+      <div class="stat-card">
+        <div class="big">75<span style="font-size:28px;color:var(--muted2)">%</span></div>
+        <div class="desc en">Average token reduction per response with Caveman Mode</div>
+        <div class="desc hi">Caveman Mode se average token reduction per response</div>
+      </div>
+      <div class="stat-card">
+        <div class="big">14K</div>
+        <div class="desc en">GitHub stars — organically. No ads. Just developers sharing it.</div>
+        <div class="desc hi">GitHub stars — organic. Koi ads nahi. Sirf developers ne share kiya.</div>
+      </div>
+      <div class="stat-card">
+        <div class="big">#1</div>
+        <div class="desc en">Trending on GitHub last week across all repositories</div>
+        <div class="desc hi">Last week GitHub pe #1 trending tha</div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <span class="en">🧠 <strong>Brain still big. Mouth smaller.</strong> Caveman mode removes performative helpfulness — not actual capability. The model still has access to everything it knows.</span>
+      <span class="hi">🧠 <strong>Dimag bada. Muh chhota.</strong> Caveman mode performative helpfulness hataata hai — actual capability nahi. Model ke paas ab bhi sab kuch hai jo wo jaanta hai.</span>
+    </div>
+  </div>
+
+  <!-- 05 REELS / INSTAGRAM -->
+  <div class="section" id="reels">
+    <div class="slabel">05 — Watch it in Action</div>
+    <h2 class="en">See the <span style="color:var(--acc)">Reel</span></h2>
+    <h2 class="hi"><span style="color:var(--acc)">Reel</span> Dekho</h2>
+    <p class="en">Full demo with terminal recording + explanation on Instagram. Follow <strong>@rk.codex</strong> for daily AI tools that actually matter.</p>
+    <p class="hi">Full demo terminal recording ke saath Instagram pe hai. Daily AI tools ke liye follow karo <strong>@rk.codex</strong>.</p>
+
+    <div class="reel-section">
+      <div class="reel-grid">
+        <div class="reel-embed">
+          <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DW_llMRiNVX/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:0;box-shadow:none;margin:0;max-width:100%;min-width:0;padding:0;width:100%;"><div style="padding:16px;"><a href="https://www.instagram.com/reel/DW_llMRiNVX/" style="background:#FFFFFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%;" target="_blank"><div style="display:flex;flex-direction:row;align-items:center;"><div style="background-color:#F4F4F4;border-radius:50%;height:40px;margin-right:14px;width:40px;"></div><div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center;"><div style="background-color:#F4F4F4;border-radius:4px;height:14px;margin-bottom:6px;width:100px;"></div><div style="background-color:#F4F4F4;border-radius:4px;height:14px;width:60px;"></div></div></div><div style="padding:19% 0;"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511,-20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;margin:8px 0 0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">A post shared by Rk Codex (@rk.codex)</p></a></div></blockquote>
+        </div>
+        <div class="reel-embed">
+          <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DW6FmJ3vnya/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:0;box-shadow:none;margin:0;max-width:100%;min-width:0;padding:0;width:100%;"><div style="padding:16px;"><a href="https://www.instagram.com/reel/DW6FmJ3vnya/" style="background:#FFFFFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%;" target="_blank"><div style="display:flex;flex-direction:row;align-items:center;"><div style="background-color:#F4F4F4;border-radius:50%;height:40px;margin-right:14px;width:40px;"></div><div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center;"><div style="background-color:#F4F4F4;border-radius:4px;height:14px;margin-bottom:6px;width:100px;"></div><div style="background-color:#F4F4F4;border-radius:4px;height:14px;width:60px;"></div></div></div><div style="padding:19% 0;"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511,-20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;margin:8px 0 0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">A post shared by Rk Codex (@rk.codex)</p></a></div></blockquote>
+        </div>
+        <div class="reel-embed">
+          <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DW5bWzTgUkT/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:0;box-shadow:none;margin:0;max-width:100%;min-width:0;padding:0;width:100%;"><div style="padding:16px;"><a href="https://www.instagram.com/p/DW5bWzTgUkT/" style="background:#FFFFFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%;" target="_blank"><div style="display:flex;flex-direction:row;align-items:center;"><div style="background-color:#F4F4F4;border-radius:50%;height:40px;margin-right:14px;width:40px;"></div><div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center;"><div style="background-color:#F4F4F4;border-radius:4px;height:14px;margin-bottom:6px;width:100px;"></div><div style="background-color:#F4F4F4;border-radius:4px;height:14px;width:60px;"></div></div></div><div style="padding:19% 0;"></div><div style="display:block;height:50px;margin:0 auto 12px;width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511,-20)" fill="#000"><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg></div><p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;margin:8px 0 0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">A post shared by Rk Codex (@rk.codex)</p></a></div></blockquote>
+        </div>
+      </div>
+
+      <a href="https://www.instagram.com/rk.codex/" target="_blank" class="ig-cta">
+        <span class="ig-icon">📱</span>
+        <div class="ig-cta-text">
+          <div class="big-label">Follow @rk.codex on Instagram</div>
+          <div class="sub-label en">Daily AI tools that actually matter for developers · Reels every day at 7PM IST</div>
+          <div class="sub-label hi">Daily AI tools jo actually kaam aate hain · Roz reels 7PM IST pe</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 06 FAQ -->
+  <div class="section" id="faq">
+    <div class="slabel">06 — FAQ</div>
+    <h2 class="en">Common <span style="color:var(--acc)">Questions</span></h2>
+    <h2 class="hi">Common <span style="color:var(--acc)">Sawaal</span></h2>
+
+    <div class="faq-item">
+      <div class="fq"><span class="en">Does Caveman Mode work with Cursor and Windsurf?</span><span class="hi">Kya Caveman Mode Cursor aur Windsurf ke saath kaam karta hai?</span></div>
+      <div class="fa"><span class="en">Yes — any IDE or tool that accepts custom system prompts or rules files. Add the caveman prompt to your <code>.cursorrules</code> or equivalent settings.</span><span class="hi">Haan — koi bhi IDE ya tool jo custom system prompts ya rules files accept karta hai. Caveman prompt ko <code>.cursorrules</code> ya equivalent settings mein daalo.</span></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="fq"><span class="en">Will it break my workflow or miss details?</span><span class="hi">Kya yeh mera workflow break karega ya details miss karega?</span></div>
+      <div class="fa"><span class="en">No. Caveman mode strips filler language and unnecessary explanations — it doesn't remove code, logic, or technical detail. All the substance remains, just without the fluff.</span><span class="hi">Nahi. Caveman mode sirf filler language aur unnecessary explanations hataata hai — code, logic, ya technical detail nahi hataata. Saari substance rehti hai, sirf fluff nahi.</span></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="fq"><span class="en">Do I need to re-install it every session?</span><span class="hi">Kya mujhe har session mein re-install karna hoga?</span></div>
+      <div class="fa"><span class="en">No. Install once — it auto-activates in every session through the skills / plugin system. Set and forget.</span><span class="hi">Nahi. Ek baar install karo — har session mein auto-activate ho jaata hai skills / plugin system ke through. Set karo aur bhool jao.</span></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="fq"><span class="en">How is 75% token reduction calculated?</span><span class="hi">75% token reduction calculate kaise hua?</span></div>
+      <div class="fa"><span class="en">Based on community benchmarks comparing identical prompts with and without Caveman Mode. The actual savings vary — simple questions save less, complex multi-step responses save more.</span><span class="hi">Community benchmarks pe based hai — same prompts Caveman Mode ke saath aur bina. Actual savings vary karte hain — simple questions mein kam, complex responses mein zyada.</span></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="fq"><span class="en">Is this an official Anthropic/Claude feature?</span><span class="hi">Kya yeh official Anthropic/Claude feature hai?</span></div>
+      <div class="fa"><span class="en">No — it's a community-built skill by developer Julius Brussee. It's open source on GitHub and has been independently verified to work well. Anthropic has no official affiliation.</span><span class="hi">Nahi — yeh developer Julius Brussee ka community-built skill hai. GitHub pe open source hai aur independently verified hai ki accha kaam karta hai. Anthropic ka koi official affiliation nahi hai.</span></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="fq"><span class="en">Where's the GitHub repo?</span><span class="hi">GitHub repo kahan hai?</span></div>
+      <div class="fa"><a href="https://github.com/JuliusBrussee/caveman" target="_blank" style="color:var(--acc-text);font-family:'Space Mono',monospace;font-size:13px;">github.com/JuliusBrussee/caveman ↗</a> — 14,000+ stars.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>Guide by <a href="https://www.instagram.com/rk.codex/" target="_blank">rk.codex</a> · AI Tool of the Day</span>
+  <a href="https://github.com/JuliusBrussee/caveman" target="_blank">github.com/JuliusBrussee/caveman ↗</a>
+</footer>
+
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+function setLang(l){
+  document.documentElement.setAttribute('data-lang',l);
+  document.getElementById('btn-en').classList.toggle('active',l==='en');
+  document.getElementById('btn-hi').classList.toggle('active',l==='hi');
+}
+function toggleTheme(){
+  const h=document.documentElement;
+  const dark=h.getAttribute('data-theme')==='dark';
+  h.setAttribute('data-theme',dark?'light':'dark');
+  document.getElementById('tbtn').textContent=dark?'☀':'☽';
+}
+</script>
+</body>
+</html>
