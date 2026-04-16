@@ -29,7 +29,8 @@ const staticRoutes = [
   "/about",
   "/projects",
   "/articles",
-  "/contact"
+  "/contact",
+  "/privacy-policy.html"
 ];
 
 const projectRoutes = softdata.project.map((project) => `/projects/${slugify(project.title)}`);
@@ -42,7 +43,14 @@ const htmlRoutes = readArticleFiles(path.join(articlesDir, "html"))
   .filter((file) => file.endsWith(".html"))
   .map((file) => `/articles/${slugify(file.replace(/\.html$/, ""))}`);
 
-const routes = [...new Set([...staticRoutes, ...projectRoutes, ...markdownRoutes, ...htmlRoutes])];
+const routes = [...new Set([...staticRoutes, ...projectRoutes, ...markdownRoutes, ...htmlRoutes])]
+  .map((route) => {
+    // Prefer trailing slashes for folder-based routes. Keep .html as-is.
+    if (route === "/" || route.endsWith(".html")) {
+      return route;
+    }
+    return route.endsWith("/") ? route : `${route}/`;
+  });
 
 const today = new Date().toISOString();
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
