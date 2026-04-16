@@ -11,6 +11,7 @@ import { slugify } from "../lib/slug";
 import softdata from "../softdata.json";
 
 function HomePage() {
+    const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://radhakishan404.is-a.dev";
     const featuredProjects = softdata.project.slice(0, 4);
     const featuredArticles = [...articles]
         .sort((a, b) => {
@@ -55,8 +56,8 @@ function HomePage() {
                     "@type": "Person",
                     name: "Radhakishan Jangid",
                     jobTitle: "Senior Software Engineer",
-                    url: "https://radhakishan404.github.io/",
-                    image: `https://radhakishan404.github.io${profileImages.hero}`,
+                    url: `${siteUrl}/`,
+                    image: `${siteUrl}${profileImages.hero}`,
                     sameAs: [
                         "https://github.com/radhakishan404",
                         "https://www.linkedin.com/in/radhakishanjangid",
@@ -66,7 +67,7 @@ function HomePage() {
                 {
                     "@type": "WebSite",
                     name: "Radhakishan Jangid",
-                    url: "https://radhakishan404.github.io/"
+                    url: `${siteUrl}/`
                 }
             ]
         }

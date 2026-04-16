@@ -9,6 +9,7 @@ import useDocumentMeta from "../hooks/useDocumentMeta";
 function ArticleDetailPage({ match }) {
     const article = getArticleBySlug(match.params.slug);
     const { views, viewsLabel } = useArticleViews(match.params.slug, true);
+    const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://radhakishan404.is-a.dev";
 
     useDocumentMeta({
         title: article ? `${article.title} | Articles | Radhakishan Jangid` : "Article | Radhakishan Jangid",
@@ -29,10 +30,10 @@ function ArticleDetailPage({ match }) {
                 "@type": "Person",
                 name: "Radhakishan Jangid"
             },
-            mainEntityOfPage: `https://radhakishan404.github.io/articles/${article.slug}`,
+            mainEntityOfPage: `${siteUrl}/articles/${article.slug}/`,
             image: article.coverImage
-                ? `https://radhakishan404.github.io${article.coverImage}`
-                : `https://radhakishan404.github.io${profileImages.article}`,
+                ? `${siteUrl}${article.coverImage}`
+                : `${siteUrl}${profileImages.article}`,
             keywords: article.tags.join(", "),
             interactionStatistic: typeof views === "number" ? {
                 "@type": "InteractionCounter",

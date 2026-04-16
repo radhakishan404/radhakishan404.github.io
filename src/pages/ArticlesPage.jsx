@@ -6,6 +6,7 @@ import { profileImages } from "../data/images";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 
 function ArticlesPage() {
+    const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://radhakishan404.is-a.dev";
     const [query, setQuery] = useState("");
     const [typeFilter, setTypeFilter] = useState("all");
     const [tagFilter, setTagFilter] = useState("all");
@@ -35,11 +36,11 @@ function ArticlesPage() {
             "@type": "CollectionPage",
             name: "Articles by Radhakishan Jangid",
             description: "AI prompts, developer content systems, public write-ups, and practical technical articles.",
-            url: "https://radhakishan404.github.io/articles",
+            url: `${siteUrl}/articles/`,
             mainEntity: filteredArticles.slice(0, 10).map((article) => ({
                 "@type": "Article",
                 headline: article.title,
-                url: `https://radhakishan404.github.io/articles/${article.slug}`,
+                url: `${siteUrl}/articles/${article.slug}/`,
                 datePublished: article.sortDate || undefined
             }))
         }

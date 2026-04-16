@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const excludedRepos = new Set([
     "radhakishan404.github.io",
+    "radhakishan404.is-a.dev",
     "radhakishan404",
     "react-native-stylish-accordion-import"
 ]);

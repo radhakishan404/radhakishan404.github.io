@@ -1,10 +1,31 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const siteUrl = "https://radhakishan404.github.io";
+function getSiteUrl(rootDir) {
+  const cnamePath = path.join(rootDir, "public", "CNAME");
+  if (fs.existsSync(cnamePath)) {
+    const cname = fs.readFileSync(cnamePath, "utf8").trim();
+    if (cname) {
+      return `https://${cname.replace(/^https?:\/\//, "")}`;
+    }
+  }
+
+  try {
+    const pkg = JSON.parse(fs.readFileSync(path.join(rootDir, "package.json"), "utf8"));
+    if (pkg.homepage) {
+      return `${pkg.homepage}`.replace(/\/$/, "");
+    }
+  } catch {
+    // ignore
+  }
+
+  return "https://radhakishan404.github.io";
+}
+
 const authorName = "Radhakishan Jangid";
 
 const rootDir = path.resolve();
+const siteUrl = getSiteUrl(rootDir);
 const buildDir = path.join(rootDir, "build");
 const sitemapPath = path.join(buildDir, "sitemap.xml");
 const indexPath = path.join(buildDir, "index.html");
