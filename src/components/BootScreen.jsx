@@ -11,7 +11,10 @@ const sequenceLines = [
     "> Launching portfolio..."
 ];
 
-const CHAR_DELAY = 60;
+const CHAR_DELAY = 22;
+const LINE_DELAY = 70;
+const BOOT_DURATION_MS = 1100;
+const FLICKER_DURATION_MS = 240;
 
 function renderProgressBar(progress) {
     const blocks = 20;
@@ -30,7 +33,7 @@ function BootScreen({ onComplete }) {
 
         const update = (now) => {
             const elapsed = now - startTime;
-            const percent = Math.min(100, Math.round((elapsed / 3000) * 100));
+            const percent = Math.min(100, Math.round((elapsed / BOOT_DURATION_MS) * 100));
             setProgress(percent);
 
             if (percent < 100) {
@@ -75,7 +78,7 @@ function BootScreen({ onComplete }) {
             charIndex = 0;
 
             if (lineIndex < sequenceLines.length) {
-                timeoutId = window.setTimeout(typeNext, 120);
+                timeoutId = window.setTimeout(typeNext, LINE_DELAY);
                 return;
             }
 
@@ -96,12 +99,29 @@ function BootScreen({ onComplete }) {
 
         const timeoutId = window.setTimeout(() => {
             onComplete();
-        }, 620);
+        }, FLICKER_DURATION_MS);
 
         return () => {
             window.clearTimeout(timeoutId);
         };
     }, [onComplete, phase]);
+
+    useEffect(() => {
+        const handleSkip = (event) => {
+            if (event?.type === "keydown" && event.key !== "Escape") {
+                return;
+            }
+            onComplete();
+        };
+
+        window.addEventListener("keydown", handleSkip);
+        window.addEventListener("pointerdown", handleSkip);
+
+        return () => {
+            window.removeEventListener("keydown", handleSkip);
+            window.removeEventListener("pointerdown", handleSkip);
+        };
+    }, [onComplete]);
 
     const wrapperClassName = useMemo(() => {
         if (phase === "flicker") {
