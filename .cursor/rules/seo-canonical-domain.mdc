@@ -1,0 +1,21 @@
+---
+description: SEO + sitemap rules (canonical domain is-a.dev)
+alwaysApply: true
+---
+
+# Canonical domain + SEO rules
+
+## Canonical domain
+
+- **Canonical site URL is `https://radhakishan404.is-a.dev` (NOT `github.io`).**
+- Any time we generate absolute URLs (sitemaps, canonical tags, `og:url`, JSON-LD `url` / `mainEntityOfPage`, etc.), they must use the canonical domain.
+- Prefer **deriving the canonical domain from `public/CNAME`** (fallback to `package.json#homepage`).
+
+## Hard checks before shipping SEO changes
+
+- **Search for hardcoded `radhakishan404.github.io`** in `src/` and `scripts/` and remove/replace.
+- **Build locally** and verify:
+  - `build/sitemap.xml` `<loc>` values use `https://radhakishan404.is-a.dev/...`
+  - Prerendered pages include correct `<title>`, `meta[name="description"]`, canonical, OG/Twitter, and JSON-LD.
+- Ensure `public/robots.txt` does **not** hardcode the wrong domain (relative `Sitemap: /sitemap.xml` is preferred).
+

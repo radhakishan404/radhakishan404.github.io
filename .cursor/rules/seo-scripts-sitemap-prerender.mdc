@@ -1,0 +1,34 @@
+---
+description: Conventions for sitemap + SEO prerender scripts
+globs: scripts/**/*.mjs
+alwaysApply: false
+---
+
+# Sitemap + prerender script conventions
+
+## Canonical host source of truth
+
+- Read canonical host from `public/CNAME` when present.
+- If absent, fallback to `package.json#homepage`.
+- Do not hardcode `github.io` in scripts.
+
+## Output expectations
+
+- `scripts/generate-sitemap.mjs` must list **every indexable route**, including:
+  - core pages (`/`, `/about/`, `/projects/`, `/articles/`, `/contact/`)
+  - all project detail routes
+  - all article routes (markdown + html)
+  - static HTML pages like `/privacy-policy.html`
+- Folder routes should be written with **trailing slashes**.
+
+## SEO prerender expectations
+
+- `scripts/generate-article-routes.mjs` should prerender **every `<loc>` in `build/sitemap.xml`** into `build/<path>/index.html` (skip real `.html` files).
+- Each prerendered page must set:
+  - `<title>`
+  - `meta[name="description"]`
+  - canonical link
+  - `og:title`, `og:description`, `og:url`, `og:image`, `og:type`
+  - `twitter:*` equivalents
+  - JSON-LD via a deterministic `<script id="seo-ld-json" type="application/ld+json">...`
+
