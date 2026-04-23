@@ -26,6 +26,7 @@ function SiteShell({ children }) {
     const articleMatch = location.pathname.match(/^\/articles\/([^/]+)$/);
     const article = articleMatch ? getArticleBySlug(articleMatch[1]) : null;
     const isHtmlArticle = article?.kind === "html";
+    const isHomeRoute = location.pathname === "/";
 
     if (isHtmlArticle) {
         return (
@@ -38,35 +39,37 @@ function SiteShell({ children }) {
     }
 
     return (
-        <div className="site-root">
-            <CursorGlow />
-            <SiteHeader theme={theme} onToggleTheme={toggleTheme} />
-            <main key={location.pathname} className="site-main">
+        <div className={`site-root${isHomeRoute ? " site-root-home" : ""}`}>
+            {!isHomeRoute ? <CursorGlow /> : null}
+            {!isHomeRoute ? <SiteHeader theme={theme} onToggleTheme={toggleTheme} /> : null}
+            <main key={location.pathname} className={`site-main${isHomeRoute ? " site-main-home" : ""}`}>
                 {children}
             </main>
-            <footer className="site-footer">
-                <div className="shell footer-shell" data-reveal>
-                    <div className="footer-brand">
-                        <img src={logoImages.withName} alt="Radhakishan Jangid logo" />
+            {!isHomeRoute ? (
+                <footer className="site-footer">
+                    <div className="shell footer-shell" data-reveal>
+                        <div className="footer-brand">
+                            <img src={logoImages.withName} alt="Radhakishan Jangid logo" />
+                        </div>
+                        <p className="footer-line">// ─────────────────────────────────── //</p>
+                        <p className="footer-line">//  radhakishan_jangid © {new Date().getFullYear()}          //</p>
+                        <p className="footer-line">//  built with React + too much coffee //</p>
+                        <p className="footer-line">// ─────────────────────────────────── //</p>
+                        <div className="footer-social">
+                            {socialLinks.map((link) => (
+                                <a
+                                    key={link.id}
+                                    href={link.href}
+                                    target={link.id === "email" ? undefined : "_blank"}
+                                    rel={link.id === "email" ? undefined : "noreferrer"}
+                                >
+                                    [{socialCode[link.id] || link.id}]
+                                </a>
+                            ))}
+                        </div>
                     </div>
-                    <p className="footer-line">// ─────────────────────────────────── //</p>
-                    <p className="footer-line">//  radhakishan_jangid © {new Date().getFullYear()}          //</p>
-                    <p className="footer-line">//  built with React + too much coffee //</p>
-                    <p className="footer-line">// ─────────────────────────────────── //</p>
-                    <div className="footer-social">
-                        {socialLinks.map((link) => (
-                            <a
-                                key={link.id}
-                                href={link.href}
-                                target={link.id === "email" ? undefined : "_blank"}
-                                rel={link.id === "email" ? undefined : "noreferrer"}
-                            >
-                                [{socialCode[link.id] || link.id}]
-                            </a>
-                        ))}
-                    </div>
-                </div>
-            </footer>
+                </footer>
+            ) : null}
         </div>
     );
 }

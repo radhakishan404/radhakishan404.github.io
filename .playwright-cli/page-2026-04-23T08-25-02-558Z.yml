@@ -1,0 +1,199 @@
+- main [ref=e5]:
+  - generic [ref=e7]:
+    - link "radhakishan / portfolio" [ref=e8] [cursor=pointer]:
+      - /url: "#top"
+      - text: radhakishan / portfolio
+    - link "Engage" [ref=e10] [cursor=pointer]:
+      - /url: "#work"
+  - main [ref=e11]:
+    - generic [ref=e13]:
+      - generic:
+        - generic: Telemetry Link - Live
+      - generic:
+        - generic: Delivery Output
+        - generic: 87.3%
+      - generic [ref=e18]:
+        - generic [ref=e19]: MARK RK // PORTFOLIO DIAGNOSTIC
+        - heading "I build product systems that teams ship fast" [level=2] [ref=e21]:
+          - generic [ref=e22]: I build product systems
+          - generic [ref=e23]: that teams ship fast
+        - paragraph [ref=e24]: Senior Software Engineer from Mumbai building production-grade web and mobile products with strong architecture and fast release execution.
+      - generic [ref=e25]:
+        - article [ref=e26]:
+          - generic [ref=e27]: 01 - Foundation
+          - paragraph [ref=e28]: Working with US-based product and engineering teams to build scalable fintech systems, including workflow management, multi-tenancy architec...
+        - article [ref=e29]:
+          - generic [ref=e30]: 02 - Current Mission
+          - paragraph [ref=e31]: Working with US-based product and engineering teams to build scalable fintech systems, including workflow management, multi-tenancy architec...
+        - article [ref=e32]:
+          - generic [ref=e33]: 03 - Delivery Style
+          - paragraph [ref=e34]: Product-first architecture, fast iteration, and stable shipping quality.
+      - generic:
+        - generic:
+          - generic: SEQ 001 / 192
+          - generic: Career Sequence
+          - generic: Scroll
+    - generic [ref=e36]:
+      - generic:
+        - generic: Playback Archive
+      - generic:
+        - generic: Sequence Monitor
+        - generic: SEQ 001 / 192
+      - generic [ref=e41]:
+        - generic [ref=e42]: BUILD LOG // PUBLIC TIMELINE
+        - generic [ref=e43]:
+          - heading "From concept to shipping" [level=2] [ref=e44]:
+            - generic [ref=e45]: From concept
+            - generic [ref=e46]: to shipping
+          - heading "Public work, real code, real impact" [level=2] [ref=e47]:
+            - generic [ref=e48]: Public work,
+            - generic [ref=e49]: real code,
+            - generic [ref=e50]: real impact
+        - paragraph [ref=e51]: "Every scroll checkpoint maps to my portfolio story: shipped products, open-source consistency, and technical writing for builders."
+      - generic [ref=e52]:
+        - article [ref=e53]:
+          - generic [ref=e54]: 01 - Projects
+          - paragraph [ref=e55]: Local-first macOS reel editor built with SwiftUI + AVFoundation.
+        - article [ref=e56]:
+          - generic [ref=e57]: 02 - Open Source
+          - paragraph [ref=e58]: 6+ repositories showing practical, reusable engineering output.
+        - article [ref=e59]:
+          - generic [ref=e60]: 03 - Writing
+          - paragraph [ref=e61]: Caveman Mode is a no-fluff prompting style that cuts token usage by ~75% while keeping output quality intact.
+      - generic:
+        - generic:
+          - generic: SEQ 001 / 192
+          - generic: Portfolio Replay
+          - generic: Scroll
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - text: J.A.R.V.I.S. // SYSTEMS NOMINAL
+        - heading "Engineering with production focus and product clarity." [level=2] [ref=e65]
+        - paragraph [ref=e66]: "I work across frontend, backend, and mobile delivery with a strong product lens. The goal is always the same: ship useful software with quality and speed."
+        - generic [ref=e67]:
+          - link "Open Work Archive" [ref=e68] [cursor=pointer]:
+            - /url: "#work"
+          - link "Contact" [ref=e69] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=e70]:
+          - article [ref=e71]:
+            - heading "Cachetech Advisor Solutions (USA)" [level=3] [ref=e72]
+            - paragraph [ref=e73]: Senior Software Engineer
+            - generic [ref=e74]: February 2024 - Present
+          - article [ref=e75]:
+            - heading "Edubridge India Pvt Ltd" [level=3] [ref=e76]
+            - paragraph [ref=e77]: Manager - Software Engineer
+            - generic [ref=e78]: December 2022 - January 2024
+          - article [ref=e79]:
+            - heading "TechStalwarts Software Development LLP" [level=3] [ref=e80]
+            - paragraph [ref=e81]: Senior Software Engineer
+            - generic [ref=e82]: September 2020 - November 2022
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - generic [ref=e86]: Years in Production
+            - generic [ref=e87]: Years building web products
+          - strong [ref=e88]: 7+
+        - generic [ref=e89]:
+          - generic [ref=e90]:
+            - generic [ref=e91]: Current Position
+            - generic [ref=e92]: Cachetech Advisor Solutions (USA)
+          - strong [ref=e93]: Senior Software Engineer
+        - generic [ref=e94]:
+          - generic [ref=e95]:
+            - generic [ref=e96]: Public Repositories
+            - generic [ref=e97]: Real code, public iteration
+          - strong [ref=e98]: 6+
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - generic [ref=e101]: Published Articles
+            - generic [ref=e102]: AI, systems, and engineering notes
+          - strong [ref=e103]: 14+
+    - generic [ref=e104]:
+      - generic [ref=e105]:
+        - text: WORK ARCHIVE // FEATURED
+        - heading "Projects, code, and writing on one timeline." [level=2] [ref=e106]
+      - generic [ref=e107]:
+        - article [ref=e108]:
+          - img "MacEdits preview" [ref=e109]
+          - generic [ref=e110]:
+            - heading "MacEdits" [level=3] [ref=e111]
+            - paragraph [ref=e112]: Local-first macOS reel editor built with SwiftUI + AVFoundation.
+            - generic [ref=e113]:
+              - link "Case Study" [ref=e114] [cursor=pointer]:
+                - /url: /projects/macedits
+              - link "Live" [ref=e115] [cursor=pointer]:
+                - /url: https://github.com/radhakishan404/MacEdits
+        - article [ref=e116]:
+          - img "Notch Prompter preview" [ref=e117]
+          - generic [ref=e118]:
+            - heading "Notch Prompter" [level=3] [ref=e119]
+            - paragraph [ref=e120]: A notch-aligned native macOS teleprompter built with SwiftUI.
+            - generic [ref=e121]:
+              - link "Case Study" [ref=e122] [cursor=pointer]:
+                - /url: /projects/notch-prompter
+              - link "Live" [ref=e123] [cursor=pointer]:
+                - /url: https://notch-prompter.vercel.app
+        - article [ref=e124]:
+          - img "SSHipIt preview" [ref=e125]
+          - generic [ref=e126]:
+            - heading "SSHipIt" [level=3] [ref=e127]
+            - paragraph [ref=e128]: CD over SSH for Node.js, Next.js and React applications.
+            - generic [ref=e129]:
+              - link "Case Study" [ref=e130] [cursor=pointer]:
+                - /url: /projects/sshipit
+              - link "Live" [ref=e131] [cursor=pointer]:
+                - /url: https://sshipit.vercel.app/
+        - article [ref=e132]:
+          - img "Nirulas preview" [ref=e133]
+          - generic [ref=e134]:
+            - heading "Nirulas" [level=3] [ref=e135]
+            - paragraph [ref=e136]: Nirula's is India's oldest fast food restaurant chain.
+            - generic [ref=e137]:
+              - link "Case Study" [ref=e138] [cursor=pointer]:
+                - /url: /projects/nirulas
+              - link "Live" [ref=e139] [cursor=pointer]:
+                - /url: https://delivery.nirulas.com/
+      - generic [ref=e140]:
+        - link "01 Caveman Mode — 75% Fewer Tokens | rk.codex 6 min read" [ref=e141] [cursor=pointer]:
+          - /url: /articles/caveman-mode-guide
+          - generic [ref=e142]: "01"
+          - paragraph [ref=e143]: Caveman Mode — 75% Fewer Tokens | rk.codex
+          - generic [ref=e144]: 6 min read
+        - link "02 Hermes Agent — Complete Guide | rk.codex 13 min read" [ref=e145] [cursor=pointer]:
+          - /url: /articles/hermes-agent-guide
+          - generic [ref=e146]: "02"
+          - paragraph [ref=e147]: Hermes Agent — Complete Guide | rk.codex
+          - generic [ref=e148]: 13 min read
+        - link "03 Free AI Models in 5 Minutes — Bonsai Setup Guide 5 min read" [ref=e149] [cursor=pointer]:
+          - /url: /articles/bonsai-free-models-guide
+          - generic [ref=e150]: "03"
+          - paragraph [ref=e151]: Free AI Models in 5 Minutes — Bonsai Setup Guide
+          - generic [ref=e152]: 5 min read
+        - link "04 Free Dev Domain Guide — rk.codex 11 min read" [ref=e153] [cursor=pointer]:
+          - /url: /articles/free-domain-guide
+          - generic [ref=e154]: "04"
+          - paragraph [ref=e155]: Free Dev Domain Guide — rk.codex
+          - generic [ref=e156]: 11 min read
+  - generic [ref=e157]:
+    - generic [ref=e158]:
+      - generic [ref=e159]:
+        - paragraph [ref=e160]: Radhakishan / Archive
+        - paragraph [ref=e162]: Senior Software Engineer building product-grade systems, public repositories, and practical writing for developers.
+      - generic [ref=e163]:
+        - link "Projects" [ref=e164] [cursor=pointer]:
+          - /url: /projects
+        - link "Articles" [ref=e165] [cursor=pointer]:
+          - /url: /articles
+        - link "Contact" [ref=e166] [cursor=pointer]:
+          - /url: /contact
+        - link "GitHub" [ref=e167] [cursor=pointer]:
+          - /url: https://github.com/radhakishan404
+        - link "LinkedIn" [ref=e168] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/radhakishanjangid
+        - link "X" [ref=e169] [cursor=pointer]:
+          - /url: https://x.com/radhakishan404
+    - generic [ref=e170]:
+      - generic [ref=e171]: Build 2026-04-23
+      - generic [ref=e172]: radhakishan404.is-a.dev
+      - generic [ref=e173]: Home sequence complete

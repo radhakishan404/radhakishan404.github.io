@@ -19,7 +19,7 @@ function getSiteUrl(rootDir) {
     // ignore
   }
 
-  return "https://radhakishan404.github.io";
+  return "https://radhakishan404.is-a.dev";
 }
 
 const authorName = "Radhakishan Jangid";
