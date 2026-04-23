@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A copy-ready collection of ChatGPT image prompts for creating cinematic Indian brand posters, menus, and product visuals.">
+<meta name="keywords" content="ai image prompts, chatgpt image prompts, prompt engineering, indian brands, menu design, product posters, rk codex">
+<meta name="date" content="2026-04-23T18:20:00+05:30">
+<meta name="category" content="Prompt System">
+<meta name="theme-color" content="#080808">
+<meta property="article:published_time" content="2026-04-23T18:20:00+05:30">
+<meta property="og:image" content="/prompt-images/first-image.png">
+<title>rk.codex — 10 ChatGPT Image Prompts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080808;
+    --surface: #0f0f0f;
+    --card: #111;
+    --border: #1a1a1a;
+    --border-strong: #2a2a2a;
+    --accent: #c8f53d;
+    --accent-soft: rgba(200,245,61,0.1);
+    --accent2: #e8e4dc;
+    --text: #e8e4dc;
+    --muted: #666;
+    --muted-2: #444;
+    --green: #c8f53d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cabinet Grotesk', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(200,245,61,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.12s ease, width 0.3s, height 0.3s, border-color 0.3s;
+  }
+
+  body:has(a:hover) .cursor-ring,
+  body:has(button:hover) .cursor-ring,
+  body:has(.prompt-card:hover) .cursor-ring {
+    width: 52px;
+    height: 52px;
+    border-color: rgba(200,245,61,0.7);
+  }
+
+  #progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 500;
+    transition: width 0.08s linear;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 400;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    padding: 0 48px;
+    background: rgba(8,8,8,0.9);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(16px);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+  }
+
+  .nav-logo span { color: var(--text); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .nav-count strong { color: var(--accent); }
+
+  .nav-ig {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--border-strong);
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .nav-ig:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,245,61,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,245,61,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(200,245,61,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    background: rgba(200,245,61,0.08);
+    border: 1px solid rgba(200,245,61,0.25);
+    border-radius: 4px;
+    padding: 7px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    width: max-content;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(56px, 9vw, 128px);
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+    color: var(--text);
+    margin-bottom: 28px;
+    max-width: 1050px;
+  }
+
+  .hero-title span {
+    display: block;
+  }
+
+  .hero-title .lime {
+    color: var(--accent);
+  }
+
+  .hero-title .outline {
+    color: #333;
+    -webkit-text-stroke: 1px #333;
+  }
+
+  .hero-sub {
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
+
+  .insta-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--border-strong);
+    padding: 1px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-bottom: 12px;
+    width: max-content;
+  }
+
+  .insta-inner {
+    background: var(--bg);
+    border-radius: 3px;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  .insta-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* Section */
+  .section-header {
+    padding: 64px 48px 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 3vw, 44px);
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+
+  /* Grid */
+  .prompts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 14px;
+    padding: 0 48px 80px;
+  }
+
+  /* Card */
+  .prompt-card {
+    background: #0f0f0f;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .prompt-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: 0 20px 70px rgba(200,245,61,0.08);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .card-emoji {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .card-info {
+    flex: 1;
+  }
+
+  .card-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 3px;
+  }
+
+  .card-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  .card-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .card-link:hover {
+    background: rgba(200,245,61,0.08);
+    border-color: rgba(200,245,61,0.4);
+    color: var(--accent);
+  }
+
+  .prompt-image-wrap {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background: #0a0a0a;
+  }
+
+  .prompt-image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.55));
+    pointer-events: none;
+  }
+
+  .prompt-image-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    filter: saturate(0.92) contrast(1.08) brightness(0.86);
+    transform: scale(1.01);
+    transition: transform 0.5s ease, filter 0.5s ease;
+  }
+
+  .prompt-card:hover .prompt-image-wrap img {
+    filter: saturate(1.08) contrast(1.12) brightness(0.95);
+    transform: scale(1.05);
+  }
+
+  .image-caption {
+    position: absolute;
+    left: 14px;
+    bottom: 12px;
+    z-index: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(8,8,8,0.72);
+    border: 1px solid rgba(200,245,61,0.25);
+    border-radius: 4px;
+    padding: 5px 8px;
+  }
+
+  /* Prompt body */
+  .card-body {
+    padding: 18px 20px;
+  }
+
+  .prompt-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .prompt-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .prompt-text {
+    background: #0a0a0a;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: #aaa;
+    font-family: 'DM Mono', monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 200px;
+    overflow-y: auto;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .prompt-text::-webkit-scrollbar { width: 4px; }
+  .prompt-text::-webkit-scrollbar-track { background: transparent; }
+  .prompt-text::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  /* Highlight key words */
+  .prompt-text em { color: var(--accent2); font-style: normal; font-weight: 500; }
+
+  .card-footer {
+    display: flex;
+    gap: 10px;
+    padding: 0 20px 20px;
+  }
+
+  .btn-copy {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    color: #080808;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-copy:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(200,245,61,0.22);
+  }
+
+  .btn-copy.copied {
+    background: var(--text);
+    transform: scale(0.98);
+  }
+
+  .btn-expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: none;
+    transition: all 0.2s ease;
+    font-family: 'DM Mono', monospace;
+    white-space: nowrap;
+  }
+
+  .btn-expand:hover {
+    background: rgba(255,255,255,0.08);
+    color: var(--text);
+  }
+
+  .prompt-text.expanded {
+    max-height: none;
+  }
+
+  /* Color variants per card */
+  .card-1 .card-emoji,
+  .card-2 .card-emoji,
+  .card-3 .card-emoji,
+  .card-4 .card-emoji,
+  .card-5 .card-emoji,
+  .card-6 .card-emoji,
+  .card-7 .card-emoji,
+  .card-8 .card-emoji,
+  .card-9 .card-emoji,
+  .card-10 .card-emoji { background: rgba(200,245,61,0.08); }
+
+  /* Top accent bar per card */
+  .card-1,
+  .card-2,
+  .card-3,
+  .card-4,
+  .card-5,
+  .card-6,
+  .card-7,
+  .card-8,
+  .card-9,
+  .card-10 { border-top: 2px solid var(--accent); }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--accent);
+    color: #080808;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 30px rgba(200,245,61,0.25);
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Reel tip banner */
+  .reel-tip {
+    max-width: 1280px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+  }
+
+  .reel-tip-inner {
+    background: rgba(200,245,61,0.06);
+    border: 1px solid rgba(200,245,61,0.22);
+    border-radius: 10px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .tip-icon {
+    font-size: 36px;
+    flex-shrink: 0;
+  }
+
+  .tip-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .tip-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .tip-text strong { color: var(--accent2); }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-handle {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* Scroll animation */
+  .prompt-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .prompt-card:nth-child(1) { animation-delay: 0.05s; }
+  .prompt-card:nth-child(2) { animation-delay: 0.10s; }
+  .prompt-card:nth-child(3) { animation-delay: 0.15s; }
+  .prompt-card:nth-child(4) { animation-delay: 0.20s; }
+  .prompt-card:nth-child(5) { animation-delay: 0.25s; }
+  .prompt-card:nth-child(6) { animation-delay: 0.30s; }
+  .prompt-card:nth-child(7) { animation-delay: 0.35s; }
+  .prompt-card:nth-child(8) { animation-delay: 0.40s; }
+  .prompt-card:nth-child(9) { animation-delay: 0.45s; }
+  .prompt-card:nth-child(10) { animation-delay: 0.50s; }
+
+  @media (max-width: 600px) {
+    body { cursor: auto; }
+    .cursor,
+    .cursor-ring { display: none; }
+    nav { padding: 0 20px; }
+    .nav-count { display: none; }
+    .hero,
+    .section-header,
+    .prompts-grid { padding-left: 20px; padding-right: 20px; }
+    .hero-title { font-size: clamp(48px, 14vw, 72px); }
+    .section-header { flex-direction: column; align-items: flex-start; }
+    .prompts-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .stat-num { font-size: 28px; }
+    .reel-tip-inner { flex-direction: column; text-align: center; }
+    .card-header { flex-wrap: wrap; gap: 12px; }
+    .card-link { font-size: 10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div id="progress"></div>
+
+<nav>
+  <a href="#" class="nav-logo">rk<span>.codex</span></a>
+  <div class="nav-right">
+    <span class="nav-count"><strong>10</strong> image prompts ready</span>
+    <a href="https://instagram.com/rk.codex" target="_blank" class="nav-ig">@rk.codex</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="badge"><span class="badge-dot"></span> ChatGPT Images 2.0 — New Model</div>
+  <h1 class="hero-title">
+    <span>10 INSANE</span>
+    <span class="lime">AI IMAGE</span>
+    <span class="outline">PROMPTS.</span>
+  </h1>
+  <p class="hero-sub">Real Indian brand concepts, cinematic menu posters, product visuals, and ready-to-copy prompts built for ChatGPT image generation.</p>
+  <a href="https://instagram.com/rk.codex" target="_blank" class="insta-handle">
+    <div class="insta-inner">
+      <svg class="insta-icon" viewBox="0 0 24 24" fill="none">
+        <defs>
+          <linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#fcb045"/>
+            <stop offset="50%" stop-color="#fd1d1d"/>
+            <stop offset="100%" stop-color="#833ab4"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="4" stroke="url(#ig)" stroke-width="2"/>
+        <circle cx="17.5" cy="6.5" r="1.5" fill="url(#ig)"/>
+      </svg>
+      @rk.codex
+    </div>
+  </a>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">10</div><div class="stat-label">Prompts</div></div>
+    <div class="stat"><div class="stat-num">🇮🇳</div><div class="stat-label">Indian Brands</div></div>
+    <div class="stat"><div class="stat-num">2K</div><div class="stat-label">Resolution</div></div>
+    <div class="stat"><div class="stat-num">FREE</div><div class="stat-label">To Use</div></div>
+  </div>
+</section>
+
+<!-- REEL TIP -->
+<div class="reel-tip">
+  <div class="reel-tip-inner">
+    <div class="tip-icon">🎬</div>
+    <div>
+      <div class="tip-title">How To Use For Your Reel</div>
+      <div class="tip-text">
+        <strong>Step 1</strong> — Copy any prompt below → <strong>Step 2</strong> — Paste in ChatGPT (use GPT-4o or Images 2.0) → <strong>Step 3</strong> — Screen record the generation → <strong>Step 4</strong> — Post the reveal on your reel. Drop the prompt in comments to boost engagement 🔥
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-header">
+  <div>
+    <div class="section-label">The Collection</div>
+    <h2 class="section-title">Copy-ready image prompts with visual references.</h2>
+  </div>
+  <div class="stat-num">10</div>
+</div>
+
+<!-- PROMPTS GRID -->
+<div class="prompts-grid">
+
+  <!-- 1. Barbeque Nation -->
+  <div class="prompt-card card-1">
+    <div class="card-header">
+      <div class="card-left">
+        <div class="card-emoji">🥘</div>
+        <div class="card-info">
+          <div class="card-num">Prompt 01</div>
+          <div class="card-brand">Barbeque Nation</div>
+          <div class="card-subtitle">Live Grill Night Menu</div>
+        </div>
+      </div>
+      <a href="https://www.barbeque-nation.com" target="_blank" class="card-link">
+        🔗 View Brand
+      </a>
+    </div>
+    <div class="prompt-image-wrap">
+      <img src="/prompt-images/first-image.png" alt="Generated Barbeque Nation prompt preview">
+      <span class="image-caption">Generated Preview 01</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">ChatGPT Prompt</div>
+      <div class="prompt-text" id="p1">Design a premium dinner menu poster for Barbeque Nation India — India's most famous live grill buffet restaurant chain. Dark smoky black background with glowing orange and red ember fire effects around the border, like a live coal grill. Bold serif gold typography. Header: 'BARBEQUE NATION — Unlimited Grill Feast' with a small golden flame icon. Two columns: LEFT — Veg Starters on the Grill: 'Paneer Malai Tikka — cottage cheese, cream cheese marinade, charcoal grilled', 'Corn on the Cob — smoky butter glaze, chilli flakes', 'Stuffed Mushroom — garlic herb filling, grilled on skewers', 'Veg Seekh Kebab — minced vegetables, green chilli, coriander'. RIGHT — Non-Veg Starters: 'Chicken Tangdi Kebab — drumstick, spiced yoghurt marinade, tandoor finish', 'Mutton Galouti Kebab — melt-in-mouth minced lamb patty', 'Fish Tikka — basa fillet, ajwain, lemon marinade, grilled'. Footer: 'Live Grill at Your Table • Unlimited Refills • ₹799 per person'. Ember glow lighting, rustic wood table texture in background. Ultra-photorealistic, 2K resolution.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-copy" onclick="copyPrompt('p1', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Prompt
+      </button>
+      <button class="btn-expand" onclick="toggleExpand('p1', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Expand
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. Wow! Momo -->
+  <div class="prompt-card card-2">
+    <div class="card-header">
+      <div class="card-left">
+        <div class="card-emoji">🥟</div>
+        <div class="card-info">
+          <div class="card-num">Prompt 02</div>
+          <div class="card-brand">Wow! Momo</div>
+          <div class="card-subtitle">Street Neon Stall Menu</div>
+        </div>
+      </div>
+      <a href="https://www.wowmomo.in" target="_blank" class="card-link">🔗 View Brand</a>
+    </div>
+    <div class="prompt-image-wrap">
+      <img src="/prompt-images/second image.png" alt="Generated Wow Momo prompt preview">
+      <span class="image-caption">Generated Preview 02</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">ChatGPT Prompt</div>
+      <div class="prompt-text" id="p2">Create a vibrant neon-lit street food stall menu board for Wow! Momo — India's biggest momo chain, founded in Kolkata. Background: blurred rainy evening Indian street with auto-rickshaws and colorful neon shop signs in the bokeh. Foreground: bright red and white Wow! Momo logo banner. Menu displayed on a lit board with bold white and yellow text: 'STEAMED MOMOS — Classic Veg ₹120 | Chicken ₹140 | Paneer ₹130'. 'PAN FRIED MOMOS — Crispy bottom, soft top — Veg ₹140 | Chicken ₹160'. 'TANDOORI MOMOS — Charcoal smoked, spicy mayo dip — ₹160'. 'CHOCO MOMOS — Nutella filled, sugar dusted — ₹150'. 'MOMO BURGER — Momo patty in toasted bun, cheese, sriracha — ₹180'. Add steam rising from a momo basket illustration. Street lighting, monsoon mood, wet pavement reflection. Ultra-detailed, cinematic, 2K resolution.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-copy" onclick="copyPrompt('p2', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Prompt
+      </button>
+      <button class="btn-expand" onclick="toggleExpand('p2', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Expand
+      </button>
+    </div>
+  </div>
+
+  <!-- 3. Cafe Coffee Day -->
+  <div class="prompt-card card-3">
+    <div class="card-header">
+      <div class="card-left">
+        <div class="card-emoji">☕</div>
+        <div class="card-info">
+          <div class="card-num">Prompt 03</div>
+          <div class="card-brand">Cafe Coffee Day</div>
+          <div class="card-subtitle">Retro 90s College Café Menu</div>
+        </div>
+      </div>
+      <a href="https://www.cafecoffeeday.com" target="_blank" class="card-link">🔗 View Brand</a>
+    </div>
+    <div class="prompt-image-wrap">
+      <img src="/prompt-images/third images.png" alt="Generated Cafe Coffee Day prompt preview">
+      <span class="image-caption">Generated Preview 03</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">ChatGPT Prompt</div>
+      <div class="prompt-text" id="p3">Design a nostalgic 1990s retro college café-style menu board for Cafe Coffee Day India — CCD, the café that defined a generation of Indian youth. Warm mustard yellow and brick red color palette, retro hand-painted signboard look, slight grunge and distressed texture. CCD square logo in retro illustration style at the top. Menu in bold vintage typewriter font: COFFEE — 'Classic Cappuccino ₹175 | Caramel Latte ₹215 | Cold Coffee with Ice Cream ₹195 | South Indian Filter Coffee ₹155'. BITES — 'Veg Grilled Sandwich ₹175 | Chicken Club Sandwich ₹225 | Chocolate Brownie ₹145 | Masala Maggi ₹135'. FRAPPE & SHAKES — 'Choco Fantasy Frappe ₹225 | Mango Mastani ₹215'. Decorative elements: cassette tape illustration, old Nokia phone doodle, retro bulletin board pins, love note scribbles. Tagline at bottom: 'A lot can happen over coffee.' Warm tungsten bulb lighting mood. Ultra-detailed, print-quality, 2K resolution.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-copy" onclick="copyPrompt('p3', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Prompt
+      </button>
+      <button class="btn-expand" onclick="toggleExpand('p3', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Expand
+      </button>
+    </div>
+  </div>
+
+  <!-- 4. Biryani By Kilo -->
+  <div class="prompt-card card-4">
+    <div class="card-header">
+      <div class="card-left">
+        <div class="card-emoji">🍛</div>
+        <div class="card-info">
+          <div class="card-num">Prompt 04</div>
+          <div class="card-brand">Biryani By Kilo</div>
+          <div class="card-subtitle">Royal Mughal Feast Menu</div>
+        </div>
+      </div>
+      <a href="https://www.biryanibykilo.com" target="_blank" class="card-link">🔗 View Brand</a>
+    </div>
+    <div class="prompt-image-wrap">
+      <img src="/prompt-images/fourth image.png" alt="Generated Biryani By Kilo prompt preview">
+      <span class="image-caption">Generated Preview 04</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">ChatGPT Prompt</div>
+      <div class="prompt-text" id="p4">Create a royal Mughal-era feast menu card design for Biryani By Kilo — India's premium handi biryani delivery brand. Rich deep maroon and royal gold color palette. Ornate Mughal arch border with intricate jali lattice pattern, peacock feather motifs in corners. Center top: 'BIRYANI BY KILO' in bold gold calligraphic Urdu-inspired typography, tagline below: 'Dum Pukht. Slow Cooked. Served Fresh in Handi.' Menu listed in two elegant sections: BIRYANI HANDI: 'Lucknowi Chicken Dum Biryani — slow cooked 2-3 hours, saffron, aged basmati, rose water — 500g ₹549', 'Hyderabadi Mutton Biryani — kachchi style, caramelized onion, mint — 500g ₹649', 'Paneer Zafrani Biryani — saffron paneer, dry fruits, kewra — 500g ₹449', 'Chicken Tikka Biryani — chargrilled tikka layered in dum — 500g ₹569'. SIDES: 'Burhani Raita ₹79 | Dal Gosht ₹299 | Shahi Tukda ₹149'. Dum steam rising from a clay handi illustration. Warm candlelight ambiance. Ultra-realistic luxurious print quality, 2K resolution.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-copy" onclick="copyPrompt('p4', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Prompt
+      </button>
+      <button class="btn-expand" onclick="toggleExpand('p4', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Expand
+      </button>
+    </div>
+  </div>
+
+  <!-- 5. Farzi Cafe -->
+  <div class="prompt-card card-5">
+    <div class="card-header">
+      <div class="card-left">
+        <div class="card-emoji">🥗</div>
+        <div class="card-info">
+          <div class="card-num">Prompt 05</div>
+          <div class="card-brand">Farzi Café</div>
+          <div class="card-subtitle">Molecular Gastronomy Tasting Menu</div>
+        </div>
+      </div>
+      <a href="https://www.farzicafe.com" target="_blank" class="card-link">🔗 View Brand</a>
+    </div>
+    <div class="prompt-image-wrap">
+      <img src="/prompt-images/fifth iamge.png" alt="Generated Farzi Cafe prompt preview">
+      <span class="image-caption">Generated Preview 05</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">ChatGPT Prompt</div>
+      <div class="prompt-text" id="p5">Design a modern, edgy tasting menu card for Farzi Café — India's most famous molecular gastronomy restaurant by Chef Zorawar Kalra, known for reinventing Indian street food with fine dining techniques. Dark slate grey background, matte finish, rose gold metallic typography, deconstructed Indian art motifs. Header: 'FARZI CAFÉ — The Art of Indian Reinvention'. Menu laid out as a tasting sequence: '01 — Pani Puri Shots — liquid nitrogen cooled spherified tamarind water, mint gel, semolina crisp'. '02 — Dal Baati Churma Deconstructed — smoked dal mousse, baati crumble, churma snow, ghee caviar'. '03 — Butter Chicken Lasagna — slow-cooked makhani sauce, béchamel, fresh pasta sheets, micro herbs — ₹695'. '04 — Gulab Jamun Cheesecake — warm rose syrup gel, saffron cream, pistachio dust — ₹395'. '05 — Pan India Tasting Board — 6 iconic street foods reimagined — ₹1,295'. Side illustration: ink-splash art of a chef mid-plating. Bold contrast, artsy layout. 2K resolution, luxury editorial style.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-copy" onclick="copyPrompt('p5', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Prompt
+      </button>
+      <button class="btn-expand" onclick="toggleExpand('p5', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Expand
+      </button>
+    </div>
+  </div>
+
+  <!-- 6. Saravana Bhavan -->
+  <div class="prompt-card card-6">
+    <div class="card-header">
+      <div class="card-left">
+        <div class="card-emoji">🍲</div>
+        <div class="card-info">
+          <div class="card-num">Prompt 06</div>
+          <div class="card-brand">Saravana Bhavan</div>
+          <div class="card-subtitle">South Indian Temple Town Menu</div>
+        </div>
+      </div>
+      <a href="https://www.saravanabhavan.com" target="_blank" class="card-link">🔗 View Brand</a>
+    </div>
+    <div class="prompt-image-wrap">
+      <img src="/prompt-images/6th image.png" alt="Generated Saravana Bhavan prompt preview">
+      <span class="image-caption">Generated Preview 06</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">ChatGPT Prompt</div>
+      <div class="prompt-text" id="p6">Design a traditional South Indian temple-town inspired full menu board for Hotel Saravana Bhavan — one of the world's largest vegetarian restaurant chains, founded in Chennai in 1981. Ivory cream background with deep forest green and vermilion red borders. Kolam rangoli pattern decorating all four corners. Tamil Nadu temple gopuram silhouette as a subtle watermark behind the text. Header in Tamil and English: 'சாரவண பவன் — Saravana Bhavan'. Menu sections in clean serif typography: BREAKFAST: 'Plain Dosa ₹80 | Masala Dosa ₹100 | Rava Kesari ₹60 | Idli Sambar (2 pcs) ₹75 | Vada (2 pcs) ₹70 | Pongal ₹85'. MEALS: 'Full South Indian Meals — rice, rasam, sambar, 3 vegetables, papad, pickle, payasam — ₹195'. TIFFIN: 'Uttapam ₹95 | Appam with Coconut Milk ₹110 | Set Dosa ₹85'. SWEETS: 'Payasam ₹70 | Kesari ₹65 | Mysore Pak ₹90'. Small banana leaf illustration under each section. Warm turmeric and coconut oil-scented mood. Authentic, ultra-detailed, 2K resolution.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-copy" onclick="copyPrompt('p6', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Prompt
+      </button>
+      <button class="btn-expand" onclick="toggleExpand('p6', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Expand
+      </button>
+    </div>
+  </div>
+
+  <!-- 7. Licious -->
+  <div class="prompt-card card-7">
+    <div class="card-header">
+      <div class="card-left">
+        <div class="card-emoji">🍗</div>
+        <div class="card-info">
+          <div class="card-num">Prompt 07</div>
+          <div class="card-brand">Licious</div>
+          <div class="card-subtitle">Premium Meat Product Poster</div>
+        </div>
+      </div>
+      <a href="https://www.licious.in" target="_blank" class="card-link">🔗 View Brand</a>
+    </div>
+    <div class="prompt-image-wrap">
+      <img src="/prompt-images/7th image.png" alt="Generated Licious prompt preview">
+      <span class="image-caption">Generated Preview 07</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">ChatGPT Prompt</div>
+      <div class="prompt-text" id="p7">Create a premium product showcase poster for Licious — India's leading fresh meat and seafood delivery brand. Clean modern white background with dark charcoal text, bold red Licious logo in top left corner. Hero center image described as: a perfectly styled, fresh raw chicken curry cut on a dark slate plate, surrounded by whole spices — black cardamom, cloves, green chilli, ginger root, fresh coriander — shot in professional food photography style with dramatic side lighting. Product details alongside: 'CHICKEN CURRY CUT — Farm Fresh | Antibiotic Free | No Preservatives'. Specs in clean typography: 'Weight: 500g | Delivers in 90 minutes | Freshness Guarantee'. Star rating: ★★★★★ 4.8 | 12,400 reviews. Bold red CTA button: 'ORDER NOW — ₹229'. Bottom strip: quality badges — 'Vacuum Packed | Temperature Controlled | Lab Tested'. Clean, minimal, e-commerce product hero poster style. Ultra-photorealistic food photography look, 2K resolution.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-copy" onclick="copyPrompt('p7', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Prompt
+      </button>
+      <button class="btn-expand" onclick="toggleExpand('p7', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Expand
+      </button>
+    </div>
+  </div>
+
+  <!-- 8. The Bombay Canteen -->
+  <div class="prompt-card card-8">
+    <div class="card-header">
+      <div class="card-left">
+        <div class="card-emoji">🧁</div>
+        <div class="card-info">
+          <div class="card-num">Prompt 08</div>
+          <div class="card-brand">The Bombay Canteen</div>
+          <div class="card-subtitle">Mumbai Heritage Cocktail Menu</div>
+        </div>
+      </div>
+      <a href="https://www.thebombaycanteen.com" target="_blank" class="card-link">🔗 View Brand</a>
+    </div>
+    <div class="prompt-image-wrap">
+      <img src="/prompt-images/8th image.png" alt="Generated The Bombay Canteen prompt preview">
+      <span class="image-caption">Generated Preview 08</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">ChatGPT Prompt</div>
+      <div class="prompt-text" id="p8">Design a vintage Mumbai heritage-style cocktail and bites menu card for The Bombay Canteen — Mumbai's iconic farm-to-table modern Indian restaurant. Aged parchment sepia paper texture background. Art deco Bombay colonial era design — geometric borders, old Bombay tram and Victoria carriage illustrations, black and white vintage photography style inserts. Header: 'THE BOMBAY CANTEEN — Est. 2015, Lower Parel, Mumbai' in stamped letterpress typography. COCKTAILS section: 'Kaala Khatta Sour — kala namak vodka, kokum shrub, tamarind foam — ₹695', 'Bombay Mule — Goa cashew feni, ginger beer, lime, curry leaf ice — ₹745', 'Thandai Old Fashioned — spiced thandai whisky, rose bitters, almond milk — ₹795'. SMALL BITES: 'Vada Pav Sliders — house green chutney, garlic chutney, fried green chilli — ₹395', 'Bombil Fry — Bombay duck, rice flour batter, konkani masala — ₹595'. Footer: 'Celebrating the spirit of Bombay, one plate at a time.' Warm sepia lighting, elegant, nostalgic. 2K resolution, luxury print quality.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-copy" onclick="copyPrompt('p8', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Prompt
+      </button>
+      <button class="btn-expand" onclick="toggleExpand('p8', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Expand
+      </button>
+    </div>
+  </div>
+
+  <!-- 9. Paper Boat -->
+  <div class="prompt-card card-9">
+    <div class="card-header">
+      <div class="card-left">
+        <div class="card-emoji">🧃</div>
+        <div class="card-info">
+          <div class="card-num">Prompt 09</div>
+          <div class="card-brand">Paper Boat</div>
+          <div class="card-subtitle">Nostalgia Drinks Lineup Poster</div>
+        </div>
+      </div>
+      <a href="https://www.paperboatdrinks.com" target="_blank" class="card-link">🔗 View Brand</a>
+    </div>
+    <div class="prompt-image-wrap">
+      <img src="/prompt-images/9th image.png" alt="Generated Paper Boat prompt preview">
+      <span class="image-caption">Generated Preview 09</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">ChatGPT Prompt</div>
+      <div class="prompt-text" id="p9">Create a stunning product lineup poster for Paper Boat — India's beloved nostalgic drinks brand. Warm cream background, simple flat-illustration style inspired by childhood Indian picture books. Paper Boat logo and tagline 'Drinks and Memories' at the top. Showcase 6 drinks in a horizontal lineup, each bottle/pouch illustrated in Paper Boat's signature illustrated style with their flavors: 'Aam Panna — raw mango, jeera, black salt', 'Jaljeera — tangy cumin, mint, lemon', 'Kokum — coastal Goan sweet-sour kokum', 'Rose Sharbat — gulkand, rose petals, milk', 'Chikki — crushed peanut jaggery smoothie', 'Thandai — badam, kesar, fennel, cardamom'. Each bottle surrounded by hand-drawn illustrations of childhood India — a gulli-danda bat, a kite, marbles, an old radio, a class school bench. Pastel palette: mango yellow, mint green, gulabi pink. Tagline at bottom: 'Har ghoont mein ek yaad.' Ultra-detailed, warm nostalgic mood, 2K resolution.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-copy" onclick="copyPrompt('p9', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Prompt
+      </button>
+      <button class="btn-expand" onclick="toggleExpand('p9', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Expand
+      </button>
+    </div>
+  </div>
+
+  <!-- 10. Kingfisher -->
+  <div class="prompt-card card-10">
+    <div class="card-header">
+      <div class="card-left">
+        <div class="card-emoji">🍺</div>
+        <div class="card-info">
+          <div class="card-num">Prompt 10</div>
+          <div class="card-brand">Kingfisher Beer</div>
+          <div class="card-subtitle">IPL Cricket Party Menu</div>
+        </div>
+      </div>
+      <a href="https://www.kingfisherworld.com" target="_blank" class="card-link">🔗 View Brand</a>
+    </div>
+    <div class="prompt-image-wrap">
+      <img src="/prompt-images/10th image.png" alt="Generated Kingfisher prompt preview">
+      <span class="image-caption">Generated Preview 10</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-label">ChatGPT Prompt</div>
+      <div class="prompt-text" id="p10">Design a bold, energetic IPL cricket season party food and drinks menu poster for Kingfisher Beer — India's most iconic beer brand. Vibrant red, gold and blue color palette. Background: cricket stadium lights bokeh, grass pitch texture at bottom. Large Kingfisher logo with flying kingfisher bird at the top. Bold header: 'KINGFISHER IPL PARTY MENU — The King of Good Times'. DRINKS: 'Kingfisher Premium Pint ₹180 | Kingfisher Ultra Strong ₹200 | Kingfisher Radler — lemon ginger ₹150 | Kingfisher 0.0 Non-Alcoholic ₹120'. MATCH BITES: 'Masala Peanuts & Chivda ₹80 | Crispy Chicken Wings — peri peri, honey sriracha ₹320 | Loaded Nachos — salsa, jalapeños, sour cream ₹280 | Paneer Tikka Platter ₹350 | Seekh Kebab (6 pcs) ₹380'. Footer: 'Watch. Cheer. Eat. Drink. Repeat. 🏏' Cricket ball and bat illustration as design elements. Stadium crowd roar energy. Bold, sporty, ultra-photorealistic, 2K resolution.</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-copy" onclick="copyPrompt('p10', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Prompt
+      </button>
+      <button class="btn-expand" onclick="toggleExpand('p10', this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Expand
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-handle">@rk.codex</div>
+  <p class="footer-sub">Follow for more AI tricks, prompts & tech content 🔥</p>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+  Prompt copied to clipboard!
+</div>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  const progress = document.getElementById('progress');
+  const canHover = window.matchMedia('(hover: hover)').matches;
+
+  if (canHover) {
+    document.addEventListener('mousemove', (event) => {
+      cursor.style.left = `${event.clientX}px`;
+      cursor.style.top = `${event.clientY}px`;
+      cursorRing.style.left = `${event.clientX}px`;
+      cursorRing.style.top = `${event.clientY}px`;
+    });
+  } else {
+    cursor.style.display = 'none';
+    cursorRing.style.display = 'none';
+  }
+
+  const updateProgress = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const width = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progress.style.width = `${width}%`;
+  };
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  function copyPrompt(id, btn) {
+    const text = document.getElementById(id).innerText;
+    const write = navigator.clipboard?.writeText
+      ? navigator.clipboard.writeText(text)
+      : Promise.reject(new Error('Clipboard API unavailable'));
+
+    write.then(() => {
+      const original = btn.innerHTML;
+      btn.classList.add('copied');
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+      showToast();
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = original;
+      }, 2500);
+    }).catch(() => {
+      showToast('Copy failed. Long press and copy manually.');
+    });
+  }
+
+  function toggleExpand(id, btn) {
+    const el = document.getElementById(id);
+    const expanded = el.classList.toggle('expanded');
+    btn.innerHTML = expanded
+      ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg> Collapse`
+      : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg> Expand`;
+  }
+
+  function showToast(message = 'Prompt copied to clipboard!') {
+    const toast = document.getElementById('toast');
+    toast.lastChild.textContent = ` ${message}`;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+</script>
+</body>
+</html>
