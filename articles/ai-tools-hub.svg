@@ -1,0 +1,42 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#080808"/>
+  <g opacity="0.25">
+    <path d="M0 140H1600" stroke="#1F2710"/>
+    <path d="M0 268H1600" stroke="#1F2710"/>
+    <path d="M0 396H1600" stroke="#1F2710"/>
+    <path d="M0 524H1600" stroke="#1F2710"/>
+    <path d="M0 652H1600" stroke="#1F2710"/>
+    <path d="M0 780H1600" stroke="#1F2710"/>
+    <path d="M180 0V900" stroke="#1F2710"/>
+    <path d="M436 0V900" stroke="#1F2710"/>
+    <path d="M692 0V900" stroke="#1F2710"/>
+    <path d="M948 0V900" stroke="#1F2710"/>
+    <path d="M1204 0V900" stroke="#1F2710"/>
+    <path d="M1460 0V900" stroke="#1F2710"/>
+  </g>
+  <circle cx="1230" cy="156" r="220" fill="url(#glow)" opacity="0.9"/>
+  <rect x="120" y="108" width="272" height="42" rx="8" fill="#101010" stroke="#365011"/>
+  <circle cx="152" cy="129" r="8" fill="#C8F53D"/>
+  <text x="176" y="136" fill="#C8F53D" font-family="Menlo, Monaco, Consolas, monospace" font-size="18" letter-spacing="3">DEVELOPER RESOURCES</text>
+  <text x="120" y="310" fill="#EBE7DE" font-family="Arial Black, Arial, sans-serif" font-size="132" letter-spacing="-4">AI TOOLS HUB</text>
+  <text x="120" y="410" fill="#C8F53D" font-family="Arial Black, Arial, sans-serif" font-size="92" letter-spacing="-2">FREE / FREEMIUM / PAID</text>
+  <text x="120" y="490" fill="#817D74" font-family="Menlo, Monaco, Consolas, monospace" font-size="28">CURATED STACKS FOR CODING, RESEARCH, DESIGN, AUTOMATION, AND CREATOR WORK</text>
+  <rect x="120" y="600" width="248" height="116" rx="18" fill="#101010" stroke="#1F1F1F"/>
+  <text x="154" y="648" fill="#C8F53D" font-family="Menlo, Monaco, Consolas, monospace" font-size="20" letter-spacing="2">OPEN SOURCE</text>
+  <text x="154" y="696" fill="#EBE7DE" font-family="Arial Black, Arial, sans-serif" font-size="54">CONTINUE</text>
+  <rect x="400" y="600" width="248" height="116" rx="18" fill="#101010" stroke="#1F1F1F"/>
+  <text x="434" y="648" fill="#F3A33B" font-family="Menlo, Monaco, Consolas, monospace" font-size="20" letter-spacing="2">PAID</text>
+  <text x="434" y="696" fill="#EBE7DE" font-family="Arial Black, Arial, sans-serif" font-size="54">CURSOR</text>
+  <rect x="680" y="600" width="248" height="116" rx="18" fill="#101010" stroke="#1F1F1F"/>
+  <text x="714" y="648" fill="#C8F53D" font-family="Menlo, Monaco, Consolas, monospace" font-size="20" letter-spacing="2">FREE + PAID</text>
+  <text x="714" y="696" fill="#EBE7DE" font-family="Arial Black, Arial, sans-serif" font-size="54">CHATGPT</text>
+  <rect x="960" y="600" width="248" height="116" rx="18" fill="#101010" stroke="#1F1F1F"/>
+  <text x="994" y="648" fill="#79D7FF" font-family="Menlo, Monaco, Consolas, monospace" font-size="20" letter-spacing="2">SELF-HOST</text>
+  <text x="994" y="696" fill="#EBE7DE" font-family="Arial Black, Arial, sans-serif" font-size="54">N8N</text>
+  <defs>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1230 156) rotate(90) scale(220)">
+      <stop stop-color="#C8F53D" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#C8F53D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
