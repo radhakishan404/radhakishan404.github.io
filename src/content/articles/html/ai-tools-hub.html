@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A curated AI tools hub for developers, builders, and creators, with stronger picks across free, freemium, open-source, and paid workflows.">
+<meta name="keywords" content="ai tools, developer tools, free ai tools, paid ai tools, coding ai, app builder, ai design tools, rk codex">
+<meta name="date" content="2026-05-08T18:40:00+05:30">
+<meta name="category" content="Developer Resources">
+<meta name="theme-color" content="#080808">
+<meta property="article:published_time" content="2026-05-08T18:40:00+05:30">
+<meta property="og:image" content="/articles/ai-tools-hub.png">
+<title>rk.codex - AI Tools Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080808;
+    --surface: #101010;
+    --surface-2: #141414;
+    --card: #111111;
+    --border: #1c1c1c;
+    --border-strong: #2a2a2a;
+    --text: #ebe7de;
+    --muted: #7d7a72;
+    --muted-2: #525048;
+    --accent: #c8f53d;
+    --accent-soft: rgba(200, 245, 61, 0.08);
+    --accent-strong: rgba(200, 245, 61, 0.2);
+    --paid: #f3a33b;
+    --paid-soft: rgba(243, 163, 59, 0.12);
+    --free: #7cff8d;
+    --free-soft: rgba(124, 255, 141, 0.12);
+    --oss: #79d7ff;
+    --oss-soft: rgba(121, 215, 255, 0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cabinet Grotesk', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .cursor,
+  .cursor-ring {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+
+  .cursor {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    transition: transform 0.1s, width 0.2s, height 0.2s;
+  }
+
+  .cursor-ring {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(200, 245, 61, 0.38);
+    transition: transform 0.12s ease, width 0.2s, height 0.2s, border-color 0.2s;
+  }
+
+  body:has(a:hover) .cursor-ring,
+  body:has(button:hover) .cursor-ring,
+  body:has(.tool-card:hover) .cursor-ring {
+    width: 52px;
+    height: 52px;
+    border-color: rgba(200, 245, 61, 0.75);
+  }
+
+  #progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--accent);
+    z-index: 500;
+    transition: width 0.08s linear;
+  }
+
+  nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    background: rgba(8, 8, 8, 0.92);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(16px);
+    z-index: 300;
+  }
+
+  .nav-logo {
+    text-decoration: none;
+    color: var(--accent);
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .nav-logo span { color: var(--text); }
+
+  .nav-meta {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-meta strong { color: var(--accent); font-weight: 500; }
+
+  .nav-link {
+    text-decoration: none;
+    color: var(--accent);
+    border: 1px solid var(--border-strong);
+    padding: 7px 12px;
+    border-radius: 4px;
+  }
+
+  .hero {
+    position: relative;
+    min-height: 96vh;
+    padding: 120px 48px 80px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,245,61,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,245,61,0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(circle at center, black 25%, transparent 82%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -120px;
+    right: -80px;
+    width: 680px;
+    height: 680px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,245,61,0.14) 0%, transparent 68%);
+    filter: blur(10px);
+  }
+
+  .hero-inner,
+  section,
+  footer {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-inner {
+    max-width: 1120px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 4px;
+    border: 1px solid var(--accent-strong);
+    background: var(--accent-soft);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(56px, 9vw, 126px);
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+    margin-bottom: 28px;
+    max-width: 1040px;
+  }
+
+  h1 span {
+    display: block;
+    color: var(--accent);
+  }
+
+  .hero-copy {
+    max-width: 640px;
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 42px;
+  }
+
+  .hero-copy strong { color: var(--text); }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 980px;
+  }
+
+  .stat {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.015);
+    padding: 18px 18px 16px;
+    border-radius: 10px;
+  }
+
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .shell {
+    padding: 0 48px 88px;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+  }
+
+  .summary-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+
+  .summary-card p {
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .inline-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    background: rgba(255,255,255,0.03);
+  }
+
+  .chip.free { color: var(--free); border-color: rgba(124,255,141,0.25); background: var(--free-soft); }
+  .chip.paid { color: var(--paid); border-color: rgba(243,163,59,0.24); background: var(--paid-soft); }
+  .chip.oss { color: var(--oss); border-color: rgba(121,215,255,0.24); background: var(--oss-soft); }
+  .chip.accent { color: var(--accent); border-color: var(--accent-strong); background: var(--accent-soft); }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 28px 0 24px;
+  }
+
+  .section-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .section-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: 10px;
+  }
+
+  .section-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    max-width: 540px;
+    line-height: 1.7;
+  }
+
+  .filter-wrap {
+    position: sticky;
+    top: 64px;
+    z-index: 250;
+    background: rgba(8,8,8,0.95);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 18px;
+    backdrop-filter: blur(12px);
+  }
+
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  input,
+  select,
+  button {
+    font: inherit;
+  }
+
+  .search-input,
+  .filter-select {
+    min-height: 44px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface-2);
+    color: var(--text);
+    padding: 0 14px;
+    outline: none;
+  }
+
+  .search-input {
+    flex: 1 1 280px;
+  }
+
+  .filter-select {
+    flex: 0 1 220px;
+  }
+
+  .count-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    border: 1px solid var(--accent-strong);
+    background: var(--accent-soft);
+    padding: 10px 12px;
+    border-radius: 8px;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+
+  .tool-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: 0 18px 42px rgba(0,0,0,0.24);
+  }
+
+  .tool-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .tool-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+
+  .tool-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .pricing-pill {
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--border-strong);
+  }
+
+  .pricing-pill.free { color: var(--free); border-color: rgba(124,255,141,0.28); background: var(--free-soft); }
+  .pricing-pill.paid { color: var(--paid); border-color: rgba(243,163,59,0.28); background: var(--paid-soft); }
+  .pricing-pill.oss { color: var(--oss); border-color: rgba(121,215,255,0.28); background: var(--oss-soft); }
+  .pricing-pill.hybrid { color: var(--accent); border-color: var(--accent-strong); background: var(--accent-soft); }
+
+  .tool-summary,
+  .tool-best,
+  .tool-note {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  .tool-best { margin-top: 12px; }
+  .tool-best strong,
+  .tool-note strong { color: var(--text); }
+  .tool-note {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+
+  .tool-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .tool-btn,
+  .tool-copy {
+    min-height: 44px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: none;
+  }
+
+  .tool-btn {
+    flex: 1 1 auto;
+    color: #090909;
+    background: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .tool-copy {
+    width: 48px;
+    background: var(--surface-2);
+    color: var(--text);
+  }
+
+  .stack-grid,
+  .notes-grid,
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 38px;
+  }
+
+  .stack-card,
+  .note-card,
+  .faq-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+  }
+
+  .stack-card h3,
+  .note-card h3,
+  .faq-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+
+  .stack-card p,
+  .note-card p,
+  .faq-card p {
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .stack-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .stack-item {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+  }
+
+  .stack-item span { color: var(--accent); }
+
+  .empty-state {
+    display: none;
+    text-align: center;
+    padding: 50px 20px;
+    border: 1px dashed var(--border-strong);
+    border-radius: 10px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(90px);
+    background: var(--accent);
+    color: #090909;
+    border-radius: 999px;
+    padding: 12px 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    z-index: 1000;
+    transition: transform 0.24s ease;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .footer-sub,
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 980px) {
+    .hero-stats,
+    .summary-grid,
+    .stack-grid,
+    .notes-grid,
+    .faq-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 700px) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    nav, .hero, .shell, footer { padding-left: 20px; padding-right: 20px; }
+    nav { height: auto; min-height: 64px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; gap: 10px; }
+    .nav-meta { width: 100%; justify-content: space-between; gap: 12px; }
+    .hero { min-height: auto; padding-top: 120px; }
+    .hero-stats,
+    .summary-grid,
+    .stack-grid,
+    .notes-grid,
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+    .section-header { flex-direction: column; align-items: flex-start; }
+    .filter-wrap { top: 90px; }
+    .tool-actions { flex-wrap: wrap; }
+    .tool-copy { width: 100%; }
+    footer { padding-top: 36px; padding-bottom: 40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div id="progress"></div>
+
+<nav>
+  <a href="#" class="nav-logo">rk<span>.codex</span></a>
+  <div class="nav-meta">
+    <span><strong>27</strong> verified picks</span>
+    <a class="nav-link" href="https://instagram.com/rk.codex" target="_blank" rel="noreferrer">@rk.codex</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">AI Tools Hub - Free, Freemium, Paid</div>
+    <h1>Do not buy random AI tools.<span>Build a stack</span>that fits the work.</h1>
+    <p class="hero-copy">
+      Most people waste money because they buy overlapping tools. This hub is the cleaner version:
+      a practical shortlist across <strong>coding, research, app building, design, automation, and video</strong>,
+      with notes on where free is enough and where paid actually buys you leverage.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-value" id="toolCount">27</div>
+        <div class="stat-label">Tools in the hub</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="freeCount">0</div>
+        <div class="stat-label">Free or open-source picks</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="paidCount">0</div>
+        <div class="stat-label">Paid or pro-tier options</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">May</div>
+        <div class="stat-label">Curated and refreshed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="shell">
+  <div class="summary-grid">
+    <article class="summary-card">
+      <h3>How to read this list</h3>
+      <p>Every pick here is tagged by pricing model and use case. I am intentionally avoiding fake "best for everyone" advice because coding, content, research, and automation have very different needs.</p>
+      <div class="inline-list">
+        <span class="chip free">Free</span>
+        <span class="chip oss">Open source</span>
+        <span class="chip accent">Free + Paid</span>
+        <span class="chip paid">Paid</span>
+      </div>
+    </article>
+    <article class="summary-card">
+      <h3>What to buy first</h3>
+      <p>If your main job is software delivery, spend first on your <strong>editor + model + review loop</strong>. If your main job is content, spend on <strong>generation + editing + distribution</strong>. Everything else is secondary.</p>
+      <div class="inline-list">
+        <span class="chip accent">Editor</span>
+        <span class="chip accent">Model</span>
+        <span class="chip accent">Review</span>
+        <span class="chip accent">Automation</span>
+      </div>
+    </article>
+    <article class="summary-card">
+      <h3>My bias in this guide</h3>
+      <p>I am optimizing for tools that shorten real work: writing code, shipping UI, reviewing pull requests, finding answers faster, or producing creator assets with less wasted motion.</p>
+      <div class="inline-list">
+        <span class="chip accent">Less overlap</span>
+        <span class="chip accent">Less noise</span>
+        <span class="chip accent">More output</span>
+      </div>
+    </article>
+  </div>
+
+  <div class="section-header">
+    <div>
+      <div class="section-kicker">Suggested stacks</div>
+      <h2>Three combinations that actually make sense.</h2>
+    </div>
+    <p class="section-note">You do not need all 27 tools. Start with one stack that matches your constraint: budget, speed, or output quality.</p>
+  </div>
+
+  <div class="stack-grid">
+    <article class="stack-card">
+      <h3>Lean builder stack</h3>
+      <p>For people who want maximum output with minimum spend.</p>
+      <div class="stack-list">
+        <div class="stack-item"><span>Continue</span> for in-editor assistance</div>
+        <div class="stack-item"><span>Aider</span> for terminal-driven edits</div>
+        <div class="stack-item"><span>Gemini</span> or <span>ChatGPT</span> for general reasoning</div>
+        <div class="stack-item"><span>n8n</span> for self-hosted automation</div>
+      </div>
+    </article>
+    <article class="stack-card">
+      <h3>Shipping fast stack</h3>
+      <p>For solo founders and small product teams moving from idea to working UI quickly.</p>
+      <div class="stack-list">
+        <div class="stack-item"><span>Cursor</span> as the primary IDE</div>
+        <div class="stack-item"><span>Claude</span> for high-quality implementation thinking</div>
+        <div class="stack-item"><span>v0</span> or <span>Lovable</span> for front-end acceleration</div>
+        <div class="stack-item"><span>CodeRabbit</span> for review pressure</div>
+      </div>
+    </article>
+    <article class="stack-card">
+      <h3>Creator output stack</h3>
+      <p>For reels, carousels, thumbnails, scripts, and high-frequency publishing.</p>
+      <div class="stack-list">
+        <div class="stack-item"><span>ChatGPT</span> for ideation and drafts</div>
+        <div class="stack-item"><span>Canva</span> for quick layout and social packaging</div>
+        <div class="stack-item"><span>Runway</span> for motion and editing</div>
+        <div class="stack-item"><span>HeyGen</span> for avatar and voice workflows</div>
+      </div>
+    </article>
+  </div>
+
+  <div class="section-header">
+    <div>
+      <div class="section-kicker">The hub</div>
+      <h2>Free and paid AI tools worth checking right now.</h2>
+    </div>
+    <p class="section-note">Pricing labels are intentionally broad here because exact plan details move often. The useful question is not the sticker price. It is whether the paid tier unlocks meaningful leverage for your workflow.</p>
+  </div>
+
+  <div class="filter-wrap">
+    <div class="filter-row">
+      <span class="filter-label">Search</span>
+      <input id="searchInput" class="search-input" type="text" placeholder="Search by tool, category, use case, or note">
+      <select id="categoryFilter" class="filter-select"></select>
+      <select id="pricingFilter" class="filter-select">
+        <option value="all">All pricing</option>
+        <option value="Free">Free</option>
+        <option value="Open source">Open source</option>
+        <option value="Free + Paid">Free + Paid</option>
+        <option value="Paid">Paid</option>
+      </select>
+      <div class="count-badge"><span id="visibleCount">0</span> visible</div>
+    </div>
+  </div>
+
+  <section class="tools-grid" id="toolsGrid"></section>
+  <div class="empty-state" id="emptyState">No tools matched this filter. Clear the search or switch category.</div>
+
+  <div class="section-header">
+    <div>
+      <div class="section-kicker">Buying notes</div>
+      <h2>Where people overspend.</h2>
+    </div>
+    <p class="section-note">The biggest waste pattern is paying for five tools that all solve the same narrow problem. These are the overlap traps to watch.</p>
+  </div>
+
+  <div class="notes-grid">
+    <article class="note-card">
+      <h3>Do not double-pay for the same coding loop</h3>
+      <p>Cursor, Windsurf, Copilot, Continue, and Aider can all touch the same workflow. You probably need <strong>one primary editor assistant</strong> and optionally one terminal-first agent. Not five subscriptions.</p>
+    </article>
+    <article class="note-card">
+      <h3>App builders are leverage, not architecture</h3>
+      <p>Tools like Bolt, v0, Replit, and Lovable are strongest for speed. They are not a substitute for judgment around code quality, deployment shape, or long-term maintainability.</p>
+    </article>
+    <article class="note-card">
+      <h3>Free is enough longer than people think</h3>
+      <p>For research, docs, ideation, and basic creator workflows, the free or freemium tier is often enough until usage becomes repetitive, team-based, or deadline-heavy.</p>
+    </article>
+  </div>
+
+  <div class="section-header">
+    <div>
+      <div class="section-kicker">FAQ</div>
+      <h2>Short answers to the obvious questions.</h2>
+    </div>
+    <p class="section-note">This is the compressed version. If you want, I can turn this page into a category-by-category deep dive later.</p>
+  </div>
+
+  <div class="faq-grid">
+    <article class="faq-card">
+      <h3>Which paid coding tool would I start with?</h3>
+      <p>If your work is mostly implementation, start with one serious coding surface like Cursor or Copilot, then add Claude or ChatGPT as the reasoning layer around it.</p>
+    </article>
+    <article class="faq-card">
+      <h3>Which free tools punch above their weight?</h3>
+      <p>Aider, Continue, n8n, Postman, Figma free tier, Gemini, and ChatGPT free tier all still offer real leverage if you have discipline around scope.</p>
+    </article>
+    <article class="faq-card">
+      <h3>When does paid become worth it?</h3>
+      <p>When a tool moves from experimentation to daily production. If a tool saves you repeated manual effort across the week, that is usually when paid starts making sense.</p>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div>
+    <div class="footer-brand">rk.codex</div>
+    <div class="footer-sub">Curated tools, cleaner workflows, less random spending.</div>
+  </div>
+  <div class="footer-meta">
+    Built as a living resource for developers, builders, and creators.<br>
+    Re-check vendor pages before buying because plans and limits move.
+  </div>
+</footer>
+
+<div class="toast" id="toast">Link copied.</div>
+
+<script>
+  const tools = [
+    {
+      name: "Cursor",
+      category: "Coding IDE",
+      pricing: "Paid",
+      bestFor: "Developers who want the IDE itself to behave like a fast implementation partner.",
+      summary: "Strong in-editor editing, large context workflows, and quick iteration on real codebases.",
+      note: "Best if your primary bottleneck is implementation speed inside the editor.",
+      url: "https://cursor.com"
+    },
+    {
+      name: "GitHub Copilot",
+      category: "Coding IDE",
+      pricing: "Free + Paid",
+      bestFor: "Developers already deep inside GitHub and VS Code or JetBrains workflows.",
+      summary: "Good autocomplete, chat, and repo-adjacent assistance without reworking your stack.",
+      note: "A safe default if you want less tool switching and tighter GitHub alignment.",
+      url: "https://github.com/features/copilot"
+    },
+    {
+      name: "Windsurf",
+      category: "Coding IDE",
+      pricing: "Free + Paid",
+      bestFor: "Developers who want an AI-first editor experience with strong agent framing.",
+      summary: "Fast iteration for coding, debugging, and understanding larger repo surfaces.",
+      note: "Worth comparing directly against Cursor before you commit to one editor subscription.",
+      url: "https://windsurf.com"
+    },
+    {
+      name: "Continue",
+      category: "Coding IDE",
+      pricing: "Open source",
+      bestFor: "Teams who want flexibility over models and tighter control over how AI is wired into the editor.",
+      summary: "Open-source coding assistant that can be shaped around your own model and provider preferences.",
+      note: "Strong option when you want control rather than a fixed vendor workflow.",
+      url: "https://www.continue.dev"
+    },
+    {
+      name: "Aider",
+      category: "Agentic Coding",
+      pricing: "Open source",
+      bestFor: "Terminal-first developers who prefer explicit file edits and direct git-oriented workflows.",
+      summary: "Lightweight and effective for patching code, multi-file edits, and disciplined CLI work.",
+      note: "One of the best open-source picks if you actually like staying in the terminal.",
+      url: "https://aider.chat"
+    },
+    {
+      name: "Claude",
+      category: "AI Chat",
+      pricing: "Free + Paid",
+      bestFor: "Long-form reasoning, implementation planning, code explanation, and structured writing.",
+      summary: "Strong for careful thinking, high-context writing, and code-quality-oriented assistance.",
+      note: "Best value comes when you use it for harder reasoning, not simple autocomplete.",
+      url: "https://www.anthropic.com/claude"
+    },
+    {
+      name: "ChatGPT",
+      category: "AI Chat",
+      pricing: "Free + Paid",
+      bestFor: "General-purpose ideation, writing, image prompting, and broad workflow coverage.",
+      summary: "A flexible all-rounder across text, reasoning, browsing, and multimodal use cases.",
+      note: "Often the most useful single paid AI subscription if your work is broad rather than specialized.",
+      url: "https://chatgpt.com"
+    },
+    {
+      name: "Gemini",
+      category: "AI Chat",
+      pricing: "Free + Paid",
+      bestFor: "Google-centric workflows, quick research, and docs-oriented general assistance.",
+      summary: "Useful when your workflow is already tied into the Google ecosystem.",
+      note: "Good to benchmark against Claude or ChatGPT before assuming you need all three.",
+      url: "https://gemini.google.com"
+    },
+    {
+      name: "Perplexity",
+      category: "Research",
+      pricing: "Free + Paid",
+      bestFor: "Fast answer gathering, source-backed summaries, and quicker research triage.",
+      summary: "Designed around retrieval and source-first answers rather than pure conversation.",
+      note: "Great when the bottleneck is finding, verifying, and compressing information.",
+      url: "https://www.perplexity.ai"
+    },
+    {
+      name: "Phind",
+      category: "Research",
+      pricing: "Free + Paid",
+      bestFor: "Developer-focused searching, explanations, and technical troubleshooting.",
+      summary: "Still useful for code-heavy search and fast technical context when docs are fragmented.",
+      note: "More helpful when the question is technical and external, not purely project-internal.",
+      url: "https://www.phind.com"
+    },
+    {
+      name: "Bolt.new",
+      category: "App Builder",
+      pricing: "Paid",
+      bestFor: "Rapid app prototyping in the browser when speed beats architecture purity.",
+      summary: "Strong for turning prompts into working front-end or full-stack prototypes quickly.",
+      note: "Treat output as accelerated scaffolding, not final architecture by default.",
+      url: "https://bolt.new"
+    },
+    {
+      name: "v0",
+      category: "App Builder",
+      pricing: "Free + Paid",
+      bestFor: "Generating interface ideas, front-end sections, and shippable React/Tailwind starting points.",
+      summary: "Best when UI speed matters and you can refine output with real engineering judgment.",
+      note: "Very useful for front-end acceleration, less useful if you expect it to own architecture decisions.",
+      url: "https://v0.dev"
+    },
+    {
+      name: "Lovable",
+      category: "App Builder",
+      pricing: "Free + Paid",
+      bestFor: "Prompt-first product assembly and quick MVP generation for founders or non-specialist builders.",
+      summary: "Good for compressing idea-to-demo time when you need visible progress fast.",
+      note: "Evaluate generated code quality if the project is graduating from prototype to product.",
+      url: "https://lovable.dev"
+    },
+    {
+      name: "Replit",
+      category: "App Builder",
+      pricing: "Free + Paid",
+      bestFor: "Browser-based coding, quick deployments, and teaching or lightweight prototyping.",
+      summary: "Useful for all-in-one coding, running, and sharing without heavy local setup.",
+      note: "Great for speed and convenience, but large production systems still need stronger engineering controls.",
+      url: "https://replit.com"
+    },
+    {
+      name: "CodeRabbit",
+      category: "Code Review",
+      pricing: "Free + Paid",
+      bestFor: "Pull-request review loops where teams want constant coverage and faster review throughput.",
+      summary: "Adds automated review pressure to PRs and can catch issues before humans miss them.",
+      note: "Best when paired with disciplined maintainers who still make the final judgment call.",
+      url: "https://coderabbit.ai"
+    },
+    {
+      name: "Qodo",
+      category: "Code Review",
+      pricing: "Free + Paid",
+      bestFor: "Review, generation, and test-adjacent support inside engineering workflows.",
+      summary: "Aimed at turning AI into a more systematic engineering helper rather than only a chatbot.",
+      note: "Worth considering if your team wants more structure around how AI enters engineering work.",
+      url: "https://www.qodo.ai"
+    },
+    {
+      name: "Snyk",
+      category: "Security",
+      pricing: "Free + Paid",
+      bestFor: "Dependency security, vulnerability visibility, and guardrails in the delivery pipeline.",
+      summary: "Useful when shipping speed is high enough that security drift becomes real risk.",
+      note: "Paid starts making more sense as soon as multiple repos and shared dependencies are involved.",
+      url: "https://snyk.io"
+    },
+    {
+      name: "Postman",
+      category: "API",
+      pricing: "Free + Paid",
+      bestFor: "API testing, collections, collaboration, and keeping request flows sane.",
+      summary: "Still one of the easiest ways to make API work visible and repeatable across people.",
+      note: "Not an AI-first tool, but still central enough to stay in the stack conversation.",
+      url: "https://www.postman.com"
+    },
+    {
+      name: "n8n",
+      category: "Automation",
+      pricing: "Open source",
+      bestFor: "Builders who want workflow automation without being fully trapped in a hosted SaaS layer.",
+      summary: "Excellent when you want automations, AI steps, and self-hosted control in one place.",
+      note: "One of the highest-leverage open-source tools in this whole page.",
+      url: "https://n8n.io"
+    },
+    {
+      name: "Zapier",
+      category: "Automation",
+      pricing: "Free + Paid",
+      bestFor: "Business automations, app connectors, and quick no-code wiring across SaaS tools.",
+      summary: "Very strong connector breadth, especially when you need non-engineers to participate.",
+      note: "You pay for convenience and connector coverage more than deep technical control.",
+      url: "https://zapier.com"
+    },
+    {
+      name: "Figma",
+      category: "Design",
+      pricing: "Free + Paid",
+      bestFor: "UI design, collaborative product thinking, and design system work.",
+      summary: "Still the core design surface for many product teams, especially when collaboration matters.",
+      note: "Paid becomes worth it when team workflows, libraries, or org-level control matter.",
+      url: "https://www.figma.com"
+    },
+    {
+      name: "Canva",
+      category: "Design",
+      pricing: "Free + Paid",
+      bestFor: "Fast social design, decks, thumbnails, and non-designer output that still has to look finished.",
+      summary: "Extremely practical for creators, marketers, and engineers who need shippable visuals quickly.",
+      note: "If output speed matters more than perfect craft, Canva is hard to beat.",
+      url: "https://www.canva.com"
+    },
+    {
+      name: "Runway",
+      category: "Video",
+      pricing: "Free + Paid",
+      bestFor: "Video generation, editing assistance, and AI-enhanced creator production.",
+      summary: "Useful for quick motion experiments, concept visuals, and creator-side production acceleration.",
+      note: "The value is highest when you are actually publishing video, not just testing one feature once.",
+      url: "https://runwayml.com"
+    },
+    {
+      name: "HeyGen",
+      category: "Video",
+      pricing: "Paid",
+      bestFor: "Avatar videos, talking-head workflows, localization, and repeatable creator pipelines.",
+      summary: "Most useful when you need consistent presenter-style output without filming every variation.",
+      note: "Worth it for teams or creators with recurring format-driven video needs.",
+      url: "https://www.heygen.com"
+    },
+    {
+      name: "Midjourney",
+      category: "Imaging",
+      pricing: "Paid",
+      bestFor: "High-style image generation where aesthetic quality is more important than workflow integration.",
+      summary: "Still relevant for strong visual taste and image-first creative generation.",
+      note: "Best for finished-looking outputs, less ideal if you want deeply integrated product workflows.",
+      url: "https://www.midjourney.com"
+    },
+    {
+      name: "Notion AI",
+      category: "Docs",
+      pricing: "Free + Paid",
+      bestFor: "Internal docs, synthesis, note cleanup, and turning scattered information into usable pages.",
+      summary: "Most useful when your team already lives inside Notion and wants AI embedded there.",
+      note: "Avoid it if your organization is not already committed to Notion as a source of truth.",
+      url: "https://www.notion.com/product/ai"
+    },
+    {
+      name: "Devin",
+      category: "Agent",
+      pricing: "Paid",
+      bestFor: "Teams exploring autonomous or semi-autonomous engineering workflows.",
+      summary: "Aimed at heavier agentic development use cases rather than lightweight assistance.",
+      note: "Evaluate very carefully against your process maturity and expected ROI before buying.",
+      url: "https://devin.ai"
+    }
+  ];
+
+  const cursor = document.getElementById("cursor");
+  const cursorRing = document.getElementById("cursorRing");
+  const progress = document.getElementById("progress");
+  const canHover = window.matchMedia("(hover: hover)").matches;
+
+  if (canHover) {
+    document.addEventListener("mousemove", (event) => {
+      cursor.style.left = `${event.clientX}px`;
+      cursor.style.top = `${event.clientY}px`;
+      cursorRing.style.left = `${event.clientX}px`;
+      cursorRing.style.top = `${event.clientY}px`;
+    });
+  } else {
+    cursor.style.display = "none";
+    cursorRing.style.display = "none";
+  }
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const width = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progress.style.width = `${width}%`;
+  }
+
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+
+  const searchInput = document.getElementById("searchInput");
+  const categoryFilter = document.getElementById("categoryFilter");
+  const pricingFilter = document.getElementById("pricingFilter");
+  const toolsGrid = document.getElementById("toolsGrid");
+  const visibleCount = document.getElementById("visibleCount");
+  const emptyState = document.getElementById("emptyState");
+  const toolCount = document.getElementById("toolCount");
+  const freeCount = document.getElementById("freeCount");
+  const paidCount = document.getElementById("paidCount");
+  const toast = document.getElementById("toast");
+
+  const categories = ["all", ...new Set(tools.map((tool) => tool.category))];
+  categoryFilter.innerHTML = categories
+    .map((category) => `<option value="${category}">${category === "all" ? "All categories" : category}</option>`)
+    .join("");
+
+  function pricingClass(pricing) {
+    if (pricing === "Free") return "free";
+    if (pricing === "Open source") return "oss";
+    if (pricing === "Paid") return "paid";
+    return "hybrid";
+  }
+
+  function renderCounts() {
+    toolCount.textContent = `${tools.length}`;
+    freeCount.textContent = `${tools.filter((tool) => tool.pricing === "Free" || tool.pricing === "Open source" || tool.pricing === "Free + Paid").length}`;
+    paidCount.textContent = `${tools.filter((tool) => tool.pricing === "Paid" || tool.pricing === "Free + Paid").length}`;
+  }
+
+  function renderTools() {
+    const search = searchInput.value.trim().toLowerCase();
+    const category = categoryFilter.value;
+    const pricing = pricingFilter.value;
+
+    const filtered = tools.filter((tool) => {
+      const haystack = [tool.name, tool.category, tool.bestFor, tool.summary, tool.note, tool.pricing]
+        .join(" ")
+        .toLowerCase();
+      const matchesSearch = haystack.includes(search);
+      const matchesCategory = category === "all" || tool.category === category;
+      const matchesPricing = pricing === "all" || tool.pricing === pricing;
+      return matchesSearch && matchesCategory && matchesPricing;
+    });
+
+    visibleCount.textContent = `${filtered.length}`;
+    emptyState.style.display = filtered.length ? "none" : "block";
+
+    toolsGrid.innerHTML = filtered.map((tool) => `
+      <article class="tool-card">
+        <div class="tool-top">
+          <div>
+            <div class="tool-name">${tool.name}</div>
+            <div class="tool-category">${tool.category}</div>
+          </div>
+          <span class="pricing-pill ${pricingClass(tool.pricing)}">${tool.pricing}</span>
+        </div>
+        <p class="tool-summary">${tool.summary}</p>
+        <p class="tool-best"><strong>Best for:</strong> ${tool.bestFor}</p>
+        <p class="tool-note"><strong>Why it matters:</strong> ${tool.note}</p>
+        <div class="tool-actions">
+          <a class="tool-btn" href="${tool.url}" target="_blank" rel="noreferrer">Open tool</a>
+          <button class="tool-copy" type="button" aria-label="Copy link for ${tool.name}" data-link="${tool.url}">+</button>
+        </div>
+      </article>
+    `).join("");
+
+    document.querySelectorAll(".tool-copy").forEach((button) => {
+      button.addEventListener("click", () => copyLink(button.dataset.link));
+    });
+  }
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    window.clearTimeout(showToast.timer);
+    showToast.timer = window.setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2200);
+  }
+
+  function copyLink(link) {
+    const writer = navigator.clipboard && navigator.clipboard.writeText
+      ? navigator.clipboard.writeText(link)
+      : Promise.reject(new Error("Clipboard unavailable"));
+
+    writer
+      .then(() => showToast("Link copied."))
+      .catch(() => showToast("Copy failed. Open the tool directly."));
+  }
+
+  searchInput.addEventListener("input", renderTools);
+  categoryFilter.addEventListener("change", renderTools);
+  pricingFilter.addEventListener("change", renderTools);
+
+  renderCounts();
+  renderTools();
+</script>
+</body>
+</html>
