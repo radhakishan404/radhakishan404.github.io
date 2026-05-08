@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A practical guide to Career-Ops, the open-source multi-agent job search system that evaluates roles, generates tailored CV PDFs, scans job boards, and tracks your pipeline.">
+<meta name="keywords" content="career-ops, claude code, job search automation, ai job search, ats resume, open source, career operations">
+<meta name="date" content="2026-05-08T20:10:00+05:30">
+<meta name="category" content="Open Source">
+<meta name="theme-color" content="#0a0806">
+<meta property="article:published_time" content="2026-05-08T20:10:00+05:30">
+<meta property="og:image" content="/articles/career-ops-guide.png">
+<title>Career-Ops — Open-Source Job Search System | rk.codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root[data-theme="dark"]{
+  --bg:#0a0806;--bg2:#110f0b;--bg3:#181510;--bg4:#231f18;
+  --border:rgba(255,200,80,0.08);--border2:rgba(255,200,80,0.16);
+  --text:#f5ead8;--muted:#7b6d58;--muted2:#aa9779;
+  --acc:#f5a623;--acc-dim:rgba(245,166,35,0.08);--acc-border:rgba(245,166,35,0.26);--acc-text:#ffc85a;
+  --blue:#61c7f7;--blue-dim:rgba(97,199,247,0.08);--blue-border:rgba(97,199,247,0.24);--blue-text:#b5e9ff;
+  --green:#7cff8d;--green-dim:rgba(124,255,141,0.08);--green-border:rgba(124,255,141,0.24);--green-text:#c5ffd0;
+  --red:#c0392b;--red-dim:rgba(192,57,43,0.08);--red-border:rgba(192,57,43,0.25);--red-text:#f07c70;
+  --code-bg:#0d0b08;--card-bg:#110f0b;
+}
+:root[data-theme="light"]{
+  --bg:#fcf7ef;--bg2:#f3e9db;--bg3:#eadcc8;--bg4:#e0d0b7;
+  --border:rgba(110,80,30,0.08);--border2:rgba(110,80,30,0.16);
+  --text:#2d2114;--muted:#907457;--muted2:#6f5336;
+  --acc:#c47d0e;--acc-dim:rgba(196,125,14,0.08);--acc-border:rgba(196,125,14,0.22);--acc-text:#8b5800;
+  --blue:#2476a8;--blue-dim:rgba(36,118,168,0.08);--blue-border:rgba(36,118,168,0.2);--blue-text:#1d5f87;
+  --green:#2e8f43;--green-dim:rgba(46,143,67,0.08);--green-border:rgba(46,143,67,0.18);--green-text:#226c33;
+  --red:#922b21;--red-dim:rgba(146,43,33,0.06);--red-border:rgba(146,43,33,0.2);--red-text:#922b21;
+  --code-bg:#ede3d5;--card-bg:#fff8ef;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.72;transition:background .2s,color .2s;position:relative;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.35;}
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:0 24px;height:48px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(8px);}
+.h-left{display:flex;align-items:center;gap:6px;font-size:13px;}
+.h-brand{font-family:'Space Mono',monospace;font-weight:700;font-size:13px;color:var(--acc-text);letter-spacing:.01em;}
+.h-sep{color:var(--border2);font-size:18px;line-height:1;margin:0 2px;}
+.h-page{color:var(--muted);font-size:12px;font-family:'Space Mono',monospace;}
+.h-right{display:flex;align-items:center;gap:8px;}
+.theme-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:background .15s;font-family:'DM Sans',sans-serif;}
+.theme-btn:hover{background:var(--bg4);}
+.hero-wrap{position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero-bg-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,var(--border) 39px,var(--border) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,var(--border) 39px,var(--border) 40px);opacity:.35;pointer-events:none;}
+.hero-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:780px;height:400px;background:radial-gradient(ellipse,rgba(245,166,35,0.06) 0%,transparent 65%);pointer-events:none;}
+.hero{max-width:760px;margin:0 auto;padding:72px 24px 60px;position:relative;}
+.tool-emoji{font-size:60px;line-height:1;margin-bottom:18px;display:block;filter:drop-shadow(0 4px 24px rgba(245,166,35,0.20));animation:float 3.2s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.badge-row{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+.badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border2);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted2);background:var(--bg2);text-transform:uppercase;font-family:'Space Mono',monospace;}
+.badge.g{border-color:var(--green-border);color:var(--green-text);background:var(--green-dim);}
+.badge.b{border-color:var(--blue-border);color:var(--blue-text);background:var(--blue-dim);}
+.badge.a{border-color:var(--acc-border);color:var(--acc-text);background:var(--acc-dim);}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--acc);display:inline-block;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,10vw,100px);font-weight:400;line-height:.95;letter-spacing:.02em;margin-bottom:16px;text-transform:uppercase;}
+h1 .acc{color:var(--acc);}
+h1 .sub-h{display:block;font-size:clamp(20px,4vw,34px);color:var(--muted2);letter-spacing:.04em;margin-top:6px;}
+.hero-sub{font-size:16px;color:var(--muted2);max-width:560px;margin-bottom:34px;line-height:1.7;}
+.hero-sub strong{color:var(--text);}
+.hero-links{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px;}
+.hero-link{display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:10px;text-decoration:none;font-size:13px;font-weight:700;transition:background .15s,border-color .15s;min-height:44px;}
+.hero-link.primary{background:var(--acc-dim);color:var(--acc-text);border:1px solid var(--acc-border);}
+.hero-link.primary:hover{background:rgba(245,166,35,0.14);}
+.hero-link.secondary{background:var(--bg2);color:var(--muted2);border:1px solid var(--border2);}
+.hero-link.secondary:hover{background:var(--bg3);color:var(--text);}
+.stats-row{display:flex;gap:0;border-top:1px solid var(--border);padding-top:32px;}
+.stat{flex:1;padding-right:28px;border-right:1px solid var(--border);margin-right:28px;}
+.stat:last-child{border-right:none;margin-right:0;}
+.sv{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--acc);letter-spacing:.02em;line-height:1;}
+.sl{font-size:11px;color:var(--muted);margin-top:2px;font-family:'Space Mono',monospace;}
+.page{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+.toc{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin:40px 0 52px;}
+.toc-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:16px;font-family:'Space Mono',monospace;}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;}
+.toc-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted2);text-decoration:none;transition:color .15s;}
+.toc-item:hover{color:var(--text);}
+.tn{font-size:11px;color:var(--acc);font-weight:700;min-width:20px;font-family:'Space Mono',monospace;}
+.section{margin-bottom:64px;scroll-margin-top:60px;}
+.slabel{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:10px;font-family:'Space Mono',monospace;}
+h2{font-family:'Bebas Neue',sans-serif;font-size:36px;font-weight:400;margin-bottom:14px;letter-spacing:.03em;text-transform:uppercase;line-height:1.1;}
+h3{font-size:15px;font-weight:600;color:var(--text);margin-bottom:7px;}
+p{color:var(--muted2);margin-bottom:12px;font-size:15px;}
+.info-box,.note-box,.warn-box{border-radius:10px;padding:14px 18px;font-size:13px;margin:16px 0;line-height:1.65;}
+.info-box{background:var(--acc-dim);border:1px solid var(--acc-border);color:var(--acc-text);}
+.note-box{background:var(--bg2);border:1px solid var(--border2);color:var(--muted2);}
+.warn-box{background:var(--red-dim);border:1px solid var(--red-border);color:var(--red-text);}
+.good-box{background:var(--green-dim);border:1px solid var(--green-border);color:var(--green-text);border-radius:10px;padding:14px 18px;font-size:13px;margin:16px 0;line-height:1.65;}
+.blue-box{background:var(--blue-dim);border:1px solid var(--blue-border);color:var(--blue-text);border-radius:10px;padding:14px 18px;font-size:13px;margin:16px 0;line-height:1.65;}
+.code-block{background:var(--code-bg);border:1px solid var(--border2);border-radius:10px;padding:14px 20px;font-family:'Space Mono',monospace;font-size:13px;margin:12px 0;overflow-x:auto;line-height:2;}
+.cmd{color:var(--acc-text);}
+.cmd::before{content:'$ ';color:var(--muted);}
+code{font-family:'Space Mono',monospace;font-size:12px;background:var(--bg3);color:var(--acc-text);padding:2px 7px;border-radius:4px;border:1px solid var(--border2);}
+.steps{margin:24px 0;}
+.step{display:grid;grid-template-columns:44px 1fr;gap:0 18px;padding:28px 0;border-bottom:1px solid var(--border);}
+.step:first-child{border-top:1px solid var(--border);}
+.snum{width:36px;height:36px;border-radius:8px;background:var(--acc-dim);border:1px solid var(--acc-border);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--acc-text);margin-top:2px;letter-spacing:.02em;}
+.step-body p{font-size:13px;margin-bottom:8px;}
+.stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0;}
+.stat-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.stat-card .big{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--acc);line-height:1;letter-spacing:.02em;}
+.stat-card .desc{font-size:12px;color:var(--muted2);margin-top:4px;line-height:1.5;}
+.compare-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+.compare-card{border-radius:12px;padding:18px 20px;border:1px solid var(--border2);background:var(--bg2);}
+.compare-card.good{border-color:var(--green-border);background:var(--green-dim);}
+.compare-card.bad{border-color:var(--red-border);background:var(--red-dim);}
+.compare-card .label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;font-family:'Space Mono',monospace;}
+.compare-card.good .label{color:var(--green-text);}
+.compare-card.bad .label{color:var(--red-text);}
+.compare-card p{font-size:13px;margin-bottom:0;}
+ul.clean{margin:16px 0 0 18px;color:var(--muted2);}
+ul.clean li{margin-bottom:8px;}
+footer{border-top:1px solid var(--border);padding:24px;max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;}
+footer a{color:var(--acc-text);text-decoration:none;}
+@media(max-width:600px){
+  .toc-grid,.compare-wrap,.stat-cards{grid-template-columns:1fr;}
+  .stats-row{flex-wrap:wrap;gap:20px;}
+  .stat{border-right:none;margin-right:0;padding-right:0;}
+  .h-page{display:none;}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-left">
+    <span class="h-brand">rk.codex</span>
+    <span class="h-sep">/</span>
+    <span class="h-page">career-ops-guide</span>
+  </div>
+  <div class="h-right">
+    <button class="theme-btn" id="tbtn" onclick="toggleTheme()">☀</button>
+  </div>
+</header>
+
+<div class="hero-wrap">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero">
+    <span class="tool-emoji">🧭</span>
+    <div class="badge-row">
+      <span class="badge g"><span class="dot"></span> Open source</span>
+      <span class="badge b">Claude Code + Gemini CLI</span>
+      <span class="badge a">Job search ops</span>
+    </div>
+
+    <h1>
+      Career<span class="acc">-Ops</span>
+      <span class="sub-h">The first job search system that behaves like an operating model, not a spreadsheet.</span>
+    </h1>
+
+    <p class="hero-sub">
+      <strong>Career-Ops</strong> is an open-source, multi-agent job search system built around AI coding CLIs.
+      It does not mass-apply for you. It does something more useful: it helps you
+      <strong>scan, evaluate, personalize, generate ATS-ready PDFs, and track the pipeline</strong>
+      so you spend time on the roles that are actually worth your energy.
+    </p>
+
+    <div class="hero-links">
+      <a class="hero-link primary" href="https://github.com/santifer/career-ops" target="_blank" rel="noreferrer">Open repository</a>
+      <a class="hero-link secondary" href="https://santifer.io/career-ops-system" target="_blank" rel="noreferrer">Read founder case study</a>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="sv">740+</div>
+        <div class="sl">Listings evaluated in the founder case study</div>
+      </div>
+      <div class="stat">
+        <div class="sv">100+</div>
+        <div class="sl">Tailored CV PDFs generated</div>
+      </div>
+      <div class="stat">
+        <div class="sv">45+</div>
+        <div class="sl">Pre-configured companies in the scanner setup</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="toc">
+    <div class="toc-lbl">Guide map</div>
+    <div class="toc-grid">
+      <a class="toc-item" href="#what"><span class="tn">01</span>What Career-Ops actually is</a>
+      <a class="toc-item" href="#who"><span class="tn">02</span>Who should use it</a>
+      <a class="toc-item" href="#workflow"><span class="tn">03</span>How the pipeline works</a>
+      <a class="toc-item" href="#setup"><span class="tn">04</span>Setup in plain English</a>
+      <a class="toc-item" href="#customize"><span class="tn">05</span>What to customize first</a>
+      <a class="toc-item" href="#commands"><span class="tn">06</span>Commands worth knowing</a>
+      <a class="toc-item" href="#strengths"><span class="tn">07</span>Where it is strong</a>
+      <a class="toc-item" href="#limits"><span class="tn">08</span>Limits and caveats</a>
+    </div>
+  </div>
+
+  <section class="section" id="what">
+    <div class="slabel">What it is</div>
+    <h2>Career-Ops is not an auto-apply bot. That is exactly why it is interesting.</h2>
+    <p>
+      A lot of AI job search tools optimize for volume. Career-Ops optimizes for
+      <strong>selection quality</strong>. That is an important difference.
+      The system reads your CV, profile, proof points, tracked companies, and portal configuration,
+      then uses an AI coding CLI to evaluate a role in context rather than doing naive keyword matching.
+    </p>
+    <p>
+      From the repo’s own framing, the goal is to help candidates use AI to
+      <strong>choose companies</strong>, not to blindly spam applications.
+      That creates a better mental model: this is a decision system, a personalization system, and a pipeline system bundled together.
+    </p>
+
+    <div class="compare-wrap">
+      <div class="compare-card bad">
+        <div class="label">What it is not</div>
+        <p>A browser bot that blindly applies everywhere, inflates activity metrics, and burns your time on roles that were never a fit.</p>
+      </div>
+      <div class="compare-card good">
+        <div class="label">What it is</div>
+        <p>A structured evaluation and job-search operations layer that helps you score, personalize, generate, and track before you decide to apply.</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      The repo strongly recommends against applying to anything below roughly <strong>4.0 / 5</strong>.
+      That philosophy is one of the strongest parts of the project.
+    </div>
+  </section>
+
+  <section class="section" id="who">
+    <div class="slabel">Who it fits</div>
+    <h2>This is for serious searches, not casual browsing.</h2>
+    <p>
+      Career-Ops makes the most sense if you are actively pursuing a defined transition:
+      senior IC roles, AI roles, platform roles, technical leadership roles, or any search where
+      the cost of applying badly is high. If you have a messy CV, unclear positioning, and no idea what kind of roles you want,
+      the system can still help, but only after you put in some profile work first.
+    </p>
+
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="big">Best</div>
+        <div class="desc">For candidates with a clear target role, real proof points, and enough discipline to review every recommendation manually.</div>
+      </div>
+      <div class="stat-card">
+        <div class="big">Weak</div>
+        <div class="desc">For people who want “press button, get hired” automation. That is not what this system is designed for.</div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      The system gets stronger when it knows you well. The README is explicit about this:
+      the first evaluations may be mediocre until you feed it your context, story, superpowers, preferences, and anti-goals.
+    </div>
+  </section>
+
+  <section class="section" id="workflow">
+    <div class="slabel">Workflow</div>
+    <h2>What happens when you paste a job URL or description</h2>
+    <p>
+      The architecture is clean enough to explain in one sentence:
+      <strong>input goes in, archetype detection happens, a multi-block evaluation runs, then report, PDF, and tracker outputs are generated.</strong>
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="snum">1</div>
+        <div class="step-body">
+          <h3>Input</h3>
+          <p>You paste a job URL or JD text. The system extracts content directly or works from pasted text.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum">2</div>
+        <div class="step-body">
+          <h3>Archetype detection</h3>
+          <p>The job is classified into an internal archetype so scoring and framing are role-aware, not generic.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum">3</div>
+        <div class="step-body">
+          <h3>Six-block evaluation</h3>
+          <p>Role summary, CV match, level strategy, compensation research, personalization plan, and interview prep all get generated in one run.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum">4</div>
+        <div class="step-body">
+          <h3>Artifacts</h3>
+          <p>You get a markdown report, an ATS-oriented PDF resume, and a tracker entry that fits into the broader pipeline.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="blue-box">
+      The architecture doc also shows a strong batch story: multiple offers can be processed in parallel through headless workers,
+      which matters if your funnel is large and you do not want to manually triage every listing one by one.
+    </div>
+  </section>
+
+  <section class="section" id="setup">
+    <div class="slabel">Setup</div>
+    <h2>The setup is not hard, but it assumes you can operate a real project</h2>
+    <p>
+      Career-Ops is not a consumer SaaS. You are installing a project, editing config, providing your own CV,
+      and letting an AI coding CLI work inside that directory. That is a feature, not a bug, but it means the right user is someone comfortable with repositories and files.
+    </p>
+
+    <div class="code-block">
+<div class="cmd">git clone https://github.com/santifer/career-ops.git</div>
+<div class="cmd">cd career-ops && npm install</div>
+<div class="cmd">npx playwright install chromium</div>
+<div class="cmd">npm run doctor</div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="snum">1</div>
+        <div class="step-body">
+          <h3>Clone and install</h3>
+          <p>Node.js is required for the scripts and PDF generation. Playwright Chromium is required for PDF output.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum">2</div>
+        <div class="step-body">
+          <h3>Copy the profile template</h3>
+          <p>Use <code>config/profile.example.yml</code> as the base and turn it into your actual identity source of truth.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum">3</div>
+        <div class="step-body">
+          <h3>Add your CV</h3>
+          <p>Create <code>cv.md</code> in the project root. This is the main context file the system keeps returning to.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum">4</div>
+        <div class="step-body">
+          <h3>Customize portals</h3>
+          <p>Copy <code>templates/portals.example.yml</code> to <code>portals.yml</code> and trim it to your actual role keywords, exclusions, and tracked companies.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum">5</div>
+        <div class="step-body">
+          <h3>Open your AI CLI in the directory</h3>
+          <p>At that point, the system wants you to work inside Claude Code or Gemini CLI and guide it through your career-specific setup.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="good-box">
+      One subtle but smart design choice: the project is built to be customized by the agent itself.
+      You ask Claude to change archetypes, update profile data, or edit target companies, and it works on the same files the system runs on.
+    </div>
+  </section>
+
+  <section class="section" id="customize">
+    <div class="slabel">Customize first</div>
+    <h2>If you skip customization, the output will feel generic</h2>
+    <p>
+      The customization guide makes it clear where the leverage is. If I were onboarding this for myself,
+      I would spend the first hour cleaning these areas before running serious evaluations.
+    </p>
+
+    <ul class="clean">
+      <li><strong><code>config/profile.yml</code></strong> — candidate identity, location, target roles, compensation, narrative.</li>
+      <li><strong><code>modes/_profile.md</code></strong> — archetype mapping and how your projects get framed against specific role types.</li>
+      <li><strong><code>portals.yml</code></strong> — job title filters, negative filters, target companies, and board search queries.</li>
+      <li><strong><code>templates/cv-template.html</code></strong> — if the default PDF look is not your style, this is where it changes.</li>
+      <li><strong><code>article-digest.md</code></strong> — optional but useful if your strongest proof points live in shipped writing or portfolio work.</li>
+    </ul>
+
+    <div class="warn-box">
+      If you leave the archetypes untouched while targeting a different market or role family, the scoring logic may be directionally wrong even if the system feels confident.
+    </div>
+  </section>
+
+  <section class="section" id="commands">
+    <div class="slabel">Commands</div>
+    <h2>The commands that matter in real use</h2>
+    <p>
+      The repo exposes a lot, but a few workflows matter more than the rest. If you are evaluating whether this is worth adopting,
+      these are the ones to understand first.
+    </p>
+
+    <div class="code-block">
+<div>/career-ops</div>
+<div>/career-ops scan</div>
+<div>/career-ops pdf</div>
+<div>/career-ops batch</div>
+<div>/career-ops tracker</div>
+<div>/career-ops pipeline</div>
+    </div>
+
+    <div class="info-box">
+      Gemini CLI support is not a side note here. The project documents native Gemini CLI usage and also offers a standalone API-script path.
+      That makes the repo more durable for people who do not want to be locked into exactly one AI coding interface.
+    </div>
+
+    <div class="note-box">
+      There is also a Go dashboard TUI for browsing the pipeline visually, with filters and status views.
+      That is a strong touch for anyone whose search has already moved beyond a handful of opportunities.
+    </div>
+  </section>
+
+  <section class="section" id="strengths">
+    <div class="slabel">Strengths</div>
+    <h2>What makes Career-Ops better than most “AI for job search” ideas</h2>
+    <p>
+      Three things stand out technically and strategically.
+    </p>
+
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="big">1</div>
+        <div class="desc">It treats the job search as a pipeline with integrity checks, normalization, merging, and canonical states.</div>
+      </div>
+      <div class="stat-card">
+        <div class="big">2</div>
+        <div class="desc">It keeps a human in the loop and explicitly avoids autonomous application spam.</div>
+      </div>
+      <div class="stat-card">
+        <div class="big">3</div>
+        <div class="desc">It is configurable enough that the system can become specific to your profile rather than forcing generic templates.</div>
+      </div>
+      <div class="stat-card">
+        <div class="big">4</div>
+        <div class="desc">It bundles evaluation, resume generation, tracker management, and scanner workflows instead of scattering them across disconnected tools.</div>
+      </div>
+    </div>
+
+    <div class="blue-box">
+      The batch architecture is especially interesting. Many repos stop at “single input, single answer.”
+      Career-Ops actually has a serious opinion about orchestration, workers, state, retries, and pipeline output.
+    </div>
+  </section>
+
+  <section class="section" id="limits">
+    <div class="slabel">Limits</div>
+    <h2>This still depends on your judgment, your writing, and your honesty</h2>
+    <p>
+      There are a few caveats worth being explicit about.
+    </p>
+
+    <ul class="clean">
+      <li>The project can personalize, but it cannot invent real proof points you do not have.</li>
+      <li>If your CV is weak or inconsistent, every downstream output inherits that weakness.</li>
+      <li>Compensation research and fit evaluation are useful approximations, not guarantees.</li>
+      <li>Portal scanning breadth is helpful, but you still need to decide where to focus and what to ignore.</li>
+      <li>The more specialized your target role, the more important profile tuning becomes.</li>
+    </ul>
+
+    <div class="warn-box">
+      Treat every generated PDF and evaluation as a high-quality draft. Do not outsource final accountability to the system just because the output looks polished.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="slabel">Verdict</div>
+    <h2>My take: this is one of the more mature open-source “AI for work” repos because it has an operating model behind it</h2>
+    <p>
+      What I like most is that Career-Ops is grounded in a real problem and a real outcome. It is not pretending AI magically gets you hired.
+      It is building a system around selection, personalization, and pipeline control.
+    </p>
+    <p>
+      If you are a serious candidate, especially in technical roles, this repo is worth reading even if you never adopt it fully.
+      The structure alone will improve how you think about job search operations.
+      And if you do adopt it, the real win is not the automation.
+      The real win is that it forces your search to become <strong>explicit, reviewable, and strategic</strong>.
+    </p>
+
+    <div class="good-box">
+      High-signal repo. Strong framing. Worth studying even if you only steal the operating principles and build your own lighter version.
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div>
+    <div>// career-ops-guide //</div>
+    <div>// built from repo docs + setup notes //</div>
+  </div>
+  <a href="https://github.com/santifer/career-ops" target="_blank" rel="noreferrer">github.com/santifer/career-ops</a>
+</footer>
+
+<script>
+function setTheme(theme){
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('career_ops_theme', theme);
+  document.getElementById('tbtn').textContent = theme === 'dark' ? '☀' : '☾';
+}
+function toggleTheme(){
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  setTheme(current === 'dark' ? 'light' : 'dark');
+}
+(function initTheme(){
+  const saved = localStorage.getItem('career_ops_theme');
+  if(saved){ setTheme(saved); }
+  else { setTheme('dark'); }
+})();
+</script>
+</body>
+</html>
