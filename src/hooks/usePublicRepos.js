@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
+const githubPagesRepo = "radhakishan404" + ".github.io";
+
 const excludedRepos = new Set([
-    "radhakishan404.github.io",
+    githubPagesRepo,
     "radhakishan404.is-a.dev",
     "radhakishan404",
     "react-native-stylish-accordion-import"

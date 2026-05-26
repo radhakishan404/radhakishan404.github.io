@@ -19,7 +19,7 @@ function getSiteUrl(rootDir) {
     // ignore
   }
 
-  return "https://radhakishan404.github.io";
+  return "https://radhakishan404.is-a.dev";
 }
 
 const authorName = "Radhakishan Jangid";
@@ -278,6 +278,43 @@ const pageDefaults = new Map([
   ["/contact/", { title: `Contact | ${authorName}`, description: "Get in touch for engineering work, collaboration, and consulting.", type: "website" }]
 ]);
 
+function buildStaticStructuredData(routePath, defaults, url) {
+  const person = {
+    "@type": "Person",
+    name: authorName,
+    jobTitle: "Senior Software Engineer",
+    url: siteUrl,
+    sameAs: [
+      "https://github.com/radhakishan404",
+      "https://www.linkedin.com/in/radhakishanjangid",
+      "https://dev.to/radhakishanjangid404"
+    ]
+  };
+
+  if (routePath === "/") {
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        person,
+        {
+          "@type": "WebSite",
+          name: authorName,
+          url: siteUrl
+        }
+      ]
+    };
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": defaults.type === "profile" ? "ProfilePage" : "WebPage",
+    name: defaults.title,
+    description: defaults.description,
+    url,
+    about: person
+  };
+}
+
 function ensureDirForRoute(routePath) {
   const cleaned = routePath.replace(/^\//, "");
   if (!cleaned) {
@@ -349,7 +386,11 @@ function buildSeoForRoute(routePath) {
 
   const defaults = pageDefaults.get(routePath);
   if (defaults) {
-    return { ...defaults, url };
+    return {
+      ...defaults,
+      url,
+      structuredData: buildStaticStructuredData(routePath, defaults, url)
+    };
   }
 
   // Fallback: keep the default SPA meta tags for unknown routes.

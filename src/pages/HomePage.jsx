@@ -26,6 +26,11 @@ function HomePage() {
         { key: "frontend", value: heroStats[1]?.value || "React" },
         { key: "backend", value: heroStats[2]?.value === "Node" ? "Node.js" : heroStats[2]?.value || "Node.js" }
     ];
+    const workingNotes = [
+        "Frontend systems that stay fast, accessible, and maintainable after launch.",
+        "APIs, admin workflows, and mobile surfaces shaped around real product constraints.",
+        "Technical writing that turns useful engineering patterns into public learning assets."
+    ];
     const typedTitle = useTypewriter({
         phrases: [
             "Senior software engineer",
@@ -37,13 +42,6 @@ function HomePage() {
         deletingSpeed: 40,
         pauseDuration: 1800
     });
-    const terminalLines = [
-        "$ whoami",
-        "> Senior SWE, Mumbai",
-        "> React · Node · Mobile",
-        "> AI prototypes + product"
-    ];
-
     useDocumentMeta({
         title: "Radhakishan Jangid",
         description: "Senior software engineer building product systems, frontend experiences, public software projects, and AI-focused technical content.",
@@ -77,69 +75,54 @@ function HomePage() {
         <div className="page-shell shell">
             <section className="home-hero" data-reveal>
                 <div className="home-hero-copy">
-                    <span className="eyebrow">// hello, world</span>
+                    <span className="eyebrow">Senior software engineer · Mumbai</span>
                     <h1 className="hero-name">
-                        <span>RADHAKISHAN</span>
-                        <span>JANGID</span>
+                        <span>Radhakishan</span>
+                        <span>Jangid</span>
                     </h1>
                     <p className="hero-typing">
                         <span>{typedTitle}</span>
                         <span className="typing-cursor" aria-hidden="true">|</span>
                     </p>
                     <p className="lede">
-                        Mumbai based. Focused on React, Node.js, mobile apps, internal systems, and public-facing product builds.
+                        I design and ship React, Node.js, mobile, and AI-assisted product systems with a bias for crisp interfaces and reliable delivery.
                     </p>
 
                     <div className="hero-actions">
-                        <Link className="button-primary" to="/projects">[ view_projects.sh ]</Link>
-                        <Link className="button-secondary" to="/articles">[ read_articles.md ]</Link>
+                        <Link className="button-primary" to="/projects">View selected work</Link>
+                        <Link className="button-secondary" to="/contact">Start a conversation</Link>
                     </div>
 
-                    <div className="hero-stat-row">
-                        {terminalStats.map((item) => (
-                            <div key={item.key} className="hero-stat">
-                                <span>{item.key}</span>
-                                <span>→</span>
-                                <strong>{item.value}</strong>
-                            </div>
-                        ))}
-                    </div>
                 </div>
 
                 <div className="hero-side" data-reveal>
                     <HeroImageShowcase />
-                    <div className="terminal-card">
-                        <div className="terminal-brand">
+                    <div className="portfolio-note">
+                        <div className="portfolio-note-brand">
                             <img src={logoImages.stack} alt="Radhakishan logo" />
                         </div>
-                        <div className="terminal-card-head">
-                            <span className="terminal-control is-red" />
-                            <span className="terminal-control is-yellow" />
-                            <span className="terminal-control is-green" />
-                        </div>
-                        {terminalLines.map((line, index) => (
-                            <p
-                                key={line}
-                                className={`terminal-line${index === terminalLines.length - 1 ? " is-last" : ""}`}
-                                style={{ animationDelay: `${index * 260 + 220}ms` }}
-                            >
-                                {line}
-                                {index === terminalLines.length - 1 ? <span className="terminal-line-cursor">|</span> : null}
-                            </p>
-                        ))}
+                        <p>Available for product engineering, frontend systems, backend APIs, and focused AI prototypes.</p>
                     </div>
                 </div>
-            </section>
 
-            <div className="ascii-divider" aria-hidden="true">/* ────────────────────── */</div>
+                <div className="hero-stat-row">
+                    {terminalStats.map((item) => (
+                        <div key={item.key} className="hero-stat">
+                            <span>{item.key}</span>
+                            <span>→</span>
+                            <strong>{item.value}</strong>
+                        </div>
+                    ))}
+                </div>
+            </section>
 
             <section className="section-stack" data-reveal>
                 <div className="section-heading section-heading-row">
                     <div>
-                        <span className="eyebrow">/* selected_work */</span>
+                        <span className="eyebrow">Selected work</span>
                         <h2>Featured projects</h2>
                     </div>
-                    <Link className="inline-link" to="/projects">[ all_projects ]</Link>
+                    <Link className="inline-link" to="/projects">All projects</Link>
                 </div>
                 <div className="project-grid project-grid-home">
                     {featuredProjects.map((project) => (
@@ -159,24 +142,37 @@ function HomePage() {
                                 ))}
                             </div>
                             <div className="project-card-links">
-                                <Link className="inline-link" to={`/projects/${slugify(project.title)}`}>[ case_study ]</Link>
-                                {project.onlineLink ? <a className="inline-link" href={project.onlineLink} target="_blank" rel="noreferrer">[ live_link ]</a> : null}
+                                <Link className="inline-link" to={`/projects/${slugify(project.title)}`}>Case study</Link>
+                                {project.onlineLink ? <a className="inline-link" href={project.onlineLink} target="_blank" rel="noreferrer">Live link</a> : null}
                             </div>
                         </article>
                     ))}
                 </div>
             </section>
 
-            <div className="ascii-divider" aria-hidden="true">// ==================== //</div>
+            <section className="working-strip" data-reveal>
+                <div className="section-heading">
+                    <span className="eyebrow">Working method</span>
+                    <h2>Product thinking with senior engineering follow-through.</h2>
+                </div>
+                <div className="working-list">
+                    {workingNotes.map((note, index) => (
+                        <p key={note}>
+                            <span>{String(index + 1).padStart(2, "0")}</span>
+                            {note}
+                        </p>
+                    ))}
+                </div>
+            </section>
 
             {repos.length ? (
                 <section className="section-stack" data-reveal>
                     <div className="section-heading section-heading-row">
                         <div>
-                            <span className="eyebrow">/* github_recent */</span>
+                            <span className="eyebrow">GitHub recent</span>
                             <h2>Recent GitHub projects</h2>
                         </div>
-                        <a className="inline-link" href="https://github.com/radhakishan404?tab=repositories" target="_blank" rel="noreferrer">[ github_profile ]</a>
+                        <a className="inline-link" href="https://github.com/radhakishan404?tab=repositories" target="_blank" rel="noreferrer">GitHub profile</a>
                     </div>
                     <div className="public-grid">
                         {repos.slice(0, 3).map((repo) => (
@@ -190,11 +186,11 @@ function HomePage() {
                                 </div>
                                 <p>{repo.description || "Public GitHub repository."}</p>
                                 <div className="tag-row">
-                                    <span className="meta-pill">[PUBLIC]</span>
+                                    <span className="meta-pill">Public</span>
                                 </div>
                                 <div className="project-card-links">
-                                    <a className="inline-link" href={repo.html_url} target="_blank" rel="noreferrer">$ git clone</a>
-                                    {repo.homepage ? <a className="inline-link" href={repo.homepage} target="_blank" rel="noreferrer">[ live_demo ]</a> : null}
+                                    <a className="inline-link" href={repo.html_url} target="_blank" rel="noreferrer">Repository</a>
+                                    {repo.homepage ? <a className="inline-link" href={repo.homepage} target="_blank" rel="noreferrer">Live demo</a> : null}
                                 </div>
                             </article>
                         ))}
@@ -202,15 +198,13 @@ function HomePage() {
                 </section>
             ) : null}
 
-            <div className="ascii-divider" aria-hidden="true">/* ────────────────────── */</div>
-
             <section className="section-stack" data-reveal>
                 <div className="section-heading section-heading-row">
                     <div>
-                        <span className="eyebrow">/* writing */</span>
+                        <span className="eyebrow">Writing</span>
                         <h2>Recent articles</h2>
                     </div>
-                    <Link className="inline-link" to="/articles">[ all_articles ]</Link>
+                    <Link className="inline-link" to="/articles">All articles</Link>
                 </div>
 
                 <div className="surface-card article-directory" data-reveal>

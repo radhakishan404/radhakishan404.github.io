@@ -49,10 +49,8 @@ function SiteShell({ children }) {
                     <div className="footer-brand">
                         <img src={logoImages.withName} alt="Radhakishan Jangid logo" />
                     </div>
-                    <p className="footer-line">// ─────────────────────────────────── //</p>
-                    <p className="footer-line">//  radhakishan_jangid © {new Date().getFullYear()}          //</p>
-                    <p className="footer-line">//  built with React + too much coffee //</p>
-                    <p className="footer-line">// ─────────────────────────────────── //</p>
+                    <p className="footer-line">Radhakishan Jangid © {new Date().getFullYear()}</p>
+                    <p className="footer-line">React portfolio for software engineering, product systems, and technical writing.</p>
                     <div className="footer-social">
                         {socialLinks.map((link) => (
                             <a

@@ -19,14 +19,12 @@ function ProjectsPage() {
     return (
         <div className="page-shell shell">
             <section className="page-hero page-hero-tight" data-reveal>
-                <span className="eyebrow">/* projects */</span>
+                <span className="eyebrow">Projects</span>
                 <h1>Projects across product engineering, open source, and shipped client work.</h1>
                 <p className="lede">
                     A cleaner index with visuals, direct links, and detail pages where deeper context already exists.
                 </p>
             </section>
-
-            <div className="ascii-divider" aria-hidden="true">/* ────────────────────── */</div>
 
             <section className="section-stack" data-reveal>
                 <div className="section-heading">
@@ -50,9 +48,9 @@ function ProjectsPage() {
                                 ))}
                             </div>
                             <div className="project-card-links">
-                                <Link className="inline-link" to={`/projects/${slugify(project.title)}`}>[ read_detail ]</Link>
+                                <Link className="inline-link" to={`/projects/${slugify(project.title)}`}>Read detail</Link>
                                 {project.onlineLink ? (
-                                    <a className="inline-link" href={project.onlineLink} target="_blank" rel="noreferrer">[ open_link ]</a>
+                                    <a className="inline-link" href={project.onlineLink} target="_blank" rel="noreferrer">Open link</a>
                                 ) : null}
                             </div>
                         </article>
@@ -60,15 +58,13 @@ function ProjectsPage() {
                 </div>
             </section>
 
-            <div className="ascii-divider" aria-hidden="true">// ==================== //</div>
-
             <section className="section-stack" data-reveal>
                 <div className="section-heading section-heading-row">
                     <div>
-                        <span className="eyebrow">/* github */</span>
+                        <span className="eyebrow">GitHub</span>
                         <h2>Public repositories</h2>
                     </div>
-                    <a className="inline-link" href="https://github.com/radhakishan404?tab=repositories" target="_blank" rel="noreferrer">[ view_all ]</a>
+                    <a className="inline-link" href="https://github.com/radhakishan404?tab=repositories" target="_blank" rel="noreferrer">View all</a>
                 </div>
                 <div className="public-grid">
                     {repos.map((repo) => (
@@ -85,11 +81,11 @@ function ProjectsPage() {
                                 <span>Updated {new Date(repo.updated_at).toLocaleDateString("en-US", { month: "short", year: "numeric" })}</span>
                             </div>
                             <div className="tag-row">
-                                <span className="meta-pill">[PUBLIC]</span>
+                                <span className="meta-pill">Public</span>
                             </div>
                             <div className="project-card-links">
-                                <a className="inline-link" href={repo.html_url} target="_blank" rel="noreferrer">$ git clone</a>
-                                {repo.homepage ? <a className="inline-link" href={repo.homepage} target="_blank" rel="noreferrer">[ live_demo ]</a> : null}
+                                <a className="inline-link" href={repo.html_url} target="_blank" rel="noreferrer">Repository</a>
+                                {repo.homepage ? <a className="inline-link" href={repo.homepage} target="_blank" rel="noreferrer">Live demo</a> : null}
                             </div>
                         </article>
                     ))}

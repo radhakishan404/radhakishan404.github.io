@@ -21,7 +21,7 @@ function AboutPage() {
     return (
         <div className="page-shell shell">
             <section className="page-hero page-hero-tight" data-reveal>
-                <span className="eyebrow">/* about */</span>
+                <span className="eyebrow">About</span>
                 <h1>Engineering depth, product focus, and shipping discipline.</h1>
                 <p className="lede">
                     I’m Radhakishan Jangid, a {getAge()} year old software engineer based in Mumbai. My work sits at the intersection of product UI,
@@ -45,11 +45,9 @@ function AboutPage() {
                 </div>
             </section>
 
-            <div className="ascii-divider" aria-hidden="true">// ==================== //</div>
-
             <section className="section-stack" data-reveal>
                 <div className="section-heading">
-                    <span className="eyebrow">/* experience */</span>
+                    <span className="eyebrow">Experience</span>
                     <h2>Recent roles</h2>
                 </div>
                 <div className="timeline-list">
@@ -71,11 +69,9 @@ function AboutPage() {
                 </div>
             </section>
 
-            <div className="ascii-divider" aria-hidden="true">/* ────────────────────── */</div>
-
             <section className="section-stack" data-reveal>
                 <div className="section-heading">
-                    <span className="eyebrow">/* capabilities */</span>
+                    <span className="eyebrow">Capabilities</span>
                     <h2>Core skill areas</h2>
                 </div>
                 <div className="capability-grid">

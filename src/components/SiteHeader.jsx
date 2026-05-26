@@ -35,11 +35,11 @@ function SiteHeader({ theme, onToggleTheme }) {
                             <img className="brand-mark-logo" src={logoImages.icon} alt="Radhakishan logo icon" />
                         </span>
                         <span className="brand-mark-label">
-                            radhakishan_jangid
+                            Radhakishan Jangid
                             <span className="brand-cursor" aria-hidden="true">_</span>
                         </span>
                     </span>
-                    <span className="brand-mark-subtitle">// senior software engineer</span>
+                    <span className="brand-mark-subtitle">Senior software engineer</span>
                 </Link>
 
                 <button
@@ -49,7 +49,7 @@ function SiteHeader({ theme, onToggleTheme }) {
                     aria-expanded={menuOpen}
                     onClick={() => setMenuOpen((current) => !current)}
                 >
-                    {menuOpen ? "[x]" : "[≡]"}
+                    {menuOpen ? "Close" : "Menu"}
                 </button>
 
                 <div className={`header-panel${menuOpen ? " is-open" : ""}`}>
@@ -69,7 +69,7 @@ function SiteHeader({ theme, onToggleTheme }) {
                     </nav>
 
                     <div className="header-actions">
-                        <Link className="header-cta" to="/contact" onClick={() => setMenuOpen(false)}>[ ./contact ]</Link>
+                        <Link className="header-cta" to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
                         <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
                     </div>
                 </div>
