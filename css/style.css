@@ -1,0 +1,136 @@
+@-webkit-keyframes slide {
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes slide {
+    100% {
+        left: 0;
+    }
+}
+.main-wrapper {
+    overflow: hidden;
+}
+
+body.page-home {
+    position: relative;
+    z-index: 1;
+    padding-top: 0;
+}
+body.page-ready {
+    /* transition-delay: 1s ease; */
+    opacity: 1;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 0.5s forwards;
+    animation-delay: 2s;
+    z-index: 500;
+}
+
+.carousel.carousel-slider .control-next:hover {
+    background: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(rgba(0, 0, 0, 0.0001)),
+        to(rgba(0, 0, 0, 0.8))
+    ) !important;
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgb(0 0 0 / 80%) 100%) !important;
+}
+
+.carousel.carousel-slider .control-prev:hover {
+    background: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(rgba(0, 0, 0, 0.8)),
+        to(rgba(0, 0, 0, 0.0001))
+    ) !important;
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.0001) 100%) !important;
+}
+
+.carousel.carousel-slider .control-next {
+    text-align: right;
+}
+
+.carousel.carousel-slider .control-prev {
+    text-align: left;
+}
+
+.carousel.carousel-slider .control-arrow {
+    width: 25%;
+}
+
+.carousel .control-dots .dot {
+    background: #2a3d6e !important;
+    opacity: 1 !important;
+    width: 13px !important;
+    height: 13px !important;
+    outline: none;
+}
+
+.carousel .control-dots .dot.selected,
+.carousel .control-dots .dot:hover {
+    transform: scale(1.4);
+    background: linear-gradient(
+        270.97deg,
+        #ffe580 -21.36%,
+        #ff7571 -2.45%,
+        #ea5dad 26.84%,
+        #c2a0fd 64.15%,
+        #3bf0e4 108.29%,
+        #b2f4b6 159.03%
+    ) !important;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    background-position: 58% 50%;
+    background-size: 500%;
+    animation: gradient-shift 30s ease infinite;
+}
+
+.carousel .control-arrow:before,
+.carousel.carousel-slider .control-arrow:before {
+    content: none !important;
+}
+
+table {
+    display: block;
+    white-space: normal;
+    overflow-x: auto;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+td {
+    line-height: 1.4;
+}
+td,
+th {
+    padding: 9px 13px;
+    border: 1px solid #d8d8d8;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

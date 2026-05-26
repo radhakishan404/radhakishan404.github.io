@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <script>
+      (function redirectForGitHubPages() {
+        var location = window.location;
+        var basePath = "/";
+        var redirect =
+          location.origin +
+          basePath +
+          "?p=" +
+          location.pathname
+            .slice(basePath.length)
+            .replace(/&/g, "~and~") +
+          (location.search ? "&q=" + location.search.slice(1).replace(/&/g, "~and~") : "") +
+          location.hash;
+
+        location.replace(redirect);
+      })();
+    </script>
+  </head>
+  <body></body>
+  </html>

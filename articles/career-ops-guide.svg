@@ -1,0 +1,39 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#0A0806"/>
+  <g opacity="0.22">
+    <path d="M0 120H1600" stroke="#2A2418"/>
+    <path d="M0 248H1600" stroke="#2A2418"/>
+    <path d="M0 376H1600" stroke="#2A2418"/>
+    <path d="M0 504H1600" stroke="#2A2418"/>
+    <path d="M0 632H1600" stroke="#2A2418"/>
+    <path d="M0 760H1600" stroke="#2A2418"/>
+    <path d="M160 0V900" stroke="#2A2418"/>
+    <path d="M416 0V900" stroke="#2A2418"/>
+    <path d="M672 0V900" stroke="#2A2418"/>
+    <path d="M928 0V900" stroke="#2A2418"/>
+    <path d="M1184 0V900" stroke="#2A2418"/>
+    <path d="M1440 0V900" stroke="#2A2418"/>
+  </g>
+  <circle cx="1180" cy="170" r="250" fill="url(#glow)" opacity="0.9"/>
+  <rect x="120" y="108" width="254" height="42" rx="8" fill="#110F0B" stroke="#5B4315"/>
+  <circle cx="152" cy="129" r="7" fill="#F5A623"/>
+  <text x="174" y="136" fill="#FFC85A" font-family="Menlo, Monaco, Consolas, monospace" font-size="18" letter-spacing="3">OPEN SOURCE GUIDE</text>
+  <text x="120" y="294" fill="#F5EAD8" font-family="Arial Black, Arial, sans-serif" font-size="126" letter-spacing="-4">CAREER-OPS</text>
+  <text x="120" y="388" fill="#F5A623" font-family="Arial Black, Arial, sans-serif" font-size="86" letter-spacing="-2">JOB SEARCH SYSTEM</text>
+  <text x="120" y="468" fill="#AA9779" font-family="Menlo, Monaco, Consolas, monospace" font-size="28">EVALUATE ROLES / GENERATE ATS PDFS / TRACK PIPELINE / SCAN PORTALS</text>
+  <rect x="120" y="600" width="302" height="118" rx="18" fill="#110F0B" stroke="#2D271D"/>
+  <text x="154" y="646" fill="#FFC85A" font-family="Menlo, Monaco, Consolas, monospace" font-size="19" letter-spacing="2">AI CODING CLI</text>
+  <text x="154" y="698" fill="#F5EAD8" font-family="Arial Black, Arial, sans-serif" font-size="56">CLAUDE</text>
+  <rect x="452" y="600" width="302" height="118" rx="18" fill="#110F0B" stroke="#2D271D"/>
+  <text x="486" y="646" fill="#B5E9FF" font-family="Menlo, Monaco, Consolas, monospace" font-size="19" letter-spacing="2">TRACKER + PDF</text>
+  <text x="486" y="698" fill="#F5EAD8" font-family="Arial Black, Arial, sans-serif" font-size="56">PIPELINE</text>
+  <rect x="784" y="600" width="302" height="118" rx="18" fill="#110F0B" stroke="#2D271D"/>
+  <text x="818" y="646" fill="#C5FFD0" font-family="Menlo, Monaco, Consolas, monospace" font-size="19" letter-spacing="2">ROLE FILTERING</text>
+  <text x="818" y="698" fill="#F5EAD8" font-family="Arial Black, Arial, sans-serif" font-size="56">SCORE</text>
+  <defs>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1180 170) rotate(90) scale(250)">
+      <stop stop-color="#F5A623" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#F5A623" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
