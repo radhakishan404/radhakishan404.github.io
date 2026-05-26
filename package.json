@@ -21,7 +21,7 @@
     "build": "vite build && node scripts/generate-sitemap.mjs && node scripts/generate-article-routes.mjs",
     "test": "echo \"No automated tests configured\"",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build --nojekyll"
   },
   "browserslist": {
     "production": [
