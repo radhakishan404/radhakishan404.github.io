@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import HeroImageShowcase from "../components/HeroImageShowcase";
+import AnimatedCounter from "../components/AnimatedCounter";
+import FloatingShapes from "../components/FloatingShapes";
+import MagneticButton from "../components/MagneticButton";
+import Marquee from "../components/Marquee";
+import TiltCard from "../components/TiltCard";
 import { articles } from "../content/articles";
-import { logoImages, profileImages } from "../data/images";
-import { heroStats } from "../data/site";
-import useTypewriter from "../hooks/useTypewriter";
+import { profileImages } from "../data/images";
+import { instagramReels, youtubeVideos } from "../data/site";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 import usePublicRepos from "../hooks/usePublicRepos";
 import { slugify } from "../lib/slug";
@@ -12,36 +15,52 @@ import softdata from "../softdata.json";
 
 function HomePage() {
     const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://radhakishan404.is-a.dev";
+    const heroRef = useRef(null);
+    const imgRef = useRef(null);
+    const textRef = useRef(null);
+    const overlayRef = useRef(null);
+
     const featuredProjects = softdata.project.slice(0, 4);
-    const featuredArticles = [...articles]
+    const recentArticles = [...articles]
         .sort((a, b) => {
             const dateA = a.sortDate ? new Date(a.sortDate).getTime() : 0;
             const dateB = b.sortDate ? new Date(b.sortDate).getTime() : 0;
             return dateB - dateA;
         })
-        .slice(0, 3);
+        .slice(0, 6);
     const { repos } = usePublicRepos();
-    const terminalStats = [
-        { key: "experience", value: `${heroStats[0]?.value || "7+"} years` },
-        { key: "frontend", value: heroStats[1]?.value || "React" },
-        { key: "backend", value: heroStats[2]?.value === "Node" ? "Node.js" : heroStats[2]?.value || "Node.js" }
-    ];
-    const workingNotes = [
-        "Frontend systems that stay fast, accessible, and maintainable after launch.",
-        "APIs, admin workflows, and mobile surfaces shaped around real product constraints.",
-        "Technical writing that turns useful engineering patterns into public learning assets."
-    ];
-    const typedTitle = useTypewriter({
-        phrases: [
-            "Senior software engineer",
-            "Full stack builder",
-            "React + Node specialist",
-            "Product-focused developer"
-        ],
-        typingSpeed: 80,
-        deletingSpeed: 40,
-        pauseDuration: 1800
-    });
+
+    useEffect(() => {
+        const hero = heroRef.current;
+        const img = imgRef.current;
+        const text = textRef.current;
+        if (!hero || !img || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const handleScroll = () => {
+            const rect = hero.getBoundingClientRect();
+            const progress = Math.min(1, Math.max(0, -rect.top / (rect.height * 0.6)));
+            const scale = 1 + progress * 0.3;
+            img.style.transform = `scale(${scale})`;
+            if (text) {
+                text.style.transform = `translateY(${progress * -80}px)`;
+                text.style.opacity = `${1 - progress * 0.9}`;
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const handleHeroMouseMove = useCallback((e) => {
+        const overlay = overlayRef.current;
+        const img = imgRef.current;
+        if (!overlay || !img || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const x = (e.clientX / window.innerWidth - 0.5) * 2;
+        const y = (e.clientY / window.innerHeight - 0.5) * 2;
+        img.style.objectPosition = `${50 + x * 2}% ${50 + y * 2}%`;
+    }, []);
+
     useDocumentMeta({
         title: "Radhakishan Jangid",
         description: "Senior software engineer building product systems, frontend experiences, public software projects, and AI-focused technical content.",
@@ -59,7 +78,9 @@ function HomePage() {
                     sameAs: [
                         "https://github.com/radhakishan404",
                         "https://www.linkedin.com/in/radhakishanjangid",
-                        "https://dev.to/radhakishanjangid404"
+                        "https://dev.to/radhakishanjangid404",
+                        "https://www.instagram.com/rk.codex",
+                        "https://www.youtube.com/@rk-codex"
                     ]
                 },
                 {
@@ -72,161 +93,203 @@ function HomePage() {
     });
 
     return (
-        <div className="page-shell shell">
-            <section className="home-hero" data-reveal>
-                <div className="home-hero-copy">
-                    <span className="eyebrow">Senior software engineer · Mumbai</span>
-                    <h1 className="hero-name">
-                        <span>Radhakishan</span>
-                        <span>Jangid</span>
-                    </h1>
-                    <p className="hero-typing">
-                        <span>{typedTitle}</span>
-                        <span className="typing-cursor" aria-hidden="true">|</span>
-                    </p>
-                    <p className="lede">
-                        I design and ship React, Node.js, mobile, and AI-assisted product systems with a bias for crisp interfaces and reliable delivery.
-                    </p>
-
-                    <div className="hero-actions">
-                        <Link className="button-primary" to="/projects">View selected work</Link>
-                        <Link className="button-secondary" to="/contact">Start a conversation</Link>
-                    </div>
-
-                </div>
-
-                <div className="hero-side" data-reveal>
-                    <HeroImageShowcase />
-                    <div className="portfolio-note">
-                        <div className="portfolio-note-brand">
-                            <img src={logoImages.stack} alt="Radhakishan logo" />
-                        </div>
-                        <p>Available for product engineering, frontend systems, backend APIs, and focused AI prototypes.</p>
+        <>
+            <section className="hero" ref={heroRef} onMouseMove={handleHeroMouseMove}>
+                <div className="hero-bg">
+                    <div className="hero-bg-sticky">
+                        <img
+                            ref={imgRef}
+                            src="/images/moon-hero.jpg"
+                            alt=""
+                            loading="eager"
+                        />
                     </div>
                 </div>
-
-                <div className="hero-stat-row">
-                    {terminalStats.map((item) => (
-                        <div key={item.key} className="hero-stat">
-                            <span>{item.key}</span>
-                            <span>→</span>
-                            <strong>{item.value}</strong>
-                        </div>
-                    ))}
+                <div className="hero-overlay" ref={overlayRef} />
+                <FloatingShapes />
+                <div className="hero-content" ref={textRef}>
+                    <h1 className="hero-name">Radhakishan<br />Jangid</h1>
+                    <p className="hero-subtitle">
+                        Senior software engineer. Building product systems, React frontends, Node backends, and AI-focused technical content.
+                    </p>
+                    <div style={{ marginTop: 32, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
+                        <MagneticButton as={Link} className="btn btn-filled" to="/projects">View Projects</MagneticButton>
+                        <MagneticButton as={Link} className="btn" to="/articles">Read Articles</MagneticButton>
+                    </div>
                 </div>
+                <div className="hero-scroll-hint">Scroll</div>
             </section>
 
-            <section className="section-stack" data-reveal>
-                <div className="section-heading section-heading-row">
-                    <div>
-                        <span className="eyebrow">Selected work</span>
-                        <h2>Featured projects</h2>
-                    </div>
-                    <Link className="inline-link" to="/projects">All projects</Link>
-                </div>
-                <div className="project-grid project-grid-home">
-                    {featuredProjects.map((project) => (
-                        <article key={project.id} className="surface-card project-card" data-reveal>
-                            <div className="project-card-path">~/projects/{slugify(project.title)}</div>
-                            <div className="project-visual">
-                                <img src={project.thumbnail} alt={`${project.title} preview`} />
-                            </div>
-                            <div className="project-card-top">
-                                <h3>{project.title}</h3>
-                                <span className="meta-pill">{project.date || "Case study"}</span>
-                            </div>
-                            <p>{project.description}</p>
-                            <div className="tag-row">
-                                {project.technology.split(",").slice(0, 4).map((item) => (
-                                    <span key={item} className="tag-chip tag-chip-static">&lt;{item.trim().toLowerCase()}&gt;</span>
-                                ))}
-                            </div>
-                            <div className="project-card-links">
-                                <Link className="inline-link" to={`/projects/${slugify(project.title)}`}>Case study</Link>
-                                {project.onlineLink ? <a className="inline-link" href={project.onlineLink} target="_blank" rel="noreferrer">Live link</a> : null}
-                            </div>
-                        </article>
-                    ))}
-                </div>
-            </section>
+            <Marquee items={["Development", "Engineering", "React", "Node.js", "Mobile Apps", "AI Content", "Product Systems", "Open Source"]} speed={35} />
 
-            <section className="working-strip" data-reveal>
-                <div className="section-heading">
-                    <span className="eyebrow">Working method</span>
-                    <h2>Product thinking with senior engineering follow-through.</h2>
-                </div>
-                <div className="working-list">
-                    {workingNotes.map((note, index) => (
-                        <p key={note}>
-                            <span>{String(index + 1).padStart(2, "0")}</span>
-                            {note}
+            <section className="page-section" style={{ background: "#000", position: "relative", overflow: "hidden" }}>
+                <div className="perspective-grid" />
+                <div className="container" style={{ position: "relative", zIndex: 1 }}>
+                    <div data-reveal-3d>
+                        <p className="about-blurb">
+                            Mumbai based. <span className="muted">Focused on React, Node.js, mobile apps,</span> internal systems, <span className="muted">and public-facing</span> product builds <span className="muted">with 7+ years of experience.</span>
                         </p>
-                    ))}
+                    </div>
+
+                    <div className="stats-row" data-reveal-3d>
+                        <div className="stat-item">
+                            <AnimatedCounter value="7+" className="stat-value" />
+                            <span className="stat-label">Years experience</span>
+                        </div>
+                        <div className="stat-item">
+                            <AnimatedCounter value={`${softdata.project.length}`} className="stat-value" />
+                            <span className="stat-label">Projects shipped</span>
+                        </div>
+                        <div className="stat-item">
+                            <AnimatedCounter value={`${articles.length}`} className="stat-value" />
+                            <span className="stat-label">Articles published</span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            {repos.length ? (
-                <section className="section-stack" data-reveal>
-                    <div className="section-heading section-heading-row">
-                        <div>
-                            <span className="eyebrow">GitHub recent</span>
-                            <h2>Recent GitHub projects</h2>
-                        </div>
-                        <a className="inline-link" href="https://github.com/radhakishan404?tab=repositories" target="_blank" rel="noreferrer">GitHub profile</a>
+            <section className="page-section">
+                <div className="container">
+                    <div className="split-title" data-reveal>
+                        <h2>Selected</h2>
+                        <span className="split-title-line" />
+                        <h2>Work</h2>
                     </div>
-                    <div className="public-grid">
-                        {repos.slice(0, 3).map((repo) => (
-                            <article key={repo.id} className="surface-card public-card" data-reveal>
-                                <div className="public-card-top terminal-window-top">
-                                    <span className="terminal-window-title">
-                                        <span className="terminal-dot" />
-                                        {repo.name}
-                                    </span>
-                                    <span className="public-star">★ {repo.stargazers_count}</span>
-                                </div>
-                                <p>{repo.description || "Public GitHub repository."}</p>
-                                <div className="tag-row">
-                                    <span className="meta-pill">Public</span>
-                                </div>
-                                <div className="project-card-links">
-                                    <a className="inline-link" href={repo.html_url} target="_blank" rel="noreferrer">Repository</a>
-                                    {repo.homepage ? <a className="inline-link" href={repo.homepage} target="_blank" rel="noreferrer">Live demo</a> : null}
-                                </div>
-                            </article>
+                    <div className="project-grid">
+                        {featuredProjects.map((project, i) => (
+                            <TiltCard key={project.id} className="project-card shine-card" data-reveal data-reveal-delay={`${i + 1}`}>
+                                <Link to={`/projects/${slugify(project.title)}`} style={{ display: "contents" }}>
+                                    <div className="project-card-visual tilt-image">
+                                        <img src={project.thumbnail} alt={`${project.title} preview`} />
+                                    </div>
+                                    <div className="project-card-body">
+                                        <h3>{project.title}</h3>
+                                        <p>{project.description}</p>
+                                        <div className="tag-row">
+                                            {project.technology.split(",").slice(0, 4).map((t) => (
+                                                <span key={t} className="tag">{t.trim()}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </Link>
+                            </TiltCard>
                         ))}
                     </div>
-                </section>
-            ) : null}
-
-            <section className="section-stack" data-reveal>
-                <div className="section-heading section-heading-row">
-                    <div>
-                        <span className="eyebrow">Writing</span>
-                        <h2>Recent articles</h2>
-                    </div>
-                    <Link className="inline-link" to="/articles">All articles</Link>
-                </div>
-
-                <div className="surface-card article-directory" data-reveal>
-                    <p className="directory-head">drwxr-xr-x  articles/</p>
-                    <div className="directory-list">
-                        {featuredArticles.map((article, index) => {
-                            const extension = article.kind === "html" ? "html" : "md";
-                            const branch = index === featuredArticles.length - 1 ? "└──" : "├──";
-
-                            return (
-                                <Link key={article.slug} className="directory-row" to={`/articles/${article.slug}`}>
-                                    <span className="directory-branch">{branch}</span>
-                                    <span className="directory-kind">[{article.kind === "html" ? "HTML" : "MD"}]</span>
-                                    <span className="directory-file">{article.slug}.{extension}</span>
-                                    <span className="directory-time">{article.readingTime}</span>
-                                </Link>
-                            );
-                        })}
+                    <div style={{ textAlign: "center", marginTop: 48 }} data-reveal>
+                        <MagneticButton as={Link} className="btn" to="/projects">View All Projects</MagneticButton>
                     </div>
                 </div>
             </section>
-        </div>
+
+            <Marquee items={["Latest Articles", "Technical Writing", "AI Prompts", "Developer Content", "Practical Guides"]} speed={40} />
+
+            <section className="page-section" style={{ background: "var(--color-bg-raised)" }}>
+                <div className="container">
+                    <div className="split-title" data-reveal>
+                        <h2>Latest</h2>
+                        <span className="split-title-line" />
+                        <h2>Articles</h2>
+                    </div>
+                    <div className="article-list">
+                        {recentArticles.map((article, i) => (
+                            <Link key={article.slug} className="article-list-item" to={`/articles/${article.slug}`} data-reveal data-reveal-delay={`${i + 1}`}>
+                                <h3>{article.title}</h3>
+                                <div className="article-list-meta">
+                                    <span>{article.readingTime}</span>
+                                    {article.date ? <span>{article.date}</span> : null}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                    <div style={{ textAlign: "center", marginTop: 48 }} data-reveal>
+                        <MagneticButton as={Link} className="btn" to="/articles">All Articles</MagneticButton>
+                    </div>
+                </div>
+            </section>
+
+            <section className="page-section creator-section">
+                <div className="container">
+                    <div className="split-title" data-reveal>
+                        <h2>Content</h2>
+                        <span className="split-title-line" />
+                        <h2>Creator</h2>
+                    </div>
+
+                    <div className="creator-grid">
+                        <TiltCard className="creator-card shine-card" data-reveal data-reveal-delay="1">
+                            <span className="creator-card-badge">
+                                <span className="badge-dot badge-dot--ig" />
+                                Instagram
+                            </span>
+                            <h3>@rk.codex</h3>
+                            <p>Coding reels, dev tips, behind-the-scenes, and tech content for developers and creators.</p>
+                            <div className="reel-grid">
+                                {instagramReels.map((reel) => (
+                                    <a key={reel.id} className="reel-card" href={reel.url} target="_blank" rel="noreferrer">
+                                        <div className="reel-card-play" />
+                                        <span className="reel-card-label">{reel.title}</span>
+                                    </a>
+                                ))}
+                            </div>
+                            <MagneticButton as="a" className="btn" href="https://www.instagram.com/rk.codex" target="_blank" rel="noreferrer" style={{ marginTop: 8 }}>
+                                Follow on Instagram
+                            </MagneticButton>
+                        </TiltCard>
+
+                        <TiltCard className="creator-card shine-card" data-reveal data-reveal-delay="2">
+                            <span className="creator-card-badge">
+                                <span className="badge-dot badge-dot--yt" />
+                                YouTube
+                            </span>
+                            <h3>@rk-codex</h3>
+                            <p>Longer-form coding tutorials, project walkthroughs, tech reviews, and engineering deep-dives.</p>
+                            <div className="yt-video-grid">
+                                {youtubeVideos.map((video) => (
+                                    <a key={video.id} className="yt-thumb-card" href={video.url} target="_blank" rel="noreferrer">
+                                        <img
+                                            src={`https://img.youtube.com/vi/${video.embedId}/hqdefault.jpg`}
+                                            alt={video.title}
+                                            loading="lazy"
+                                        />
+                                        <div className="yt-thumb-play" />
+                                    </a>
+                                ))}
+                            </div>
+                            <MagneticButton as="a" className="btn" href="https://www.youtube.com/@rk-codex" target="_blank" rel="noreferrer" style={{ marginTop: 8 }}>
+                                Subscribe on YouTube
+                            </MagneticButton>
+                        </TiltCard>
+                    </div>
+                </div>
+            </section>
+
+            {repos.length > 0 && (
+                <section className="page-section">
+                    <div className="container">
+                        <div className="split-title" data-reveal>
+                            <h2>Open</h2>
+                            <span className="split-title-line" />
+                            <h2>Source</h2>
+                        </div>
+                        <div className="public-grid">
+                            {repos.slice(0, 3).map((repo, i) => (
+                                <TiltCard key={repo.id} className="public-card shine-card" data-reveal data-reveal-delay={`${i + 1}`}>
+                                    <div className="public-card-header">
+                                        <h3>{repo.name}</h3>
+                                        <span className="public-star">★ {repo.stargazers_count}</span>
+                                    </div>
+                                    <p>{repo.description || "Public GitHub repository."}</p>
+                                    <div className="public-card-footer">
+                                        <a className="text-link" href={repo.html_url} target="_blank" rel="noreferrer">View Repo</a>
+                                        {repo.homepage ? <a className="text-link" href={repo.homepage} target="_blank" rel="noreferrer">Live Demo</a> : null}
+                                    </div>
+                                </TiltCard>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
+        </>
     );
 }
 

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { logoImages } from "../data/images";
-import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
     { label: "Home", to: "/" },
@@ -11,7 +9,7 @@ const navItems = [
     { label: "Contact", to: "/contact" }
 ];
 
-function SiteHeader({ theme, onToggleTheme }) {
+function SiteHeader() {
     const [menuOpen, setMenuOpen] = useState(false);
     const location = useLocation();
 
@@ -28,51 +26,49 @@ function SiteHeader({ theme, onToggleTheme }) {
 
     return (
         <header className="site-header">
-            <div className="shell header-shell">
-                <Link className="brand-mark" to="/" onClick={() => setMenuOpen(false)}>
-                    <span className="brand-mark-heading">
-                        <span className="brand-mark-logo-wrap">
-                            <img className="brand-mark-logo" src={logoImages.icon} alt="Radhakishan logo icon" />
-                        </span>
-                        <span className="brand-mark-label">
-                            Radhakishan Jangid
-                            <span className="brand-cursor" aria-hidden="true">_</span>
-                        </span>
-                    </span>
-                    <span className="brand-mark-subtitle">Senior software engineer</span>
+            <div className="header-inner">
+                <Link className="brand-text" to="/" onClick={() => setMenuOpen(false)}>
+                    Radhakishan Jangid
                 </Link>
+
+                <nav className="primary-nav" aria-label="Primary">
+                    {navItems.map((item) => (
+                        <NavLink
+                            key={item.to}
+                            exact={item.to === "/"}
+                            activeClassName="is-active"
+                            className="nav-link"
+                            to={item.to}
+                        >
+                            {item.label}
+                        </NavLink>
+                    ))}
+                </nav>
 
                 <button
                     type="button"
                     className="menu-toggle"
                     aria-label="Toggle navigation"
                     aria-expanded={menuOpen}
-                    onClick={() => setMenuOpen((current) => !current)}
+                    onClick={() => setMenuOpen((prev) => !prev)}
                 >
                     {menuOpen ? "Close" : "Menu"}
                 </button>
+            </div>
 
-                <div className={`header-panel${menuOpen ? " is-open" : ""}`}>
-                    <nav className="primary-nav" aria-label="Primary">
-                        {navItems.map((item) => (
-                            <NavLink
-                                key={item.to}
-                                exact={item.to === "/"}
-                                activeClassName="is-active"
-                                className="primary-nav-link"
-                                to={item.to}
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                {item.label}
-                            </NavLink>
-                        ))}
-                    </nav>
-
-                    <div className="header-actions">
-                        <Link className="header-cta" to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
-                        <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
-                    </div>
-                </div>
+            <div className={`mobile-nav${menuOpen ? " is-open" : ""}`}>
+                {navItems.map((item) => (
+                    <NavLink
+                        key={item.to}
+                        exact={item.to === "/"}
+                        activeClassName="is-active"
+                        className="nav-link"
+                        to={item.to}
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        {item.label}
+                    </NavLink>
+                ))}
             </div>
         </header>
     );

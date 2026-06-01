@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import MagneticButton from "../components/MagneticButton";
+import TiltCard from "../components/TiltCard";
 import { profileImages } from "../data/images";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 import usePublicRepos from "../hooks/usePublicRepos";
@@ -17,86 +19,76 @@ function ProjectsPage() {
     });
 
     return (
-        <div className="page-shell shell">
-            <section className="page-hero page-hero-tight" data-reveal>
-                <span className="eyebrow">Projects</span>
-                <h1>Projects across product engineering, open source, and shipped client work.</h1>
-                <p className="lede">
-                    A cleaner index with visuals, direct links, and detail pages where deeper context already exists.
-                </p>
-            </section>
+        <div className="page-wrap">
+            <div className="container">
+                <section data-reveal>
+                    <h1 style={{ marginBottom: 12 }}>Projects</h1>
+                    <p style={{ color: "var(--color-text-muted)", fontSize: 18, maxWidth: 640, marginBottom: 48 }}>
+                        A cleaner index with visuals, direct links, and detail pages where deeper context exists.
+                    </p>
+                </section>
 
-            <section className="section-stack" data-reveal>
-                <div className="section-heading">
-                    <h2>Case studies</h2>
+                <div className="split-title" data-reveal>
+                    <h2>Case</h2>
+                    <span className="split-title-line" />
+                    <h2>Studies</h2>
                 </div>
+
                 <div className="project-grid">
-                    {softdata.project.map((project) => (
-                        <article key={project.id} className="surface-card project-card" data-reveal>
-                            <div className="project-card-path">~/projects/{slugify(project.title)}</div>
-                            <div className="project-visual">
-                                <img src={project.thumbnail} alt={`${project.title} preview`} />
-                            </div>
-                            <div className="project-card-top">
-                                <h3>{project.title}</h3>
-                                <span className="meta-pill">{project.gitAvailable ? "GitHub" : "Project"}</span>
-                            </div>
-                            <p>{project.description}</p>
-                            <div className="tag-row">
-                                {project.tag.split(",").slice(0, 4).map((tag) => (
-                                    <span key={tag} className="tag-chip tag-chip-static">&lt;{tag.trim().toLowerCase()}&gt;</span>
-                                ))}
-                            </div>
-                            <div className="project-card-links">
-                                <Link className="inline-link" to={`/projects/${slugify(project.title)}`}>Read detail</Link>
-                                {project.onlineLink ? (
-                                    <a className="inline-link" href={project.onlineLink} target="_blank" rel="noreferrer">Open link</a>
-                                ) : null}
-                            </div>
-                        </article>
+                    {softdata.project.map((project, i) => (
+                        <TiltCard key={project.id} className="project-card shine-card" data-reveal data-reveal-delay={`${(i % 4) + 1}`}>
+                            <Link to={`/projects/${slugify(project.title)}`} style={{ display: "contents" }}>
+                                <div className="project-card-visual tilt-image">
+                                    <img src={project.thumbnail} alt={`${project.title} preview`} />
+                                </div>
+                                <div className="project-card-body">
+                                    <h3>{project.title}</h3>
+                                    <p>{project.description}</p>
+                                    <div className="tag-row">
+                                        {project.tag.split(",").slice(0, 4).map((t) => (
+                                            <span key={t} className="tag">{t.trim()}</span>
+                                        ))}
+                                    </div>
+                                    <div className="project-card-links">
+                                        <span className="text-link">View Details</span>
+                                        {project.onlineLink ? (
+                                            <a className="text-link" href={project.onlineLink} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>Live Link</a>
+                                        ) : null}
+                                    </div>
+                                </div>
+                            </Link>
+                        </TiltCard>
                     ))}
                 </div>
-            </section>
 
-            <section className="section-stack" data-reveal>
-                <div className="section-heading section-heading-row">
-                    <div>
-                        <span className="eyebrow">GitHub</span>
-                        <h2>Public repositories</h2>
-                    </div>
-                    <a className="inline-link" href="https://github.com/radhakishan404?tab=repositories" target="_blank" rel="noreferrer">View all</a>
-                </div>
-                <div className="public-grid">
-                    {repos.map((repo) => (
-                        <article key={repo.id} className="surface-card public-card" data-reveal>
-                            <div className="public-card-top terminal-window-top">
-                                <span className="terminal-window-title">
-                                    <span className="terminal-dot" />
-                                    {repo.name}
-                                </span>
-                                <span className="public-star">★ {repo.stargazers_count}</span>
-                            </div>
-                            <p>{repo.description || "Public GitHub repository."}</p>
-                            <div className="public-meta">
-                                <span>Updated {new Date(repo.updated_at).toLocaleDateString("en-US", { month: "short", year: "numeric" })}</span>
-                            </div>
-                            <div className="tag-row">
-                                <span className="meta-pill">Public</span>
-                            </div>
-                            <div className="project-card-links">
-                                <a className="inline-link" href={repo.html_url} target="_blank" rel="noreferrer">Repository</a>
-                                {repo.homepage ? <a className="inline-link" href={repo.homepage} target="_blank" rel="noreferrer">Live demo</a> : null}
-                            </div>
-                        </article>
-                    ))}
-                    {!loading && !repos.length ? (
-                        <article className="surface-card public-card" data-reveal>
-                            <h3>Public repositories</h3>
-                            <p>GitHub data is unavailable right now. Refreshing later should bring the latest public projects back in.</p>
-                        </article>
-                    ) : null}
-                </div>
-            </section>
+                {repos.length > 0 && (
+                    <section className="page-section">
+                        <div className="split-title" data-reveal>
+                            <h2>Public</h2>
+                            <span className="split-title-line" />
+                            <h2>Repositories</h2>
+                        </div>
+                        <div className="public-grid">
+                            {repos.map((repo, i) => (
+                                <TiltCard key={repo.id} className="public-card shine-card" data-reveal data-reveal-delay={`${(i % 3) + 1}`}>
+                                    <div className="public-card-header">
+                                        <h3>{repo.name}</h3>
+                                        <span className="public-star">★ {repo.stargazers_count}</span>
+                                    </div>
+                                    <p>{repo.description || "Public GitHub repository."}</p>
+                                    <div className="public-card-footer">
+                                        <a className="text-link" href={repo.html_url} target="_blank" rel="noreferrer">View Repo</a>
+                                        {repo.homepage ? <a className="text-link" href={repo.homepage} target="_blank" rel="noreferrer">Live Demo</a> : null}
+                                    </div>
+                                </TiltCard>
+                            ))}
+                        </div>
+                        {!loading && !repos.length && (
+                            <p style={{ color: "var(--color-text-muted)", marginTop: 20 }}>GitHub data is unavailable right now.</p>
+                        )}
+                    </section>
+                )}
+            </div>
         </div>
     );
 }

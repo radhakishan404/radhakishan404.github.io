@@ -1,25 +1,15 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getArticleBySlug } from "../content/articles";
-import { logoImages } from "../data/images";
 import { socialLinks } from "../data/site";
 import useScrollReveal from "../hooks/useScrollReveal";
-import useTheme from "../hooks/useTheme";
-import CursorGlow from "./CursorGlow";
+import CustomCursor from "./CustomCursor";
+import PageTransition from "./PageTransition";
+import ScrollProgress from "./ScrollProgress";
 import SiteHeader from "./SiteHeader";
-
-const socialCode = {
-    github: "gh",
-    linkedin: "li",
-    x: "x",
-    dev: "dev",
-    instagram: "ig",
-    email: "mail"
-};
 
 function SiteShell({ children }) {
     const location = useLocation();
-    const { theme, toggleTheme } = useTheme();
 
     useScrollReveal([location.pathname]);
 
@@ -29,8 +19,8 @@ function SiteShell({ children }) {
 
     if (isHtmlArticle) {
         return (
-            <div className="site-root site-root-embedded">
-                <main key={location.pathname} className="site-main site-main-embedded">
+            <div className="site-root-embedded">
+                <main key={location.pathname} className="site-main-embedded">
                     {children}
                 </main>
             </div>
@@ -38,20 +28,32 @@ function SiteShell({ children }) {
     }
 
     return (
-        <div className="site-root">
-            <CursorGlow />
-            <SiteHeader theme={theme} onToggleTheme={toggleTheme} />
-            <main key={location.pathname} className="site-main">
-                {children}
-            </main>
+        <>
+            <CustomCursor />
+            <ScrollProgress />
+            <SiteHeader />
+            <PageTransition>
+                <main key={location.pathname}>
+                    {children}
+                </main>
+            </PageTransition>
             <footer className="site-footer">
-                <div className="shell footer-shell" data-reveal>
-                    <div className="footer-brand">
-                        <img src={logoImages.withName} alt="Radhakishan Jangid logo" />
+                <div className="footer-inner">
+                    <div className="footer-brand-col">
+                        <h3>Radhakishan Jangid</h3>
+                        <p>Senior software engineer building product systems, frontend experiences, and technical content.</p>
                     </div>
-                    <p className="footer-line">Radhakishan Jangid © {new Date().getFullYear()}</p>
-                    <p className="footer-line">React portfolio for software engineering, product systems, and technical writing.</p>
-                    <div className="footer-social">
+                    <div className="footer-col">
+                        <h4>Pages</h4>
+                        <Link to="/">Home</Link>
+                        <Link to="/about">About</Link>
+                        <Link to="/projects">Projects</Link>
+                        <Link to="/articles">Articles</Link>
+                        <Link to="/contact">Contact</Link>
+                        <a href="/privacy-policy.html">Privacy Policy</a>
+                    </div>
+                    <div className="footer-col">
+                        <h4>Connect</h4>
                         {socialLinks.map((link) => (
                             <a
                                 key={link.id}
@@ -59,13 +61,28 @@ function SiteShell({ children }) {
                                 target={link.id === "email" ? undefined : "_blank"}
                                 rel={link.id === "email" ? undefined : "noreferrer"}
                             >
-                                [{socialCode[link.id] || link.id}]
+                                {link.label}
+                            </a>
+                        ))}
+                    </div>
+                </div>
+                <div className="footer-bottom">
+                    <span>&copy; {new Date().getFullYear()} Radhakishan Jangid</span>
+                    <div className="footer-social-row">
+                        {socialLinks.filter((l) => l.id !== "email").map((link) => (
+                            <a
+                                key={link.id}
+                                href={link.href}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                {link.label}
                             </a>
                         ))}
                     </div>
                 </div>
             </footer>
-        </div>
+        </>
     );
 }
 

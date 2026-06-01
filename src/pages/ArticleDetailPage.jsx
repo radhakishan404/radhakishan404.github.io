@@ -52,27 +52,30 @@ function ArticleDetailPage({ match }) {
     }
 
     return (
-        <div className="page-shell shell">
-            <section className="article-detail-header" data-reveal>
-                <Link className="back-link" to="/articles">[ back_to_articles ]</Link>
-                <div className="article-card-meta">
-                    <span className="meta-pill">{article.kind === "html" ? "HTML" : "Markdown"}</span>
-                    <span>{article.readingTime}</span>
-                    {article.date ? <span>{article.date}</span> : null}
-                    {viewsLabel ? <span>{viewsLabel}</span> : null}
-                </div>
-                <h1>{article.title}</h1>
-                <p className="lede article-lede">{article.excerpt}</p>
-                {article.tags.length ? (
-                    <div className="tag-row">
-                        {article.tags.map((tag) => (
-                            <span key={tag} className="tag-chip tag-chip-static">{tag}</span>
-                        ))}
-                    </div>
-                ) : null}
-            </section>
+        <div className="page-wrap">
+            <div className="container">
+                <Link className="back-link" to="/articles">Back to Articles</Link>
 
-            <article className="article-prose" data-reveal dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
+                <div className="article-detail-header" data-reveal>
+                    <div className="article-detail-meta">
+                        <span>{article.kind === "html" ? "HTML" : "Markdown"}</span>
+                        <span>{article.readingTime}</span>
+                        {article.date ? <span>{article.date}</span> : null}
+                        {viewsLabel ? <span>{viewsLabel}</span> : null}
+                    </div>
+                    <h1>{article.title}</h1>
+                    <p style={{ color: "var(--color-text-muted)", fontSize: 18 }}>{article.excerpt}</p>
+                    {article.tags.length > 0 && (
+                        <div className="tag-row">
+                            {article.tags.map((tag) => (
+                                <span key={tag} className="tag">{tag}</span>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <article className="article-prose" data-reveal dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
+            </div>
         </div>
     );
 }

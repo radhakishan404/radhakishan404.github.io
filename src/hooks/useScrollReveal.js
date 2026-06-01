@@ -22,7 +22,7 @@ function useScrollReveal(deps = []) {
                             observer.unobserve(entry.target);
                         });
                     },
-                    { threshold: 0.16, rootMargin: "0px 0px -12% 0px" }
+                    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
                 )
                 : null;
 
@@ -42,7 +42,7 @@ function useScrollReveal(deps = []) {
         };
 
         const scan = () => {
-            document.querySelectorAll("[data-reveal]").forEach(registerNode);
+            document.querySelectorAll("[data-reveal], [data-reveal-3d], .clip-reveal:not(.is-revealed)").forEach(registerNode);
         };
 
         scan();

@@ -1,96 +1,75 @@
 import React from "react";
-import softdata from "../softdata.json";
+import TiltCard from "../components/TiltCard";
+import { profileImages } from "../data/images";
 import useDocumentMeta from "../hooks/useDocumentMeta";
-
-function getAge() {
-    const birthDate = new Date("1998-07-26");
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDelta = today.getMonth() - birthDate.getMonth();
-
-    if (monthDelta < 0 || (monthDelta === 0 && today.getDate() < birthDate.getDate())) {
-        age -= 1;
-    }
-
-    return age;
-}
+import softdata from "../softdata.json";
 
 function AboutPage() {
+    const birthYear = 1998;
+    const age = new Date().getFullYear() - birthYear;
+
     useDocumentMeta("About | Radhakishan Jangid", "Experience, technical strengths, and current focus areas.");
 
     return (
-        <div className="page-shell shell">
-            <section className="page-hero page-hero-tight" data-reveal>
-                <span className="eyebrow">About</span>
-                <h1>Engineering depth, product focus, and shipping discipline.</h1>
-                <p className="lede">
-                    I’m Radhakishan Jangid, a {getAge()} year old software engineer based in Mumbai. My work sits at the intersection of product UI,
-                    backend services, and developer-facing systems.
-                </p>
-            </section>
+        <div className="page-wrap">
+            <div className="container">
+                <section data-reveal>
+                    <h1 style={{ marginBottom: 24 }}>About</h1>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "clamp(32px, 5vw, 64px)", alignItems: "start" }}>
+                        <p className="about-blurb">
+                            I'm Radhakishan, a {age}-year-old <span className="muted">senior software engineer based in Mumbai.</span> I build product systems, <span className="muted">ship React and Node applications,</span> and write technical content <span className="muted">for developers and creators.</span>
+                        </p>
+                        <div className="portrait-wrap clip-reveal is-revealed" data-reveal data-reveal-delay="2">
+                            <img src={profileImages.hero} alt="Radhakishan Jangid" />
+                        </div>
+                    </div>
+                </section>
 
-            <section className="info-grid" data-reveal>
-                <div className="surface-card" data-reveal>
-                    <h2>Current position</h2>
-                    <p>
-                        Senior Software Engineer at <a href="https://www.cachetech.com/" target="_blank" rel="noreferrer">Cachetech Advisor Solutions</a>,
-                        working on fintech systems, multi-tenant workflows, and product engineering across web and mobile.
-                    </p>
-                </div>
-                <div className="surface-card" data-reveal>
-                    <h2>Working style</h2>
-                    <p>
-                        Strong on frontend architecture, pragmatic on backend delivery, and comfortable turning rough product intent into production-ready systems.
-                    </p>
-                </div>
-            </section>
-
-            <section className="section-stack" data-reveal>
-                <div className="section-heading">
-                    <span className="eyebrow">Experience</span>
-                    <h2>Recent roles</h2>
-                </div>
-                <div className="timeline-list">
-                    {softdata.experience.map((item) => (
-                        <article key={`${item.companyName}-${item.from}`} className="timeline-item" data-reveal>
-                            <div className="timeline-meta">
-                                <span>{item.from} to {item.to}</span>
-                                <span>{item.location}</span>
+                <section className="page-section">
+                    <div className="split-title" data-reveal>
+                        <h2>Work</h2>
+                        <span className="split-title-line" />
+                        <h2>Experience</h2>
+                    </div>
+                    <div className="timeline">
+                        {softdata.experience.map((job, i) => (
+                            <div key={`${job.companyName}-${job.from}`} className="timeline-item" data-reveal data-reveal-delay={`${i + 1}`}>
+                                <div className="timeline-meta">
+                                    <strong>{job.title}</strong>
+                                    <span>{job.from} — {job.to}</span>
+                                    <span>{job.location}</span>
+                                    <div className="timeline-company">
+                                        <a href={job.companyLink} target="_blank" rel="noreferrer">{job.companyName}</a>
+                                    </div>
+                                </div>
+                                <div className="timeline-body">
+                                    <p>{job.description}</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3>{item.title}</h3>
-                                <p className="timeline-company">
-                                    <a href={item.companyLink} target="_blank" rel="noreferrer">{item.companyName}</a>
-                                </p>
-                                <p>{item.description}</p>
-                            </div>
-                        </article>
-                    ))}
-                </div>
-            </section>
+                        ))}
+                    </div>
+                </section>
 
-            <section className="section-stack" data-reveal>
-                <div className="section-heading">
-                    <span className="eyebrow">Capabilities</span>
-                    <h2>Core skill areas</h2>
-                </div>
-                <div className="capability-grid">
-                    {softdata.skills[0].skillType.map((group) => (
-                        <article key={group.title} className="surface-card" data-reveal>
-                            <h3>{group.title}</h3>
-                            <p dangerouslySetInnerHTML={{ __html: group.description }} />
-                            <ul className="clean-list">
-                                {group.skillsList.map((item) => (
-                                    <li key={item.skillTitle}>
-                                        <strong>{item.skillTitle}</strong>
-                                        <span>{item.skillDesc}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </article>
-                    ))}
-                </div>
-            </section>
+                <section className="page-section">
+                    <div className="split-title" data-reveal>
+                        <h2>Technical</h2>
+                        <span className="split-title-line" />
+                        <h2>Skills</h2>
+                    </div>
+                    <div className="skills-grid">
+                        {(softdata.skills[0]?.skillType || []).map((group, i) => (
+                            <TiltCard key={group.title} className="skill-card shine-card" data-reveal data-reveal-delay={`${i + 1}`}>
+                                <h3>{group.title}</h3>
+                                <ul>
+                                    {(group.skillsList || []).map((skill) => (
+                                        <li key={skill.skillTitle}>{skill.skillTitle}</li>
+                                    ))}
+                                </ul>
+                            </TiltCard>
+                        ))}
+                    </div>
+                </section>
+            </div>
         </div>
     );
 }
