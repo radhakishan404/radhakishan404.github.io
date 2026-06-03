@@ -28,12 +28,17 @@ function buildEmbeddedHtml(raw) {
 <style>
 html, body { margin: 0; padding: 0; }
 body > * { position: relative; z-index: 1; }
-body { font-family: 'Inter', 'Instrument Sans', -apple-system, sans-serif !important; }
 ::-webkit-scrollbar { width: 0; height: 0; }
-body { scrollbar-width: none; }
-</style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">`;
+body { scrollbar-width: none; cursor: auto !important; }
+header, footer, nav,
+.topbar, .topbar-inner,
+.cursor, .cursor-ring,
+#progress,
+[class*="site-header"], [class*="site-footer"],
+[class*="back-to-top"] {
+    display: none !important;
+}
+</style>`;
 
     if (/<head[^>]*>/i.test(raw)) {
         return raw.replace(/<head([^>]*)>/i, `<head$1>${helperMarkup}`);
