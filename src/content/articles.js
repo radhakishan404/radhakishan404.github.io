@@ -232,3 +232,7 @@ export function getArticleBySlug(slug) {
 export function getArticleTags() {
     return Array.from(new Set(articles.flatMap((article) => article.tags))).sort((a, b) => a.localeCompare(b));
 }
+
+export function getArticleCategories() {
+    return Array.from(new Set(articles.map((a) => a.category || "Article").filter(Boolean))).sort((a, b) => a.localeCompare(b));
+}

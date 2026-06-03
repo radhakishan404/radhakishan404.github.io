@@ -760,44 +760,91 @@ p { margin: 0; }
 
 /* ─── Filter bar ─────────────────────── */
 
-.filter-bar {
+/* ─── Article filters ────────────────── */
+
+.article-filters {
+    margin-bottom: 40px;
+    display: grid;
+    gap: 16px;
+}
+
+.article-filters-row {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     align-items: center;
-    margin-bottom: 40px;
 }
 
-.filter-bar input[type="search"] {
+.filter-search {
     flex: 1;
     min-width: 200px;
     padding: 12px 16px;
     background: var(--color-bg-card);
     border: 1px solid var(--color-border);
-    border-radius: 999px;
+    border-radius: 12px;
     color: var(--color-text);
-    font-size: 14px;
+    font-size: 15px;
+    font-family: inherit;
     outline: none;
     transition: border-color 0.25s;
 }
 
-.filter-bar input[type="search"]:focus {
+.filter-search:focus {
     border-color: var(--color-border-hover);
 }
 
-.filter-chip {
-    font-size: 13px;
-    padding: 8px 16px;
+.filter-select {
+    padding: 12px 36px 12px 16px;
+    background: var(--color-bg-card);
     border: 1px solid var(--color-border);
-    border-radius: 999px;
-    background: transparent;
-    color: var(--color-text-muted);
+    border-radius: 12px;
+    color: var(--color-text);
+    font-size: 14px;
+    font-family: inherit;
     cursor: pointer;
-    transition: all 0.25s;
+    outline: none;
+    transition: border-color 0.25s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' fill='none' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
 }
 
-.filter-chip:hover { border-color: var(--color-border-hover); color: var(--color-text); }
-.filter-chip.is-active { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+.filter-select:hover,
+.filter-select:focus {
+    border-color: var(--color-border-hover);
+}
+
+.filter-select option {
+    background: #111;
+    color: #eee;
+}
+
+.article-filters-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.filter-count {
+    font-size: 13px;
+    color: var(--color-text-dim);
+}
+
+.filter-clear {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.25s;
+    font-family: inherit;
+    padding: 0;
+}
+
+.filter-clear:hover { color: var(--color-text); }
 
 /* ─── Experience timeline ────────────── */
 
@@ -1776,6 +1823,9 @@ p { margin: 0; }
     .split-title { flex-direction: column; align-items: flex-start; gap: 12px; }
     .split-title-line { display: none; }
 
+    .article-filters-row { flex-direction: column; }
+    .filter-search { min-width: unset; width: 100%; }
+    .filter-select { width: 100%; }
     .article-featured { grid-template-columns: 1fr; }
     .article-featured-img { min-height: 200px; }
     .article-featured-body { padding: 24px; }

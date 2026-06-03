@@ -1,29 +1,73 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import MagneticButton from "../components/MagneticButton";
 import TiltCard from "../components/TiltCard";
-import { articles, getArticleTags } from "../content/articles";
+import { articles, getArticleCategories, getArticleTags } from "../content/articles";
 import { profileImages } from "../data/images";
 import useDocumentMeta from "../hooks/useDocumentMeta";
+
+const SORT_OPTIONS = [
+    { value: "newest", label: "Newest First" },
+    { value: "oldest", label: "Oldest First" },
+    { value: "title-az", label: "Title A–Z" },
+    { value: "title-za", label: "Title Z–A" },
+    { value: "reading-time", label: "Quick Reads First" }
+];
 
 function ArticlesPage() {
     const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://radhakishan404.is-a.dev";
     const [query, setQuery] = useState("");
-    const [tagFilter, setTagFilter] = useState("all");
+    const [category, setCategory] = useState("all");
+    const [tag, setTag] = useState("all");
+    const [sortBy, setSortBy] = useState("newest");
 
+    const categories = getArticleCategories();
     const tags = getArticleTags();
-    const normalizedQuery = query.trim().toLowerCase();
-    const filteredArticles = articles.filter((article) => {
-        const matchesQuery =
-            !normalizedQuery ||
-            article.title.toLowerCase().includes(normalizedQuery) ||
-            article.excerpt.toLowerCase().includes(normalizedQuery);
-        const matchesTag = tagFilter === "all" || article.tags.includes(tagFilter);
-        return matchesQuery && matchesTag;
-    });
 
-    const featuredArticle = filteredArticles.find((a) => a.featured) || filteredArticles[0];
+    const filteredArticles = useMemo(() => {
+        const normalizedQuery = query.trim().toLowerCase();
+
+        const filtered = articles.filter((article) => {
+            if (normalizedQuery && !article.title.toLowerCase().includes(normalizedQuery) && !article.excerpt.toLowerCase().includes(normalizedQuery)) return false;
+            if (category !== "all" && (article.category || "Article") !== category) return false;
+            if (tag !== "all" && !article.tags.includes(tag)) return false;
+            return true;
+        });
+
+        const sorted = [...filtered];
+        switch (sortBy) {
+            case "oldest":
+                sorted.sort((a, b) => {
+                    const da = a.sortDate ? new Date(a.sortDate).getTime() : 0;
+                    const db = b.sortDate ? new Date(b.sortDate).getTime() : 0;
+                    return da - db;
+                });
+                break;
+            case "title-az":
+                sorted.sort((a, b) => a.title.localeCompare(b.title));
+                break;
+            case "title-za":
+                sorted.sort((a, b) => b.title.localeCompare(a.title));
+                break;
+            case "reading-time":
+                sorted.sort((a, b) => {
+                    const ma = parseInt(a.readingTime) || 0;
+                    const mb = parseInt(b.readingTime) || 0;
+                    return ma - mb;
+                });
+                break;
+            default:
+                break;
+        }
+
+        return sorted;
+    }, [query, category, tag, sortBy]);
+
+    const featuredArticle = sortBy === "newest"
+        ? (filteredArticles.find((a) => a.featured) || filteredArticles[0])
+        : filteredArticles[0];
     const restArticles = filteredArticles.filter((a) => a !== featuredArticle);
+
+    const hasActiveFilters = category !== "all" || tag !== "all" || sortBy !== "newest" || query.trim();
 
     useDocumentMeta({
         title: "Articles | Radhakishan Jangid",
@@ -56,30 +100,57 @@ function ArticlesPage() {
                     </p>
                 </section>
 
-                <div className="filter-bar" data-reveal>
-                    <input
-                        type="search"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Search articles..."
-                    />
-                    <button
-                        type="button"
-                        className={`filter-chip${tagFilter === "all" ? " is-active" : ""}`}
-                        onClick={() => setTagFilter("all")}
-                    >
-                        All
-                    </button>
-                    {tags.map((tag) => (
-                        <button
-                            key={tag}
-                            type="button"
-                            className={`filter-chip${tagFilter === tag ? " is-active" : ""}`}
-                            onClick={() => setTagFilter(tag)}
+                <div className="article-filters" data-reveal>
+                    <div className="article-filters-row">
+                        <input
+                            type="search"
+                            className="filter-search"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            placeholder="Search articles..."
+                        />
+                        <select
+                            className="filter-select"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
                         >
-                            {tag}
-                        </button>
-                    ))}
+                            <option value="all">All Categories</option>
+                            {categories.map((c) => (
+                                <option key={c} value={c}>{c}</option>
+                            ))}
+                        </select>
+                        <select
+                            className="filter-select"
+                            value={tag}
+                            onChange={(e) => setTag(e.target.value)}
+                        >
+                            <option value="all">All Tags</option>
+                            {tags.map((t) => (
+                                <option key={t} value={t}>{t}</option>
+                            ))}
+                        </select>
+                        <select
+                            className="filter-select"
+                            value={sortBy}
+                            onChange={(e) => setSortBy(e.target.value)}
+                        >
+                            {SORT_OPTIONS.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="article-filters-info">
+                        <span className="filter-count">{filteredArticles.length} article{filteredArticles.length !== 1 ? "s" : ""}</span>
+                        {hasActiveFilters && (
+                            <button
+                                type="button"
+                                className="filter-clear"
+                                onClick={() => { setQuery(""); setCategory("all"); setTag("all"); setSortBy("newest"); }}
+                            >
+                                Clear filters
+                            </button>
+                        )}
+                    </div>
                 </div>
 
                 {featuredArticle && (
@@ -135,7 +206,7 @@ function ArticlesPage() {
 
                 {filteredArticles.length === 0 && (
                     <p style={{ color: "var(--color-text-muted)", textAlign: "center", padding: "60px 0" }} data-reveal>
-                        No articles match your search.
+                        No articles match your filters.
                     </p>
                 )}
             </div>
