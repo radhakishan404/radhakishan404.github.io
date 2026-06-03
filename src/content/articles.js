@@ -38,6 +38,13 @@ header, footer, nav,
 [class*="site-header"], [class*="site-footer"],
 [class*="back-to-top"] {
     display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
 }
 
 /* ── Mobile-first overrides ── */

@@ -719,7 +719,7 @@ body.nav-open { overflow: hidden; }
 
 .article-html-frame {
     width: 100%;
-    min-height: 80vh;
+    min-height: 200px;
     border: 0;
     display: block;
     background: #080808;
