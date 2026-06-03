@@ -146,13 +146,17 @@ p { margin: 0; }
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 1000;
     height: 72px;
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background: rgba(0, 0, 0, 0.6);
     border-bottom: 1px solid var(--color-border);
     transition: background 0.3s;
+}
+
+body.nav-open .site-header {
+    background: #000;
 }
 
 .header-inner {
@@ -205,37 +209,48 @@ p { margin: 0; }
 
 .menu-toggle {
     display: none;
-    min-height: 40px;
-    min-width: 40px;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 16px;
     border: 1px solid var(--color-border);
     border-radius: 8px;
     background: transparent;
     color: var(--color-text);
     font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
     cursor: pointer;
 }
 
 .mobile-nav {
     position: fixed;
     inset: 72px 0 0;
-    z-index: 200;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(20px);
+    z-index: 999;
+    background: #000;
     display: none;
     flex-direction: column;
     padding: 40px var(--side-pad);
-    gap: 8px;
+    gap: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav.is-open { display: flex; }
+
+body.nav-open { overflow: hidden; }
 
 .mobile-nav .nav-link {
     font-size: 28px;
     font-family: var(--font-heading);
     font-weight: 600;
     color: var(--color-text);
-    padding: 12px 0;
+    padding: 16px 0;
     border-bottom: 1px solid var(--color-border);
+    display: block;
+}
+
+.mobile-nav .nav-link.is-active {
+    color: var(--color-accent);
 }
 
 .mobile-nav .nav-link::after { display: none; }
@@ -1844,9 +1859,9 @@ p { margin: 0; }
 }
 
 @media (max-width: 768px) {
-    .site-header { height: 64px; }
-    .scroll-progress { top: 64px; }
-    .mobile-nav { inset: 64px 0 0; }
+    .site-header { height: 60px; background: rgba(0,0,0,0.85); }
+    .scroll-progress { top: 60px; }
+    .mobile-nav { inset: 60px 0 0; }
 
     .menu-toggle { display: inline-flex; }
     .primary-nav { display: none; }
