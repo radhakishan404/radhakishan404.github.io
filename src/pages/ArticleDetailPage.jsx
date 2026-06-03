@@ -46,17 +46,35 @@ function ArticleDetailPage({ match }) {
         const resizeIframe = () => {
             try {
                 const doc = iframe.contentDocument || iframe.contentWindow?.document;
-                if (doc?.body) {
-                    iframe.style.height = `${doc.body.scrollHeight + 40}px`;
-                }
+                if (!doc?.body) return;
+                doc.body.style.overflow = "hidden";
+                doc.documentElement.style.overflow = "hidden";
+                const height = Math.max(
+                    doc.body.scrollHeight,
+                    doc.body.offsetHeight,
+                    doc.documentElement.scrollHeight,
+                    doc.documentElement.offsetHeight
+                );
+                iframe.style.height = `${height + 20}px`;
             } catch (_) { /* cross-origin fallback */ }
         };
 
-        iframe.addEventListener("load", resizeIframe);
-        const interval = setInterval(resizeIframe, 1000);
+        const onLoad = () => {
+            resizeIframe();
+            try {
+                const doc = iframe.contentDocument || iframe.contentWindow?.document;
+                const images = doc?.querySelectorAll("img") || [];
+                images.forEach((img) => {
+                    if (!img.complete) img.addEventListener("load", resizeIframe);
+                });
+            } catch (_) {}
+        };
+
+        iframe.addEventListener("load", onLoad);
+        const interval = setInterval(resizeIframe, 800);
 
         return () => {
-            iframe.removeEventListener("load", resizeIframe);
+            iframe.removeEventListener("load", onLoad);
             clearInterval(interval);
         };
     }, [article]);

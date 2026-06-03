@@ -705,10 +705,41 @@ p { margin: 0; }
 
 .article-html-frame {
     width: 100%;
-    min-height: 80vh;
+    min-height: 60vh;
     border: 0;
     display: block;
     background: #080808;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .article-html-wrap {
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+        margin-left: calc(var(--side-pad) * -1);
+        margin-right: calc(var(--side-pad) * -1);
+        width: calc(100% + var(--side-pad) * 2);
+    }
+
+    .article-detail-header h1 {
+        font-size: clamp(26px, 7vw, 40px);
+    }
+
+    .article-detail-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .article-footer-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .article-footer-nav .btn {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 /* ─── Ad slots ──────────────────────── */
