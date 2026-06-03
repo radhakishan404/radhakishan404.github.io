@@ -28,7 +28,12 @@ function buildEmbeddedHtml(raw) {
 <style>
 html, body { margin: 0; padding: 0; }
 body > * { position: relative; z-index: 1; }
-</style>`;
+body { font-family: 'Inter', 'Instrument Sans', -apple-system, sans-serif !important; }
+::-webkit-scrollbar { width: 0; height: 0; }
+body { scrollbar-width: none; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">`;
 
     if (/<head[^>]*>/i.test(raw)) {
         return raw.replace(/<head([^>]*)>/i, `<head$1>${helperMarkup}`);
@@ -163,6 +168,7 @@ function buildMarkdownArticle([path, raw]) {
         coverImage: coverImage || attributes.cover || "",
         accent: attributes.accent || "",
         featured: parseBoolean(attributes.featured || "false"),
+        githubUrl: attributes.github || "",
         bodyHtml: marked.parse(body),
         previewHtml: buildMarkdownPreview(title, excerpt)
     };
@@ -188,6 +194,7 @@ function buildHtmlArticle([path, raw]) {
         || "";
     const accent = doc.querySelector('meta[name="theme-color"]')?.content || "";
     const featured = parseBoolean(doc.querySelector('meta[name="featured"]')?.content || "false");
+    const githubUrl = doc.querySelector('meta[name="github"]')?.content || "";
     const excerpt = metaDescription || firstParagraph || "Standalone HTML article rendered inside the React reader.";
     const plainText = stripTags(doc.body?.innerHTML || raw);
 
@@ -204,6 +211,7 @@ function buildHtmlArticle([path, raw]) {
         coverImage,
         accent,
         featured,
+        githubUrl,
         raw: embeddedHtml
     };
 }
