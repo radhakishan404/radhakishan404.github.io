@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const navItems = [
@@ -9,54 +10,20 @@ const navItems = [
     { label: "Contact", to: "/contact", icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" }
 ];
 
-function SiteHeader() {
-    const [menuOpen, setMenuOpen] = useState(false);
+function MobileMenu({ open, onClose }) {
     const location = useLocation();
 
     useEffect(() => {
-        setMenuOpen(false);
+        onClose();
     }, [location.pathname]);
 
-    useEffect(() => {
-        document.body.classList.toggle("nav-open", menuOpen);
-        return () => document.body.classList.remove("nav-open");
-    }, [menuOpen]);
-
-    return (
-        <header className={`site-header${menuOpen ? " menu-active" : ""}`}>
-            <div className="header-inner">
-                <Link className="brand-text" to="/" onClick={() => setMenuOpen(false)}>
-                    RK
-                </Link>
-
-                <nav className="primary-nav" aria-label="Primary">
-                    {navItems.map((item) => (
-                        <NavLink
-                            key={item.to}
-                            exact={item.to === "/"}
-                            activeClassName="is-active"
-                            className="nav-link"
-                            to={item.to}
-                        >
-                            {item.label}
-                        </NavLink>
-                    ))}
-                </nav>
-
-                <button
-                    type="button"
-                    className={`hamburger${menuOpen ? " is-open" : ""}`}
-                    aria-label="Toggle navigation"
-                    aria-expanded={menuOpen}
-                    onClick={() => setMenuOpen((prev) => !prev)}
-                >
-                    <span className="hamburger-line" />
-                    <span className="hamburger-line" />
-                    <span className="hamburger-line" />
-                </button>
-            </div>
-
-            <nav className={`mobile-nav${menuOpen ? " is-open" : ""}`} aria-label="Mobile">
+    return createPortal(
+        <div className={`mobile-overlay${open ? " is-open" : ""}`} onClick={onClose}>
+            <nav
+                className={`mobile-nav${open ? " is-open" : ""}`}
+                aria-label="Mobile"
+                onClick={(e) => e.stopPropagation()}
+            >
                 <div className="mobile-nav-links">
                     {navItems.map((item, i) => (
                         <NavLink
@@ -65,8 +32,8 @@ function SiteHeader() {
                             activeClassName="is-active"
                             className="mobile-nav-link"
                             to={item.to}
-                            onClick={() => setMenuOpen(false)}
-                            style={{ transitionDelay: menuOpen ? `${i * 60}ms` : "0ms" }}
+                            onClick={onClose}
+                            style={{ transitionDelay: open ? `${i * 50 + 100}ms` : "0ms" }}
                         >
                             <svg className="mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                 <path d={item.icon} />
@@ -83,7 +50,61 @@ function SiteHeader() {
                     <span>Senior Software Engineer</span>
                 </div>
             </nav>
-        </header>
+        </div>,
+        document.body
+    );
+}
+
+function SiteHeader() {
+    const [menuOpen, setMenuOpen] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [location.pathname]);
+
+    useEffect(() => {
+        document.body.classList.toggle("nav-open", menuOpen);
+        return () => document.body.classList.remove("nav-open");
+    }, [menuOpen]);
+
+    return (
+        <>
+            <header className={`site-header${menuOpen ? " menu-active" : ""}`}>
+                <div className="header-inner">
+                    <Link className="brand-text" to="/" onClick={() => setMenuOpen(false)}>
+                        RK
+                    </Link>
+
+                    <nav className="primary-nav" aria-label="Primary">
+                        {navItems.map((item) => (
+                            <NavLink
+                                key={item.to}
+                                exact={item.to === "/"}
+                                activeClassName="is-active"
+                                className="nav-link"
+                                to={item.to}
+                            >
+                                {item.label}
+                            </NavLink>
+                        ))}
+                    </nav>
+
+                    <button
+                        type="button"
+                        className={`hamburger${menuOpen ? " is-open" : ""}`}
+                        aria-label="Toggle navigation"
+                        aria-expanded={menuOpen}
+                        onClick={() => setMenuOpen((prev) => !prev)}
+                    >
+                        <span className="hamburger-line" />
+                        <span className="hamburger-line" />
+                        <span className="hamburger-line" />
+                    </button>
+                </div>
+            </header>
+            <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+        </>
     );
 }
 
