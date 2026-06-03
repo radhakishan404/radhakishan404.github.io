@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { getArticleBySlug } from "../content/articles";
 import { socialLinks } from "../data/site";
 import useScrollReveal from "../hooks/useScrollReveal";
 import CustomCursor from "./CustomCursor";
@@ -12,20 +11,6 @@ function SiteShell({ children }) {
     const location = useLocation();
 
     useScrollReveal([location.pathname]);
-
-    const articleMatch = location.pathname.match(/^\/articles\/([^/]+)$/);
-    const article = articleMatch ? getArticleBySlug(articleMatch[1]) : null;
-    const isHtmlArticle = article?.kind === "html";
-
-    if (isHtmlArticle) {
-        return (
-            <div className="site-root-embedded">
-                <main key={location.pathname} className="site-main-embedded">
-                    {children}
-                </main>
-            </div>
-        );
-    }
 
     return (
         <>
