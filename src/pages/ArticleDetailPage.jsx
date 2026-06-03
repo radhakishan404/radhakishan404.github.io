@@ -47,20 +47,22 @@ function ArticleDetailPage({ match }) {
             try {
                 const doc = iframe.contentDocument || iframe.contentWindow?.document;
                 if (!doc?.body) return;
-                doc.body.style.overflow = "hidden";
-                doc.documentElement.style.overflow = "hidden";
                 const height = Math.max(
                     doc.body.scrollHeight,
                     doc.body.offsetHeight,
                     doc.documentElement.scrollHeight,
                     doc.documentElement.offsetHeight
                 );
-                iframe.style.height = `${height + 20}px`;
+                if (height > 100) {
+                    iframe.style.height = `${height}px`;
+                }
             } catch (_) { /* cross-origin fallback */ }
         };
 
         const onLoad = () => {
-            resizeIframe();
+            setTimeout(resizeIframe, 100);
+            setTimeout(resizeIframe, 500);
+            setTimeout(resizeIframe, 1500);
             try {
                 const doc = iframe.contentDocument || iframe.contentWindow?.document;
                 const images = doc?.querySelectorAll("img") || [];
@@ -71,7 +73,7 @@ function ArticleDetailPage({ match }) {
         };
 
         iframe.addEventListener("load", onLoad);
-        const interval = setInterval(resizeIframe, 800);
+        const interval = setInterval(resizeIframe, 1000);
 
         return () => {
             iframe.removeEventListener("load", onLoad);
@@ -127,7 +129,7 @@ function ArticleDetailPage({ match }) {
                 <AdSlot slot="ARTICLE_TOP_SLOT" className="article-ad-slot" />
 
                 {article.kind === "html" ? (
-                    <div className="article-html-wrap" data-reveal>
+                    <div className="article-html-wrap">
                         <iframe
                             ref={iframeRef}
                             className="article-html-frame"

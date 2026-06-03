@@ -29,9 +29,7 @@ function buildEmbeddedHtml(raw) {
 /* ── Reset & strip duplicate chrome ── */
 html, body { margin: 0; padding: 0; overflow-x: hidden; }
 body > * { position: relative; z-index: 1; }
-body { cursor: auto !important; -webkit-overflow-scrolling: touch; }
-::-webkit-scrollbar { width: 0; height: 0; }
-body { scrollbar-width: none; }
+body { cursor: auto !important; }
 
 header, footer, nav,
 .topbar, .topbar-inner,
