@@ -19,18 +19,9 @@ const htmlModules = import.meta.glob("./articles/html/*.html", {
 });
 
 function buildEmbeddedHtml(raw) {
-    const baseHref =
-        typeof window !== "undefined"
-            ? `${window.location.origin}${import.meta.env.BASE_URL || "/"}`
-            : import.meta.env.BASE_URL || "/";
-    const helperMarkup = `
-<base href="${baseHref}" target="_blank">
+    const overrideStyle = `
 <style>
-/* ── Reset & strip duplicate chrome ── */
-html, body { margin: 0; padding: 0; overflow-x: hidden; }
-body > * { position: relative; z-index: 1; }
-body { cursor: auto !important; }
-
+/* Strip duplicate chrome — site shell provides header/footer */
 header, footer, nav,
 .topbar, .topbar-inner,
 .cursor, .cursor-ring,
@@ -38,148 +29,31 @@ header, footer, nav,
 [class*="site-header"], [class*="site-footer"],
 [class*="back-to-top"] {
     display: none !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    max-height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    overflow: hidden !important;
 }
 
-/* ── Mobile-first overrides ── */
-@media (max-width: 768px) {
-    body {
-        font-size: 15px !important;
-        line-height: 1.7 !important;
-        padding: 0 16px !important;
-    }
+/* Fix positioning for shadow DOM context */
+.shadow-article-body { cursor: auto; }
 
-    /* Force all grids to single column */
-    [style*="grid-template-columns"],
-    .grid, .card-grid, .prompt-grid, .section-grid,
-    .two-col, .three-col, .hero, .hero-grid,
-    .tools-grid, .courses-grid, .domains-grid,
-    .flow-list, .example-grid {
-        display: block !important;
-    }
-
-    /* Force all flex wraps to column */
-    [style*="display: flex"],
-    [style*="display:flex"] {
-        flex-wrap: wrap !important;
-    }
-
-    /* Readable headings */
-    h1 { font-size: 28px !important; line-height: 1.15 !important; }
-    h2 { font-size: 22px !important; line-height: 1.2 !important; }
-    h3 { font-size: 18px !important; line-height: 1.3 !important; }
-
-    /* Readable body text */
-    p, li, td, th, span, div {
-        max-width: 100% !important;
-        word-break: break-word !important;
-    }
-
-    /* Touch-friendly buttons and links */
-    button, a, .btn, [class*="btn"],
-    .filter-btn, .copy-btn, .tag, .pill, .chip {
-        min-height: 44px !important;
-        min-width: 44px !important;
-        padding: 10px 16px !important;
-        font-size: 14px !important;
-        touch-action: manipulation !important;
-    }
-
-    /* Cards — full width, readable */
-    [class*="card"], .panel, .block, .item,
-    .prompt-card, .tool-card, .course-card,
-    .domain-card, .section-card {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        border-radius: 12px !important;
-        margin-bottom: 16px !important;
-    }
-
-    /* Images scale properly */
-    img, video, iframe, svg {
-        max-width: 100% !important;
-        height: auto !important;
-    }
-
-    /* Code blocks scroll horizontally */
-    pre, code, .code-block {
-        max-width: 100% !important;
-        overflow-x: auto !important;
-        font-size: 13px !important;
-        white-space: pre-wrap !important;
-        word-break: break-all !important;
-    }
-
-    /* Tables scroll */
-    table {
-        display: block !important;
-        overflow-x: auto !important;
-        width: 100% !important;
-    }
-
-    /* Kill fixed/sticky elements inside articles */
-    [style*="position: fixed"],
-    [style*="position:fixed"],
-    [style*="position: sticky"],
-    [style*="position:sticky"] {
-        position: relative !important;
-    }
-
-    /* Hero sections — simplify */
-    .hero, [class*="hero"] {
-        min-height: auto !important;
-        height: auto !important;
-        padding: 32px 0 !important;
-    }
-
-    /* Remove decorative noise overlays */
-    body::before, body::after {
-        display: none !important;
-    }
-
-    /* Sections — proper spacing */
-    section, [class*="section"], .shell {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        max-width: 100% !important;
-    }
-
-    /* Filter bars wrap */
-    .filters, [class*="filter"], .search-bar {
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-    }
-
-    input[type="search"], input[type="text"] {
-        width: 100% !important;
-        min-width: 0 !important;
-        font-size: 16px !important;
-    }
+/* Kill fixed/sticky — they break inside shadow DOM */
+[style*="position: fixed"],
+[style*="position:fixed"],
+[style*="position: sticky"],
+[style*="position:sticky"] {
+    position: relative !important;
 }
 
-/* ── Tablet tweaks ── */
-@media (min-width: 769px) and (max-width: 1024px) {
-    body { padding: 0 24px !important; }
-
-    [style*="grid-template-columns"] {
-        grid-template-columns: 1fr 1fr !important;
-    }
+/* Noise overlays — disable */
+.shadow-article-body::before,
+.shadow-article-body::after {
+    display: none !important;
 }
 </style>`;
 
     if (/<head[^>]*>/i.test(raw)) {
-        return raw.replace(/<head([^>]*)>/i, `<head$1>${helperMarkup}`);
+        return raw.replace(/<head([^>]*)>/i, `<head$1>${overrideStyle}`);
     }
 
-    return `<!DOCTYPE html><html><head>${helperMarkup}</head><body>${raw}</body></html>`;
+    return `<!DOCTYPE html><html><head>${overrideStyle}</head><body>${raw}</body></html>`;
 }
 
 function fileNameFromPath(path) {

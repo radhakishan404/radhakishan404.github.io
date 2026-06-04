@@ -823,15 +823,8 @@ body.nav-open { overflow: hidden; }
     border-radius: 16px;
     background: #080808;
     position: relative;
-}
-
-.article-html-frame {
-    width: 100%;
-    min-height: 200px;
-    border: 0;
-    display: block;
-    background: #080808;
-    border-radius: 16px;
+    overflow: hidden;
+    contain: layout style;
 }
 
 @media (max-width: 768px) {

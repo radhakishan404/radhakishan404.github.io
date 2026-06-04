@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import AdSlot from "../components/AdSlot";
 import MagneticButton from "../components/MagneticButton";
+import ShadowArticle from "../components/ShadowArticle";
 import { getArticleBySlug } from "../content/articles";
 import { profileImages } from "../data/images";
 import useArticleViews from "../hooks/useArticleViews";
@@ -11,7 +12,6 @@ function ArticleDetailPage({ match }) {
     const article = getArticleBySlug(match.params.slug);
     const { views, viewsLabel } = useArticleViews(match.params.slug, true);
     const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://radhakishan404.is-a.dev";
-    const iframeRef = useRef(null);
 
     useDocumentMeta({
         title: article ? `${article.title} | Articles | Radhakishan Jangid` : "Article | Radhakishan Jangid",
@@ -38,48 +38,6 @@ function ArticleDetailPage({ match }) {
             } : undefined
         } : undefined
     });
-
-    useEffect(() => {
-        if (article?.kind !== "html" || !iframeRef.current) return;
-
-        const iframe = iframeRef.current;
-        const resizeIframe = () => {
-            try {
-                const doc = iframe.contentDocument || iframe.contentWindow?.document;
-                if (!doc?.body) return;
-                const height = Math.max(
-                    doc.body.scrollHeight,
-                    doc.body.offsetHeight,
-                    doc.documentElement.scrollHeight,
-                    doc.documentElement.offsetHeight
-                );
-                if (height > 100) {
-                    iframe.style.height = `${height}px`;
-                }
-            } catch (_) { /* cross-origin fallback */ }
-        };
-
-        const onLoad = () => {
-            setTimeout(resizeIframe, 100);
-            setTimeout(resizeIframe, 500);
-            setTimeout(resizeIframe, 1500);
-            try {
-                const doc = iframe.contentDocument || iframe.contentWindow?.document;
-                const images = doc?.querySelectorAll("img") || [];
-                images.forEach((img) => {
-                    if (!img.complete) img.addEventListener("load", resizeIframe);
-                });
-            } catch (_) {}
-        };
-
-        iframe.addEventListener("load", onLoad);
-        const interval = setInterval(resizeIframe, 1000);
-
-        return () => {
-            iframe.removeEventListener("load", onLoad);
-            clearInterval(interval);
-        };
-    }, [article]);
 
     if (!article) {
         return <Redirect to="/articles" />;
@@ -129,15 +87,7 @@ function ArticleDetailPage({ match }) {
                 <AdSlot slot="ARTICLE_TOP_SLOT" className="article-ad-slot" />
 
                 {article.kind === "html" ? (
-                    <div className="article-html-wrap">
-                        <iframe
-                            ref={iframeRef}
-                            className="article-html-frame"
-                            title={article.title}
-                            srcDoc={article.raw}
-                            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-                        />
-                    </div>
+                    <ShadowArticle html={article.raw} className="article-html-wrap" />
                 ) : (
                     <article className="article-prose" data-reveal dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
                 )}
