@@ -818,25 +818,8 @@ body.nav-open { overflow: hidden; }
 
 /* ─── HTML article frame (inline) ───── */
 
-.article-html-wrap {
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-    background: #080808;
-    position: relative;
-    overflow: hidden;
-    contain: layout style;
-}
 
 @media (max-width: 768px) {
-    .article-html-wrap {
-        border-radius: 0;
-        border-left: 0;
-        border-right: 0;
-        margin-left: calc(var(--side-pad) * -1);
-        margin-right: calc(var(--side-pad) * -1);
-        width: calc(100% + var(--side-pad) * 2);
-    }
-
     .article-detail-header h1 {
         font-size: clamp(26px, 7vw, 40px);
     }

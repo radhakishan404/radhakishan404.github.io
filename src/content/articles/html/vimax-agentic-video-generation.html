@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ViMax is a free open-source agentic video generation tool from Hong Kong University. One prompt to full cinematic video — script, storyboard, camera angles, consistent characters — all automatic.">
+<meta name="keywords" content="ViMax, AI video generation, agentic AI, open source, HKUDS, cinematic video, AutoCameo, Idea2Video, rk codex">
+<meta name="date" content="2026-06-04T09:30:00+05:30">
+<meta name="category" content="AI Tools">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="github" content="https://github.com/HKUDS/ViMax">
+<meta property="article:published_time" content="2026-06-04T09:30:00+05:30">
+<meta property="og:image" content="/articles/vimax-agentic-video-generation.png">
+<title>ViMax — AI Video Generation Complete Guide | rk.codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #101018;
+  --bg3: #151520;
+  --surface: #12121a;
+  --card: #14141e;
+  --border: #1e1e30;
+  --border2: #2a2a40;
+  --text: #eeeef5;
+  --text2: #a0a0b8;
+  --text3: #666680;
+  --accent: #f44336;
+  --accent2: #ff7043;
+  --accent-bg: rgba(244,67,54,0.08);
+  --accent-bd: rgba(244,67,54,0.2);
+  --blue: #42a5f5;
+  --blue-bg: rgba(66,165,245,0.08);
+  --blue-bd: rgba(66,165,245,0.18);
+  --green: #66bb6a;
+  --green-bg: rgba(102,187,106,0.08);
+  --green-bd: rgba(102,187,106,0.18);
+  --purple: #ab47bc;
+  --purple-bg: rgba(171,71,188,0.08);
+  --purple-bd: rgba(171,71,188,0.18);
+  --amber: #ffca28;
+  --amber-bg: rgba(255,202,40,0.08);
+  --amber-bd: rgba(255,202,40,0.18);
+  --code-bg: #08080e;
+  --radius: 10px;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:var(--bg2); }
+::-webkit-scrollbar-thumb { background:var(--accent); border-radius:4px; }
+
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+  opacity:.35;
+}
+
+/* ── LANG TOGGLE ── */
+.en, .hi { }
+.hi { display:none; }
+body.hindi .en { display:none; }
+body.hindi .hi { display:block; }
+
+/* ── NAV ── */
+nav {
+  position:sticky;top:0;z-index:200;
+  background:rgba(10,10,15,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo {
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:18px;
+  color:var(--accent);
+  text-decoration:none;
+  letter-spacing:-0.02em;
+}
+.nav-right { display:flex;gap:12px;align-items:center; }
+.nav-right a {
+  font-size:12px;color:var(--text3);text-decoration:none;
+  font-family:'JetBrains Mono',monospace;letter-spacing:.04em;
+  text-transform:uppercase;transition:color .2s;
+}
+.nav-right a:hover { color:var(--text); }
+.lang-btn {
+  padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;
+  cursor:pointer;border:1px solid var(--border);background:transparent;
+  color:var(--text3);font-family:'Inter',sans-serif;transition:all .2s;
+}
+.lang-btn.on { background:var(--accent);color:#fff;border-color:var(--accent); }
+
+/* ── LANG MODAL ── */
+.lang-modal {
+  position:fixed;inset:0;z-index:999;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(8px);
+}
+.lang-modal-box {
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:16px;padding:40px;max-width:380px;width:90%;text-align:center;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height:90vh;display:flex;flex-direction:column;
+  justify-content:center;padding:100px 48px 60px;
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.hero::after {
+  content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(244,67,54,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-badge {
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--accent-bd);background:var(--accent-bg);
+  color:var(--accent);font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:7px 18px;border-radius:100px;margin:0 auto 28px;
+}
+.hero h1 {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.4rem,6vw,4.2rem);
+  font-weight:900;line-height:1.08;
+  letter-spacing:-2px;margin-bottom:20px;
+  max-width:800px;margin-left:auto;margin-right:auto;
+}
+.hero h1 em { font-style:normal;color:var(--accent); }
+.hero-sub {
+  color:var(--text2);font-size:1.05rem;line-height:1.75;
+  max-width:620px;margin:0 auto 36px;
+}
+.hero-actions { display:flex;gap:12px;justify-content:center;flex-wrap:wrap; }
+.btn {
+  padding:13px 26px;border-radius:8px;font-size:.85rem;
+  font-weight:600;cursor:pointer;text-decoration:none;
+  transition:all .2s;border:none;font-family:'Inter',sans-serif;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary { background:var(--accent);color:#fff; }
+.btn-primary:hover { background:#e53935;transform:translateY(-1px); }
+.btn-outline { background:transparent;color:var(--text);border:1px solid var(--border2); }
+.btn-outline:hover { border-color:var(--text3); }
+.btn-yt { background:#ff0000;color:#fff; }
+.btn-yt:hover { background:#cc0000;transform:translateY(-1px); }
+
+/* ── STATS ── */
+.stats {
+  display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+  padding:32px 40px;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:var(--surface);
+}
+.stat { text-align:center; }
+.stat-num {
+  font-family:'Syne',sans-serif;font-size:1.8rem;
+  font-weight:800;color:var(--accent);
+}
+.stat-label { font-size:.72rem;color:var(--text3);margin-top:2px;letter-spacing:.5px; }
+
+/* ── SECTION ── */
+.section { max-width:900px;margin:0 auto;padding:72px 32px; }
+.section-label {
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+}
+.section h2 {
+  font-family:'Syne',sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);
+  font-weight:800;letter-spacing:-1px;margin-bottom:12px;line-height:1.15;
+}
+.section h2 em { font-style:normal;color:var(--accent2); }
+.section-sub { color:var(--text2);font-size:.95rem;margin-bottom:40px;line-height:1.7; }
+
+/* ── PROBLEM/SOLUTION GRID ── */
+.ps-grid {
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px;
+}
+.ps-card {
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  transition:transform .2s,border-color .2s;
+}
+.ps-card:hover { transform:translateY(-2px);border-color:var(--border2); }
+.ps-card .icon { font-size:1.4rem;margin-bottom:10px; }
+.ps-card h4 {
+  font-size:.9rem;font-weight:700;margin-bottom:6px;
+  font-family:'Syne',sans-serif;
+}
+.ps-card p { font-size:.82rem;color:var(--text2);line-height:1.6; }
+.ps-card.problem { border-left:3px solid var(--accent); }
+.ps-card.solution { border-left:3px solid var(--green); }
+
+/* ── FEATURE CARDS ── */
+.feat-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px; }
+.feat-card {
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px;
+  position:relative;overflow:hidden;transition:all .2s;
+}
+.feat-card::before {
+  content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+  transition:transform .3s;transform:scaleX(0);transform-origin:left;
+}
+.feat-card:hover { border-color:var(--border2);transform:translateY(-2px); }
+.feat-card:hover::before { transform:scaleX(1); }
+.feat-card.red::before { background:var(--accent); }
+.feat-card.blue::before { background:var(--blue); }
+.feat-card.green::before { background:var(--green); }
+.feat-card.purple::before { background:var(--purple); }
+.feat-card .feat-icon { font-size:1.5rem;margin-bottom:12px; }
+.feat-card h3 {
+  font-family:'Syne',sans-serif;font-size:1.05rem;
+  font-weight:700;margin-bottom:8px;
+}
+.feat-card p { font-size:.82rem;color:var(--text2);line-height:1.65; }
+
+/* ── ARCHITECTURE ── */
+.arch-flow {
+  display:flex;flex-direction:column;gap:12px;margin:32px 0;
+}
+.arch-step {
+  display:flex;align-items:flex-start;gap:16px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;transition:border-color .2s;
+}
+.arch-step:hover { border-color:var(--border2); }
+.arch-num {
+  flex-shrink:0;width:36px;height:36px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:14px;
+  background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-bd);
+}
+.arch-step h4 { font-size:.88rem;font-weight:700;margin-bottom:4px; }
+.arch-step p { font-size:.8rem;color:var(--text2);line-height:1.6; }
+
+/* ── CODE BLOCKS ── */
+.code-block {
+  background:var(--code-bg);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px 24px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;
+  line-height:1.8;color:var(--text2);overflow-x:auto;
+  margin:24px 0;position:relative;
+}
+.code-block .code-label {
+  position:absolute;top:8px;right:12px;
+  font-size:10px;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;
+}
+.code-block .hl { color:var(--accent); }
+.code-block .hl2 { color:var(--green); }
+.code-block .hl3 { color:var(--blue); }
+.code-block .hl4 { color:var(--amber); }
+
+/* ── IDEAS GRID ── */
+.ideas-grid {
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  counter-reset:ideas;
+}
+.idea-card {
+  counter-increment:ideas;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px 20px;
+  font-size:.82rem;color:var(--text2);line-height:1.55;
+  transition:all .2s;cursor:default;position:relative;
+  padding-left:48px;
+}
+.idea-card::before {
+  content:counter(ideas);position:absolute;left:16px;top:16px;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:14px;
+  color:var(--accent);opacity:.5;
+}
+.idea-card:hover { border-color:var(--accent-bd);transform:translateY(-1px); }
+.idea-card strong { color:var(--text);font-weight:600; }
+.idea-card .idea-style { font-size:.7rem;color:var(--text3);margin-top:4px;display:block; }
+
+/* ── CTA ── */
+.cta-section {
+  background:var(--surface);border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:64px 40px;text-align:center;
+}
+.cta-inner { max-width:560px;margin:0 auto; }
+.cta-section h2 {
+  font-family:'Syne',sans-serif;font-size:1.8rem;
+  font-weight:800;letter-spacing:-1px;margin-bottom:12px;
+}
+.cta-section p { color:var(--text2);font-size:.9rem;line-height:1.7;margin-bottom:28px; }
+.email-chip {
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--border);
+  padding:14px 22px;border-radius:6px;
+  font-family:'JetBrains Mono',monospace;font-size:.82rem;margin-bottom:16px;
+}
+.btn-email {
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:13px 28px;border-radius:8px;font-weight:700;
+  text-decoration:none;font-size:.85rem;transition:all .2s;
+  border:none;cursor:pointer;font-family:'Inter',sans-serif;
+}
+.btn-email:hover { background:#e53935;transform:translateY(-1px); }
+
+/* ── FOOTER ── */
+footer {
+  padding:40px 32px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-left { font-family:'Syne',sans-serif;font-weight:800;font-size:1rem; }
+.footer-left span { color:var(--accent); }
+.footer-right { color:var(--text3);font-size:.78rem;text-align:right; }
+.footer-links { display:flex;gap:20px;margin-top:8px; }
+.footer-links a { color:var(--text3);text-decoration:none;font-size:.78rem;transition:color .2s; }
+.footer-links a:hover { color:var(--text); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px) {
+  nav { padding:0 20px; }
+  .hero { padding:80px 20px 40px;min-height:auto; }
+  .hero h1 { font-size:clamp(1.8rem,8vw,2.6rem); letter-spacing:-1px; }
+  .section { padding:48px 20px; }
+  .ps-grid,.feat-grid,.ideas-grid { grid-template-columns:1fr; }
+  .stats { gap:24px;padding:24px 20px; }
+  footer { padding:30px 20px;flex-direction:column;text-align:center; }
+  .footer-right { text-align:center; }
+  .code-block { font-size:12px;padding:16px; }
+  .nav-right a.hide-mobile { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- LANG MODAL -->
+<div class="lang-modal" id="lm">
+  <div class="lang-modal-box">
+    <div style="font-size:32px;margin-bottom:16px">🎬</div>
+    <div style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-.025em;font-family:'Syne',sans-serif">Choose your language</div>
+    <div style="font-size:14px;color:var(--text3);margin-bottom:24px;line-height:1.6">Read this guide in English or Hinglish.<br><span style="font-size:12px">English ya Hinglish mein padhna chahte ho?</span></div>
+    <div style="display:flex;gap:10px">
+      <button onclick="setLang('en')" class="btn btn-primary" style="flex:1;padding:13px;font-size:15px">English</button>
+      <button onclick="setLang('hi')" class="btn btn-outline" style="flex:1;padding:13px;font-size:15px">Hinglish 🇮🇳</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://radhakishan404.is-a.dev" class="nav-logo">rk.codex</a>
+  <div class="nav-right">
+    <a href="https://www.instagram.com/rk.codex" target="_blank" class="hide-mobile">Instagram</a>
+    <a href="https://www.youtube.com/@rk-codex" target="_blank" class="hide-mobile">YouTube</a>
+    <button class="lang-btn on" id="ben" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="bhi" onclick="setLang('hi')">HI</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🎬 Open Source • MIT License • Free</div>
+  <h1>
+    <span class="en">One Prompt. Full <em>Cinematic Video.</em> Automatically.</span>
+    <span class="hi">Ek Prompt. Poori <em>Cinematic Video.</em> Automatic.</span>
+  </h1>
+  <p class="hero-sub en">ViMax is a free, open-source AI tool from Hong Kong University that turns a single idea into a complete cinematic video — script, storyboard, camera angles, consistent characters — all done by the tool itself.</p>
+  <p class="hero-sub hi">ViMax ek free, open-source AI tool hai Hong Kong University se jo ek single idea ko complete cinematic video mein convert karta hai — script, storyboard, camera angles, consistent characters — sab kuch tool khud karta hai.</p>
+  <div class="hero-actions">
+    <a href="https://github.com/HKUDS/ViMax" target="_blank" class="btn btn-primary">⭐ Star on GitHub</a>
+    <a href="https://www.youtube.com/@rk-codex" target="_blank" class="btn btn-yt">▶ Watch Demo</a>
+    <a href="#quickstart" class="btn btn-outline">Quick Start ↓</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">8,600+</div><div class="stat-label">GitHub Stars</div></div>
+  <div class="stat"><div class="stat-num">1,300+</div><div class="stat-label">Forks</div></div>
+  <div class="stat"><div class="stat-num">339+</div><div class="stat-label">Commits</div></div>
+  <div class="stat"><div class="stat-num">MIT</div><div class="stat-label">License (Free)</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Python</div></div>
+</div>
+
+<!-- WHAT IS VIMAX -->
+<div class="section">
+  <div class="section-label">What Is ViMax?</div>
+  <h2>
+    <span class="en">Director, Screenwriter, Producer & Video Generator — <em>All-in-One</em></span>
+    <span class="hi">Director, Screenwriter, Producer & Video Generator — <em>Sab Ek Mein</em></span>
+  </h2>
+  <p class="section-sub en">Most AI video tools generate 5-second clips with characters that change faces mid-video. ViMax is different. It's an agentic system — meaning multiple AI agents work together like a film production crew. You give it an idea. It writes the script, designs storyboards, plans camera angles, creates consistent characters, and generates the final video. End to end. Automatically.</p>
+  <p class="section-sub hi">Zyaadatar AI video tools bas 5-second ki clips banate hain aur characters ke face bich mein change ho jaate hain. ViMax alag hai. Ye ek agentic system hai — matlab multiple AI agents milke kaam karte hain jaise ek film production crew. Tum ek idea dete ho. Ye script likhta hai, storyboard design karta hai, camera angles plan karta hai, consistent characters banata hai, aur final video generate karta hai. End to end. Automatically.</p>
+
+  <div class="ps-grid">
+    <div class="ps-card problem">
+      <div class="icon">❌</div>
+      <h4 class="en">Short Clips Only</h4><h4 class="hi">Sirf Short Clips</h4>
+      <p class="en">Most AI tools generate only 5-10 seconds of footage. That's useless for storytelling.</p>
+      <p class="hi">Zyaadatar AI tools sirf 5-10 seconds ka footage banate hain. Storytelling ke liye ye bekaar hai.</p>
+    </div>
+    <div class="ps-card solution">
+      <div class="icon">✅</div>
+      <h4 class="en">Full-Length Videos</h4><h4 class="hi">Poori Video</h4>
+      <p class="en">ViMax generates multi-scene, minute-long videos with proper narrative structure.</p>
+      <p class="hi">ViMax multi-scene, minute-long videos generate karta hai proper narrative structure ke saath.</p>
+    </div>
+    <div class="ps-card problem">
+      <div class="icon">❌</div>
+      <h4 class="en">Consistency Chaos</h4><h4 class="hi">Consistency Ka Masla</h4>
+      <p class="en">Characters change appearance, faces morph between shots. Every frame looks different.</p>
+      <p class="hi">Characters ka look change ho jaata hai, faces bich mein morph ho jaate hain. Har frame alag dikhta hai.</p>
+    </div>
+    <div class="ps-card solution">
+      <div class="icon">✅</div>
+      <h4 class="en">Character Consistency</h4><h4 class="hi">Character Consistency</h4>
+      <p class="en">Intelligent reference tracking keeps characters identical across every scene.</p>
+      <p class="hi">Intelligent reference tracking se characters har scene mein same dikhte hain.</p>
+    </div>
+    <div class="ps-card problem">
+      <div class="icon">❌</div>
+      <h4 class="en">Visual-Only Focus</h4><h4 class="hi">Sirf Visual</h4>
+      <p class="en">No script, no storyboard, no audio, no narrative depth. You get a clip and that's it.</p>
+      <p class="hi">Koi script nahi, koi storyboard nahi, koi audio nahi, koi narrative depth nahi. Clip milti hai bus.</p>
+    </div>
+    <div class="ps-card solution">
+      <div class="icon">✅</div>
+      <h4 class="en">Complete Production</h4><h4 class="hi">Complete Production</h4>
+      <p class="en">Script generation, storyboarding, camera planning, audio binding — the whole pipeline.</p>
+      <p class="hi">Script generation, storyboarding, camera planning, audio binding — poora pipeline.</p>
+    </div>
+  </div>
+</div>
+
+<!-- KEY FEATURES -->
+<div class="section" style="padding-top:0">
+  <div class="section-label">Key Features</div>
+  <h2>
+    <span class="en">4 Ways to Create <em>Videos</em></span>
+    <span class="hi">Video Banane Ke <em>4 Tarike</em></span>
+  </h2>
+  <p class="section-sub en">ViMax gives you multiple entry points — from raw ideas to full screenplays, even novels and your own photos.</p>
+  <p class="section-sub hi">ViMax tumhe multiple entry points deta hai — raw ideas se lekar full screenplays, novels aur tumhari apni photos tak.</p>
+
+  <div class="feat-grid">
+    <div class="feat-card red">
+      <div class="feat-icon">💡</div>
+      <h3>Idea2Video</h3>
+      <p class="en">Type a simple idea like <em>"a cat and dog are best friends, what happens when they meet a stranger"</em> — and ViMax generates the complete video. Script, shots, characters, everything.</p>
+      <p class="hi">Ek simple idea likho jaise <em>"ek cat aur dog best friends hain, kya hoga jab wo ek stranger se milte hain"</em> — aur ViMax complete video generate karta hai. Script, shots, characters, sab kuch.</p>
+    </div>
+    <div class="feat-card blue">
+      <div class="feat-icon">📝</div>
+      <h3>Script2Video</h3>
+      <p class="en">Already have a screenplay? Write your scenes with dialogue, character descriptions, and settings. ViMax handles all the visual production — storyboard, images, video.</p>
+      <p class="hi">Screenplay already ready hai? Apne scenes likho dialogue, character descriptions, aur settings ke saath. ViMax saari visual production handle karta hai.</p>
+    </div>
+    <div class="feat-card green">
+      <div class="feat-icon">📚</div>
+      <h3>Novel2Video</h3>
+      <p class="en">Feed it an entire novel. ViMax intelligently compresses the narrative, tracks characters across chapters, and generates episodic video content scene by scene.</p>
+      <p class="hi">Ek poori novel feed karo. ViMax intelligently narrative ko compress karta hai, characters ko chapters mein track karta hai, aur episodic video content generate karta hai.</p>
+    </div>
+    <div class="feat-card purple">
+      <div class="feat-icon">🤳</div>
+      <h3>AutoCameo</h3>
+      <p class="en"><strong>This is wild.</strong> Upload your own photo and ViMax puts you inside the video as a character — fully consistent from start to finish. Your face, your appearance, maintained across every single scene.</p>
+      <p class="hi"><strong>Ye feature insane hai.</strong> Apni photo upload karo aur ViMax tumhe video mein character bana deta hai — start se finish tak fully consistent. Tumhara face, tumhara look, har scene mein same.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ARCHITECTURE -->
+<div class="section">
+  <div class="section-label">How It Works</div>
+  <h2>
+    <span class="en">Multi-Agent <em>Production Pipeline</em></span>
+    <span class="hi">Multi-Agent <em>Production Pipeline</em></span>
+  </h2>
+  <p class="section-sub en">ViMax uses specialized AI agents working together — like a real film crew. Here's the pipeline from your idea to the final video:</p>
+  <p class="section-sub hi">ViMax specialized AI agents use karta hai jo saath mein kaam karte hain — jaise ek real film crew. Yahan hai pipeline tumhare idea se final video tak:</p>
+
+  <div class="arch-flow">
+    <div class="arch-step">
+      <div class="arch-num">1</div>
+      <div>
+        <h4 class="en">Script Understanding Agent</h4><h4 class="hi">Script Understanding Agent</h4>
+        <p class="en">Extracts characters, environments, emotions, and scene boundaries from your input. Understands what the story needs.</p>
+        <p class="hi">Tumhare input se characters, environments, emotions, aur scene boundaries extract karta hai. Samajhta hai ki story ko kya chahiye.</p>
+      </div>
+    </div>
+    <div class="arch-step">
+      <div class="arch-num">2</div>
+      <div>
+        <h4 class="en">Storyboard Designer</h4><h4 class="hi">Storyboard Designer</h4>
+        <p class="en">Creates shot-level storyboards with cinematographic language — wide shots, close-ups, transitions, pacing, camera movements.</p>
+        <p class="hi">Shot-level storyboards banata hai cinematographic language ke saath — wide shots, close-ups, transitions, pacing, camera movements.</p>
+      </div>
+    </div>
+    <div class="arch-step">
+      <div class="arch-num">3</div>
+      <div>
+        <h4 class="en">Visual Asset Planner</h4><h4 class="hi">Visual Asset Planner</h4>
+        <p class="en">Intelligently selects and manages reference images. Tracks what characters and environments looked like in previous scenes.</p>
+        <p class="hi">Intelligently reference images select aur manage karta hai. Track karta hai ki characters aur environments pehle ke scenes mein kaise dikhte the.</p>
+      </div>
+    </div>
+    <div class="arch-step">
+      <div class="arch-num">4</div>
+      <div>
+        <h4 class="en">Consistency Engine</h4><h4 class="hi">Consistency Engine</h4>
+        <p class="en">Generates multiple image candidates in parallel. Uses VLM (Vision Language Model) to pick the most consistent one. Like a human director saying "take 3 was the best."</p>
+        <p class="hi">Multiple image candidates parallel mein generate karta hai. VLM (Vision Language Model) use karke most consistent wala choose karta hai. Jaise ek human director bolta hai "take 3 sabse accha tha."</p>
+      </div>
+    </div>
+    <div class="arch-step">
+      <div class="arch-num">5</div>
+      <div>
+        <h4 class="en">Video Synthesis & Assembly</h4><h4 class="hi">Video Synthesis & Assembly</h4>
+        <p class="en">Parallel shot generation for maximum speed. Final assembly with timeline, cuts, and transitions. Output: your complete video.</p>
+        <p class="hi">Maximum speed ke liye parallel shot generation. Final assembly timeline, cuts, aur transitions ke saath. Output: tumhari complete video.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK START -->
+<div class="section" id="quickstart">
+  <div class="section-label">Quick Start</div>
+  <h2>
+    <span class="en">Get Running in <em>5 Minutes</em></span>
+    <span class="hi"><em>5 Minute</em> Mein Shuru Karo</span>
+  </h2>
+  <p class="section-sub en">Requirements: Linux or Windows, Python 3.10+, and the uv package manager.</p>
+  <p class="section-sub hi">Requirements: Linux ya Windows, Python 3.10+, aur uv package manager.</p>
+
+  <h3 style="margin-bottom:12px;font-size:.95rem">
+    <span class="en">Step 1 — Clone & Install</span>
+    <span class="hi">Step 1 — Clone & Install</span>
+  </h3>
+  <div class="code-block">
+    <span class="code-label">terminal</span>
+    <span class="hl">git clone</span> https://github.com/HKUDS/ViMax.git<br>
+    <span class="hl">cd</span> ViMax<br>
+    <span class="hl">uv sync</span>
+  </div>
+
+  <h3 style="margin-bottom:12px;font-size:.95rem;margin-top:32px">
+    <span class="en">Step 2 — Configure API Keys</span>
+    <span class="hi">Step 2 — API Keys Configure Karo</span>
+  </h3>
+  <p class="en" style="font-size:.85rem;color:var(--text2);margin-bottom:16px">Edit <code style="background:var(--code-bg);padding:2px 8px;border-radius:4px;font-size:13px">configs/idea2video.yaml</code>:</p>
+  <p class="hi" style="font-size:.85rem;color:var(--text2);margin-bottom:16px"><code style="background:var(--code-bg);padding:2px 8px;border-radius:4px;font-size:13px">configs/idea2video.yaml</code> edit karo:</p>
+  <div class="code-block">
+    <span class="code-label">yaml</span>
+    <span class="hl3">chat_model:</span><br>
+    &nbsp;&nbsp;<span class="hl3">init_args:</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;model: <span class="hl2">google/gemini-2.5-flash-lite</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;model_provider: <span class="hl2">openai</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;api_key: <span class="hl">YOUR_API_KEY</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;base_url: <span class="hl2">https://openrouter.ai/api/v1</span><br>
+    <br>
+    <span class="hl3">image_generator:</span><br>
+    &nbsp;&nbsp;class_path: <span class="hl2">tools.ImageGeneratorNanobananaGoogleAPI</span><br>
+    &nbsp;&nbsp;<span class="hl3">init_args:</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;api_key: <span class="hl">YOUR_GOOGLE_API_KEY</span><br>
+    <br>
+    <span class="hl3">video_generator:</span><br>
+    &nbsp;&nbsp;class_path: <span class="hl2">tools.VideoGeneratorVeoGoogleAPI</span><br>
+    &nbsp;&nbsp;<span class="hl3">init_args:</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;api_key: <span class="hl">YOUR_GOOGLE_API_KEY</span>
+  </div>
+
+  <h3 style="margin-bottom:12px;font-size:.95rem;margin-top:32px">
+    <span class="en">Step 3 — Generate Your First Video</span>
+    <span class="hi">Step 3 — Pehli Video Generate Karo</span>
+  </h3>
+  <p class="en" style="font-size:.85rem;color:var(--text2);margin-bottom:16px">Edit <code style="background:var(--code-bg);padding:2px 8px;border-radius:4px;font-size:13px">main_idea2video.py</code> with your idea:</p>
+  <p class="hi" style="font-size:.85rem;color:var(--text2);margin-bottom:16px"><code style="background:var(--code-bg);padding:2px 8px;border-radius:4px;font-size:13px">main_idea2video.py</code> mein apna idea likho:</p>
+  <div class="code-block">
+    <span class="code-label">python</span>
+    <span class="hl3">idea</span> = <span class="hl4">"""</span><br>
+    <span class="hl2">A lonely astronaut discovers music on a distant planet</span><br>
+    <span class="hl4">"""</span><br>
+    <br>
+    <span class="hl3">user_requirement</span> = <span class="hl4">"""</span><br>
+    <span class="hl2">Cinematic feel, 4-5 scenes, dramatic lighting</span><br>
+    <span class="hl4">"""</span><br>
+    <br>
+    <span class="hl3">style</span> = <span class="hl4">"Cinematic Realism"</span>
+  </div>
+  <div class="code-block">
+    <span class="code-label">terminal</span>
+    <span class="hl">uv run</span> python main_idea2video.py
+  </div>
+  <p class="en" style="font-size:.85rem;color:var(--text2);margin-top:16px">That's it. ViMax will generate the script, design storyboards, create reference images, check consistency, render shots, and assemble the final video — all automatically.</p>
+  <p class="hi" style="font-size:.85rem;color:var(--text2);margin-top:16px">Bas itna hi. ViMax script generate karega, storyboards design karega, reference images banayega, consistency check karega, shots render karega, aur final video assemble karega — sab automatic.</p>
+</div>
+
+<!-- IDEAS -->
+<div class="section">
+  <div class="section-label">Creative Ideas</div>
+  <h2>
+    <span class="en">20 Ideas You Can Generate With ViMax <em>Right Now</em></span>
+    <span class="hi">20 Ideas Jo Tum ViMax Se <em>Abhi Bana Sakte Ho</em></span>
+  </h2>
+  <p class="section-sub en">Need inspiration? Copy any of these and paste them as your idea prompt.</p>
+  <p class="section-sub hi">Inspiration chahiye? Inme se koi bhi copy karo aur idea prompt mein paste karo.</p>
+
+  <div class="ideas-grid">
+    <div class="idea-card"><strong>A robot discovers it can dream</strong><span class="idea-style">Sci-fi, Cinematic</span></div>
+    <div class="idea-card"><strong>Two rival chefs compete on Mars</strong><span class="idea-style">Comedy, Animated</span></div>
+    <div class="idea-card"><strong>A grandma secretly fights crime</strong><span class="idea-style">Action-Comedy, Cartoon</span></div>
+    <div class="idea-card"><strong>Trees decide to leave the forest</strong><span class="idea-style">Fantasy, Storybook</span></div>
+    <div class="idea-card"><strong>A street cat becomes mayor</strong><span class="idea-style">Wholesome, Pixar-like</span></div>
+    <div class="idea-card"><strong>The last library on Earth</strong><span class="idea-style">Dramatic, Cinematic</span></div>
+    <div class="idea-card"><strong>A kid teaches AI about friendship</strong><span class="idea-style">Heartwarming, Animated</span></div>
+    <div class="idea-card"><strong>Underwater civilization finds the surface</strong><span class="idea-style">Epic, Fantasy</span></div>
+    <div class="idea-card"><strong>Musician's notes come alive as people</strong><span class="idea-style">Musical, Abstract Art</span></div>
+    <div class="idea-card"><strong>Time-traveling food delivery gone wrong</strong><span class="idea-style">Comedy, Cartoon</span></div>
+    <div class="idea-card"><strong>A dog's POV of their human's wedding</strong><span class="idea-style">Emotional, Realistic</span></div>
+    <div class="idea-card"><strong>Samurai in modern Tokyo — culture shock</strong><span class="idea-style">Action-Drama, Anime</span></div>
+    <div class="idea-card"><strong>Plants vs pollution — nature fights back</strong><span class="idea-style">Environmental, Animated</span></div>
+    <div class="idea-card"><strong>A camera that photographs the future</strong><span class="idea-style">Thriller, Noir</span></div>
+    <div class="idea-card"><strong>Baby dragon's first day at school</strong><span class="idea-style">Kids, Colorful Cartoon</span></div>
+    <div class="idea-card"><strong>A ghost who's afraid of humans</strong><span class="idea-style">Comedy-Horror, Animated</span></div>
+    <div class="idea-card"><strong>Two AIs debate the meaning of art</strong><span class="idea-style">Philosophical, Abstract</span></div>
+    <div class="idea-card"><strong>Street murals come alive at midnight</strong><span class="idea-style">Magical Realism, Cinematic</span></div>
+    <div class="idea-card"><strong>Cat accidentally launches into space</strong><span class="idea-style">Comedy, Pixar-like</span></div>
+    <div class="idea-card"><strong>Ancient warrior wakes up in a gaming tournament</strong><span class="idea-style">Action-Comedy, Anime</span></div>
+  </div>
+</div>
+
+<!-- WHO BUILT THIS -->
+<div class="section">
+  <div class="section-label">The Team</div>
+  <h2>
+    <span class="en">Built by <em>Hong Kong University</em> Researchers</span>
+    <span class="hi"><em>Hong Kong University</em> Ke Researchers Ne Banaya</span>
+  </h2>
+  <p class="section-sub en">ViMax comes from HKUDS — the Data Science lab at the Hong Kong University of Science and Technology. The team has published research on graph neural networks, recommendation systems, and now agentic AI for creative content generation. 339+ commits, 1,300+ forks, MIT license, actively maintained with Google AI Studio API support and upcoming agent loop improvements.</p>
+  <p class="section-sub hi">ViMax HKUDS se aaya hai — Hong Kong University of Science and Technology ka Data Science lab. Team ne graph neural networks, recommendation systems, aur ab creative content generation ke liye agentic AI pe research publish ki hai. 339+ commits, 1,300+ forks, MIT license, actively maintained hai Google AI Studio API support aur upcoming agent loop improvements ke saath.</p>
+</div>
+
+<!-- CTA -->
+<div class="cta-section" id="ads">
+  <div class="cta-inner">
+    <div class="hero-badge" style="margin-bottom:20px">🤝 Collaborate</div>
+    <h2>
+      <span class="en">Want to advertise with rk.codex?</span>
+      <span class="hi">rk.codex ke saath advertise karna hai?</span>
+    </h2>
+    <p class="en">Reach thousands of developers, designers, and AI enthusiasts. Drop a mail and let's talk about promoting your product, tool, or brand on my reels and YouTube channel.</p>
+    <p class="hi">Thousands of developers, designers, aur AI enthusiasts tak pahuncho. Mail karo aur baat karte hain tumhare product, tool, ya brand ko mere reels aur YouTube channel pe promote karne ki.</p>
+    <div class="email-chip">📩 radhakishanjangid404@gmail.com</div>
+    <br><br>
+    <a href="mailto:radhakishanjangid404@gmail.com?subject=Ad Enquiry – rk.codex&body=Hi RK, I'd like to discuss an advertising opportunity with you." class="btn-email">📨 Drop Ad Enquiry Now</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-left">rk<span>.</span>codex</div>
+    <div class="footer-links" style="margin-top:10px">
+      <a href="https://www.instagram.com/rk.codex" target="_blank">Instagram</a>
+      <a href="https://www.youtube.com/@rk-codex" target="_blank">YouTube</a>
+      <a href="https://github.com/HKUDS/ViMax" target="_blank">ViMax GitHub</a>
+      <a href="https://radhakishan404.is-a.dev" target="_blank">Portfolio</a>
+    </div>
+  </div>
+  <div class="footer-right">
+    <div>Made with ❤️ for the dev community</div>
+    <div style="margin-top:6px;color:var(--text3)">Type one idea. Get a full movie.</div>
+  </div>
+</footer>
+
+<script>
+var bd = document.body;
+
+function setLang(l) {
+  document.getElementById('lm').style.display = 'none';
+  var isHi = l === 'hi';
+  bd.classList.toggle('hindi', isHi);
+  document.querySelectorAll('.en').forEach(function(e){ e.style.display = isHi ? 'none' : ''; });
+  document.querySelectorAll('.hi').forEach(function(e){ e.style.display = isHi ? '' : 'none'; });
+  document.getElementById('ben').classList.toggle('on', !isHi);
+  document.getElementById('bhi').classList.toggle('on', isHi);
+  localStorage.setItem('rk-lang', l);
+}
+
+(function(){
+  var saved = localStorage.getItem('rk-lang');
+  if (saved) { setLang(saved); }
+})();
+</script>
+</body>
+</html>

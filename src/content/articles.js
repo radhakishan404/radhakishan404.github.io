@@ -18,42 +18,9 @@ const htmlModules = import.meta.glob("./articles/html/*.html", {
     query: "?raw"
 });
 
-function buildEmbeddedHtml(raw) {
-    const overrideStyle = `
-<style>
-/* Strip duplicate chrome — site shell provides header/footer */
-header, footer, nav,
-.topbar, .topbar-inner,
-.cursor, .cursor-ring,
-#progress,
-[class*="site-header"], [class*="site-footer"],
-[class*="back-to-top"] {
-    display: none !important;
-}
-
-/* Fix positioning for shadow DOM context */
-.shadow-article-body { cursor: auto; }
-
-/* Kill fixed/sticky — they break inside shadow DOM */
-[style*="position: fixed"],
-[style*="position:fixed"],
-[style*="position: sticky"],
-[style*="position:sticky"] {
-    position: relative !important;
-}
-
-/* Noise overlays — disable */
-.shadow-article-body::before,
-.shadow-article-body::after {
-    display: none !important;
-}
-</style>`;
-
-    if (/<head[^>]*>/i.test(raw)) {
-        return raw.replace(/<head([^>]*)>/i, `<head$1>${overrideStyle}`);
-    }
-
-    return `<!DOCTYPE html><html><head>${overrideStyle}</head><body>${raw}</body></html>`;
+function ensureFullDocument(raw) {
+    if (/<html[\s>]/i.test(raw)) return raw;
+    return `<!DOCTYPE html><html><head></head><body>${raw}</body></html>`;
 }
 
 function fileNameFromPath(path) {
@@ -189,9 +156,9 @@ function buildMarkdownArticle([path, raw]) {
 }
 
 function buildHtmlArticle([path, raw]) {
-    const embeddedHtml = buildEmbeddedHtml(raw);
+    const fullHtml = ensureFullDocument(raw);
     const parser = new DOMParser();
-    const doc = parser.parseFromString(embeddedHtml, "text/html");
+    const doc = parser.parseFromString(fullHtml, "text/html");
     const title = doc.title || fileNameFromPath(path);
     const metaDescription = doc.querySelector('meta[name="description"]')?.content || "";
     const keywords = doc.querySelector('meta[name="keywords"]')?.content || "";
@@ -226,7 +193,7 @@ function buildHtmlArticle([path, raw]) {
         accent,
         featured,
         githubUrl,
-        raw: embeddedHtml
+        raw: fullHtml
     };
 }
 

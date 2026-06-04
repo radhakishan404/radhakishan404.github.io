@@ -2,7 +2,6 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import AdSlot from "../components/AdSlot";
 import MagneticButton from "../components/MagneticButton";
-import ShadowArticle from "../components/ShadowArticle";
 import { getArticleBySlug } from "../content/articles";
 import { profileImages } from "../data/images";
 import useArticleViews from "../hooks/useArticleViews";
@@ -86,11 +85,7 @@ function ArticleDetailPage({ match }) {
 
                 <AdSlot slot="ARTICLE_TOP_SLOT" className="article-ad-slot" />
 
-                {article.kind === "html" ? (
-                    <ShadowArticle html={article.raw} className="article-html-wrap" />
-                ) : (
-                    <article className="article-prose" data-reveal dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
-                )}
+                <article className="article-prose" data-reveal dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
 
                 <AdSlot slot="ARTICLE_BOTTOM_SLOT" className="article-ad-slot" />
 

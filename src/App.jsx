@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import SiteShell from "./components/SiteShell";
+import { getArticleBySlug } from "./content/articles";
 import AboutPage from "./pages/AboutPage";
 import ArticleDetailPage from "./pages/ArticleDetailPage";
 import ArticlesPage from "./pages/ArticlesPage";
 import ContactPage from "./pages/ContactPage";
 import HomePage from "./pages/HomePage";
+import HtmlArticlePage from "./pages/HtmlArticlePage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
 import ProjectsPage from "./pages/ProjectsPage";
 
@@ -59,22 +61,38 @@ function AnalyticsTracker() {
     return null;
 }
 
-function AppRoutes() {
+function ArticleRouter({ match }) {
+    const article = getArticleBySlug(match.params.slug);
+    if (article?.kind === "html") {
+        return <HtmlArticlePage match={match} />;
+    }
     return (
         <SiteShell>
-            <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/about" component={AboutPage} />
-                <Route exact path="/projects" component={ProjectsPage} />
-                <Route exact path="/projects/:topic" component={ProjectDetailPage} />
-                <Route exact path="/portfolio" render={() => <Redirect to="/projects" />} />
-                <Route exact path="/portfolio/:topic" render={({ match }) => <Redirect to={`/projects/${match.params.topic}`} />} />
-                <Route exact path="/articles" component={ArticlesPage} />
-                <Route exact path="/articles/:slug" component={ArticleDetailPage} />
-                <Route exact path="/contact" component={ContactPage} />
-                <Route render={() => <Redirect to="/" />} />
-            </Switch>
+            <ArticleDetailPage match={match} />
         </SiteShell>
+    );
+}
+
+function AppRoutes() {
+    return (
+        <Switch>
+            <Route exact path="/articles/:slug" component={ArticleRouter} />
+            <Route>
+                <SiteShell>
+                    <Switch>
+                        <Route exact path="/" component={HomePage} />
+                        <Route exact path="/about" component={AboutPage} />
+                        <Route exact path="/projects" component={ProjectsPage} />
+                        <Route exact path="/projects/:topic" component={ProjectDetailPage} />
+                        <Route exact path="/portfolio" render={() => <Redirect to="/projects" />} />
+                        <Route exact path="/portfolio/:topic" render={({ match: m }) => <Redirect to={`/projects/${m.params.topic}`} />} />
+                        <Route exact path="/articles" component={ArticlesPage} />
+                        <Route exact path="/contact" component={ContactPage} />
+                        <Route render={() => <Redirect to="/" />} />
+                    </Switch>
+                </SiteShell>
+            </Route>
+        </Switch>
     );
 }
 
