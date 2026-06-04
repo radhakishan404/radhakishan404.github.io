@@ -96,11 +96,19 @@ function BookmarkIcon() {
     return <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>;
 }
 
+function getIndexFromHash() {
+    const hash = window.location.hash.replace("#", "");
+    const match = hash.match(/^prompt(\d+)$/);
+    if (match) return Math.max(0, Math.min(prompts.length - 1, parseInt(match[1], 10) - 1));
+    return 0;
+}
+
 function UniquePromptsPage() {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(getIndexFromHash);
     const [liked, setLiked] = useState(false);
     const [copied, setCopied] = useState(false);
     const sliderRef = useRef(null);
+    const layoutRef = useRef(null);
     const touchStartRef = useRef(0);
 
     useDocumentMeta({
@@ -113,7 +121,17 @@ function UniquePromptsPage() {
         const clamped = Math.max(0, Math.min(prompts.length - 1, idx));
         setActiveIndex(clamped);
         setCopied(false);
+        window.history.replaceState(null, "", `#prompt${clamped + 1}`);
     }, []);
+
+    useEffect(() => {
+        const onHashChange = () => goTo(getIndexFromHash());
+        window.addEventListener("hashchange", onHashChange);
+        if (window.location.hash && layoutRef.current) {
+            setTimeout(() => layoutRef.current.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+        }
+        return () => window.removeEventListener("hashchange", onHashChange);
+    }, [goTo]);
 
     const handleTouchStart = (e) => { touchStartRef.current = e.touches[0].clientX; };
     const handleTouchEnd = (e) => {
@@ -154,7 +172,7 @@ function UniquePromptsPage() {
                 <a href={IG_POST} target="_blank" rel="noreferrer" className="up-follow-btn">View on Instagram</a>
             </div>
 
-            <div className="up-layout">
+            <div className="up-layout" ref={layoutRef} id={`prompt${activeIndex + 1}`}>
                 <div className="up-post-card">
                     <div className="up-post-header">
                         <a href={IG_PROFILE} target="_blank" rel="noreferrer" className="up-avatar-row">
@@ -246,8 +264,15 @@ function UniquePromptsPage() {
             </div>
 
             <div className="up-more-section">
+                <div className="up-more-badge">🚀 More Coming</div>
                 <h2>More Prompt Collections Coming Soon</h2>
                 <p>Follow <a href={IG_PROFILE} target="_blank" rel="noreferrer">@rk.codex</a> on Instagram for new prompt drops every week.</p>
+                <div className="up-share-links">
+                    <span>Share a prompt directly:</span>
+                    {prompts.map((p) => (
+                        <a key={p.id} href={`#prompt${p.id}`} className="up-share-chip">#{p.id} {p.title}</a>
+                    ))}
+                </div>
                 <div className="up-more-ctas">
                     <a href={IG_PROFILE} target="_blank" rel="noreferrer" className="up-cta-btn up-cta-ig">Follow on Instagram</a>
                     <a href="https://www.youtube.com/@rk-codex" target="_blank" rel="noreferrer" className="up-cta-btn up-cta-yt">Subscribe on YouTube</a>
