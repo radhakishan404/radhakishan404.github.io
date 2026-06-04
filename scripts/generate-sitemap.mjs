@@ -51,6 +51,7 @@ const staticRoutes = [
   "/projects",
   "/articles",
   "/contact",
+  "/unique-prompts",
   "/privacy-policy.html"
 ];
 

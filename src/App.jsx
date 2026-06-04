@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import HtmlArticlePage from "./pages/HtmlArticlePage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import UniquePromptsPage from "./pages/UniquePromptsPage";
 
 const gaMeasurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
 
@@ -77,6 +78,7 @@ function AppRoutes() {
     return (
         <Switch>
             <Route exact path="/articles/:slug" component={ArticleRouter} />
+            <Route exact path="/unique-prompts" component={UniquePromptsPage} />
             <Route>
                 <SiteShell>
                     <Switch>
