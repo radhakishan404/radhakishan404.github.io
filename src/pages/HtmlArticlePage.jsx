@@ -8,12 +8,27 @@ function HtmlArticlePage({ match }) {
     const history = useHistory();
     const containerRef = useRef(null);
     const cleanupRef = useRef([]);
+    const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://radhakishan404.is-a.dev";
 
     useDocumentMeta({
         title: article ? `${article.title} | rk.codex` : "Article | rk.codex",
         description: article?.excerpt || "",
         image: article?.coverImage || "",
-        type: "article"
+        type: "article",
+        structuredData: article ? {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: article.title,
+            description: article.excerpt,
+            datePublished: article.sortDate || undefined,
+            author: { "@type": "Person", name: "Radhakishan Jangid" },
+            publisher: { "@type": "Person", name: "Radhakishan Jangid" },
+            mainEntityOfPage: `${siteUrl}/articles/${article.slug}/`,
+            image: article.coverImage
+                ? new URL(article.coverImage, siteUrl).href
+                : undefined,
+            keywords: article.tags.join(", ") || undefined
+        } : undefined
     });
 
     useEffect(() => {

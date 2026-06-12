@@ -96,6 +96,21 @@ function normalizeKeywords(value) {
     .join(", ");
 }
 
+function getTagAttribute(tag, attribute) {
+  const match = tag.match(new RegExp(`\\b${attribute}\\s*=\\s*(["'])(.*?)\\1`, "i"));
+  return match ? match[2] : "";
+}
+
+function getMetaContent(html, attribute, key) {
+  for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
+    const tag = match[0];
+    if (getTagAttribute(tag, attribute).toLowerCase() === key.toLowerCase()) {
+      return getTagAttribute(tag, "content");
+    }
+  }
+  return "";
+}
+
 function normalizeAbsoluteUrl(value) {
   if (!value) {
     return "";
@@ -219,19 +234,21 @@ function buildArticleMetaMap() {
     const slug = slugify(file.replace(/\.html$/, ""));
     const titleMatch = raw.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
     const title = (titleMatch ? stripTags(titleMatch[1]) : slug).trim();
-    const descMatch = raw.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["'][^>]*>/i);
-    const description = (descMatch ? descMatch[1] : "").trim();
-    const coverMatch =
-      raw.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["'][^>]*>/i) ||
-      raw.match(/<meta[^>]+name=["']cover["'][^>]+content=["']([^"']+)["'][^>]*>/i);
+    const description = getMetaContent(raw, "name", "description").trim();
+    const coverImage =
+      getMetaContent(raw, "name", "cover") ||
+      getMetaContent(raw, "property", "og:image");
+    const datePublished =
+      getMetaContent(raw, "property", "article:published_time") ||
+      getMetaContent(raw, "name", "date");
 
     map.set(slug, {
       slug,
       title,
       description: description || "Article by Radhakishan Jangid.",
-      datePublished: "",
-      tags: normalizeKeywords(raw.match(/<meta[^>]+name=["']keywords["'][^>]+content=["']([^"']+)["'][^>]*>/i)?.[1] || ""),
-      coverImage: coverMatch ? coverMatch[1] : `/articles/${slug}.png`
+      datePublished,
+      tags: normalizeKeywords(getMetaContent(raw, "name", "keywords")),
+      coverImage: coverImage || `/articles/${slug}.png`
     });
   });
 
@@ -275,7 +292,12 @@ const pageDefaults = new Map([
   ["/about/", { title: `About | ${authorName}`, description: "Experience, technical strengths, and current focus areas.", type: "profile" }],
   ["/projects/", { title: `Projects | ${authorName}`, description: "Selected projects across product UI, web applications, shipped client work, and public software tools.", type: "website" }],
   ["/articles/", { title: `Articles | ${authorName}`, description: "AI prompts, developer content systems, and practical technical articles for developers and creators.", type: "website" }],
-  ["/contact/", { title: `Contact | ${authorName}`, description: "Get in touch for engineering work, collaboration, and consulting.", type: "website" }]
+  ["/contact/", { title: `Contact | ${authorName}`, description: "Get in touch for engineering work, collaboration, and consulting.", type: "website" }],
+  ["/unique-prompts/", {
+    title: "Unique Prompts — AI Profile Photo Transformations | rk.codex",
+    description: "Copy the exact prompts used to create AI-generated profile photo transformations for ChatGPT image generation.",
+    type: "website"
+  }]
 ]);
 
 function buildStaticStructuredData(routePath, defaults, url) {

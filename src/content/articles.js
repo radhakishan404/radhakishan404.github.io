@@ -169,10 +169,10 @@ function buildHtmlArticle([path, raw]) {
         "";
     const category = doc.querySelector('meta[name="category"]')?.content || "Article";
     const slug = slugify(fileNameFromPath(path));
-    const coverImage = inferredCoverImage(slug)
+    const coverImage =
+        doc.querySelector('meta[name="cover"]')?.content
         || doc.querySelector('meta[property="og:image"]')?.content
-        || doc.querySelector('meta[name="cover"]')?.content
-        || "";
+        || inferredCoverImage(slug);
     const accent = doc.querySelector('meta[name="theme-color"]')?.content || "";
     const featured = parseBoolean(doc.querySelector('meta[name="featured"]')?.content || "false");
     const githubUrl = doc.querySelector('meta[name="github"]')?.content || "";
