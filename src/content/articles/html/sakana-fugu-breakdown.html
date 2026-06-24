@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakana Fugu — Full Breakdown | rk.codex</title>
+<meta name="description" content="Japan built their own Fable 5. Sakana Fugu is a multi-agent AI that beats GPT-5.5, costs $20/month, and the whole world can use it. Full breakdown inside.">
+<meta name="author" content="Radhakishan Jangid">
+<meta name="keywords" content="Sakana Fugu, Sakana AI, Fugu Ultra, multi-agent AI, AI model, SWE-Bench Pro, GPT-5.5, AI orchestration">
+<meta name="date" content="2026-06-23T12:00:00+05:30">
+<meta name="category" content="AI Models">
+<meta name="featured" content="true">
+<meta name="cover" content="/articles/sakana-fugu-breakdown.svg">
+<meta property="article:published_time" content="2026-06-23T12:00:00+05:30">
+<meta property="article:author" content="Radhakishan Jangid">
+<meta property="og:title" content="Sakana Fugu — Full Breakdown | rk.codex">
+<meta property="og:description" content="Japan built their own Fable 5. Beats GPT-5.5 on SWE-Bench Pro. $20/month. Full breakdown, benchmarks, how it works.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://radhakishan404.is-a.dev/articles/sakana-fugu-breakdown/">
+<meta property="og:image" content="https://radhakishan404.is-a.dev/articles/sakana-fugu-breakdown.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sakana Fugu — Full Breakdown | rk.codex">
+<meta name="twitter:description" content="Japan built their own Fable 5. Beats GPT-5.5 on SWE-Bench Pro. $20/month. Full breakdown, benchmarks, how it works.">
+<meta name="twitter:image" content="https://radhakishan404.is-a.dev/articles/sakana-fugu-breakdown.svg">
+<link rel="canonical" href="https://radhakishan404.is-a.dev/articles/sakana-fugu-breakdown/">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f7f5;
+    --border: #e5e5e3;
+    --text: #1a1a1a;
+    --muted: #888;
+    --accent: #0066cc;
+    --code-bg: #f4f4f2;
+    --link: #0066cc;
+  }
+  [data-theme="dark"] {
+    --bg: #111111;
+    --surface: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e8e6e1;
+    --muted: #666;
+    --accent: #4d9eff;
+    --code-bg: #1e1e1e;
+    --link: #4d9eff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', serif;
+    font-size: 17px;
+    line-height: 1.78;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .topbar {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .brand {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+  .brand span { color: var(--accent); }
+  .topbar-right { display: flex; gap: 8px; align-items: center; }
+  .toggle-group { display: flex; gap: 6px; }
+  .toggle-btn {
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.75rem;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.15s;
+  }
+  .toggle-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .toggle-btn:hover:not(.active) { border-color: var(--muted); color: var(--text); }
+
+  .wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  .article-header { margin-bottom: 48px; }
+  .tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: block;
+  }
+  h1 {
+    font-family: 'Georgia', serif;
+    font-size: 2.2rem;
+    line-height: 1.15;
+    font-weight: normal;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .meta {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .meta a { color: var(--accent); text-decoration: none; }
+  .meta a:hover { text-decoration: underline; }
+
+  h2 {
+    font-family: 'Georgia', serif;
+    font-size: 1.45rem;
+    font-weight: normal;
+    margin: 52px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.3px;
+  }
+  h3 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 32px 0 10px;
+  }
+  p { margin-bottom: 20px; }
+  a { color: var(--link); }
+  strong { font-weight: 700; }
+  em { font-style: italic; color: var(--muted); }
+
+  .callout {
+    padding: 16px 20px;
+    border-radius: 2px;
+    margin: 24px 0;
+    font-size: 0.92rem;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.65;
+    border-left: 3px solid;
+  }
+  .callout-info { background: var(--surface); border-color: var(--accent); }
+  .callout-warn { background: var(--surface); border-color: #c49000; }
+  .callout-green { background: var(--surface); border-color: #2a9d5c; }
+  .callout-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .callout-info .callout-label { color: var(--accent); }
+  .callout-warn .callout-label { color: #c49000; }
+  .callout-green .callout-label { color: #2a9d5c; }
+
+  blockquote {
+    border-left: 3px solid var(--accent);
+    margin: 28px 0;
+    padding: 4px 0 4px 20px;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+  }
+
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    margin: 36px 0;
+    border-radius: 2px;
+  }
+  .toc-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .toc ol { list-style: none; counter-reset: toc; padding: 0; }
+  .toc li {
+    counter-increment: toc;
+    margin-bottom: 6px;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85rem;
+  }
+  .toc li::before { content: counter(toc) ". "; color: var(--accent); font-weight: 700; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  /* BENCH TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85rem;
+  }
+  th {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--border);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  tr.hl td { background: var(--surface); }
+  .score { font-weight: 700; }
+  .score.top { color: var(--accent); }
+  .winner {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* HOW IT WORKS STEPS */
+  .steps { margin: 24px 0; }
+  .step {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 28px;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-body { flex: 1; }
+  .step-title {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+  .step-desc { font-family: 'Arial', sans-serif; font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+  /* USE CASES */
+  .usecase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .usecase-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 18px;
+    border-radius: 2px;
+  }
+  .usecase-title {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    margin-bottom: 6px;
+  }
+  .usecase-desc { font-family: 'Arial', sans-serif; font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+  .usecase-quote {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+
+  /* CODE */
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    border-radius: 2px;
+    overflow-x: auto;
+    margin: 20px 0;
+    position: relative;
+  }
+  pre code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text);
+    background: none;
+    padding: 0;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.7rem;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .copy-btn.done { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  .faq-q:hover { color: var(--accent); }
+  .faq-a { font-size: 0.9rem; color: var(--muted); display: none; line-height: 1.7; font-family: 'Arial', sans-serif; margin-top: 10px; }
+  .faq-a.open { display: block; }
+  .faq-arrow { transition: transform 0.2s; font-style: normal; }
+  .faq-arrow.open { transform: rotate(180deg); }
+
+  /* CTA */
+  .cta-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 28px;
+    border-radius: 2px;
+    text-align: center;
+    margin: 48px 0;
+  }
+  .cta-block h3 {
+    font-family: 'Georgia', serif;
+    font-size: 1.3rem;
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+  .cta-block p {
+    color: var(--muted);
+    font-family: 'Arial', sans-serif;
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    transition: all 0.15s;
+    margin: 4px;
+  }
+  .cta-btn:hover { opacity: 0.85; color: #fff; }
+  .cta-btn.outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .cta-btn.outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* MORE */
+  .more-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .more-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 18px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s;
+    display: block;
+  }
+  .more-card:hover { border-color: var(--accent); }
+  .more-card-tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .more-card-title {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .more-card-desc { font-family: 'Arial', sans-serif; font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 36px 24px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 10px; flex-wrap: wrap; }
+
+  @media(max-width: 600px) {
+    h1 { font-size: 1.7rem; }
+    .wrapper { padding: 36px 18px 80px; }
+    .usecase-grid { grid-template-columns: 1fr; }
+    .more-grid { grid-template-columns: 1fr; }
+    .topbar { padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="https://radhakishan404.is-a.dev/">rk<span>.</span>codex</a>
+  <div class="topbar-right">
+    <div class="toggle-group">
+      <button class="toggle-btn active" id="btn-light" onclick="setTheme('light')">Light</button>
+      <button class="toggle-btn" id="btn-dark" onclick="setTheme('dark')">Dark</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <div class="article-header">
+    <span class="tag">AI Model · June 23, 2026</span>
+    <h1>Sakana Fugu — Japan Built Their Own Fable 5. And the Whole World Can Use It.</h1>
+    <p class="subtitle">Anthropic's Fable 5 got export-controlled. Japan's Sakana AI dropped Fugu the next week. Multi-agent, beats GPT-5.5, $20 a month. Here's everything.</p>
+    <div class="meta">
+      <span>By <a href="https://www.instagram.com/rk.codex" target="_blank">@rk.codex</a></span>
+      <span>·</span>
+      <span>June 23, 2026</span>
+      <span>·</span>
+      <span>9 min read</span>
+      <span>·</span>
+      <a href="https://sakana.ai/fugu" target="_blank">Try Fugu ↗</a>
+      <span>·</span>
+      <a href="https://www.youtube.com/@rk-codex?sub_confirmation=1" target="_blank">YouTube ↗</a>
+    </div>
+  </div>
+
+  <div class="callout callout-green">
+    <span class="callout-label">Launch offer — act now</span>
+    Subscribe to any Fugu plan before <strong>July 31, 2026</strong> and get your second month completely free. Try it at <a href="https://sakana.ai/fugu" target="_blank">sakana.ai/fugu</a>.
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">What's in this breakdown</div>
+    <ol>
+      <li><a href="#what">What is Fugu — and why does it exist</a></li>
+      <li><a href="#how">How it actually works — the conductor model</a></li>
+      <li><a href="#benchmarks">Benchmarks — where it leads, where it doesn't</a></li>
+      <li><a href="#usecases">What you can actually do with it</a></li>
+      <li><a href="#pricing">Pricing and access</a></li>
+      <li><a href="#api">Using the API — code example</a></li>
+      <li><a href="#limits">Honest limitations</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+
+  <h2 id="what">What is Fugu — and why does it exist</h2>
+
+  <p>On June 12, 2026, Anthropic suspended access to Fable 5 and Mythos Preview globally due to US government export controls. Developers outside America lost access overnight. No warning. No transition period.</p>
+
+  <p>Ten days later, on June 22, Tokyo-based Sakana AI released <strong>Fugu</strong> — named after the Japanese blowfish. The fish that looks harmless on the surface and is lethally complex underneath. The name is deliberate.</p>
+
+  <p>Sakana AI was founded in 2023 by <strong>Llion Jones</strong> and <strong>David Ha</strong>. Jones co-authored the 2017 Transformer paper — "Attention Is All You Need" — the research that built the foundation for every AI model that exists today. He left Google, went to Tokyo, and built Sakana around a completely different philosophy: instead of training bigger and bigger single models, study how nature works. Fish schools. Ant colonies. Swarm intelligence. Use that to build AI that coordinates rather than brute-forces.</p>
+
+  <p>Sakana AI is now valued at <strong>$2.5 billion</strong>, backed by NVIDIA and Google. Fugu is their first commercial product for everyday developers.</p>
+
+  <blockquote>
+    "Our 'Fugu Ultra' model matches the performance of Fable and Mythos, delivering frontier capability without the risk of export controls."
+    <cite>— Sakana AI, launch announcement, June 22, 2026</cite>
+  </blockquote>
+
+  <h2 id="how">How it actually works — the conductor model</h2>
+
+  <p>Every AI model you've used works the same way. One model. You send a prompt. It answers. Done.</p>
+
+  <p>Fugu is architecturally different. It is not a bigger model. It is a <strong>coordinator</strong> — a 7 billion parameter model trained specifically to manage other models.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">You send one prompt</div>
+        <div class="step-desc">To you it looks like any other API call. Same format as OpenAI. One endpoint. One request.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Fugu reads the task and decides</div>
+        <div class="step-desc">The 7B Conductor model analyses your prompt. Simple task? Answer directly. Complex multi-step task? Assemble a team.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Specialists get assigned</div>
+        <div class="step-desc">Fugu picks from a pool of frontier models — GPT-5, Gemini 3.1, Claude Opus, specialist open models. Each sub-task goes to the model best suited for it. TRINITY assigns roles: Thinker, Worker, Verifier.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Outputs get cross-checked</div>
+        <div class="step-desc">The Verifier role checks every output. Fugu can even call itself recursively — checking its own coordination decisions before synthesising the final answer.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">One clean answer comes back</div>
+        <div class="step-desc">You receive one response. No orchestration complexity in your code. No managing multiple APIs. The entire multi-agent system is invisible to you.</div>
+      </div>
+    </div>
+  </div>
+
+  <p>This is built on two ICLR 2026 research papers: <strong>TRINITY</strong> (evolved LLM coordinator) and <strong>Conductor</strong> (learning to orchestrate agents using reinforcement learning). Not marketing. Peer-reviewed published research.</p>
+
+  <div class="callout callout-info">
+    <span class="callout-label">Key difference from model routers</span>
+    Tools like RouteLLM or Not Diamond pick one model per prompt — routing. Fugu coordinates multiple models on the same prompt in parallel and sequence, synthesises their outputs, and verifies before returning. That's orchestration, not routing. Different category entirely.
+  </div>
+
+  <h2 id="benchmarks">Benchmarks — where it leads, where it doesn't</h2>
+
+  <p>Sakana published these scores in their technical report. Independent commentators note the comparisons use provider-reported scores as baselines, not head-to-head tests. Treat as directional, not guaranteed. Test on your own tasks before committing.</p>
+
+  <h3>SWE-Bench Pro — real software engineering tasks</h3>
+  <table>
+    <tr><th>Model</th><th>Score</th><th>Notes</th></tr>
+    <tr class="hl">
+      <td><strong>Fugu Ultra</strong> <span class="winner">Top</span></td>
+      <td><span class="score top">73.7%</span></td>
+      <td>Multi-agent coordination</td>
+    </tr>
+    <tr>
+      <td>Claude Opus 4.8</td>
+      <td><span class="score">69.2%</span></td>
+      <td>Single model</td>
+    </tr>
+    <tr>
+      <td>GPT-5.5</td>
+      <td><span class="score">58.6%</span></td>
+      <td>Single model</td>
+    </tr>
+    <tr>
+      <td>Gemini 3.1 Pro</td>
+      <td><span class="score">54.2%</span></td>
+      <td>Single model</td>
+    </tr>
+  </table>
+
+  <h3>Other benchmarks</h3>
+  <table>
+    <tr><th>Benchmark</th><th>Category</th><th>Fugu Ultra result</th></tr>
+    <tr class="hl"><td><strong>TerminalBench 2.1</strong></td><td>Real terminal tasks</td><td><span class="score top">82.1 — top score</span></td></tr>
+    <tr><td>Humanity's Last Exam</td><td>Hardest reasoning</td><td><span class="score">Leads all public models</span></td></tr>
+    <tr><td>GPQA-Diamond</td><td>Scientific reasoning</td><td><span class="score">Top tied with Fugu</span></td></tr>
+    <tr><td>CharXiv Reasoning</td><td>Chart understanding</td><td><span class="score">Top score</span></td></tr>
+    <tr><td>MRCRv2</td><td>Long context retrieval</td><td><span class="score">GPT-5.5 wins this one</span></td></tr>
+  </table>
+
+  <p>Fugu Ultra posts top score on 10 of 11 benchmarks tested. GPT-5.5 wins one — MRCRv2, the long context retrieval benchmark.</p>
+
+  <div class="callout callout-warn">
+    <span class="callout-label">Honest caveat</span>
+    Fugu cannot benchmark against Fable 5 or Mythos Preview directly — they're not in Fugu's model pool because they're export-controlled and not publicly accessible. Parity claims against those models are Sakana's own assertion. Independent verification is pending.
+  </div>
+
+  <h2 id="usecases">What you can actually do with it</h2>
+
+  <div class="usecase-grid">
+    <div class="usecase-card">
+      <div class="usecase-title">Code review on large codebases</div>
+      <div class="usecase-desc">Multiple specialist agents review different aspects in parallel — logic, security, style, performance — then synthesise findings into one report.</div>
+      <div class="usecase-quote">"Where other tools flagged about three issues, Fugu surfaced more than twenty. It's become the model I run all my reviews through." — early user</div>
+    </div>
+    <div class="usecase-card">
+      <div class="usecase-title">Security assessments</div>
+      <div class="usecase-desc">Give it a scoped instruction and it drives a full security assessment end-to-end — recon, XSS/SQLi checks, auth review, clean report — staying inside scope autonomously.</div>
+      <div class="usecase-quote">"Given one scoped instruction, Fugu drove a full security assessment end-to-end and stayed inside scope." — early user</div>
+    </div>
+    <div class="usecase-card">
+      <div class="usecase-title">Multi-paper research synthesis</div>
+      <div class="usecase-desc">Feed it multiple research papers. It assigns specialist agents per paper, cross-references findings, and surfaces connections between papers you'd never spot manually.</div>
+      <div class="usecase-quote">"Normally 3-4 days of work. With Fugu I had a full analysis in a few hours, including connections between papers I would never have spotted." — early user</div>
+    </div>
+    <div class="usecase-card">
+      <div class="usecase-title">Long multi-turn agent tasks</div>
+      <div class="usecase-desc">Fugu maintains persona and context stability across very long sessions better than single models. Build chatbots or agents that don't drift over 50+ turns.</div>
+      <div class="usecase-quote">Beta users specifically called out "sustained persona consistency" as a standout strength vs other frontier models.</div>
+    </div>
+    <div class="usecase-card">
+      <div class="usecase-title">Autonomous AI experiments</div>
+      <div class="usecase-desc">In beta, Fugu ran 123 experiments over 14 hours on one H100 GPU to autonomously improve a small GPT's training recipe — without human intervention.</div>
+      <div class="usecase-quote">AutoResearch use case from Sakana's published beta examples.</div>
+    </div>
+    <div class="usecase-card">
+      <div class="usecase-title">Compliance-sensitive workflows</div>
+      <div class="usecase-desc">Fugu standard lets you opt specific model providers out of the pool. Need to exclude US-based models for data residency? Exclude them. Pool routes around them.</div>
+      <div class="usecase-quote">Fugu Ultra pool is fixed. Only regular Fugu supports provider opt-out.</div>
+    </div>
+  </div>
+
+  <h2 id="pricing">Pricing and access</h2>
+
+  <h3>Subscription plans</h3>
+  <table>
+    <tr><th>Plan</th><th>Price</th><th>Usage</th><th>Best for</th></tr>
+    <tr>
+      <td>Standard</td>
+      <td><strong>$20/month</strong></td>
+      <td>Baseline</td>
+      <td>Individual devs, everyday coding, chatbots</td>
+    </tr>
+    <tr class="hl">
+      <td><strong>Pro</strong></td>
+      <td><strong>$100/month</strong></td>
+      <td>10x Standard</td>
+      <td>Heavy workflows, research pipelines</td>
+    </tr>
+    <tr>
+      <td>Max</td>
+      <td><strong>$200/month</strong></td>
+      <td>20x Standard</td>
+      <td>Continuous long-running tasks</td>
+    </tr>
+    <tr>
+      <td>Pay-as-you-go</td>
+      <td>Per token</td>
+      <td>Elastic</td>
+      <td>Enterprise, production — higher priority serving</td>
+    </tr>
+  </table>
+
+  <p>All plans include both Fugu and Fugu Ultra. Subscribe before <strong>July 31, 2026</strong> and get second month free at your initial tier.</p>
+
+  <div class="callout callout-warn">
+    <span class="callout-label">EU/EEA users</span>
+    Fugu is not currently available in EU or EEA regions while Sakana works on GDPR compliance. All other regions including India, US, Southeast Asia, Japan — full access today.
+  </div>
+
+  <h2 id="api">Using the API — code example</h2>
+
+  <p>Fugu uses the OpenAI-compatible Chat Completions format. If you already use GPT or Claude in code, swap the base URL and API key. Nothing else changes.</p>
+
+  <pre><code>from openai import OpenAI
+
+# Get your API key from console.sakana.ai
+client = OpenAI(
+    base_url="https://&lt;your-fugu-endpoint&gt;/v1",
+    api_key="YOUR_SAKANA_API_KEY",
+)
+
+resp = client.chat.completions.create(
+    model="fugu-ultra-20260615",  # or "fugu" for standard
+    messages=[
+        {"role": "user", "content": "Review this codebase for security issues."},
+    ],
+)
+
+print(resp.choices[0].message.content)
+# Token usage and cost reported per request</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+  <p>Get your endpoint and API key from <a href="https://console.sakana.ai" target="_blank">console.sakana.ai</a>. Model IDs: <code>fugu-ultra-20260615</code> for Ultra, <code>fugu</code> for standard.</p>
+
+  <div class="callout callout-info">
+    <span class="callout-label">Already using Claude or GPT in your code?</span>
+    Change <code>base_url</code> to your Fugu endpoint. Change <code>api_key</code> to your Sakana key. Change <code>model</code> to <code>fugu-ultra-20260615</code>. That's the entire migration.
+  </div>
+
+  <h2 id="limits">Honest limitations</h2>
+
+  <p><strong>Latency.</strong> Multiple API calls behind the scenes means Fugu is slower than a single model call. For real-time interactive chat this adds up. Best suited to tasks where quality matters more than response speed.</p>
+
+  <p><strong>Cost on heavy tasks.</strong> Per-message costs can reach $10 on demanding Fugu Ultra tasks with long multi-agent chains. For teams running heavy research automation, monitor spend carefully via the per-request cost reporting.</p>
+
+  <p><strong>Closed pool composition.</strong> Sakana has not disclosed what percentage of the agent pool is closed vs open models. You don't know exactly which models ran on your task unless you opt specific providers out. Transparency here needs to improve before enterprise production use.</p>
+
+  <p><strong>Benchmark fairness disputes.</strong> The community on Hacker News and X has flagged that Fugu's benchmarks compare against provider-reported scores, not head-to-head identical test setups. Treat scores as directional. Run your own evaluations on your actual tasks.</p>
+
+  <p><strong>No EU access yet.</strong> GDPR compliance is in progress. Timeline not published.</p>
+
+  <h2>Frequently asked questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Is this just a model router like RouteLLM?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">No. Routers pick one model per prompt and send it there. Fugu coordinates multiple models on the same prompt — in parallel and sequence — cross-checks outputs, and synthesises. Architecturally different. Routers make one selection. Fugu runs a multi-agent workflow.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Can I use it if I'm in India?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">Yes. Full access. No restrictions. Only excluded regions right now are EU and EEA due to pending GDPR compliance work. India, US, Southeast Asia, Japan — all available today.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Does it actually match Fable 5?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">Sakana claims parity. Independent verification doesn't exist yet because Fable 5 is export-controlled and not in Fugu's model pool — they can't run head-to-head tests. On the models it CAN benchmark against — GPT-5.5, Opus 4.8, Gemini 3.1 — it leads on 10 of 11 benchmarks. Judge on those numbers for now.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      What's the difference between Fugu and Fugu Ultra?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">Fugu — optimised for speed and everyday tasks. Lower latency. Good for chatbots, code review, interactive coding. Supports provider opt-out. Fugu Ultra — optimised for maximum quality on hard multi-step tasks. Deeper agent pool. Fixed pool — no opt-out. Best for research, security assessments, long-horizon automation. Both included in every subscription tier.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Who founded Sakana AI?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">Llion Jones — co-author of the 2017 Transformer paper "Attention Is All You Need," the research that underpins all modern AI. And David Ha — former Research Director at Google Brain. They left to build Sakana AI in Tokyo in 2023, focused on biomimicry and swarm intelligence rather than scaling single models.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Is it open source?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">No. Fugu is a commercial closed-source product. The underlying research papers — TRINITY and Conductor — are published and peer-reviewed at ICLR 2026. But the orchestration logic and model pool composition are proprietary. This is a legitimate criticism for teams that need full transparency.</div>
+  </div>
+
+  <div class="cta-block">
+    <h3>Try Sakana Fugu right now</h3>
+    <p>Standard plan is $20/month. Second month free if you sign up before July 31. Available in India and most regions today.</p>
+    <a href="https://sakana.ai/fugu" target="_blank" class="cta-btn">Open sakana.ai/fugu ↗</a>
+    <a href="https://www.instagram.com/rk.codex" target="_blank" class="cta-btn outline">Follow @rk.codex</a>
+  </div>
+
+  <h2>More from rk.codex</h2>
+  <div class="more-grid">
+    <a class="more-card" href="https://radhakishan404.is-a.dev/articles/claude-fable-5-breakdown/" target="_blank">
+      <div class="more-card-tag">AI Model</div>
+      <div class="more-card-title">Claude Fable 5 — Full Breakdown</div>
+      <div class="more-card-desc">The model Anthropic hid for over a year. 80.3% on SWE-Bench. Free on Pro until June 22.</div>
+    </a>
+    <a class="more-card" href="https://radhakishan404.is-a.dev/articles/odysseus-setup-guide/" target="_blank">
+      <div class="more-card-tag">Setup Guide</div>
+      <div class="more-card-title">Odysseus — PewDiePie's Free AI Workspace</div>
+      <div class="more-card-desc">30,000 stars in 48 hours. Full install guide inside.</div>
+    </a>
+    <a class="more-card" href="https://radhakishan404.is-a.dev/articles/vimax-agentic-video-generation/" target="_blank">
+      <div class="more-card-tag">Tool Breakdown</div>
+      <div class="more-card-title">ViMax — One Prompt to Full Cinematic Video</div>
+      <div class="more-card-desc">Script, storyboard, camera angles, consistent characters.</div>
+    </a>
+    <a class="more-card" href="https://www.youtube.com/@rk-codex?sub_confirmation=1" target="_blank">
+      <div class="more-card-tag">YouTube</div>
+      <div class="more-card-title">Full Tutorials on rk.codex YouTube</div>
+      <div class="more-card-desc">Deep dives every week. Subscribe for more.</div>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <div>By <a href="https://radhakishan404.is-a.dev/" target="_blank">Radhakishan Jangid</a> · <a href="https://www.instagram.com/rk.codex" target="_blank">@rk.codex</a> · <a href="https://www.youtube.com/@rk-codex?sub_confirmation=1" target="_blank">YouTube</a></div>
+  <div class="footer-links">
+    <a href="https://sakana.ai/fugu" target="_blank">Sakana Fugu</a>
+    <a href="https://radhakishan404.is-a.dev/articles/claude-fable-5-breakdown/" target="_blank">Fable 5 Guide</a>
+    <a href="https://radhakishan404.is-a.dev/articles/odysseus-setup-guide/" target="_blank">Odysseus Guide</a>
+  </div>
+</footer>
+
+<script>
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('btn-light').classList.toggle('active', t === 'light');
+  document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
+}
+function toggleFaq(el) {
+  const ans = el.nextElementSibling;
+  const arrow = el.querySelector('.faq-arrow');
+  ans.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+function copyCode(btn) {
+  const code = btn.previousSibling.textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
