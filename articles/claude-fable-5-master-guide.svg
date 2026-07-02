@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Claude Fable 5 Master Guide cover</title>
+  <desc id="desc">Editorial documentation-style cover for the Claude Fable 5 Master Guide by rk.codex.</desc>
+  <rect width="1200" height="630" fill="#080808"/>
+  <path d="M0 90h1200M0 180h1200M0 270h1200M0 360h1200M0 450h1200M0 540h1200M90 0v630M180 0v630M270 0v630M360 0v630M450 0v630M540 0v630M630 0v630M720 0v630M810 0v630M900 0v630M990 0v630M1080 0v630" stroke="#1c1c1c"/>
+  <circle cx="940" cy="315" r="210" fill="#14100d" stroke="#e85d00" stroke-width="2" opacity=".72"/>
+  <circle cx="940" cy="315" r="148" fill="none" stroke="#ff8a3d" stroke-width="2" opacity=".54"/>
+  <circle cx="940" cy="315" r="84" fill="none" stroke="#ffd7bd" stroke-width="2" opacity=".42"/>
+  <path d="M810 315h260M940 185v260M848 222l184 184M848 408l184-184" stroke="#e85d00" stroke-width="4" opacity=".68"/>
+  <circle cx="810" cy="315" r="9" fill="#ffd7bd"/>
+  <circle cx="940" cy="185" r="9" fill="#ffd7bd"/>
+  <circle cx="940" cy="445" r="9" fill="#ffd7bd"/>
+  <circle cx="1070" cy="315" r="9" fill="#ffd7bd"/>
+  <circle cx="940" cy="315" r="16" fill="#e85d00"/>
+  <text x="72" y="104" fill="#e85d00" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="7">PROMPT ENGINEERING DOCS</text>
+  <text x="72" y="255" fill="#f6eee4" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="92" font-weight="900" letter-spacing="-4">CLAUDE</text>
+  <text x="72" y="365" fill="#f6eee4" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="92" font-weight="900" letter-spacing="-4">FABLE 5</text>
+  <text x="76" y="456" fill="#ff8a3d" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="800" letter-spacing="10">MASTER GUIDE</text>
+  <text x="76" y="548" fill="#f6eee4" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">rk.codex</text>
+</svg>
