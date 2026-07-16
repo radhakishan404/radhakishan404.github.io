@@ -30,6 +30,7 @@ const buildDir = path.join(rootDir, "build");
 const sitemapPath = path.join(buildDir, "sitemap.xml");
 const indexPath = path.join(buildDir, "index.html");
 const softdataPath = path.join(rootDir, "src", "softdata.json");
+const featuredProjectMetaPath = path.join(rootDir, "src", "data", "featuredProjectMeta.json");
 const articlesDir = path.join(rootDir, "src", "content", "articles");
 
 if (!fs.existsSync(buildDir) || !fs.existsSync(indexPath) || !fs.existsSync(sitemapPath)) {
@@ -260,9 +261,12 @@ function buildProjectMetaMap() {
     return new Map();
   }
   const softdata = JSON.parse(fs.readFileSync(softdataPath, "utf8"));
+  const featuredProjectMeta = fs.existsSync(featuredProjectMetaPath)
+    ? JSON.parse(fs.readFileSync(featuredProjectMetaPath, "utf8"))
+    : [];
   const map = new Map();
 
-  (softdata.project || []).forEach((project) => {
+  [...featuredProjectMeta, ...(softdata.project || [])].forEach((project) => {
     const slug = slugify(project.title);
     map.set(slug, {
       slug,

@@ -1,0 +1,17 @@
+[
+    {"title":"InfoLive","description":"A full-stack marketplace for discovering verified businesses, professionals, products, and services.","thumbnail":"/images/project/first-batch/infolive.png","date":"2026"},
+    {"title":"YOURVAY","description":"Real-time local discovery for deciding where to eat using nearby place signals and community taps.","thumbnail":"/images/project/first-batch/yourvay.png","date":"2026"},
+    {"title":"Bhajan Baan","description":"A bilingual devotional discovery platform for bhajans, festivals, lyrics, reading, and saved collections.","thumbnail":"/images/project/first-batch/bhajan-baan.png","date":"2026"},
+    {"title":"Transformo","description":"A privacy-first universal file converter that runs locally inside the browser.","thumbnail":"/images/project/first-batch/transformo.png","date":"2026"},
+    {"title":"Linepop","description":"Browser-only caption studio for transcribing and exporting creator-ready video subtitles.","thumbnail":"/images/project/first-batch/linepop.png","date":"2026"},
+    {"title":"NanhiPathshala","description":"A Hindi-first AI voice tutor for mothers helping children with everyday homework.","thumbnail":"/images/project/first-batch/nanhipathshala.png","date":"2026"},
+    {"title":"Replybox","description":"An Instagram comment-to-DM automation engine with rules, activity monitoring, and Meta integration.","thumbnail":"/images/project/first-batch/replybox.png","date":"2026"},
+    {"title":"PookieMouse","description":"A native macOS cursor-effects application with themes, sounds, trails, and custom assets.","thumbnail":"/images/project/first-batch/pookiemouse.png","date":"2026"},
+    {"title":"Hero Match Arena","description":"A Bollywood-inspired collectible card game platform with web, mobile, administration, and backend systems.","thumbnail":"/images/project/first-batch/hero-match-arena.png","date":"2026"},
+    {"title":"Ritu Polymers","description":"An SEO-focused industrial catalogue for a PTFE and Teflon products manufacturer.","thumbnail":"/images/project/first-batch/ritu-polymers.png","date":"2026"},
+    {"title":"ASMC","description":"A sports-club platform for memberships, facility booking, events, payments, and member services.","thumbnail":"/images/project/first-batch/asmc.png","date":"2026"},
+    {"title":"MagicLock","description":"A product, operations, mobile, and payments platform for LPG safety devices.","thumbnail":"/images/project/first-batch/magiclock.png","date":"2026"},
+    {"title":"VeLivings","description":"A furniture-commerce platform focused on handcrafted solid Sheesham wood products.","thumbnail":"/images/project/first-batch/velivings.png","date":"2026"},
+    {"title":"MatterClock","description":"A physical-pixel clock simulation built from hundreds of continuously sorted marbles.","thumbnail":"/images/project/first-batch/matterclock.png","date":"2026"},
+    {"title":"Antaraal","description":"An India-first sponsored status-line and revenue-sharing platform for AI coding agents.","thumbnail":"/images/project/first-batch/antaraal.png","date":"2026"}
+]

@@ -27,6 +27,7 @@ const siteUrl = getSiteUrl(rootDir);
 const buildDir = path.join(rootDir, "build");
 const articlesDir = path.join(rootDir, "src", "content", "articles");
 const softdataPath = path.join(rootDir, "src", "softdata.json");
+const featuredProjectMetaPath = path.join(rootDir, "src", "data", "featuredProjectMeta.json");
 
 function slugify(value) {
   return `${value}`
@@ -44,6 +45,7 @@ function readArticleFiles(dir) {
 }
 
 const softdata = JSON.parse(fs.readFileSync(softdataPath, "utf8"));
+const featuredProjectMeta = JSON.parse(fs.readFileSync(featuredProjectMetaPath, "utf8"));
 
 const staticRoutes = [
   "/",
@@ -55,7 +57,8 @@ const staticRoutes = [
   "/privacy-policy.html"
 ];
 
-const projectRoutes = softdata.project.map((project) => `/projects/${slugify(project.title)}`);
+const projectRoutes = [...featuredProjectMeta, ...softdata.project]
+  .map((project) => `/projects/${slugify(project.title)}`);
 
 const markdownRoutes = readArticleFiles(path.join(articlesDir, "md"))
   .filter((file) => file.endsWith(".md"))

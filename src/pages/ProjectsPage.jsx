@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import MagneticButton from "../components/MagneticButton";
 import TiltCard from "../components/TiltCard";
 import { profileImages } from "../data/images";
+import { featuredProjects } from "../data/featuredProjects";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 import usePublicRepos from "../hooks/usePublicRepos";
 import { slugify } from "../lib/slug";
@@ -10,6 +11,7 @@ import softdata from "../softdata.json";
 
 function ProjectsPage() {
     const { repos, loading } = usePublicRepos();
+    const projects = [...featuredProjects, ...softdata.project];
 
     useDocumentMeta({
         title: "Projects | Radhakishan Jangid",
@@ -35,7 +37,7 @@ function ProjectsPage() {
                 </div>
 
                 <div className="project-grid">
-                    {softdata.project.map((project, i) => (
+                    {projects.map((project, i) => (
                         <TiltCard key={project.id} className="project-card shine-card" data-reveal data-reveal-delay={`${(i % 4) + 1}`}>
                             <Link to={`/projects/${slugify(project.title)}`} style={{ display: "contents" }}>
                                 <div className="project-card-visual tilt-image">

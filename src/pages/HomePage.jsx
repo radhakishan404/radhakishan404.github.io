@@ -7,6 +7,7 @@ import Marquee from "../components/Marquee";
 import TiltCard from "../components/TiltCard";
 import { articles } from "../content/articles";
 import { profileImages } from "../data/images";
+import { featuredProjects as approvedProjects } from "../data/featuredProjects";
 import { instagramReels, youtubeVideos } from "../data/site";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 import usePublicRepos from "../hooks/usePublicRepos";
@@ -20,7 +21,8 @@ function HomePage() {
     const textRef = useRef(null);
     const overlayRef = useRef(null);
 
-    const featuredProjects = softdata.project.slice(0, 4);
+    const allProjects = [...approvedProjects, ...softdata.project];
+    const homepageProjects = allProjects.slice(0, 4);
     const recentArticles = [...articles]
         .sort((a, b) => {
             const dateA = a.sortDate ? new Date(a.sortDate).getTime() : 0;
@@ -137,7 +139,7 @@ function HomePage() {
                             <span className="stat-label">Years experience</span>
                         </div>
                         <div className="stat-item">
-                            <AnimatedCounter value={`${softdata.project.length}`} className="stat-value" />
+                        <AnimatedCounter value={`${allProjects.length}`} className="stat-value" />
                             <span className="stat-label">Projects shipped</span>
                         </div>
                         <div className="stat-item">
@@ -156,7 +158,7 @@ function HomePage() {
                         <h2>Work</h2>
                     </div>
                     <div className="project-grid">
-                        {featuredProjects.map((project, i) => (
+                        {homepageProjects.map((project, i) => (
                             <TiltCard key={project.id} className="project-card shine-card" data-reveal data-reveal-delay={`${i + 1}`}>
                                 <Link to={`/projects/${slugify(project.title)}`} style={{ display: "contents" }}>
                                     <div className="project-card-visual tilt-image">

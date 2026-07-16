@@ -2098,7 +2098,7 @@ body.nav-open { overflow: hidden; }
     border-radius: 50%;
     background: var(--color-text);
     pointer-events: none;
-    z-index: 9999;
+    z-index: 10002;
     will-change: transform;
     mix-blend-mode: difference;
 }
@@ -2110,7 +2110,7 @@ body.nav-open { overflow: hidden; }
     border-radius: 50%;
     border: 1.5px solid rgba(255, 255, 255, 0.5);
     pointer-events: none;
-    z-index: 9998;
+    z-index: 10001;
     will-change: transform;
     mix-blend-mode: difference;
 }

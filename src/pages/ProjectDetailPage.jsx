@@ -1,12 +1,14 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import MagneticButton from "../components/MagneticButton";
+import { featuredProjects } from "../data/featuredProjects";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 import { slugify } from "../lib/slug";
 import softdata from "../softdata.json";
 
 function ProjectDetailPage({ match }) {
-    const project = softdata.project.find((item) => slugify(item.title) === match.params.topic);
+    const projects = [...featuredProjects, ...softdata.project];
+    const project = projects.find((item) => slugify(item.title) === match.params.topic);
     const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://radhakishan404.is-a.dev";
 
     useDocumentMeta({
@@ -75,6 +77,18 @@ function ProjectDetailPage({ match }) {
                             <div className="sidebar-label">Tags</div>
                             <p style={{ color: "var(--color-text-muted)", fontSize: 14 }}>{project.tag}</p>
                         </div>
+                        {project.projectType && (
+                            <div className="sidebar-block">
+                                <div className="sidebar-label">Project type</div>
+                                <strong style={{ color: "var(--color-text)" }}>{project.projectType}</strong>
+                            </div>
+                        )}
+                        {project.visibility && (
+                            <div className="sidebar-block">
+                                <div className="sidebar-label">Visibility</div>
+                                <p style={{ color: "var(--color-text-muted)", fontSize: 14 }}>{project.visibility}</p>
+                            </div>
+                        )}
                     </aside>
                 </div>
 
