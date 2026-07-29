@@ -34,7 +34,7 @@ function Home(props) {
                             <div className="home-v2__layout">
                                 <div className="home-v2__copy">
                                     <p className="home-v2__eyebrow">
-                                        Product engineer · Jaipur, India
+                                        Product engineer · Mumbai, India
                                     </p>
 
                                     <h1 id="home-title">
