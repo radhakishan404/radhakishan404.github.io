@@ -31,10 +31,15 @@ Each slice must be testable before work begins on the next one.
 
 - Sidebar-compatible page shell
 - Semantic identity and introduction
-- Bounded canvas-text interaction
+- One clear presentation of the name
+- Restrained portrait interaction with no duplicate identity artwork
 - Portrait and current role information
 - Portfolio and About actions
-- Desktop, mobile, reduced-motion, and canvas fallbacks
+- Desktop, mobile, and reduced-motion behavior
+
+Following the first review, Canvas Text was removed from the opening because it
+repeated the name and weakened the hierarchy. If it returns later, it must carry
+section-specific language rather than identity content.
 
 ### Slice 2 — Homepage capabilities
 
