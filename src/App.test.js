@@ -75,6 +75,8 @@ test("renders useful principles and a complete laptop keyboard", () => {
     expect(screen.getByText("Make it work. Make it clear. Then make it fast.")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Understand the job" })).toBeInTheDocument();
     expect(container.querySelectorAll(".macbook__keyboard span")).toHaveLength(48);
+    expect(container.querySelector(".ascii-portrait__source"))
+        .toHaveAttribute("src", "/images/radhakishan-web-2.jpg");
     expect(screen.queryByRole("tablist", { name: "Code examples" })).not.toBeInTheDocument();
 });
 

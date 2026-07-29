@@ -404,7 +404,7 @@ export function AsciiPortrait() {
             context.setTransform(ratio, 0, 0, ratio, 0, 0);
             context.clearRect(0, 0, width, height);
 
-            const columns = width < 420 ? 54 : 76;
+            const columns = width < 420 ? 68 : 96;
             const cell = width / columns;
             const rows = Math.ceil(height / (cell * 1.45));
             const sampler = document.createElement("canvas");
@@ -412,23 +412,32 @@ export function AsciiPortrait() {
             sampler.width = columns;
             sampler.height = rows;
 
-            // Crop to the canvas ratio instead of stretching the portrait.
-            // The slight downward bias keeps the face and printed shirt in view
-            // while trimming the bright office ceiling.
+            // Crop around the face and shoulders instead of shrinking the full
+            // portrait into the panel. More samples now describe facial detail.
             const targetAspect = width / height;
             const sourceAspect = image.naturalWidth / image.naturalHeight;
-            let sourceX = 0;
-            let sourceY = 0;
+            const focusX = image.naturalWidth * 0.57;
+            const focusY = image.naturalHeight * 0.26;
+            const zoom = 1.25;
             let sourceWidth = image.naturalWidth;
             let sourceHeight = image.naturalHeight;
 
             if (sourceAspect > targetAspect) {
                 sourceWidth = image.naturalHeight * targetAspect;
-                sourceX = (image.naturalWidth - sourceWidth) / 2;
             } else {
                 sourceHeight = image.naturalWidth / targetAspect;
-                sourceY = (image.naturalHeight - sourceHeight) * 0.2;
             }
+
+            sourceWidth /= zoom;
+            sourceHeight /= zoom;
+            const sourceX = Math.min(
+                image.naturalWidth - sourceWidth,
+                Math.max(0, focusX - sourceWidth / 2)
+            );
+            const sourceY = Math.min(
+                image.naturalHeight - sourceHeight,
+                Math.max(0, focusY - sourceHeight / 2)
+            );
 
             samplerContext.drawImage(
                 image,
@@ -496,7 +505,7 @@ export function AsciiPortrait() {
             queueDraw(true);
             document.fonts?.ready.then(() => queueDraw(true));
         };
-        image.src = "/images/radhakishan-web-3.jpg";
+        image.src = "/images/radhakishan-web-2.jpg";
 
         if ("ResizeObserver" in window) {
             resizeObserver = new ResizeObserver(() => queueDraw());
@@ -517,7 +526,7 @@ export function AsciiPortrait() {
         <div className={`ascii-portrait ${loaded ? "is-loaded" : ""}`}>
             <img
                 className="ascii-portrait__source"
-                src="/images/radhakishan-web-3.jpg"
+                src="/images/radhakishan-web-2.jpg"
                 alt=""
                 aria-hidden="true"
             />
