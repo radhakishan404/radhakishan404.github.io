@@ -225,80 +225,15 @@ export function InteractiveGrid() {
 }
 
 export function MacbookScroll() {
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-        const section = sectionRef.current;
-        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        let frame = 0;
-        let active = false;
-        let scheduled = false;
-
-        const update = () => {
-            const rect = section.getBoundingClientRect();
-            const distance = Math.max(section.offsetHeight - window.innerHeight, 1);
-            const progress = clamp(-rect.top / distance);
-            section.style.setProperty("--mac-progress", progress.toFixed(4));
-            section.style.setProperty("--mac-angle", `${-52 + progress * 52}deg`);
-            section.style.setProperty("--mac-shift", `${7 - progress * 7}rem`);
-            section.style.setProperty("--mac-scale", `${0.76 + progress * 0.19}`);
-            section.style.setProperty("--mac-intro-opacity", `${1 - progress * 0.8}`);
-            section.style.setProperty("--mac-facts-opacity", `${0.25 + progress * 0.75}`);
-            section.style.setProperty("--mac-intro-shift", `${progress * -1.5}rem`);
-        };
-
-        const requestUpdate = () => {
-            if (!active || scheduled) return;
-            scheduled = true;
-            frame = window.requestAnimationFrame(() => {
-                scheduled = false;
-                update();
-            });
-        };
-
-        update();
-
-        if (reducedMotion) {
-            section.style.setProperty("--mac-angle", "0deg");
-            section.style.setProperty("--mac-shift", "0rem");
-            section.style.setProperty("--mac-scale", "0.95");
-            section.style.setProperty("--mac-intro-opacity", "1");
-            section.style.setProperty("--mac-facts-opacity", "1");
-            return undefined;
-        }
-
-        const observer = "IntersectionObserver" in window
-            ? new IntersectionObserver((entries) => {
-                active = entries[0].isIntersecting;
-                if (active) requestUpdate();
-            }, { rootMargin: "20% 0px" })
-            : null;
-
-        const onResize = () => {
-            if (!observer) active = true;
-            requestUpdate();
-        };
-
-        if (observer) {
-            observer.observe(section);
-        } else {
-            active = true;
-        }
-        window.addEventListener("scroll", requestUpdate, { passive: true });
-        window.addEventListener("resize", onResize);
-        requestUpdate();
-
-        return () => {
-            active = false;
-            window.cancelAnimationFrame(frame);
-            if (observer) observer.disconnect();
-            window.removeEventListener("scroll", requestUpdate);
-            window.removeEventListener("resize", onResize);
-        };
-    }, []);
+    const keys = [
+        "esc", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "delete",
+        "tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "return",
+        "caps", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'",
+        "shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "shift"
+    ];
 
     return (
-        <section ref={sectionRef} className="macbook-story" aria-labelledby="flagship-title">
+        <section className="macbook-story" aria-labelledby="flagship-title">
             <div className="macbook-story__sticky">
                 <div className="section-shell macbook-story__intro">
                     <div>
@@ -319,7 +254,13 @@ export function MacbookScroll() {
                             </div>
                         </div>
                         <div className="macbook__base">
-                            <span className="macbook__notch" />
+                            <span className="macbook__notch" aria-hidden="true" />
+                            <div className="macbook__keyboard" aria-hidden="true">
+                                {keys.map((key, index) => (
+                                    <span key={`${key}-${index}`}>{key}</span>
+                                ))}
+                            </div>
+                            <div className="macbook__trackpad" aria-hidden="true" />
                         </div>
                     </div>
                 </div>

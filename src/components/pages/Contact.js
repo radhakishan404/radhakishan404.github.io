@@ -1,105 +1,78 @@
-import React, { useEffect, useState } from "react";
-import Header from "../common/Header";
-import Loader from "react-animation-loader";
-import emailjs from 'emailjs-com';
-import $ from "jquery";
-import ReactGA from 'react-ga';
-ReactGA.initialize('UA-187892763-1');
-ReactGA.pageview(window.location.pathname + window.location.search);
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
+import PageFrame from "../common/PageFrame";
 
-function Contact(props) {
-    const [isLoading, setIsLoading] = useState(true);
-    const [success, setSuccess] = useState(false);
+function Contact() {
+    const [status, setStatus] = useState("idle");
 
-    useEffect(() => {
-        let checkInterval2 = setInterval(() => {
-            if (document.readyState === "complete") {
-                setIsLoading(false);
-                clearInterval(checkInterval2);
-            }
-        }, 100);
-    }, []);
+    const submitForm = async (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        setStatus("sending");
 
-    const submitForm = (e) => {
-        e.preventDefault();
-
-        $(e.target).find(".gradient-btn").attr('disabled', true);
-        $(e.target).find(".gradient-btn").html('Sending <span class="lds-dual-ring"></span>');
-
-        emailjs.sendForm('service_sn6cjfe', 'template_ai5s6x5', e.target, 'user_Di32uXdzGJ3xyE4Kjf5bJ')
-            .then((result) => {
-                setSuccess(true);
-            }, (error) => {
-                $(e.target).find(".gradient-btn").attr('disabled', false);
-                $(e.target).find(".gradient-btn").html('Send Message');
-            });
-    }
+        try {
+            await emailjs.sendForm(
+                "service_sn6cjfe",
+                "template_ai5s6x5",
+                form,
+                "user_Di32uXdzGJ3xyE4Kjf5bJ"
+            );
+            form.reset();
+            setStatus("sent");
+        } catch (error) {
+            setStatus("error");
+        }
+    };
 
     return (
-        <div className="main-wrapper">
-            <Loader isLoading={isLoading} bgColor="161122" icon="/images/500%20x%20500%20logo.png" />
-            <Header props={props} />
-
-            <main id="content" className="main page-content" aria-label="Content">
-                <div className="container-full header-content">
-                    <div className="content__main">
-                        {
-                            isLoading
-                                ?
-                                <div className="loading-bg"></div>
-                                :
-                                null
-                        }
-
-                        <section className="section section-contact">
-                            <div className="container">
-                                <h1>Get in touch</h1>
-
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <p>Do you have an interesting project I can help with? Feel free to reach out to me by using one of the following:</p>
-
-                                        <ul>
-                                            <li> Email <strong className="text-gradient"><a href="mailto:radhakishanjangid404@gmail.com">radhakishanjangid404@gmail.com</a></strong> </li>
-                                            <li> Linkedin <strong className="text-gradient"><a href="https://www.linkedin.com/in/radhakishanjangid">radhakishanjangid</a></strong> </li>
-                                            <li> GitHub <strong className="text-gradient"><a href="https://github.com/radhakishan404">radhakishan404</a></strong> </li>
-                                        </ul>
-
-                                        <p>You can also use the contact form on this page.</p>
-                                    </div>
-                                    <div className="col-md-6">
-                                        {
-                                            success
-                                                ?
-                                                <form className="contact-form">
-                                                    <em>Thank you for reaching out. I will get back to you as soon as possible.</em>
-                                                </form>
-                                                :
-                                                <form className="contact-form" onSubmit={(e) => submitForm(e)}>
-                                                    <div className="contact-form-inner">
-                                                        <div className="row">
-                                                            <div className="col-md-6">
-                                                                <input className="form-control" name="from_name" type="text" placeholder="Enter your full name..." required />
-                                                            </div>
-                                                            <div className="col-md-6">
-                                                                <input className="form-control" name="from_email" type="email" placeholder="Enter your email..." required />
-                                                            </div>
-                                                        </div>
-                                                        <textarea className="form-control" name="from_message" placeholder="Enter your message..." rows="5" aria-required="true" aria-invalid="false" required="" spellCheck="false"></textarea>
-
-                                                        <button className="gradient-btn contact-btn"> Send Message </button>
-                                                    </div>
-                                                </form>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+        <PageFrame className="contact-page" title="Contact">
+            <section className="contact-layout page-shell">
+                <div className="contact-intro">
+                    <p className="page-eyebrow">Contact</p>
+                    <h1>Tell me what needs to work better.</h1>
+                    <p>
+                        Share the context, the people affected, and what a useful result would look like.
+                    </p>
+                    <div className="contact-links">
+                        <a href="mailto:radhakishanjangid404@gmail.com">
+                            <span>Email</span>
+                            radhakishanjangid404@gmail.com
+                        </a>
+                        <a href="https://www.linkedin.com/in/radhakishanjangid" target="_blank" rel="noreferrer">
+                            <span>LinkedIn</span>
+                            radhakishanjangid
+                        </a>
+                        <a href="https://github.com/radhakishan404" target="_blank" rel="noreferrer">
+                            <span>GitHub</span>
+                            radhakishan404
+                        </a>
                     </div>
                 </div>
-            </main>
-        </div>
-    )
+
+                <form className="page-contact-form" onSubmit={submitForm}>
+                    <label>
+                        <span>Name</span>
+                        <input name="from_name" type="text" autoComplete="name" required />
+                    </label>
+                    <label>
+                        <span>Email</span>
+                        <input name="from_email" type="email" autoComplete="email" required />
+                    </label>
+                    <label>
+                        <span>What are you building?</span>
+                        <textarea name="from_message" rows="6" required />
+                    </label>
+                    <button type="submit" disabled={status === "sending"}>
+                        {status === "sending" ? "Sending..." : "Send message"}
+                    </button>
+                    <p role="status">
+                        {status === "sent" && "Message sent. Thank you. I will reply soon."}
+                        {status === "error" && "The message did not send. Please use the email link."}
+                    </p>
+                </form>
+            </section>
+        </PageFrame>
+    );
 }
 
 export default Contact;

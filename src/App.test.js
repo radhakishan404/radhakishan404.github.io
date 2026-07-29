@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import emailjs from "emailjs-com";
 import App from "./App";
 
@@ -41,7 +41,14 @@ beforeAll(() => {
         addEventListener: noOp,
         removeEventListener: noOp
     });
+    window.scrollTo = jest.fn();
     HTMLCanvasElement.prototype.getContext = () => canvasContext;
+});
+
+beforeEach(() => {
+    window.history.pushState({}, "", "/");
+    window.scrollTo.mockClear();
+    emailjs.sendForm.mockClear();
 });
 
 test("renders the portfolio identity once with the correct location", () => {
@@ -51,16 +58,23 @@ test("renders the portfolio identity once with the correct location", () => {
     expect(screen.getAllByText(/Mumbai, India/i)).toHaveLength(1);
 });
 
-test("opens a selected project from its interactive card", () => {
+test("opens and closes a selected project", () => {
     render(<App />);
 
     const transformo = screen.getByRole("button", { name: /Transformo/i });
     fireEvent.click(transformo);
-
     expect(transformo).toHaveAttribute("aria-expanded", "true");
-
     fireEvent.click(transformo);
     expect(transformo).toHaveAttribute("aria-expanded", "false");
+});
+
+test("renders useful principles and a complete laptop keyboard", () => {
+    const { container } = render(<App />);
+
+    expect(screen.getByText("Make it work. Make it clear. Then make it fast.")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Understand the job" })).toBeInTheDocument();
+    expect(container.querySelectorAll(".macbook__keyboard span")).toHaveLength(48);
+    expect(screen.queryByRole("tablist", { name: "Code examples" })).not.toBeInTheDocument();
 });
 
 test("keeps both navigation controls operable and truthful", () => {
@@ -81,45 +95,73 @@ test("keeps both navigation controls operable and truthful", () => {
     expect(mobileToggle).toHaveAttribute("aria-expanded", "false");
 });
 
-test("supports every stateful homepage control", () => {
+test("opens every sidebar page at the top with visible content", () => {
     render(<App />);
 
-    const capabilityBoard = screen.getByRole("button", { name: /Current capability: REACT \+ NEXT\.JS/i });
-    fireEvent.click(capabilityBoard);
-    expect(screen.getByRole("button", { name: /Current capability: NODE \+ PRODUCT APIS/i })).toBeInTheDocument();
+    let navigation = within(screen.getByRole("navigation", { name: "Main" }));
+    fireEvent.click(navigation.getByRole("link", { name: /About Professional skills/i }));
+    expect(screen.getByRole("heading", { name: "I build across the whole product." })).toBeInTheDocument();
 
-    const motionTab = screen.getByRole("tab", { name: "motion.scss" });
-    fireEvent.click(motionTab);
-    expect(motionTab).toHaveAttribute("aria-selected", "true");
-    expect(screen.getAllByText("opacity: 1;")).toHaveLength(2);
+    navigation = within(screen.getByRole("navigation", { name: "Main" }));
+    fireEvent.click(navigation.getByRole("link", { name: /Portfolio Some of the projects/i }));
+    expect(screen.getByRole("heading", { name: "Products, systems, and useful experiments." })).toBeInTheDocument();
 
-    const nextOutcome = screen.getByRole("button", { name: "Next project outcome" });
-    fireEvent.click(nextOutcome);
-    expect(screen.getByRole("heading", { name: "YOURVAY" })).toBeInTheDocument();
+    navigation = within(screen.getByRole("navigation", { name: "Main" }));
+    fireEvent.click(navigation.getByRole("link", { name: /Articles Guides, prompts/i }));
+    expect(screen.getByRole("heading", { name: "Practical writing for developers and creators." })).toBeInTheDocument();
 
-    const previousOutcome = screen.getByRole("button", { name: "Previous project outcome" });
-    fireEvent.click(previousOutcome);
-    expect(screen.getByRole("heading", { name: "InfoLive" })).toBeInTheDocument();
+    navigation = within(screen.getByRole("navigation", { name: "Main" }));
+    fireEvent.click(navigation.getByRole("link", { name: /Say Hello Get in touch/i }));
+    expect(screen.getByRole("heading", { name: "Tell me what needs to work better." })).toBeInTheDocument();
+
+    expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 0, left: 0, behavior: "auto" });
 });
 
-test("uses unique canonical destinations for each article", () => {
+test("filters the portfolio and article collection", () => {
+    window.history.pushState({}, "", "/portfolio");
+    const { unmount } = render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Open source" }));
+    expect(screen.getByRole("heading", { name: "Transformo" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Linepop" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "InfoLive" })).not.toBeInTheDocument();
+
+    unmount();
+    window.history.pushState({}, "", "/articles");
     render(<App />);
 
-    expect(screen.getByRole("link", { name: /Free AI coding tools/i })).toHaveAttribute(
+    fireEvent.change(screen.getByLabelText("Search articles"), { target: { value: "zero rupees" } });
+    expect(screen.getByRole("heading", { name: "10 AI coding tools you can start for zero rupees" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Claude Fable 5 master guide" })).not.toBeInTheDocument();
+});
+
+test("opens an earlier project in the updated detail layout", () => {
+    window.history.pushState({}, "", "/portfolio/nirulas");
+    render(<App />);
+
+    expect(screen.getByRole("heading", { name: "Nirulas" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Technology" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Back to portfolio" })).toHaveAttribute("href", "/portfolio");
+});
+
+test("uses canonical destinations for recent writing", () => {
+    render(<App />);
+
+    expect(screen.getByRole("link", { name: /10 AI coding tools/i })).toHaveAttribute(
         "href",
         "https://radhakishan404.is-a.dev/articles/free-ai-coding-tools-zero-rupees"
     );
-    expect(screen.getByRole("link", { name: /100 Claude Code prompts/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /Garry Tan's gstack/i })).toHaveAttribute(
         "href",
-        "https://radhakishan404.is-a.dev/articles/100-claude-code-prompts"
+        "https://radhakishan404.is-a.dev/articles/garry-tan-gstack-claude-code-agents"
     );
-    expect(screen.getByRole("link", { name: /From repo to reader/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /Claude Fable 5 master guide/i })).toHaveAttribute(
         "href",
-        "https://radhakishan404.is-a.dev/articles/from-repo-to-reader"
+        "https://radhakishan404.is-a.dev/articles/claude-fable-5-master-guide"
     );
 });
 
-test("submits the contact form and exposes a useful status", async () => {
+test("submits the home contact form and exposes a useful status", async () => {
     render(<App />);
 
     fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Test Person" } });

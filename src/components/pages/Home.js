@@ -6,17 +6,14 @@ import Lenis from "lenis";
 import Header from "../common/Header";
 import {
     AsciiPortrait,
-    CanvasPhrase,
-    FlipBoard,
-    InteractiveGrid,
     MacbookScroll,
     MagneticAction,
-    OutcomeCarousel,
     PointerScene,
     SquigglyLabel,
     TiltProject,
     useSectionReveals
 } from "../home/HomeExperience";
+import { ARTICLES } from "../../data/articles";
 import "../css/Home.scss";
 
 ReactGA.initialize("UA-187892763-1");
@@ -74,115 +71,20 @@ const FEATURED_PROJECTS = [
     }
 ];
 
-const ARTICLES = [
+const PRINCIPLES = [
     {
-        title: "Free AI coding tools that cost zero rupees",
-        meta: "Field guide / AI tooling",
-        image: "/articles/free-ai-coding-tools-zero-rupees.png",
-        href: "https://radhakishan404.is-a.dev/articles/free-ai-coding-tools-zero-rupees"
+        title: "Understand the job",
+        text: "Start with the person, the constraint, and the decision the product needs to support."
     },
     {
-        title: "100 Claude Code prompts for real development work",
-        meta: "Prompt library / Engineering",
-        image: "/articles/100-claude-code-prompts.png",
-        href: "https://radhakishan404.is-a.dev/articles/100-claude-code-prompts"
+        title: "Make failure clear",
+        text: "Loading, empty, offline, validation, and recovery states are part of the product."
     },
     {
-        title: "From repo to reader: publishing technical work well",
-        meta: "Process note / Open source",
-        image: "/articles/from-repo-to-reader.png",
-        href: "https://radhakishan404.is-a.dev/articles/from-repo-to-reader"
+        title: "Keep the system legible",
+        text: "Good architecture helps the next engineer change the product without guessing."
     }
 ];
-
-const OUTCOMES = [
-    {
-        title: "InfoLive",
-        label: "Product outcome",
-        statement: "One marketplace, several operational surfaces, and a service architecture designed to stay understandable as the product grows.",
-        scope: "Marketplace / Admin / Services",
-        image: "/images/project/first-batch/infolive.png"
-    },
-    {
-        title: "YOURVAY",
-        label: "Product outcome",
-        statement: "Location-aware mobile decisions backed by offline-safe signals and the tools operators need to keep place data useful.",
-        scope: "Mobile / Discovery / Operations",
-        image: "/images/project/first-batch/yourvay.png"
-    },
-    {
-        title: "Transformo",
-        label: "Product outcome",
-        statement: "A capable conversion workflow that protects privacy by moving heavy processing into the browser instead of a remote server.",
-        scope: "Open source / WebAssembly / Privacy",
-        image: "/images/project/first-batch/transformo.png"
-    }
-];
-
-const CODE_TABS = {
-    "PointerScene.js": [
-        "const pointer = { x: 0.72, y: 0.46 };",
-        "",
-        "function renderFrame() {",
-        "  pointer.x += (target.x - pointer.x) * 0.055;",
-        "  pointer.y += (target.y - pointer.y) * 0.055;",
-        "",
-        "  drawResponsiveLines({",
-        "    origin: pointer,",
-        "    palette: ['#c98cdd', '#c2a0fd', '#cf4981'],",
-        "    cursor: 'native'",
-        "  });",
-        "",
-        "  requestAnimationFrame(renderFrame);",
-        "}"
-    ],
-    "motion.scss": [
-        "[data-home-reveal] {",
-        "  opacity: 1;",
-        "  transform: translateY(1rem);",
-        "}",
-        "",
-        "[data-home-reveal].is-visible {",
-        "  opacity: 1;",
-        "  transform: none;",
-        "  transition: 650ms cubic-bezier(.22, 1, .36, 1);",
-        "}"
-    ]
-};
-
-function CodePanel() {
-    const [activeTab, setActiveTab] = useState("PointerScene.js");
-
-    return (
-        <div className="code-panel" data-home-reveal>
-            <div className="code-panel__tabs" role="tablist" aria-label="Code examples">
-                {Object.keys(CODE_TABS).map((tab) => (
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected={activeTab === tab}
-                        className={activeTab === tab ? "is-active" : ""}
-                        onClick={() => setActiveTab(tab)}
-                        key={tab}
-                    >
-                        {tab}
-                    </button>
-                ))}
-                <span>portfolio / home</span>
-            </div>
-            <pre tabIndex="0">
-                <code>
-                    {CODE_TABS[activeTab].map((line, index) => (
-                        <span className={index === 9 || index === 10 ? "is-highlighted" : ""} key={`${line}-${index}`}>
-                            <i>{String(index + 1).padStart(2, "0")}</i>
-                            {line || " "}
-                        </span>
-                    ))}
-                </code>
-            </pre>
-        </div>
-    );
-}
 
 function Home(props) {
     const [expandedProject, setExpandedProject] = useState(0);
@@ -283,13 +185,15 @@ function Home(props) {
                         </section>
 
                         <section className="capability-section home-section" aria-labelledby="capability-title">
-                            <InteractiveGrid />
                             <div className="section-shell">
                                 <div className="capability-section__intro">
                                     <div data-home-reveal>
-                                        <h2 id="capability-title">Useful products need more than a polished surface.</h2>
+                                        <h2 id="capability-title">What I build</h2>
+                                        <p>
+                                            Product engineering across the interface, mobile application,
+                                            backend, automation, and release workflow.
+                                        </p>
                                     </div>
-                                    <FlipBoard />
                                 </div>
 
                                 <div className="capability-list">
@@ -337,13 +241,24 @@ function Home(props) {
                             <div className="section-shell">
                                 <div className="section-heading" data-home-reveal>
                                     <div>
-                                        <h2 id="engineering-title">Motion belongs to the system.</h2>
-                                        <p>Every transition should clarify hierarchy, feedback, or state.</p>
+                                        <h2 id="engineering-title">Build for use, not applause.</h2>
+                                        <p>Motion can guide attention, but the product still has to solve the problem.</p>
                                     </div>
                                 </div>
 
-                                <CodePanel />
-                                <CanvasPhrase />
+                                <div className="principles-panel" data-home-reveal>
+                                    <blockquote>
+                                        Make it work. Make it clear. Then make it fast.
+                                    </blockquote>
+                                    <div className="principles-grid">
+                                        {PRINCIPLES.map((principle) => (
+                                            <article key={principle.title}>
+                                                <h3>{principle.title}</h3>
+                                                <p>{principle.text}</p>
+                                            </article>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                         </section>
 
@@ -367,18 +282,6 @@ function Home(props) {
                             </div>
                         </section>
 
-                        <section className="outcomes-section home-section" aria-labelledby="outcomes-title">
-                            <div className="section-shell">
-                                <div className="section-heading" data-home-reveal>
-                                    <div>
-                                        <h2 id="outcomes-title">What each system made possible.</h2>
-                                        <p>Real product outcomes, without invented client quotes.</p>
-                                    </div>
-                                </div>
-                                <OutcomeCarousel items={OUTCOMES} />
-                            </div>
-                        </section>
-
                         <section className="writing-section home-section" aria-labelledby="writing-title">
                             <div className="section-shell">
                                 <div className="section-heading" data-home-reveal>
@@ -389,7 +292,7 @@ function Home(props) {
                                 </div>
 
                                 <div className="article-rows">
-                                    {ARTICLES.map((article) => (
+                                    {ARTICLES.slice(0, 3).map((article) => (
                                         <a
                                             href={article.href}
                                             target="_blank"
@@ -399,15 +302,21 @@ function Home(props) {
                                             key={article.title}
                                         >
                                             <span className="article-row__image">
-                                                <img src={article.image} alt="" />
+                                                <img src={article.cover} alt="" />
                                             </span>
                                             <span className="article-row__copy">
                                                 <strong data-title={article.title}>{article.title}</strong>
-                                                <span>{article.meta}</span>
+                                                <span>{article.category} / {article.date}</span>
                                             </span>
                                             <span aria-hidden="true">↗</span>
                                         </a>
                                     ))}
+                                </div>
+
+                                <div className="writing-section__action" data-home-reveal>
+                                    <MagneticAction as="link" to="/articles" className="primary-action">
+                                        Browse all articles <span aria-hidden="true">↗</span>
+                                    </MagneticAction>
                                 </div>
                             </div>
                         </section>

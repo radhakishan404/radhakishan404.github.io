@@ -1406,6 +1406,10 @@ canvas {
         -webkit-transition-delay: 0.6s !important;
         transition-delay: 0.6s !important;
     }
+    .header-nav-menu ul li:nth-child(5) {
+        -webkit-transition-delay: 0.75s !important;
+        transition-delay: 0.75s !important;
+    }
 
     .header-nav-menu ul li {
         opacity: 1 !important;

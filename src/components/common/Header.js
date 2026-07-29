@@ -39,7 +39,11 @@ function Header(props) {
                     <nav className="header-nav-menu" aria-label="Main">
                         <ul>
                             <li>
-                                <Link aria-current="page" className={location.pathname === "/" ? "active" : ""} to={"/"}>
+                                <Link
+                                    aria-current={location.pathname === "/" ? "page" : undefined}
+                                    className={location.pathname === "/" ? "active" : ""}
+                                    to={"/"}
+                                >
                                     <span className="menu-item-title text-gradient">Home</span>
                                     <span>Introduction about me</span>
                                 </Link>
@@ -51,9 +55,15 @@ function Header(props) {
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/portfolio"} className={location.pathname === "/portfolio" ? "active" : ""}>
+                                <Link to={"/portfolio"} className={location.pathname.startsWith("/portfolio") ? "active" : ""}>
                                     <span className="menu-item-title text-gradient">Portfolio</span>
                                     <span>Some of the projects I worked on</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to={"/articles"} className={location.pathname.startsWith("/articles") ? "active" : ""}>
+                                    <span className="menu-item-title text-gradient">Articles</span>
+                                    <span>Guides, prompts, and technical writing</span>
                                 </Link>
                             </li>
                             <li>
@@ -102,6 +112,11 @@ function Header(props) {
                             <li className="watch-sub-nav about">
                                 <Link to={"/about"}>
                                     <span>About</span>
+                                </Link>
+                            </li>
+                            <li className="watch-sub-nav articles">
+                                <Link to={"/articles"}>
+                                    <span>Articles</span>
                                 </Link>
                             </li>
                             <li className="gradient-btn">
