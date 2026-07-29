@@ -350,7 +350,9 @@ export function AsciiPortrait() {
         const context = canvas.getContext("2d");
         const image = new Image();
         image.crossOrigin = "anonymous";
-        const characters = " .,:;irsXA253hMHGS#9B&@";
+        // Keep a visible glyph at the darkest end of the ramp. The previous
+        // leading space made Radhakishan's dark shirt disappear completely.
+        const characters = ".,:;irsXA253hMHGS#9B&@";
 
         const draw = () => {
             if (!image.complete || !image.naturalWidth) return;
@@ -366,13 +368,43 @@ export function AsciiPortrait() {
             const cell = width / columns;
             const rows = Math.ceil(height / (cell * 1.45));
             const sampler = document.createElement("canvas");
-            const samplerContext = sampler.getContext("2d");
+            const samplerContext = sampler.getContext("2d", { willReadFrequently: true });
             sampler.width = columns;
             sampler.height = rows;
-            samplerContext.drawImage(image, 0, 0, columns, rows);
-            const data = samplerContext.getImageData(0, 0, columns, rows).data;
 
-            context.font = `600 ${cell * 1.55}px monospace`;
+            // Crop to the canvas ratio instead of stretching the portrait.
+            // The slight downward bias keeps the face and printed shirt in view
+            // while trimming the bright office ceiling.
+            const targetAspect = columns / rows;
+            const sourceAspect = image.naturalWidth / image.naturalHeight;
+            let sourceX = 0;
+            let sourceY = 0;
+            let sourceWidth = image.naturalWidth;
+            let sourceHeight = image.naturalHeight;
+
+            if (sourceAspect > targetAspect) {
+                sourceWidth = image.naturalHeight * targetAspect;
+                sourceX = (image.naturalWidth - sourceWidth) / 2;
+            } else {
+                sourceHeight = image.naturalWidth / targetAspect;
+                sourceY = (image.naturalHeight - sourceHeight) * 0.28;
+            }
+
+            samplerContext.drawImage(
+                image,
+                sourceX,
+                sourceY,
+                sourceWidth,
+                sourceHeight,
+                0,
+                0,
+                columns,
+                rows
+            );
+            const data = samplerContext.getImageData(0, 0, columns, rows).data;
+            const rowHeight = height / rows;
+
+            context.font = `600 ${Math.min(cell * 1.45, rowHeight * 1.22)}px monospace`;
             context.textAlign = "center";
             context.textBaseline = "middle";
 
@@ -382,9 +414,15 @@ export function AsciiPortrait() {
                     const alpha = data[pixel + 3] / 255;
                     if (alpha < 0.08) continue;
                     const lightness = (data[pixel] * 0.2126 + data[pixel + 1] * 0.7152 + data[pixel + 2] * 0.0722) / 255;
-                    const character = characters[Math.floor(clamp(lightness) * (characters.length - 1))];
-                    context.fillStyle = `rgba(${180 + data[pixel] * 0.2}, ${115 + data[pixel + 1] * 0.2}, ${190 + data[pixel + 2] * 0.15}, ${0.2 + alpha * 0.8})`;
-                    context.fillText(character, column * cell + cell / 2, row * cell * 1.45 + cell);
+                    const tone = clamp((lightness - 0.04) / 0.82);
+                    const character = characters[Math.floor(tone * (characters.length - 1))];
+                    const visibility = 0.3 + tone * 0.7;
+                    context.fillStyle = `rgba(${180 + data[pixel] * 0.2}, ${112 + data[pixel + 1] * 0.2}, ${194 + data[pixel + 2] * 0.15}, ${visibility * alpha})`;
+                    context.fillText(
+                        character,
+                        column * cell + cell / 2,
+                        row * rowHeight + rowHeight / 2
+                    );
                 }
             }
             setLoaded(true);
