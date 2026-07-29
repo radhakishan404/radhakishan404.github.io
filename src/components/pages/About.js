@@ -145,6 +145,7 @@ function useAboutMotion() {
 
 function About() {
     const [activeMode, setActiveMode] = useState(WORK_MODES[0]);
+    const [activeJourney, setActiveJourney] = useState(0);
     const portraitRef = useRef(null);
     useAboutMotion();
 
@@ -221,21 +222,55 @@ function About() {
                     </p>
                 </div>
 
-                <ol className="journey-list">
-                    {JOURNEY.map((item, index) => (
-                        <li key={`${item.company}-${item.years}`} data-about-reveal>
-                            <span className="journey-list__number" aria-hidden="true">
-                                {String(JOURNEY.length - index).padStart(2, "0")}
-                            </span>
-                            <p className="journey-list__years">{item.years}</p>
-                            <div>
-                                <h3>{item.role}</h3>
-                                <p>{item.company} · {item.location}</p>
-                            </div>
-                            <p className="journey-list__note">{item.note}</p>
-                        </li>
-                    ))}
-                </ol>
+                <div className="career-tree" data-about-reveal>
+                    <div className="career-tree__crown" aria-hidden="true">
+                        <span>now</span>
+                        <i />
+                    </div>
+                    <ol aria-label="Career journey from 2018 to now">
+                        {JOURNEY.map((item, index) => {
+                            const isActive = activeJourney === index;
+                            const branchNumber = String(JOURNEY.length - index).padStart(2, "0");
+
+                            return (
+                                <li
+                                    className={`${index % 2 === 0 ? "branch-left" : "branch-right"} ${isActive ? "is-active" : ""}`}
+                                    key={`${item.company}-${item.years}`}
+                                >
+                                    <span className="career-tree__node" aria-hidden="true">
+                                        <i />
+                                        <b>{branchNumber}</b>
+                                    </span>
+                                    <button
+                                        type="button"
+                                        className="career-tree__card"
+                                        aria-expanded={isActive}
+                                        onClick={() => setActiveJourney(index)}
+                                    >
+                                        <span className="career-tree__meta">
+                                            <span>{item.years}</span>
+                                            <span>{index === 0 ? "current branch" : `chapter ${branchNumber}`}</span>
+                                        </span>
+                                        <strong>{item.role}</strong>
+                                        <span className="career-tree__company">
+                                            {item.company} · {item.location}
+                                        </span>
+                                        <span className="career-tree__note" aria-hidden={!isActive}>
+                                            {item.note}
+                                        </span>
+                                        <span className="career-tree__hint" aria-hidden="true">
+                                            {isActive ? "branch open" : "open branch"} <b>↗</b>
+                                        </span>
+                                    </button>
+                                </li>
+                            );
+                        })}
+                    </ol>
+                    <div className="career-tree__roots" aria-hidden="true">
+                        <i />
+                        <span>2018 / root</span>
+                    </div>
+                </div>
             </section>
 
             <section className="about-modes page-section" aria-labelledby="modes-title">

@@ -343,72 +343,339 @@ html.lenis body {
     }
 }
 
-.journey-list {
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid rgba(194, 160, 253, 0.16);
-    list-style: none;
+.career-tree {
+    position: relative;
+    width: min(100%, 74rem);
+    margin: 1rem auto 0;
+    padding: 5rem 0 5.5rem;
+    view-timeline-name: --career-tree;
+    view-timeline-axis: block;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 2.4rem;
+        bottom: 3.6rem;
+        left: 50%;
+        width: 1px;
+        transform: translateX(-50%);
+        transform-origin: top;
+    }
+
+    &::before {
+        background: rgba(194, 160, 253, 0.2);
+    }
+
+    &::after {
+        background: linear-gradient(#e3b2ef, #c98cdd 45%, rgba(201, 140, 221, 0.2));
+        box-shadow: 0 0 1.4rem rgba(201, 140, 221, 0.22);
+    }
+
+    ol {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 
     li {
         position: relative;
-        min-height: 9rem;
-        padding: 1.8rem 0;
-        border-bottom: 1px solid rgba(194, 160, 253, 0.16);
-        display: grid;
-        grid-template-columns: 3.2rem minmax(8rem, 0.3fr) minmax(15rem, 0.65fr) minmax(18rem, 1fr);
-        align-items: start;
-        gap: clamp(1rem, 3vw, 2.5rem);
-        transition: padding 280ms ease, background 280ms ease;
+        width: 50%;
+        min-height: 13rem;
+        display: flex;
+        align-items: center;
 
         &::before {
             content: "";
             position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            width: 2px;
+            top: 50%;
+            width: 4.6rem;
+            height: 1px;
+            background: rgba(194, 160, 253, 0.2);
+            transition: background 260ms ease, box-shadow 260ms ease;
+        }
+
+        &.is-active::before {
             background: #c98cdd;
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 0 1rem rgba(201, 140, 221, 0.3);
+        }
+    }
+
+    .branch-left {
+        padding-right: 4.6rem;
+        justify-content: flex-end;
+
+        &::before {
+            right: 0;
         }
 
-        &:hover {
-            padding-inline: 1.2rem;
-            background: rgba(255, 255, 255, 0.018);
+        .career-tree__node {
+            right: -1.35rem;
         }
 
-        &:hover::before {
-            transform: scaleY(1);
+        .career-tree__card {
+            clip-path: polygon(0 0, calc(100% - 1.25rem) 0, 100% 50%, calc(100% - 1.25rem) 100%, 0 100%);
+        }
+    }
+
+    .branch-right {
+        margin-left: 50%;
+        padding-left: 4.6rem;
+
+        &::before {
+            left: 0;
         }
 
-        h3 {
-            margin: 0 0 0.5rem;
-            color: #eee9f0;
-            font-size: clamp(1.25rem, 2vw, 1.85rem);
-            font-weight: 550;
-            letter-spacing: -0.035em;
+        .career-tree__node {
+            left: -1.35rem;
         }
 
-        div p,
-        .journey-list__years,
-        .journey-list__note {
-            margin: 0;
-            color: #aaa3b0;
-            font-size: 0.78rem;
-            line-height: 1.7;
+        .career-tree__card {
+            clip-path: polygon(1.25rem 0, 100% 0, 100% 100%, 1.25rem 100%, 0 50%);
+            padding-left: 2.8rem;
         }
     }
 }
 
-.journey-list__number {
+.career-tree__crown,
+.career-tree__roots {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: #c98cdd;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.68rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    transform: translateX(-50%);
 }
 
-.journey-list .journey-list__years {
-    color: #d1c9d4;
+.career-tree__crown {
+    top: 0;
+
+    i {
+        width: 0.65rem;
+        height: 0.65rem;
+        margin-top: 0.7rem;
+        border: 1px solid #c98cdd;
+        background: #09090d;
+        transform: rotate(45deg);
+        animation: career-tree-pulse 2.4s ease-in-out infinite;
+    }
+}
+
+.career-tree__roots {
+    bottom: 0;
+    color: #736c79;
+
+    i {
+        position: relative;
+        width: 5rem;
+        height: 1.5rem;
+        margin-bottom: 0.25rem;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 3.7rem;
+            height: 1px;
+            background: rgba(194, 160, 253, 0.25);
+            transform-origin: left;
+        }
+
+        &::before {
+            transform: rotate(20deg);
+        }
+
+        &::after {
+            transform: rotate(160deg);
+        }
+    }
+}
+
+.career-tree__node {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    width: 2.7rem;
+    height: 2.7rem;
+    border: 1px solid rgba(194, 160, 253, 0.34);
+    display: grid;
+    place-items: center;
+    color: #9a8fa0;
+    background: #09090d;
+    transform: translateY(-50%) rotate(45deg);
+    transition:
+        border-color 260ms ease,
+        color 260ms ease,
+        background 260ms ease,
+        transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    i {
+        position: absolute;
+        inset: 0.38rem;
+        border: 1px solid rgba(194, 160, 253, 0.12);
+    }
+
+    b {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.56rem;
+        font-weight: 500;
+        transform: rotate(-45deg);
+    }
+}
+
+.career-tree li.is-active .career-tree__node {
+    border-color: #c98cdd;
+    color: #09090d;
+    background: #c98cdd;
+    transform: translateY(-50%) rotate(135deg) scale(1.08);
+
+    b {
+        transform: rotate(-135deg);
+    }
+}
+
+.career-tree__card {
+    width: 100%;
+    min-height: 10.5rem;
+    padding: 1.7rem 2rem;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #eee9f0;
+    background:
+        linear-gradient(125deg, rgba(201, 140, 221, 0.055), transparent 55%),
+        #0f0d13;
+    text-align: left;
+    transform: translateY(0);
+    transition:
+        background 280ms ease,
+        transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+        filter 280ms ease;
+
+    &:hover,
+    &:focus-visible,
+    &[aria-expanded="true"] {
+        background:
+            linear-gradient(125deg, rgba(201, 140, 221, 0.13), transparent 62%),
+            #121018;
+    }
+
+    &:hover {
+        transform: translateY(-0.35rem);
+    }
+
+    &:active {
+        transform: translateY(-0.1rem) scale(0.99);
+    }
+
+    &:focus-visible {
+        outline: 2px solid #c98cdd;
+        outline-offset: 4px;
+    }
+
+    > strong {
+        max-width: 19ch;
+        margin: 1.15rem 0 0.5rem;
+        color: #f1edf2;
+        font-size: clamp(1.3rem, 2vw, 1.85rem);
+        font-weight: 550;
+        letter-spacing: -0.04em;
+        line-height: 1.08;
+        text-wrap: balance;
+    }
+}
+
+.career-tree__meta {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #c98cdd;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+
+    span:last-child {
+        color: #655d69;
+        text-transform: uppercase;
+    }
+}
+
+.career-tree__company {
+    color: #aaa3b0;
+    font-size: 0.72rem;
+    line-height: 1.55;
+}
+
+.career-tree__note {
+    max-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    color: #bdb5c1;
+    font-size: 0.75rem;
+    line-height: 1.65;
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition:
+        max-height 500ms cubic-bezier(0.22, 1, 0.36, 1),
+        margin 400ms ease,
+        opacity 300ms ease,
+        transform 400ms ease;
+}
+
+.career-tree__card[aria-expanded="true"] .career-tree__note {
+    max-height: 8rem;
+    margin-top: 1.15rem;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.career-tree__hint {
+    margin-top: auto;
+    padding-top: 1.2rem;
+    color: #655d69;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+
+    b {
+        margin-left: 0.35rem;
+        color: #c98cdd;
+        font-weight: 400;
+    }
+}
+
+@supports (animation-timeline: view()) {
+    .career-tree::after {
+        transform: translateX(-50%) scaleY(0);
+        animation: career-tree-grow linear both;
+        animation-timeline: --career-tree;
+        animation-range: entry 5% cover 75%;
+    }
+}
+
+@keyframes career-tree-grow {
+    to {
+        transform: translateX(-50%) scaleY(1);
+    }
+}
+
+@keyframes career-tree-pulse {
+    50% {
+        box-shadow: 0 0 0 0.65rem rgba(201, 140, 221, 0);
+        background: #c98cdd;
+    }
 }
 
 .about-modes {
@@ -1191,14 +1458,6 @@ html.lenis body {
         justify-self: end;
     }
 
-    .journey-list li {
-        grid-template-columns: 2.5rem minmax(8rem, 0.35fr) 1fr;
-
-        .journey-list__note {
-            grid-column: 3;
-        }
-    }
-
     .about-modes__layout {
         grid-template-columns: 1fr;
     }
@@ -1273,15 +1532,46 @@ html.lenis body {
         }
     }
 
-    .journey-list li {
-        padding-block: 1.5rem;
-        grid-template-columns: 2rem 1fr;
-        gap: 0.8rem 1rem;
+    .career-tree {
+        padding-top: 4.5rem;
 
-        .journey-list__years,
-        div,
-        .journey-list__note {
-            grid-column: 2;
+        &::before,
+        &::after,
+        .career-tree__crown,
+        .career-tree__roots {
+            left: 1.25rem;
+        }
+
+        li,
+        .branch-left,
+        .branch-right {
+            width: 100%;
+            min-height: 12rem;
+            margin-left: 0;
+            padding-right: 0;
+            padding-left: 4.4rem;
+            justify-content: flex-start;
+
+            &::before {
+                right: auto;
+                left: 1.25rem;
+                width: 3.15rem;
+            }
+
+            .career-tree__node {
+                right: auto;
+                left: -0.1rem;
+            }
+
+            .career-tree__card {
+                padding: 1.5rem 1.4rem 1.5rem 2.1rem;
+                clip-path: polygon(1rem 0, 100% 0, 100% 100%, 1rem 100%, 0 50%);
+            }
+        }
+
+        .career-tree__roots {
+            align-items: flex-start;
+            transform: translateX(-1.25rem);
         }
     }
 

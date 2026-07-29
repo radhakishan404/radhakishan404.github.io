@@ -131,6 +131,11 @@ test("switches the playful current-work and about modes", () => {
 
     expect(screen.getByRole("img", { name: /Radhakishan Jangid sitting at his workspace/i }))
         .toHaveAttribute("src", "/images/radhakishan-web-3.jpg");
+    const innovinsBranch = screen.getByRole("button", { name: /2019.*2020.*PHP Web Developer.*Innovins/i });
+    expect(innovinsBranch).toHaveAttribute("aria-expanded", "false");
+    fireEvent.click(innovinsBranch);
+    expect(innovinsBranch).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByText(/Built APIs and new features across business portals/i)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("tab", { name: /02 Fix/i }));
     expect(screen.getByRole("heading", { name: "Give me the strange bug." })).toBeInTheDocument();
 });
