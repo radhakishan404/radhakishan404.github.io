@@ -12,17 +12,10 @@ function About(props) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        let checkInterval = setInterval(() => {
-            try {
-                window.threeJsAnimation();
-                clearInterval(checkInterval);
-                let checkInterval2 = setInterval(() => {
-                    if (document.readyState === "complete") {
-                        setIsLoading(false);
-                        clearInterval(checkInterval2);
-                    }
-                }, 100);
-            } catch (e) {
+        let checkInterval2 = setInterval(() => {
+            if (document.readyState === "complete") {
+                setIsLoading(false);
+                clearInterval(checkInterval2);
             }
         }, 100);
     }, []);
@@ -46,9 +39,6 @@ function About(props) {
             <main id="content" className="main page-content" aria-label="Content">
                 <div className="container-full header-content">
                     <div className="content__main">
-                        <div style={{ position: "absolute" }} id="scene-canvas">
-                            <canvas id="scene" width="500px" height="500px"></canvas>
-                        </div>
                         {
                             isLoading
                                 ?

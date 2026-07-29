@@ -13,14 +13,6 @@ function Home(props) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-
-        let checkInterval = setInterval(() => {
-            try {
-                window.threeJsAnimation();
-                clearInterval(checkInterval);
-            } catch (e) {
-            }
-        }, 100);
         let checkInterval2 = setInterval(() => {
             if (document.readyState === "complete") {
                 setIsLoading(false);
@@ -29,7 +21,6 @@ function Home(props) {
         }, 100);
         setTimeout(() => {
             window.wordSpinner();
-            window.textAnimation();
         }, 4000);
     }, []);
 
@@ -48,10 +39,6 @@ function Home(props) {
             <main id="content" className="main page-content" aria-label="Content" onClick={() => menuTriggerClose()}>
                 <div className="container-full header-content" id="home-detail">
                     <div className="content__main">
-
-                        <div style={{ position: "absolute" }} id="scene-canvas">
-                            <canvas id="scene" width="500px" height="500px"></canvas>
-                        </div>
                         {
                             isLoading
                                 ?

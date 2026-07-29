@@ -5,6 +5,15 @@ section {
     font-family: $second-font;
 }
 
+#home-detail,
+#home-detail .content__main {
+    min-height: 100vh;
+}
+
+#home-detail .content__main {
+    position: relative;
+}
+
 .intro {
     position: relative;
     @include start-at(600px) {
