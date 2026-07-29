@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "../css/Header.scss";
 import { Link, useLocation } from "react-router-dom";
 import $ from "jquery";
 
 function Header(props) {
     const location = useLocation();
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         $('body').removeClass('menu-is-active');
@@ -12,20 +13,28 @@ function Header(props) {
         $(".header__nav-btn").removeClass("header__nav-btn--active");
         $(".header-nav").removeClass("header-nav-open");
 
-        $(".header__nav-btn").click(function () {
+        const navigationButton = $(".header__nav-btn");
+        navigationButton.off("click.headerNavigation").on("click.headerNavigation", function () {
             $("body").toggleClass("nav--open");
-            $(".header__nav-btn").toggleClass("header__nav-btn--active");
+            const isOpen = $(this).toggleClass("header__nav-btn--active").hasClass("header__nav-btn--active");
+            $(this).attr("aria-expanded", String(isOpen));
             $(".header-nav").toggleClass("header-nav-open");
         });
+
+        return () => {
+            navigationButton.off("click.headerNavigation");
+            $("body").removeClass("menu-is-active nav--open");
+        };
     }, []);
 
     const menuTriggerFunction = () => {
         $('body').toggleClass('menu-is-active');
+        setMobileMenuOpen((isOpen) => !isOpen);
     }
 
     return (
         <Fragment>
-            <header className="header-nav">
+            <header className="header-nav" id="legacy-sidebar">
                 <div className="header-nav-wrapper">
                     <nav className="header-nav-menu" aria-label="Main">
                         <ul>
@@ -66,13 +75,20 @@ function Header(props) {
                         </Link>
                     </div>
                     <div className="site-header-burger">
-                        <div className="ml-3 burger" onClick={() => menuTriggerFunction()}>
+                        <button
+                            className="ml-3 burger"
+                            type="button"
+                            aria-label="Toggle mobile navigation"
+                            aria-controls="mobile-drawer"
+                            aria-expanded={mobileMenuOpen}
+                            onClick={() => menuTriggerFunction()}
+                        >
                             <span className="closed"><img src={"/images/burger.svg"} alt="menu icon" /></span>
                             <span className="open"><img src={"/images/close.svg"} alt="close icon" /></span>
-                        </div>
+                        </button>
                     </div>
                 </div>
-                <nav className="mobile-drawer">
+                <nav className="mobile-drawer" id="mobile-drawer">
                     <div className="navigation-inner">
                         <ul className="mobile-navigation">
                             <li className="watch-sub-nav home">
@@ -104,7 +120,14 @@ function Header(props) {
                 </Link>
 
                 <nav className="en">
-                    <button type="button" className="header__nav-btn " aria-label="Toggle main navigation" aria-haspopup="true" aria-expanded="false">
+                    <button
+                        type="button"
+                        className="header__nav-btn"
+                        aria-label="Toggle main navigation"
+                        aria-controls="legacy-sidebar"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
                         <span className="header__nav-btn-icon">
                             <span className="span-1"></span>
                             <span className="span-2"></span>

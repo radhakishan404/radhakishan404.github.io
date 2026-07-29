@@ -22,7 +22,6 @@ html.lenis body {
     --home-dim: #736c79;
     --home-purple: #c98cdd;
     --home-pink: #cf4981;
-    --home-mint: #7ee1d0;
     --home-rule: rgba(194, 160, 253, 0.17);
     min-height: 100%;
     overflow: clip;
@@ -68,18 +67,9 @@ html.lenis body {
 
 .home-section {
     position: relative;
-    padding: clamp(7rem, 12vw, 11rem) 0;
+    padding: clamp(5.5rem, 8vw, 8rem) 0;
 }
 
-.section-index {
-    color: rgba(255, 255, 255, 0.38);
-    font-family: $nova-font;
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.section-kicker,
 .home-eyebrow {
     margin: 0 0 1.15rem;
     color: #caa5da;
@@ -90,13 +80,11 @@ html.lenis body {
 }
 
 .section-heading {
-    margin-bottom: clamp(4rem, 8vw, 7rem);
-    display: grid;
-    grid-template-columns: minmax(10rem, 0.35fr) minmax(0, 1fr);
-    gap: clamp(2rem, 6vw, 7rem);
+    max-width: 58rem;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
 
     h2 {
-        max-width: 15ch;
+        max-width: 13ch;
         margin: 0;
         font-size: clamp(2.7rem, 5.3vw, 6.5rem);
         font-weight: 600;
@@ -104,14 +92,22 @@ html.lenis body {
         line-height: 0.98;
         text-wrap: balance;
     }
+
+    p {
+        max-width: 40rem;
+        margin: 1.4rem 0 0;
+        color: var(--home-muted);
+        font-size: 0.94rem;
+        line-height: 1.7;
+    }
 }
 
 [data-home-reveal] {
-    opacity: 0;
-    transform: translateY(2rem);
+    opacity: 1;
+    transform: translateY(1rem);
     transition:
-        opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
-        transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
 
     &.is-visible {
         opacity: 1;
@@ -140,6 +136,10 @@ html.lenis body {
     &:focus-visible {
         outline: 2px solid var(--home-purple);
         outline-offset: 5px;
+    }
+
+    &:active {
+        transform: translate(var(--magnet-x), calc(var(--magnet-y) + 1px)) scale(0.98);
     }
 }
 
@@ -208,7 +208,7 @@ html.lenis body {
 .home-hero {
     position: relative;
     min-height: 100dvh;
-    padding: clamp(4.5rem, 8vh, 7rem) clamp(2rem, 5vw, 5rem) 2.4rem 8rem;
+    padding: clamp(4rem, 7vh, 6rem) clamp(2rem, 5vw, 5rem) 2.4rem clamp(3rem, 5vw, 5rem);
     overflow: hidden;
     isolation: isolate;
     display: flex;
@@ -225,39 +225,6 @@ html.lenis body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-}
-
-.home-section-rail {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 4.5rem;
-    padding-top: 2.25rem;
-    border-right: 1px solid var(--home-rule);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 1rem;
-    color: rgba(255, 255, 255, 0.39);
-    font-family: $nova-font;
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-
-    &::after {
-        content: "";
-        width: 2px;
-        height: 4.5rem;
-        margin-top: 0.4rem;
-        background: $gradient-portfolio;
-        animation: rail-draw 850ms cubic-bezier(0.22, 1, 0.36, 1) 140ms both;
-    }
-
-    span:last-child {
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
-    }
 }
 
 .home-hero__layout {
@@ -411,7 +378,7 @@ html.lenis body {
     &::after {
         content: "";
         position: absolute;
-        border: 1px solid rgba(126, 225, 208, 0.12);
+        border: 1px solid rgba(207, 73, 129, 0.12);
         border-radius: inherit;
     }
 
@@ -424,18 +391,6 @@ html.lenis body {
     }
 }
 
-.home-hero__portrait figcaption {
-    padding: 1rem 1rem 0;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    color: rgba(255, 255, 255, 0.42);
-    font-family: $nova-font;
-    font-size: 0.59rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
 .home-hero__footer {
     width: min(100%, 87rem);
     margin: 2rem auto 0;
@@ -443,17 +398,13 @@ html.lenis body {
     border-top: 1px solid var(--home-rule);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 2rem;
     color: rgba(255, 255, 255, 0.43);
     font-family: $nova-font;
     font-size: 0.61rem;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-
-    p {
-        margin: 0;
-    }
 
     ul {
         margin: 0;
@@ -511,7 +462,6 @@ html.lenis body {
 }
 
 .capability-section__intro {
-    margin-top: 4rem;
     display: grid;
     grid-template-columns: minmax(20rem, 0.8fr) minmax(28rem, 1fr);
     align-items: end;
@@ -575,24 +525,18 @@ html.lenis body {
 }
 
 .capability-list {
-    margin-top: clamp(5rem, 10vw, 9rem);
+    margin-top: clamp(4rem, 7vw, 6rem);
     border-top: 1px solid var(--home-rule);
 
     article {
-        min-height: 7rem;
-        padding: 1.5rem 0;
+        min-height: 6.5rem;
+        padding: 1.35rem 0;
         border-bottom: 1px solid var(--home-rule);
         display: grid;
-        grid-template-columns: 5rem minmax(14rem, 0.62fr) minmax(18rem, 1fr);
+        grid-template-columns: minmax(14rem, 0.62fr) minmax(18rem, 1fr);
         align-items: center;
         gap: 2rem;
         transition: padding 300ms ease, background 300ms ease;
-
-        > span {
-            color: var(--home-dim);
-            font-family: $nova-font;
-            font-size: 0.65rem;
-        }
 
         h3 {
             margin: 0;
@@ -619,14 +563,14 @@ html.lenis body {
 /* MacBook scroll scene */
 .macbook-story {
     --mac-progress: 0;
-    --mac-angle: -68deg;
-    --mac-shift: 12rem;
-    --mac-scale: 0.68;
+    --mac-angle: -52deg;
+    --mac-shift: 7rem;
+    --mac-scale: 0.76;
     --mac-intro-opacity: 1;
     --mac-facts-opacity: 0.25;
     --mac-intro-shift: 0rem;
     position: relative;
-    height: 235vh;
+    height: 165vh;
     background:
         radial-gradient(circle at 50% 45%, rgba(194, 160, 253, 0.085), transparent 34rem),
         #08080b;
@@ -644,19 +588,24 @@ html.lenis body {
 }
 
 .macbook-story__intro {
-    display: grid;
-    grid-template-columns: minmax(10rem, 0.35fr) minmax(0, 1fr);
-    gap: clamp(2rem, 6vw, 7rem);
     opacity: var(--mac-intro-opacity);
     transform: translateY(var(--mac-intro-shift));
 
     h2 {
-        max-width: 18ch;
+        max-width: 14ch;
         margin: 0;
         font-size: clamp(2rem, 4vw, 4.8rem);
         font-weight: 600;
         letter-spacing: -0.055em;
         line-height: 1;
+    }
+
+    p {
+        max-width: 38rem;
+        margin: 1rem 0 0;
+        color: var(--home-muted);
+        font-size: 0.86rem;
+        line-height: 1.6;
     }
 }
 
@@ -795,7 +744,7 @@ html.lenis body {
     padding: 2rem 0;
     border: 0;
     display: grid;
-    grid-template-columns: 4.5rem minmax(16rem, 0.72fr) minmax(20rem, 1fr) 4rem;
+    grid-template-columns: minmax(16rem, 0.72fr) minmax(20rem, 1fr) 4rem;
     align-items: center;
     gap: clamp(1.5rem, 4vw, 4rem);
     color: inherit;
@@ -811,7 +760,6 @@ html.lenis body {
     }
 }
 
-.project-scene__number,
 .project-scene__type {
     color: var(--home-dim);
     font-family: $nova-font;
@@ -891,7 +839,7 @@ html.lenis body {
 
 .project-scene__details {
     max-height: 0;
-    margin-left: calc(4.5rem + clamp(1.5rem, 4vw, 4rem) + 16rem + clamp(1.5rem, 4vw, 4rem));
+    margin-left: calc(16rem + clamp(1.5rem, 4vw, 4rem));
     overflow: hidden;
     opacity: 0;
     transition:
@@ -1071,7 +1019,7 @@ html.lenis body {
         line-height: 0.98;
     }
 
-    > p:not(.section-kicker) {
+    > p {
         max-width: 40rem;
         margin: 0 0 2rem;
         color: var(--home-muted);
@@ -1124,7 +1072,7 @@ html.lenis body {
 /* Animated outcome / testimonial behavior without fabricated quotes */
 .outcomes-section {
     background:
-        radial-gradient(circle at 88% 20%, rgba(126, 225, 208, 0.055), transparent 28rem),
+        radial-gradient(circle at 88% 20%, rgba(207, 73, 129, 0.055), transparent 28rem),
         var(--home-bg);
 }
 
@@ -1159,17 +1107,6 @@ html.lenis body {
         }
     }
 
-    > span {
-        position: absolute;
-        z-index: 2;
-        right: 1rem;
-        bottom: 1rem;
-        padding: 0.45rem 0.6rem;
-        color: #fff;
-        background: rgba(9, 9, 13, 0.72);
-        font-family: $nova-font;
-        font-size: 0.6rem;
-    }
 }
 
 .outcome-carousel__copy {
@@ -1245,7 +1182,7 @@ html.lenis body {
     padding: 1.25rem 0;
     border-bottom: 1px solid var(--home-rule);
     display: grid;
-    grid-template-columns: 4rem 8rem minmax(20rem, 1fr) 2rem;
+    grid-template-columns: 8rem minmax(20rem, 1fr) 2rem;
     align-items: center;
     gap: clamp(1.5rem, 4vw, 4rem);
     color: inherit;
@@ -1254,12 +1191,6 @@ html.lenis body {
         outline: 2px solid var(--home-purple);
         outline-offset: -2px;
     }
-}
-
-.article-row__number {
-    color: var(--home-dim);
-    font-family: $nova-font;
-    font-size: 0.63rem;
 }
 
 .article-row__image {
@@ -1341,7 +1272,7 @@ html.lenis body {
     border-radius: 50%;
     box-shadow:
         0 0 0 7rem rgba(207, 73, 129, 0.018),
-        0 0 0 14rem rgba(126, 225, 208, 0.012);
+        0 0 0 14rem rgba(194, 160, 253, 0.012);
     pointer-events: none;
 }
 
@@ -1361,7 +1292,7 @@ html.lenis body {
         line-height: 0.94;
     }
 
-    > p:not(.section-kicker) {
+    > p {
         max-width: 35rem;
         margin: 0 0 2rem;
         color: var(--home-muted);
@@ -1435,8 +1366,8 @@ html.lenis body {
 /* CTA block */
 .final-cta {
     position: relative;
-    min-height: 92dvh;
-    padding: clamp(8rem, 16vw, 15rem) 0 2rem;
+    min-height: 72dvh;
+    padding: clamp(6rem, 11vw, 10rem) 0 2rem;
     display: flex;
     align-items: stretch;
     background:
@@ -1460,23 +1391,21 @@ html.lenis body {
     }
 
     h2 {
-        margin: 2rem 0 3rem;
-        color: transparent;
-        background: $gradient-portfolio;
-        background-clip: text;
-        -webkit-background-clip: text;
-        font-size: clamp(4rem, 10vw, 11rem);
-        font-weight: 700;
-        letter-spacing: -0.08em;
-        line-height: 0.87;
+        max-width: 12ch;
+        margin: 2rem auto 3rem;
+        color: var(--home-ink);
+        font-size: clamp(3.4rem, 7vw, 7.5rem);
+        font-weight: 650;
+        letter-spacing: -0.065em;
+        line-height: 0.94;
     }
 }
 
 .final-cta__button {
-    width: clamp(9rem, 14vw, 13rem);
-    aspect-ratio: 1;
+    min-height: 3.5rem;
+    padding: 0.9rem 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
+    border-radius: 999px;
     color: var(--home-ink);
     background: rgba(255, 255, 255, 0.035);
     font-size: 0.78rem;
@@ -1484,12 +1413,6 @@ html.lenis body {
         transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
         color 300ms ease,
         background 300ms ease;
-
-    > span {
-        width: 8rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
 
     &:hover {
         color: #0d0b10;
@@ -1533,17 +1456,6 @@ html.lenis body {
     }
 }
 
-@keyframes rail-draw {
-    from {
-        transform: scaleY(0);
-        transform-origin: top;
-    }
-    to {
-        transform: scaleY(1);
-        transform-origin: top;
-    }
-}
-
 @keyframes orbit-drift {
     to {
         transform: translate(-1.2rem, 1.4rem) rotate(7deg);
@@ -1563,7 +1475,7 @@ html.lenis body {
 
 @media (max-width: 1180px) {
     .home-hero {
-        padding-left: 6.5rem;
+        padding-left: 3rem;
     }
 
     .home-hero__layout {
@@ -1572,12 +1484,12 @@ html.lenis body {
     }
 
     .project-scene__button {
-        grid-template-columns: 3rem minmax(14rem, 0.72fr) minmax(16rem, 1fr) 3.2rem;
+        grid-template-columns: minmax(14rem, 0.72fr) minmax(16rem, 1fr) 3.2rem;
     }
 
     .project-scene__details {
         margin-left: 0;
-        padding-inline: calc(3rem + clamp(1.5rem, 4vw, 4rem) + 14rem + clamp(1.5rem, 4vw, 4rem));
+        padding-inline: calc(14rem + clamp(1.5rem, 4vw, 4rem));
     }
 }
 
@@ -1590,18 +1502,9 @@ html.lenis body {
         width: min(100% - 3rem, 47rem);
     }
 
-    .section-heading,
-    .macbook-story__intro {
-        grid-template-columns: 1fr;
-    }
-
     .home-hero {
         min-height: auto;
-        padding: 7rem 2rem 2rem 5.5rem;
-    }
-
-    .home-section-rail {
-        width: 3.75rem;
+        padding: 7rem 2rem 2rem;
     }
 
     .home-hero__layout {
@@ -1634,11 +1537,11 @@ html.lenis body {
     }
 
     .capability-list article {
-        grid-template-columns: 3rem minmax(12rem, 0.55fr) minmax(15rem, 1fr);
+        grid-template-columns: minmax(12rem, 0.55fr) minmax(15rem, 1fr);
     }
 
     .macbook-story {
-        height: 190vh;
+        height: 145vh;
     }
 
     .macbook-stage {
@@ -1652,7 +1555,7 @@ html.lenis body {
     }
 
     .project-scene__button {
-        grid-template-columns: 2rem minmax(12rem, 0.65fr) minmax(15rem, 1fr);
+        grid-template-columns: minmax(12rem, 0.65fr) minmax(15rem, 1fr);
     }
 
     .project-scene__toggle {
@@ -1660,7 +1563,7 @@ html.lenis body {
     }
 
     .project-scene__details {
-        padding-inline: calc(2rem + clamp(1.5rem, 4vw, 4rem) + 12rem + clamp(1.5rem, 4vw, 4rem));
+        padding-inline: calc(12rem + clamp(1.5rem, 4vw, 4rem));
     }
 
     .ascii-portrait {
@@ -1677,7 +1580,7 @@ html.lenis body {
     }
 
     .article-row {
-        grid-template-columns: 2rem 6rem minmax(14rem, 1fr) 1rem;
+        grid-template-columns: 6rem minmax(14rem, 1fr) 1rem;
         gap: 1.25rem;
     }
 }
@@ -1697,11 +1600,7 @@ html.lenis body {
     }
 
     .home-hero {
-        padding: 6rem 1.2rem 1.5rem 3.7rem;
-    }
-
-    .home-section-rail {
-        width: 2.7rem;
+        padding: 6rem 1.2rem 1.5rem;
     }
 
     .home-hero__copy h1 {
@@ -1716,10 +1615,6 @@ html.lenis body {
 
     .home-hero__portrait {
         width: 100%;
-    }
-
-    .home-hero__portrait figcaption span:last-child {
-        display: none;
     }
 
     .home-hero__footer {
@@ -1756,16 +1651,16 @@ html.lenis body {
 
     .capability-list article {
         padding-block: 1.5rem;
-        grid-template-columns: 2rem minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1fr);
         gap: 0.9rem;
 
         p {
-            grid-column: 2;
+            grid-column: 1;
         }
     }
 
     .macbook-story {
-        height: 150vh;
+        height: 125vh;
     }
 
     .macbook-story__sticky {
@@ -1786,14 +1681,14 @@ html.lenis body {
 
     .project-scene__button {
         padding-block: 1.5rem;
-        grid-template-columns: 2rem minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1fr);
         align-items: start;
         gap: 1rem;
     }
 
     .project-scene__visual,
     .project-scene__copy {
-        grid-column: 2;
+        grid-column: 1;
     }
 
     .project-scene__copy strong {
@@ -1845,7 +1740,7 @@ html.lenis body {
 
     .article-row {
         min-height: 8rem;
-        grid-template-columns: 1.5rem minmax(0, 1fr) 1rem;
+        grid-template-columns: minmax(0, 1fr) 1rem;
     }
 
     .article-row__image {
@@ -1868,7 +1763,7 @@ html.lenis body {
     }
 
     .final-cta {
-        min-height: 78dvh;
+        min-height: 68dvh;
     }
 
     .final-cta h2 {

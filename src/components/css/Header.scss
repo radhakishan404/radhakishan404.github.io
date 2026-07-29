@@ -548,6 +548,10 @@ $max-logo-width: 202px;
     position: relative;
     width: 60px;
     height: 60px;
+    padding: 0;
+    border: 0;
+    color: inherit;
+    background: transparent;
 
     img {
         width: 24px;

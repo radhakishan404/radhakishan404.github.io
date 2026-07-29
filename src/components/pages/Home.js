@@ -29,22 +29,18 @@ const SOCIAL_LINKS = [
 
 const CAPABILITIES = [
     {
-        number: "01",
         title: "Product interfaces",
         description: "Fast, accessible web products with deliberate interaction and clear operational states."
     },
     {
-        number: "02",
         title: "Systems behind them",
         description: "APIs, services, administration surfaces, payments, queues, and deployment workflows."
     },
     {
-        number: "03",
         title: "Mobile products",
         description: "Flutter and React Native experiences that remain useful in real-world network conditions."
     },
     {
-        number: "04",
         title: "Practical AI",
         description: "Voice, vision, local models, content tools, and automation shaped around a specific job."
     }
@@ -63,7 +59,7 @@ const FEATURED_PROJECTS = [
         title: "Transformo",
         type: "Open-source browser utility",
         summary: "A privacy-first universal file converter that keeps files on the user’s device.",
-        detail: "Format detection, smart output routing, local WebAssembly processing, and an installable offline application shell—without uploading personal files.",
+        detail: "Format detection, smart output routing, local WebAssembly processing, and an installable offline application shell without uploading personal files.",
         stack: ["TypeScript", "WebAssembly", "FFmpeg", "Vite"],
         image: "/images/project/first-batch/transformo.png",
         href: "https://github.com/radhakishan404/transformo"
@@ -81,18 +77,21 @@ const FEATURED_PROJECTS = [
 const ARTICLES = [
     {
         title: "Free AI coding tools that cost zero rupees",
-        meta: "Field guide · AI tooling",
-        image: "/articles/free-ai-coding-tools-zero-rupees.png"
+        meta: "Field guide / AI tooling",
+        image: "/articles/free-ai-coding-tools-zero-rupees.png",
+        href: "https://radhakishan404.is-a.dev/articles/free-ai-coding-tools-zero-rupees"
     },
     {
         title: "100 Claude Code prompts for real development work",
-        meta: "Prompt library · Engineering",
-        image: "/articles/100-claude-code-prompts.png"
+        meta: "Prompt library / Engineering",
+        image: "/articles/100-claude-code-prompts.png",
+        href: "https://radhakishan404.is-a.dev/articles/100-claude-code-prompts"
     },
     {
         title: "From repo to reader: publishing technical work well",
-        meta: "Process note · Open source",
-        image: "/articles/from-repo-to-reader.png"
+        meta: "Process note / Open source",
+        image: "/articles/from-repo-to-reader.png",
+        href: "https://radhakishan404.is-a.dev/articles/from-repo-to-reader"
     }
 ];
 
@@ -101,21 +100,21 @@ const OUTCOMES = [
         title: "InfoLive",
         label: "Product outcome",
         statement: "One marketplace, several operational surfaces, and a service architecture designed to stay understandable as the product grows.",
-        scope: "Marketplace · Admin · Services",
+        scope: "Marketplace / Admin / Services",
         image: "/images/project/first-batch/infolive.png"
     },
     {
         title: "YOURVAY",
         label: "Product outcome",
         statement: "Location-aware mobile decisions backed by offline-safe signals and the tools operators need to keep place data useful.",
-        scope: "Mobile · Discovery · Operations",
+        scope: "Mobile / Discovery / Operations",
         image: "/images/project/first-batch/yourvay.png"
     },
     {
         title: "Transformo",
         label: "Product outcome",
         statement: "A capable conversion workflow that protects privacy by moving heavy processing into the browser instead of a remote server.",
-        scope: "Open source · WebAssembly · Privacy",
+        scope: "Open source / WebAssembly / Privacy",
         image: "/images/project/first-batch/transformo.png"
     }
 ];
@@ -130,7 +129,7 @@ const CODE_TABS = {
         "",
         "  drawResponsiveLines({",
         "    origin: pointer,",
-        "    palette: ['#c2a0fd', '#cf4981', '#7ee1d0'],",
+        "    palette: ['#c98cdd', '#c2a0fd', '#cf4981'],",
         "    cursor: 'native'",
         "  });",
         "",
@@ -139,14 +138,14 @@ const CODE_TABS = {
     ],
     "motion.scss": [
         "[data-home-reveal] {",
-        "  opacity: 0;",
-        "  transform: translateY(2rem);",
+        "  opacity: 1;",
+        "  transform: translateY(1rem);",
         "}",
         "",
         "[data-home-reveal].is-visible {",
         "  opacity: 1;",
         "  transform: none;",
-        "  transition: 800ms cubic-bezier(.22, 1, .36, 1);",
+        "  transition: 650ms cubic-bezier(.22, 1, .36, 1);",
         "}"
     ]
 };
@@ -192,7 +191,7 @@ function Home(props) {
 
     useEffect(() => {
         ReactGA.pageview(window.location.pathname + window.location.search);
-        document.title = "Radhakishan Jangid — Product Engineer";
+        document.title = "Radhakishan Jangid - Product Engineer";
 
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (reducedMotion) return undefined;
@@ -211,16 +210,17 @@ function Home(props) {
 
     const submitContact = async (event) => {
         event.preventDefault();
+        const form = event.currentTarget;
         setContactStatus("sending");
 
         try {
             await emailjs.sendForm(
                 "service_sn6cjfe",
                 "template_ai5s6x5",
-                event.currentTarget,
+                form,
                 "user_Di32uXdzGJ3xyE4Kjf5bJ"
             );
-            event.currentTarget.reset();
+            form.reset();
             setContactStatus("sent");
         } catch (error) {
             setContactStatus("error");
@@ -236,21 +236,17 @@ function Home(props) {
                     <div className="content__main">
                         <section className="home-hero" aria-labelledby="home-title">
                             <PointerScene />
-                            <div className="home-section-rail" aria-hidden="true">
-                                <span>01</span>
-                                <span>Home</span>
-                            </div>
 
                             <div className="home-hero__layout">
                                 <div className="home-hero__copy">
-                                    <p className="home-eyebrow">Product engineer · Mumbai, India</p>
+                                    <p className="home-eyebrow">Product engineer / Mumbai, India</p>
                                     <h1 id="home-title">
                                         Radhakishan
                                         <span>Jangid</span>
                                     </h1>
                                     <p className="home-hero__summary">
-                                        I design and build useful product systems—from the interface people
-                                        touch to the services, mobile apps, and automation behind it.
+                                        I build product interfaces, mobile apps, backend systems, and
+                                        practical automation for teams shipping real software.
                                     </p>
                                     <div className="home-hero__actions">
                                         <MagneticAction as="a" href="#selected-work" className="primary-action">
@@ -270,15 +266,10 @@ function Home(props) {
                                             alt="Radhakishan Jangid seated at his workspace"
                                         />
                                     </div>
-                                    <figcaption>
-                                        <span>Web · Mobile · Product systems</span>
-                                        <span>Move your pointer</span>
-                                    </figcaption>
                                 </figure>
                             </div>
 
                             <div className="home-hero__footer">
-                                <p>Scroll to enter the work</p>
                                 <ul aria-label="Social profiles">
                                     {SOCIAL_LINKS.map((social) => (
                                         <li key={social.label}>
@@ -294,10 +285,8 @@ function Home(props) {
                         <section className="capability-section home-section" aria-labelledby="capability-title">
                             <InteractiveGrid />
                             <div className="section-shell">
-                                <div className="section-index" data-home-reveal>02 / Capability board</div>
                                 <div className="capability-section__intro">
                                     <div data-home-reveal>
-                                        <p className="section-kicker">The toolkit changes. The standard does not.</p>
                                         <h2 id="capability-title">Useful products need more than a polished surface.</h2>
                                     </div>
                                     <FlipBoard />
@@ -305,8 +294,7 @@ function Home(props) {
 
                                 <div className="capability-list">
                                     {CAPABILITIES.map((capability) => (
-                                        <article key={capability.number} data-home-reveal>
-                                            <span>{capability.number}</span>
+                                        <article key={capability.title} data-home-reveal>
                                             <h3>{capability.title}</h3>
                                             <p>{capability.description}</p>
                                         </article>
@@ -320,10 +308,9 @@ function Home(props) {
                         <section className="work-section home-section" id="selected-work" aria-labelledby="work-title">
                             <div className="section-shell">
                                 <div className="section-heading" data-home-reveal>
-                                    <div className="section-index">04 / Selected work</div>
                                     <div>
-                                        <p className="section-kicker">Three different product problems</p>
-                                        <h2 id="work-title">Move over a project. Click to open the useful detail.</h2>
+                                        <h2 id="work-title">Selected product work.</h2>
+                                        <p>Open a project to inspect the engineering detail.</p>
                                     </div>
                                 </div>
 
@@ -331,7 +318,6 @@ function Home(props) {
                                     {FEATURED_PROJECTS.map((project, index) => (
                                         <TiltProject
                                             project={project}
-                                            index={index}
                                             expanded={expandedProject === index}
                                             onToggle={() => setExpandedProject(expandedProject === index ? -1 : index)}
                                             key={project.title}
@@ -350,14 +336,9 @@ function Home(props) {
                         <section className="engineering-section home-section" aria-labelledby="engineering-title">
                             <div className="section-shell">
                                 <div className="section-heading" data-home-reveal>
-                                    <div className="section-index">05 / Engineering detail</div>
                                     <div>
-                                        <p className="section-kicker">Interaction should have a reason</p>
-                                        <h2 id="engineering-title">
-                                            Motion is part of the system,
-                                            <br />
-                                            not decoration pasted on top.
-                                        </h2>
+                                        <h2 id="engineering-title">Motion belongs to the system.</h2>
+                                        <p>Every transition should clarify hierarchy, feedback, or state.</p>
                                     </div>
                                 </div>
 
@@ -369,12 +350,9 @@ function Home(props) {
                         <section className="about-scene home-section" aria-labelledby="about-scene-title">
                             <div className="section-shell about-scene__layout">
                                 <div className="about-scene__copy" data-home-reveal>
-                                    <div className="section-index">06 / How I work</div>
-                                    <p className="section-kicker">From ambiguity to shipped product</p>
                                     <h2 id="about-scene-title">
                                         <SquigglyLabel>Curious</SquigglyLabel> enough to explore.
-                                        <br />
-                                        Practical enough to finish.
+                                        {" "}Practical enough to finish.
                                     </h2>
                                     <p>
                                         I work across interface, backend, mobile, and product operations.
@@ -392,10 +370,9 @@ function Home(props) {
                         <section className="outcomes-section home-section" aria-labelledby="outcomes-title">
                             <div className="section-shell">
                                 <div className="section-heading" data-home-reveal>
-                                    <div className="section-index">07 / Product outcomes</div>
                                     <div>
-                                        <p className="section-kicker">No invented testimonials</p>
-                                        <h2 id="outcomes-title">The proof is what each system had to make possible.</h2>
+                                        <h2 id="outcomes-title">What each system made possible.</h2>
+                                        <p>Real product outcomes, without invented client quotes.</p>
                                     </div>
                                 </div>
                                 <OutcomeCarousel items={OUTCOMES} />
@@ -405,24 +382,22 @@ function Home(props) {
                         <section className="writing-section home-section" aria-labelledby="writing-title">
                             <div className="section-shell">
                                 <div className="section-heading" data-home-reveal>
-                                    <div className="section-index">08 / Writing</div>
                                     <div>
-                                        <p className="section-kicker">Notes from building</p>
-                                        <h2 id="writing-title">Ideas become more useful when they are documented.</h2>
+                                        <h2 id="writing-title">Recent writing.</h2>
+                                        <p>Practical notes on development, tools, and publishing technical work.</p>
                                     </div>
                                 </div>
 
                                 <div className="article-rows">
-                                    {ARTICLES.map((article, index) => (
+                                    {ARTICLES.map((article) => (
                                         <a
-                                            href="https://dev.to/radhakishanjangid404"
+                                            href={article.href}
                                             target="_blank"
                                             rel="noreferrer"
                                             className="article-row"
                                             data-home-reveal
                                             key={article.title}
                                         >
-                                            <span className="article-row__number">0{index + 1}</span>
                                             <span className="article-row__image">
                                                 <img src={article.image} alt="" />
                                             </span>
@@ -441,8 +416,6 @@ function Home(props) {
                             <div className="contact-scene__glow" aria-hidden="true" />
                             <div className="section-shell contact-scene__layout">
                                 <div className="contact-scene__copy" data-home-reveal>
-                                    <div className="section-index">09 / Contact</div>
-                                    <p className="section-kicker">Have a product problem worth solving?</p>
                                     <h2 id="contact-title">Tell me what needs to work better.</h2>
                                     <p>
                                         Share the context, the people affected, and what success should look
@@ -476,7 +449,7 @@ function Home(props) {
                                             <span aria-hidden="true">↗</span>
                                         </MagneticAction>
                                         <p role="status">
-                                            {contactStatus === "sent" && "Message sent. Thank you—I’ll get back to you soon."}
+                                            {contactStatus === "sent" && "Message sent. Thank you. I’ll get back to you soon."}
                                             {contactStatus === "error" && "That did not send. Please use the email link instead."}
                                         </p>
                                     </div>
@@ -484,12 +457,18 @@ function Home(props) {
                             </div>
                         </section>
 
-                        <section className="final-cta" aria-label="Start a project">
+                        <section className="final-cta" aria-label="Open source profile">
                             <div className="section-shell">
-                                <p>Based in Mumbai. Working wherever the right product problem is.</p>
-                                <h2>Let’s make it useful.</h2>
-                                <MagneticAction as="link" to="/contact" className="final-cta__button">
-                                    Start a conversation <span aria-hidden="true">↗</span>
+                                <p>Open source and experiments</p>
+                                <h2>See what I’m building in public.</h2>
+                                <MagneticAction
+                                    as="a"
+                                    href="https://github.com/radhakishan404"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="final-cta__button"
+                                >
+                                    View GitHub <span aria-hidden="true">↗</span>
                                 </MagneticAction>
                                 <div className="final-cta__footer">
                                     <span>© {new Date().getFullYear()}</span>

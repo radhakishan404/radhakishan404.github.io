@@ -94,7 +94,7 @@ export function PointerScene() {
                 lineGradient.addColorStop(0, "rgba(194, 160, 253, 0)");
                 lineGradient.addColorStop(0.45, `rgba(194, 160, 253, ${0.035 + line * 0.003})`);
                 lineGradient.addColorStop(0.72, "rgba(207, 73, 129, 0.13)");
-                lineGradient.addColorStop(1, "rgba(89, 215, 188, 0)");
+                lineGradient.addColorStop(1, "rgba(207, 73, 129, 0)");
                 context.beginPath();
                 context.moveTo(width * 0.38, height * 0.7 + offset * 0.35);
                 context.bezierCurveTo(
@@ -174,6 +174,7 @@ export function FlipBoard() {
     const [messageIndex, setMessageIndex] = useState(0);
 
     useEffect(() => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
         const interval = window.setInterval(() => {
             setMessageIndex((index) => (index + 1) % BOARD_MESSAGES.length);
         }, 2600);
@@ -228,33 +229,71 @@ export function MacbookScroll() {
 
     useEffect(() => {
         const section = sectionRef.current;
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         let frame = 0;
+        let active = false;
+        let scheduled = false;
 
         const update = () => {
             const rect = section.getBoundingClientRect();
             const distance = Math.max(section.offsetHeight - window.innerHeight, 1);
             const progress = clamp(-rect.top / distance);
             section.style.setProperty("--mac-progress", progress.toFixed(4));
-            section.style.setProperty("--mac-angle", `${-68 + progress * 68}deg`);
-            section.style.setProperty("--mac-shift", `${12 - progress * 12}rem`);
-            section.style.setProperty("--mac-scale", `${0.68 + progress * 0.27}`);
+            section.style.setProperty("--mac-angle", `${-52 + progress * 52}deg`);
+            section.style.setProperty("--mac-shift", `${7 - progress * 7}rem`);
+            section.style.setProperty("--mac-scale", `${0.76 + progress * 0.19}`);
             section.style.setProperty("--mac-intro-opacity", `${1 - progress * 0.8}`);
             section.style.setProperty("--mac-facts-opacity", `${0.25 + progress * 0.75}`);
-            section.style.setProperty("--mac-intro-shift", `${progress * -3}rem`);
-            frame = 0;
+            section.style.setProperty("--mac-intro-shift", `${progress * -1.5}rem`);
         };
 
-        const onScroll = () => {
-            if (!frame) frame = window.requestAnimationFrame(update);
+        const requestUpdate = () => {
+            if (!active || scheduled) return;
+            scheduled = true;
+            frame = window.requestAnimationFrame(() => {
+                scheduled = false;
+                update();
+            });
         };
 
         update();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onScroll);
+
+        if (reducedMotion) {
+            section.style.setProperty("--mac-angle", "0deg");
+            section.style.setProperty("--mac-shift", "0rem");
+            section.style.setProperty("--mac-scale", "0.95");
+            section.style.setProperty("--mac-intro-opacity", "1");
+            section.style.setProperty("--mac-facts-opacity", "1");
+            return undefined;
+        }
+
+        const observer = "IntersectionObserver" in window
+            ? new IntersectionObserver((entries) => {
+                active = entries[0].isIntersecting;
+                if (active) requestUpdate();
+            }, { rootMargin: "20% 0px" })
+            : null;
+
+        const onResize = () => {
+            if (!observer) active = true;
+            requestUpdate();
+        };
+
+        if (observer) {
+            observer.observe(section);
+        } else {
+            active = true;
+        }
+        window.addEventListener("scroll", requestUpdate, { passive: true });
+        window.addEventListener("resize", onResize);
+        requestUpdate();
+
         return () => {
+            active = false;
             window.cancelAnimationFrame(frame);
-            window.removeEventListener("scroll", onScroll);
-            window.removeEventListener("resize", onScroll);
+            if (observer) observer.disconnect();
+            window.removeEventListener("scroll", requestUpdate);
+            window.removeEventListener("resize", onResize);
         };
     }, []);
 
@@ -262,10 +301,9 @@ export function MacbookScroll() {
         <section ref={sectionRef} className="macbook-story" aria-labelledby="flagship-title">
             <div className="macbook-story__sticky">
                 <div className="section-shell macbook-story__intro">
-                    <div className="section-index">03 / Flagship system</div>
                     <div>
-                        <p className="section-kicker">Full-stack product ecosystem</p>
-                        <h2 id="flagship-title">InfoLive, shown as a product—not a thumbnail.</h2>
+                        <h2 id="flagship-title">One marketplace. Every operational surface.</h2>
+                        <p>InfoLive spans public discovery, administration, APIs, and services.</p>
                     </div>
                 </div>
 
@@ -287,7 +325,7 @@ export function MacbookScroll() {
                 </div>
 
                 <div className="macbook-story__facts section-shell">
-                    <p>Public marketplace · Admin operations · API gateway · Microservices</p>
+                    <p>Marketplace / Admin operations / API gateway / Services</p>
                     <MagneticAction as="link" to="/portfolio" className="text-action">
                         Explore project work <span aria-hidden="true">↗</span>
                     </MagneticAction>
@@ -297,7 +335,7 @@ export function MacbookScroll() {
     );
 }
 
-export function TiltProject({ project, index, expanded, onToggle }) {
+export function TiltProject({ project, expanded, onToggle }) {
     const cardRef = useRef(null);
 
     const move = (event) => {
@@ -330,9 +368,8 @@ export function TiltProject({ project, index, expanded, onToggle }) {
                 onClick={onToggle}
                 aria-expanded={expanded}
             >
-                <span className="project-scene__number">0{index + 1}</span>
                 <span className="project-scene__visual">
-                    <img src={project.image} alt="" />
+                    <img src={project.image} alt={`${project.title} interface preview`} />
                 </span>
                 <span className="project-scene__copy">
                     <span className="project-scene__type">{project.type}</span>
@@ -375,6 +412,7 @@ export function AsciiPortrait() {
         const characters = " .,:;irsXA253hMHGS#9B&@";
 
         const draw = () => {
+            if (!image.complete || !image.naturalWidth) return;
             const ratio = Math.min(window.devicePixelRatio || 1, 2);
             const width = canvas.clientWidth;
             const height = canvas.clientHeight;
@@ -465,7 +503,7 @@ export function CanvasPhrase() {
             for (let line = -3; line < 26; line += 1) {
                 const y = (line / 23) * height;
                 const gradient = context.createLinearGradient(0, y, width, y);
-                gradient.addColorStop(0, "#7ee1d0");
+                gradient.addColorStop(0, "#bda0f6");
                 gradient.addColorStop(0.45, "#c2a0fd");
                 gradient.addColorStop(1, "#cf4981");
                 context.beginPath();
@@ -528,6 +566,7 @@ export function OutcomeCarousel({ items }) {
     const [active, setActive] = useState(0);
 
     useEffect(() => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
         const timer = window.setInterval(() => setActive((index) => (index + 1) % items.length), 5200);
         return () => window.clearInterval(timer);
     }, [items.length]);
@@ -542,10 +581,9 @@ export function OutcomeCarousel({ items }) {
                         key={outcome.title}
                         className={index === active ? "is-active" : ""}
                         src={outcome.image}
-                        alt=""
+                        alt={index === active ? `${outcome.title} project interface` : ""}
                     />
                 ))}
-                <span>0{active + 1} / 0{items.length}</span>
             </div>
             <div className="outcome-carousel__copy" aria-live="polite">
                 <p>{item.label}</p>
