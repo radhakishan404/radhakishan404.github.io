@@ -383,12 +383,22 @@ export function AsciiPortrait() {
         // The ramp runs from light marks to dense marks. We calculate "ink"
         // separately so dark clothing keeps its shape instead of becoming dots.
         const characters = ".,:;irsXA253hMHGS#9B&@";
+        let resizeFrame = 0;
+        let resizeObserver;
+        let lastWidth = 0;
+        let lastHeight = 0;
 
         const draw = () => {
             if (!image.complete || !image.naturalWidth) return;
             const ratio = Math.min(window.devicePixelRatio || 1, 2);
-            const width = canvas.clientWidth;
-            const height = canvas.clientHeight;
+            const rect = canvas.getBoundingClientRect();
+            const width = Math.round(rect.width);
+            const height = Math.round(rect.height);
+            if (!width || !height) return;
+            if (width === lastWidth && height === lastHeight && canvas.width && canvas.height) return;
+
+            lastWidth = width;
+            lastHeight = height;
             canvas.width = Math.round(width * ratio);
             canvas.height = Math.round(height * ratio);
             context.setTransform(ratio, 0, 0, ratio, 0, 0);
@@ -471,10 +481,36 @@ export function AsciiPortrait() {
             setLoaded(true);
         };
 
-        image.onload = draw;
+        const queueDraw = (force = false) => {
+            window.cancelAnimationFrame(resizeFrame);
+            resizeFrame = window.requestAnimationFrame(() => {
+                if (force) {
+                    lastWidth = 0;
+                    lastHeight = 0;
+                }
+                draw();
+            });
+        };
+
+        image.onload = () => {
+            queueDraw(true);
+            document.fonts?.ready.then(() => queueDraw(true));
+        };
         image.src = "/images/radhakishan-web-3.jpg";
-        window.addEventListener("resize", draw);
-        return () => window.removeEventListener("resize", draw);
+
+        if ("ResizeObserver" in window) {
+            resizeObserver = new ResizeObserver(() => queueDraw());
+            resizeObserver.observe(canvas);
+            resizeObserver.observe(canvas.parentElement);
+        }
+
+        const handleWindowResize = () => queueDraw(true);
+        window.addEventListener("resize", handleWindowResize);
+        return () => {
+            resizeObserver?.disconnect();
+            window.cancelAnimationFrame(resizeFrame);
+            window.removeEventListener("resize", handleWindowResize);
+        };
     }, []);
 
     return (

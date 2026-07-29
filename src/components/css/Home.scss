@@ -1128,6 +1128,7 @@ html.lenis body {
 
 .ascii-portrait {
     position: relative;
+    height: 30rem;
     min-height: 30rem;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.09);
@@ -1154,10 +1155,11 @@ html.lenis body {
     }
 
     canvas {
-        position: relative;
+        position: absolute;
         z-index: 1;
+        inset: 0;
         width: 100%;
-        height: 30rem;
+        height: 100%;
         display: block;
         opacity: 0;
         transition: opacity 650ms ease, filter 350ms ease;
