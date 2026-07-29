@@ -27,19 +27,19 @@ const SOCIAL_LINKS = [
 const CAPABILITIES = [
     {
         title: "Product interfaces",
-        description: "Fast, accessible web products with deliberate interaction and clear operational states."
+        description: "Fast, easy-to-use websites where loading, errors, and small details are handled."
     },
     {
         title: "Systems behind them",
-        description: "APIs, services, administration surfaces, payments, queues, and deployment workflows."
+        description: "APIs, admin tools, payments, queues, and deploys that keep the product running."
     },
     {
         title: "Mobile products",
-        description: "Flutter and React Native experiences that remain useful in real-world network conditions."
+        description: "Flutter and React Native apps built for real phones, slow networks, and daily use."
     },
     {
         title: "Practical AI",
-        description: "Voice, vision, local models, content tools, and automation shaped around a specific job."
+        description: "Voice, image, and automation tools that help with a real task."
     }
 ];
 
@@ -86,9 +86,49 @@ const PRINCIPLES = [
     }
 ];
 
+const BUILDING_NOW = [
+    {
+        id: "ship",
+        label: "Ship",
+        number: "01",
+        title: "SSHipIt",
+        text: "A simple way to deploy Node.js, Next.js, and React apps over SSH without paying for another platform.",
+        linkLabel: "Open the repo",
+        href: "https://github.com/radhakishan404/sshipit"
+    },
+    {
+        id: "make",
+        label: "Make",
+        number: "02",
+        title: "MacEdits",
+        text: "A Mac reel editor where recording, trimming, captions, and export happen on the device.",
+        linkLabel: "See my GitHub",
+        href: "https://github.com/radhakishan404"
+    },
+    {
+        id: "learn",
+        label: "Learn",
+        number: "03",
+        title: "SwiftUI",
+        text: "I am learning native Mac app design by building small tools instead of only watching tutorials.",
+        linkLabel: "See Notch Prompter",
+        href: "https://github.com/radhakishan404/notch-prompter"
+    },
+    {
+        id: "write",
+        label: "Write",
+        number: "04",
+        title: "Useful notes",
+        text: "Short guides about developer tools, AI workflows, creator tools, and the fixes I want to remember.",
+        linkLabel: "Browse the articles",
+        to: "/articles"
+    }
+];
+
 function Home(props) {
     const [expandedProject, setExpandedProject] = useState(0);
     const [contactStatus, setContactStatus] = useState("idle");
+    const [activeNow, setActiveNow] = useState(BUILDING_NOW[0]);
     useSectionReveals();
 
     useEffect(() => {
@@ -147,8 +187,8 @@ function Home(props) {
                                         <span>Jangid</span>
                                     </h1>
                                     <p className="home-hero__summary">
-                                        I build product interfaces, mobile apps, backend systems, and
-                                        practical automation for teams shipping real software.
+                                        I build websites, mobile apps, backend systems, and useful
+                                        automation. I like taking an idea all the way to a working product.
                                     </p>
                                     <div className="home-hero__actions">
                                         <MagneticAction as="a" href="#selected-work" className="primary-action">
@@ -190,8 +230,8 @@ function Home(props) {
                                     <div data-home-reveal>
                                         <h2 id="capability-title">What I build</h2>
                                         <p>
-                                            Product engineering across the interface, mobile application,
-                                            backend, automation, and release workflow.
+                                            From the first screen to the API, mobile app, and deploy.
+                                            I enjoy seeing how all the pieces work together.
                                         </p>
                                     </div>
                                 </div>
@@ -270,9 +310,9 @@ function Home(props) {
                                         {" "}Practical enough to finish.
                                     </h2>
                                     <p>
-                                        I work across interface, backend, mobile, and product operations.
-                                        That range helps me make decisions with the whole workflow in view,
-                                        not just one isolated screen.
+                                        I started with PHP in 2018. Since then I have worked with React,
+                                        Node.js, mobile apps, cloud systems, and now native Mac tools.
+                                        I still learn best by building something real.
                                     </p>
                                     <MagneticAction as="link" to="/about" className="text-action">
                                         Read the full story <span aria-hidden="true">↗</span>
@@ -282,12 +322,60 @@ function Home(props) {
                             </div>
                         </section>
 
+                        <section className="now-section home-section" aria-labelledby="now-section-title">
+                            <div className="section-shell now-section__layout">
+                                <div className="now-section__intro" data-home-reveal>
+                                    <p className="home-eyebrow">A little more human</p>
+                                    <h2 id="now-section-title">What is open on my laptop?</h2>
+                                    <p>Pick a mode. This is what I am building, learning, or writing right now.</p>
+                                </div>
+
+                                <div className="now-switcher" data-home-reveal>
+                                    <div className="now-switcher__tabs" role="tablist" aria-label="Current work">
+                                        {BUILDING_NOW.map((item) => (
+                                            <button
+                                                type="button"
+                                                role="tab"
+                                                aria-selected={activeNow.id === item.id}
+                                                aria-controls="home-now-panel"
+                                                className={activeNow.id === item.id ? "is-active" : ""}
+                                                onClick={() => setActiveNow(item)}
+                                                key={item.id}
+                                            >
+                                                <span>{item.number}</span>
+                                                {item.label}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <article
+                                        id="home-now-panel"
+                                        role="tabpanel"
+                                        aria-live="polite"
+                                        data-mode={activeNow.label}
+                                    >
+                                        <span>{activeNow.label} mode</span>
+                                        <h3>{activeNow.title}</h3>
+                                        <p>{activeNow.text}</p>
+                                        {activeNow.to ? (
+                                            <Link to={activeNow.to}>
+                                                {activeNow.linkLabel} <span aria-hidden="true">↗</span>
+                                            </Link>
+                                        ) : (
+                                            <a href={activeNow.href} target="_blank" rel="noreferrer">
+                                                {activeNow.linkLabel} <span aria-hidden="true">↗</span>
+                                            </a>
+                                        )}
+                                    </article>
+                                </div>
+                            </div>
+                        </section>
+
                         <section className="writing-section home-section" aria-labelledby="writing-title">
                             <div className="section-shell">
                                 <div className="section-heading" data-home-reveal>
                                     <div>
                                         <h2 id="writing-title">Recent writing.</h2>
-                                        <p>Practical notes on development, tools, and publishing technical work.</p>
+                                        <p>Short guides about development, tools, and things worth remembering.</p>
                                     </div>
                                 </div>
 
@@ -327,8 +415,8 @@ function Home(props) {
                                 <div className="contact-scene__copy" data-home-reveal>
                                     <h2 id="contact-title">Tell me what needs to work better.</h2>
                                     <p>
-                                        Share the context, the people affected, and what success should look
-                                        like. I’ll reply with a useful next step.
+                                        Tell me what you are making, where it is stuck, and what you
+                                        want it to do. I’ll reply with a useful next step.
                                     </p>
                                     <a href="mailto:radhakishanjangid404@gmail.com">
                                         radhakishanjangid404@gmail.com

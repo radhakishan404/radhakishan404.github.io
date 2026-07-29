@@ -100,7 +100,7 @@ test("opens every sidebar page at the top with visible content", () => {
 
     let navigation = within(screen.getByRole("navigation", { name: "Main" }));
     fireEvent.click(navigation.getByRole("link", { name: /About Professional skills/i }));
-    expect(screen.getByRole("heading", { name: "I build across the whole product." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /I started with PHP.*never stopped learning/i })).toBeInTheDocument();
 
     navigation = within(screen.getByRole("navigation", { name: "Main" }));
     fireEvent.click(navigation.getByRole("link", { name: /Portfolio Some of the projects/i }));
@@ -115,6 +115,23 @@ test("opens every sidebar page at the top with visible content", () => {
     expect(screen.getByRole("heading", { name: "Tell me what needs to work better." })).toBeInTheDocument();
 
     expect(window.scrollTo).toHaveBeenLastCalledWith({ top: 0, left: 0, behavior: "auto" });
+});
+
+test("switches the playful current-work and about modes", () => {
+    const { unmount } = render(<App />);
+
+    fireEvent.click(screen.getByRole("tab", { name: /04 Write/i }));
+    expect(screen.getByRole("heading", { name: "Useful notes" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Browse the articles/i })).toHaveAttribute("href", "/articles");
+
+    unmount();
+    window.history.pushState({}, "", "/about");
+    render(<App />);
+
+    expect(screen.getByRole("img", { name: /Radhakishan Jangid sitting at his workspace/i }))
+        .toHaveAttribute("src", "/images/radhakishan-web-3.jpg");
+    fireEvent.click(screen.getByRole("tab", { name: /02 Fix/i }));
+    expect(screen.getByRole("heading", { name: "Give me the strange bug." })).toBeInTheDocument();
 });
 
 test("filters the portfolio and article collection", () => {

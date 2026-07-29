@@ -1251,6 +1251,148 @@ html.lenis body {
     }
 }
 
+/* A small, useful playground for current side projects */
+.now-section {
+    border-top: 1px solid var(--home-rule);
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 18% 80%, rgba(207, 73, 129, 0.055), transparent 24rem),
+        #09090d;
+}
+
+.now-section__layout {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.48fr) minmax(32rem, 1fr);
+    align-items: start;
+    gap: clamp(4rem, 9vw, 9rem);
+}
+
+.now-section__intro {
+    position: sticky;
+    top: 5rem;
+
+    h2 {
+        max-width: 10ch;
+        margin: 0;
+        font-size: clamp(3rem, 5vw, 5.8rem);
+        font-weight: 600;
+        letter-spacing: -0.06em;
+        line-height: 0.96;
+        text-wrap: balance;
+    }
+
+    > p:last-child {
+        max-width: 24rem;
+        margin: 1.4rem 0 0;
+        color: var(--home-muted);
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+}
+
+.now-switcher {
+    border-top: 1px solid var(--home-rule);
+}
+
+.now-switcher__tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    button {
+        min-height: 5.4rem;
+        padding: 1rem;
+        border: 0;
+        border-right: 1px solid var(--home-rule);
+        border-bottom: 1px solid var(--home-rule);
+        color: var(--home-dim);
+        background: var(--home-raised);
+        text-align: left;
+        transition: color 220ms ease, background 220ms ease;
+
+        span {
+            margin-bottom: 0.55rem;
+            display: block;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.55rem;
+        }
+
+        &:hover,
+        &:focus-visible,
+        &.is-active {
+            color: var(--home-ink);
+            background: rgba(201, 140, 221, 0.1);
+        }
+
+        &:focus-visible {
+            position: relative;
+            z-index: 1;
+            outline: 2px solid var(--home-purple);
+            outline-offset: -2px;
+        }
+    }
+}
+
+.now-switcher article {
+    position: relative;
+    min-height: 27rem;
+    padding: clamp(2rem, 5vw, 4rem);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background:
+        linear-gradient(130deg, transparent 0 62%, rgba(201, 140, 221, 0.07) 62% 62.3%, transparent 62.3%),
+        var(--home-raised);
+
+    &::before {
+        content: attr(data-mode);
+        position: absolute;
+        top: -0.15em;
+        right: -0.08em;
+        color: rgba(255, 255, 255, 0.025);
+        font-size: clamp(8rem, 20vw, 18rem);
+        font-weight: 700;
+        line-height: 0.75;
+        text-transform: uppercase;
+        pointer-events: none;
+    }
+
+    > span {
+        margin-bottom: auto;
+        color: var(--home-purple);
+        font-size: 0.66rem;
+        text-transform: lowercase;
+    }
+
+    h3 {
+        max-width: 12ch;
+        margin: 3rem 0 1rem;
+        font-size: clamp(3rem, 6vw, 6.8rem);
+        font-weight: 600;
+        letter-spacing: -0.065em;
+        line-height: 0.9;
+    }
+
+    > p {
+        max-width: 39rem;
+        margin: 0 0 1.7rem;
+        color: var(--home-muted);
+        line-height: 1.72;
+    }
+
+    a {
+        width: fit-content;
+        padding-bottom: 0.35rem;
+        border-bottom: 1px solid var(--home-purple);
+        color: var(--home-ink);
+        font-size: 0.78rem;
+
+        span {
+            color: var(--home-purple);
+        }
+    }
+}
+
 /* Writing + text hover */
 .writing-section {
     border-top: 1px solid var(--home-rule);
@@ -1630,9 +1772,14 @@ html.lenis body {
 
     .capability-section__intro,
     .about-scene__layout,
+    .now-section__layout,
     .outcome-carousel,
     .contact-scene__layout {
         grid-template-columns: 1fr;
+    }
+
+    .now-section__intro {
+        position: static;
     }
 
     .flip-board {
@@ -1848,6 +1995,19 @@ html.lenis body {
 
     .about-scene__copy h2 {
         font-size: clamp(2.7rem, 13vw, 4.4rem);
+    }
+
+    .now-switcher__tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .now-switcher article {
+        min-height: 23rem;
+        padding: 1.5rem;
+
+        h3 {
+            font-size: clamp(3rem, 15vw, 5rem);
+        }
     }
 
     .ascii-portrait,
