@@ -42,6 +42,7 @@ export function PointerScene() {
         let frame = 0;
         let time = 0;
         const pointer = { x: 0.72, y: 0.46, targetX: 0.72, targetY: 0.46 };
+        const trail = Array.from({ length: 7 }, () => ({ x: 0.72, y: 0.46 }));
 
         const resize = () => {
             const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -69,46 +70,75 @@ export function PointerScene() {
             pointer.y += (pointer.targetY - pointer.y) * 0.055;
             time += reducedMotion ? 0 : 0.006;
 
-            const centerX = width * (0.72 + (pointer.x - 0.72) * 0.18);
-            const centerY = height * (0.45 + (pointer.y - 0.45) * 0.18);
+            trail[0].x += (pointer.x - trail[0].x) * 0.32;
+            trail[0].y += (pointer.y - trail[0].y) * 0.32;
+            for (let index = 1; index < trail.length; index += 1) {
+                trail[index].x += (trail[index - 1].x - trail[index].x) * (0.2 - index * 0.012);
+                trail[index].y += (trail[index - 1].y - trail[index].y) * (0.2 - index * 0.012);
+            }
+
+            const centerX = width * trail[0].x;
+            const centerY = height * trail[0].y;
             const gradient = context.createRadialGradient(
                 centerX,
                 centerY,
-                15,
+                8,
                 centerX,
                 centerY,
-                Math.max(width, height) * 0.48
+                Math.max(width, height) * 0.38
             );
-            gradient.addColorStop(0, "rgba(209, 139, 213, 0.14)");
-            gradient.addColorStop(0.45, "rgba(194, 160, 253, 0.055)");
+            gradient.addColorStop(0, "rgba(209, 139, 213, 0.2)");
+            gradient.addColorStop(0.42, "rgba(194, 160, 253, 0.075)");
             gradient.addColorStop(1, "rgba(9, 9, 13, 0)");
             context.fillStyle = gradient;
             context.fillRect(0, 0, width, height);
 
-            for (let line = 0; line < 14; line += 1) {
-                const offset = (line - 6.5) * Math.max(24, width * 0.025);
-                const drift = Math.sin(time * 1.7 + line * 0.54) * 17;
-                const pullX = (pointer.x - 0.5) * 65;
-                const pullY = (pointer.y - 0.5) * 55;
-                const lineGradient = context.createLinearGradient(width * 0.38, 0, width, height);
+            for (let line = 0; line < 17; line += 1) {
+                const offset = (line - 8) * Math.max(26, width * 0.026);
+                const drift = Math.sin(time * 1.8 + line * 0.52) * 21;
+                const pullX = (trail[0].x - 0.5) * 115;
+                const pullY = (trail[0].y - 0.5) * 90;
+                const lineGradient = context.createLinearGradient(0, 0, width, height);
                 lineGradient.addColorStop(0, "rgba(194, 160, 253, 0)");
-                lineGradient.addColorStop(0.45, `rgba(194, 160, 253, ${0.035 + line * 0.003})`);
-                lineGradient.addColorStop(0.72, "rgba(207, 73, 129, 0.13)");
+                lineGradient.addColorStop(0.32, `rgba(194, 160, 253, ${0.025 + line * 0.002})`);
+                lineGradient.addColorStop(0.68, "rgba(207, 73, 129, 0.15)");
                 lineGradient.addColorStop(1, "rgba(207, 73, 129, 0)");
                 context.beginPath();
-                context.moveTo(width * 0.38, height * 0.7 + offset * 0.35);
+                context.moveTo(-width * 0.05, height * 0.56 + offset * 0.28);
                 context.bezierCurveTo(
-                    width * 0.52 + pullX,
-                    height * 0.12 + offset + drift,
-                    width * 0.79 - pullX * 0.4,
-                    height * 0.89 + offset * 0.45 + pullY,
-                    width * 1.08,
-                    height * 0.22 + offset * 0.6
+                    width * 0.28 + pullX * 0.3,
+                    centerY + offset + drift,
+                    centerX - pullX * 0.45,
+                    centerY - offset * 0.45 + pullY,
+                    width * 1.05,
+                    height * 0.34 + offset * 0.52
                 );
                 context.strokeStyle = lineGradient;
-                context.lineWidth = line % 4 === 0 ? 1.4 : 0.75;
+                context.lineWidth = line % 4 === 0 ? 1.35 : 0.65;
                 context.stroke();
             }
+
+            // A soft lens follows the native cursor. It gives the scene a clear
+            // response without replacing the cursor or bringing back the stars.
+            trail.slice(1).forEach((point, index) => {
+                context.beginPath();
+                context.arc(
+                    width * point.x,
+                    height * point.y,
+                    8 + index * 5 + Math.sin(time * 3 + index) * 1.5,
+                    0,
+                    Math.PI * 2
+                );
+                context.strokeStyle = `rgba(201, 140, 221, ${0.14 - index * 0.016})`;
+                context.lineWidth = 0.8;
+                context.stroke();
+            });
+
+            context.beginPath();
+            context.arc(centerX, centerY, 5.5, 0, Math.PI * 2);
+            context.strokeStyle = "rgba(245, 241, 247, 0.5)";
+            context.lineWidth = 1;
+            context.stroke();
 
             if (!reducedMotion) frame = window.requestAnimationFrame(draw);
         };
@@ -350,8 +380,8 @@ export function AsciiPortrait() {
         const context = canvas.getContext("2d");
         const image = new Image();
         image.crossOrigin = "anonymous";
-        // Keep a visible glyph at the darkest end of the ramp. The previous
-        // leading space made Radhakishan's dark shirt disappear completely.
+        // The ramp runs from light marks to dense marks. We calculate "ink"
+        // separately so dark clothing keeps its shape instead of becoming dots.
         const characters = ".,:;irsXA253hMHGS#9B&@";
 
         const draw = () => {
@@ -375,7 +405,7 @@ export function AsciiPortrait() {
             // Crop to the canvas ratio instead of stretching the portrait.
             // The slight downward bias keeps the face and printed shirt in view
             // while trimming the bright office ceiling.
-            const targetAspect = columns / rows;
+            const targetAspect = width / height;
             const sourceAspect = image.naturalWidth / image.naturalHeight;
             let sourceX = 0;
             let sourceY = 0;
@@ -387,7 +417,7 @@ export function AsciiPortrait() {
                 sourceX = (image.naturalWidth - sourceWidth) / 2;
             } else {
                 sourceHeight = image.naturalWidth / targetAspect;
-                sourceY = (image.naturalHeight - sourceHeight) * 0.28;
+                sourceY = (image.naturalHeight - sourceHeight) * 0.2;
             }
 
             samplerContext.drawImage(
@@ -403,6 +433,16 @@ export function AsciiPortrait() {
             );
             const data = samplerContext.getImageData(0, 0, columns, rows).data;
             const rowHeight = height / rows;
+            const getLightness = (column, row) => {
+                const safeColumn = Math.min(columns - 1, Math.max(0, column));
+                const safeRow = Math.min(rows - 1, Math.max(0, row));
+                const pixel = (safeRow * columns + safeColumn) * 4;
+                return (
+                    data[pixel] * 0.2126 +
+                    data[pixel + 1] * 0.7152 +
+                    data[pixel + 2] * 0.0722
+                ) / 255;
+            };
 
             context.font = `600 ${Math.min(cell * 1.45, rowHeight * 1.22)}px monospace`;
             context.textAlign = "center";
@@ -413,11 +453,14 @@ export function AsciiPortrait() {
                     const pixel = (row * columns + column) * 4;
                     const alpha = data[pixel + 3] / 255;
                     if (alpha < 0.08) continue;
-                    const lightness = (data[pixel] * 0.2126 + data[pixel + 1] * 0.7152 + data[pixel + 2] * 0.0722) / 255;
-                    const tone = clamp((lightness - 0.04) / 0.82);
-                    const character = characters[Math.floor(tone * (characters.length - 1))];
-                    const visibility = 0.3 + tone * 0.7;
-                    context.fillStyle = `rgba(${180 + data[pixel] * 0.2}, ${112 + data[pixel + 1] * 0.2}, ${194 + data[pixel + 2] * 0.15}, ${visibility * alpha})`;
+                    const lightness = getLightness(column, row);
+                    const right = getLightness(column + 1, row);
+                    const below = getLightness(column, row + 1);
+                    const edge = clamp(Math.abs(lightness - right) + Math.abs(lightness - below));
+                    const ink = clamp(0.14 + (1 - lightness) * 0.68 + edge * 1.35);
+                    const character = characters[Math.round(ink * (characters.length - 1))];
+                    const visibility = 0.4 + ink * 0.58;
+                    context.fillStyle = `rgba(${182 + data[pixel] * 0.18}, ${116 + data[pixel + 1] * 0.18}, ${198 + data[pixel + 2] * 0.13}, ${visibility * alpha})`;
                     context.fillText(
                         character,
                         column * cell + cell / 2,
@@ -436,6 +479,12 @@ export function AsciiPortrait() {
 
     return (
         <div className={`ascii-portrait ${loaded ? "is-loaded" : ""}`}>
+            <img
+                className="ascii-portrait__source"
+                src="/images/radhakishan-web-3.jpg"
+                alt=""
+                aria-hidden="true"
+            />
             <canvas ref={canvasRef} aria-label="ASCII interpretation of Radhakishan at his workspace" />
             <span aria-hidden="true">portrait.render("ascii")</span>
         </div>

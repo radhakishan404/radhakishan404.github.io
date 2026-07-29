@@ -1,5 +1,14 @@
 @import "./Setting.scss";
 
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
 .site-page {
     min-height: 100dvh;
     overflow-x: clip;
@@ -138,9 +147,41 @@
 }
 
 .about-page--story {
+    --about-pointer-x: 75vw;
+    --about-pointer-y: 25vh;
+    position: relative;
+    isolation: isolate;
     background:
         radial-gradient(circle at 82% 8%, rgba(201, 140, 221, 0.07), transparent 31rem),
         #09090d;
+
+    &::before {
+        content: "";
+        position: fixed;
+        z-index: 3;
+        inset: 0;
+        background:
+            radial-gradient(
+                21rem circle at var(--about-pointer-x) var(--about-pointer-y),
+                rgba(201, 140, 221, 0.055),
+                transparent 68%
+            );
+        pointer-events: none;
+    }
+}
+
+.about-page--story [data-about-reveal] {
+    opacity: 0;
+    transform: translateY(2.2rem);
+    transition:
+        opacity 760ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.about-page--story [data-about-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .about-hero {
@@ -185,6 +226,8 @@
 }
 
 .about-portrait {
+    --portrait-tilt-x: 0deg;
+    --portrait-tilt-y: 0deg;
     position: relative;
     margin: 0;
 
@@ -209,6 +252,12 @@
     position: relative;
     overflow: hidden;
     background: #15121a;
+    transform:
+        perspective(1000px)
+        rotateX(var(--portrait-tilt-x))
+        rotateY(var(--portrait-tilt-y));
+    transform-style: preserve-3d;
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 
     &::after {
         content: "";
@@ -1305,5 +1354,25 @@
     .project-detail__stack,
     .project-gallery > div {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-page--story *,
+    .about-page--story *::before,
+    .about-page--story *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .about-page--story [data-about-reveal] {
+        opacity: 1;
+        transform: none;
+    }
+
+    .about-page--story::before {
+        display: none;
     }
 }

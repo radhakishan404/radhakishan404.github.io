@@ -103,8 +103,8 @@ html.lenis body {
 }
 
 [data-home-reveal] {
-    opacity: 1;
-    transform: translateY(1rem);
+    opacity: 0;
+    transform: translateY(1.8rem);
     transition:
         opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
         transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -220,7 +220,7 @@ html.lenis body {
 
 .home-scene {
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     inset: 0;
     width: 100%;
     height: 100%;
@@ -228,6 +228,8 @@ html.lenis body {
 }
 
 .home-hero__layout {
+    position: relative;
+    z-index: 2;
     width: min(100%, 87rem);
     margin: auto;
     display: grid;
@@ -392,6 +394,8 @@ html.lenis body {
 }
 
 .home-hero__footer {
+    position: relative;
+    z-index: 2;
     width: min(100%, 87rem);
     margin: 2rem auto 0;
     padding-top: 1.2rem;
@@ -1125,10 +1129,33 @@ html.lenis body {
 .ascii-portrait {
     position: relative;
     min-height: 30rem;
+    overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.09);
     background: #08080b;
 
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 45%, rgba(8, 8, 11, 0.12));
+        pointer-events: none;
+    }
+
+    .ascii-portrait__source {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 40%;
+        opacity: 0.16;
+        filter: grayscale(1) contrast(1.3) brightness(1.1);
+        transform: scale(1.01);
+    }
+
     canvas {
+        position: relative;
+        z-index: 1;
         width: 100%;
         height: 30rem;
         display: block;
@@ -1146,6 +1173,7 @@ html.lenis body {
 
     span {
         position: absolute;
+        z-index: 2;
         right: 1rem;
         bottom: 0.8rem;
         color: rgba(255, 255, 255, 0.32);

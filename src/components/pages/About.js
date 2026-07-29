@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import Lenis from "lenis";
 import PageFrame from "../common/PageFrame";
 
 const JOURNEY = [
@@ -74,13 +75,97 @@ const SOCIAL_LINKS = [
     { label: "DEV", detail: "Six years of practical posts", href: "https://dev.to/radhakishanjangid404" }
 ];
 
+function useAboutMotion() {
+    useEffect(() => {
+        const page = document.querySelector(".about-page--story");
+        if (!page) return undefined;
+
+        const elements = Array.from(page.querySelectorAll("[data-about-reveal]"));
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        let observer;
+        let lenis;
+        let frame = 0;
+        const pointer = {
+            x: window.innerWidth * 0.75,
+            y: window.innerHeight * 0.25,
+            targetX: window.innerWidth * 0.75,
+            targetY: window.innerHeight * 0.25
+        };
+
+        if (reducedMotion || !("IntersectionObserver" in window)) {
+            elements.forEach((element) => element.classList.add("is-visible"));
+        } else {
+            observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("is-visible");
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+            );
+            elements.forEach((element) => observer.observe(element));
+
+            lenis = new Lenis({
+                autoRaf: true,
+                lerp: 0.075,
+                smoothWheel: true,
+                wheelMultiplier: 0.88,
+                touchMultiplier: 1.05,
+                anchors: true
+            });
+        }
+
+        const movePointer = (event) => {
+            pointer.targetX = event.clientX;
+            pointer.targetY = event.clientY;
+        };
+
+        const renderPointer = () => {
+            pointer.x += (pointer.targetX - pointer.x) * 0.075;
+            pointer.y += (pointer.targetY - pointer.y) * 0.075;
+            page.style.setProperty("--about-pointer-x", `${pointer.x}px`);
+            page.style.setProperty("--about-pointer-y", `${pointer.y}px`);
+            if (!reducedMotion) frame = window.requestAnimationFrame(renderPointer);
+        };
+
+        window.addEventListener("pointermove", movePointer, { passive: true });
+        renderPointer();
+
+        return () => {
+            observer?.disconnect();
+            lenis?.destroy();
+            window.cancelAnimationFrame(frame);
+            window.removeEventListener("pointermove", movePointer);
+        };
+    }, []);
+}
+
 function About() {
     const [activeMode, setActiveMode] = useState(WORK_MODES[0]);
+    const portraitRef = useRef(null);
+    useAboutMotion();
+
+    const movePortrait = (event) => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const rect = portraitRef.current.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        portraitRef.current.style.setProperty("--portrait-tilt-x", `${-y * 4}deg`);
+        portraitRef.current.style.setProperty("--portrait-tilt-y", `${x * 5}deg`);
+    };
+
+    const resetPortrait = () => {
+        portraitRef.current.style.setProperty("--portrait-tilt-x", "0deg");
+        portraitRef.current.style.setProperty("--portrait-tilt-y", "0deg");
+    };
 
     return (
         <PageFrame className="about-page about-page--story" title="About">
             <section className="about-hero page-shell" aria-labelledby="about-title">
-                <div className="about-hero__copy">
+                <div className="about-hero__copy" data-about-reveal>
                     <p className="page-eyebrow">Hello from Mumbai</p>
                     <h1 id="about-title">
                         I started with PHP.
@@ -99,7 +184,13 @@ function About() {
                     </div>
                 </div>
 
-                <figure className="about-portrait">
+                <figure
+                    ref={portraitRef}
+                    className="about-portrait"
+                    onPointerMove={movePortrait}
+                    onPointerLeave={resetPortrait}
+                    data-about-reveal
+                >
                     <div className="about-portrait__frame">
                         <img
                             src="/images/radhakishan-web-3.jpg"
@@ -113,7 +204,7 @@ function About() {
                 </figure>
             </section>
 
-            <section className="about-numbers page-shell" aria-label="A few quick facts">
+            <section className="about-numbers page-shell" aria-label="A few quick facts" data-about-reveal>
                 <p><strong>2018</strong><span>First developer role</span></p>
                 <p><strong>48</strong><span>Public GitHub repos</span></p>
                 <p><strong>Web + mobile</strong><span>One product mindset</span></p>
@@ -121,7 +212,7 @@ function About() {
             </section>
 
             <section className="about-story page-section page-shell" aria-labelledby="story-title">
-                <div className="page-section__heading">
+                <div className="page-section__heading" data-about-reveal>
                     <p className="page-eyebrow">My journey</p>
                     <h2 id="story-title">One step at a time. One new problem each time.</h2>
                     <p>
@@ -132,7 +223,7 @@ function About() {
 
                 <ol className="journey-list">
                     {JOURNEY.map((item, index) => (
-                        <li key={`${item.company}-${item.years}`}>
+                        <li key={`${item.company}-${item.years}`} data-about-reveal>
                             <span className="journey-list__number" aria-hidden="true">
                                 {String(JOURNEY.length - index).padStart(2, "0")}
                             </span>
@@ -149,13 +240,13 @@ function About() {
 
             <section className="about-modes page-section" aria-labelledby="modes-title">
                 <div className="page-shell about-modes__layout">
-                    <div className="about-modes__heading">
+                    <div className="about-modes__heading" data-about-reveal>
                         <p className="page-eyebrow">How my brain works</p>
                         <h2 id="modes-title">Pick a mode.</h2>
                         <p>No big speech. This is what I enjoy doing.</p>
                     </div>
 
-                    <div className="about-modes__switcher">
+                    <div className="about-modes__switcher" data-about-reveal>
                         <div className="about-modes__tabs" role="tablist" aria-label="Work modes">
                             {WORK_MODES.map((mode, index) => (
                                 <button
@@ -182,24 +273,24 @@ function About() {
             </section>
 
             <section className="about-now page-section page-shell" aria-labelledby="now-title">
-                <div className="page-section__heading">
+                <div className="page-section__heading" data-about-reveal>
                     <p className="page-eyebrow">Right now</p>
                     <h2 id="now-title">Small tools. Real reasons to build them.</h2>
                 </div>
                 <div className="about-now__list">
-                    <a href="https://github.com/radhakishan404/sshipit" target="_blank" rel="noreferrer">
+                    <a href="https://github.com/radhakishan404/sshipit" target="_blank" rel="noreferrer" data-about-reveal>
                         <span>Deploy</span>
                         <h3>SSHipIt</h3>
                         <p>Self-hosted deploys over plain SSH for small teams that want a clear setup.</p>
                         <b aria-hidden="true">↗</b>
                     </a>
-                    <a href="https://github.com/radhakishan404" target="_blank" rel="noreferrer">
+                    <a href="https://github.com/radhakishan404" target="_blank" rel="noreferrer" data-about-reveal>
                         <span>Create</span>
                         <h3>MacEdits</h3>
                         <p>A local Mac reel editor where recording, editing, and export stay on the device.</p>
                         <b aria-hidden="true">↗</b>
                     </a>
-                    <a href="https://github.com/radhakishan404/notch-prompter" target="_blank" rel="noreferrer">
+                    <a href="https://github.com/radhakishan404/notch-prompter" target="_blank" rel="noreferrer" data-about-reveal>
                         <span>Experiment</span>
                         <h3>Notch Prompter</h3>
                         <p>A small SwiftUI teleprompter that turns the MacBook notch into the main idea.</p>
@@ -209,13 +300,13 @@ function About() {
             </section>
 
             <section className="about-social page-section page-shell" aria-labelledby="social-title">
-                <div className="page-section__heading">
+                <div className="page-section__heading" data-about-reveal>
                     <p className="page-eyebrow">Find me online</p>
                     <h2 id="social-title">Code, work, posts, and side quests.</h2>
                 </div>
                 <div className="about-social__links">
                     {SOCIAL_LINKS.map((social) => (
-                        <a href={social.href} target="_blank" rel="noreferrer" key={social.label}>
+                        <a href={social.href} target="_blank" rel="noreferrer" key={social.label} data-about-reveal>
                             <strong>{social.label}</strong>
                             <span>{social.detail}</span>
                             <b aria-hidden="true">↗</b>
@@ -224,7 +315,7 @@ function About() {
                 </div>
             </section>
 
-            <section className="page-closing page-shell">
+            <section className="page-closing page-shell" data-about-reveal>
                 <p className="page-eyebrow">That’s the long version</p>
                 <h2>Let’s make something useful.</h2>
                 <p>

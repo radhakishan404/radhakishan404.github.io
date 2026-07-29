@@ -18,6 +18,7 @@ jest.mock("emailjs-com", () => ({
 const noOp = () => {};
 const gradient = { addColorStop: noOp };
 const canvasContext = {
+    arc: noOp,
     beginPath: noOp,
     bezierCurveTo: noOp,
     clearRect: noOp,
