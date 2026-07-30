@@ -4,11 +4,11 @@ import ReactGA from "react-ga";
 import emailjs from "emailjs-com";
 import Lenis from "lenis";
 import Header from "../common/Header";
+import PointerField from "../common/PointerField";
 import {
     AsciiPortrait,
     MacbookScroll,
     MagneticAction,
-    PointerScene,
     SquigglyLabel,
     TiltProject,
     useSectionReveals
@@ -172,13 +172,12 @@ function Home(props) {
     return (
         <div className="main-wrapper home-v3">
             <Header props={props} />
+            <PointerField className="home-scene" />
 
             <main id="content" className="main page-content" aria-label="Content">
                 <div className="header-content" id="home-detail">
                     <div className="content__main">
                         <section className="home-hero" aria-labelledby="home-title">
-                            <PointerScene />
-
                             <div className="home-hero__layout">
                                 <div className="home-hero__copy">
                                     <p className="home-eyebrow">Product engineer / Mumbai, India</p>

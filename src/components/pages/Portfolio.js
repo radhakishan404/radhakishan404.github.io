@@ -17,16 +17,34 @@ const LEGACY_PROJECTS = softdata.project.map((project) => ({
 const FILTERS = [...PROJECT_CATEGORIES, "Earlier work"];
 
 function ProjectCard({ project }) {
+    const destinationLabel = project.to
+        ? "Read case study"
+        : project.href
+            ? "View source"
+            : "Overview only";
+
     const content = (
         <>
             <div className="portfolio-card__image">
                 <img src={project.image} alt={`${project.title} interface`} loading="lazy" />
+                <span className="portfolio-card__type">
+                    {project.to ? "Case study" : project.href ? "Source available" : "Selected work"}
+                </span>
             </div>
             <div className="portfolio-card__body">
-                <span>{project.category}</span>
+                <div className="portfolio-card__kicker">
+                    <span>{project.category}</span>
+                    {project.year ? <small>{project.year}</small> : null}
+                </div>
                 <h2>{project.title}</h2>
                 <p>{project.description}</p>
-                <small>{project.technology}</small>
+                <div className="portfolio-card__footer">
+                    <small>{project.technology}</small>
+                    <span className={!project.to && !project.href ? "is-muted" : ""}>
+                        {destinationLabel}
+                        {project.to || project.href ? <b aria-hidden="true">↗</b> : null}
+                    </span>
+                </div>
             </div>
         </>
     );
@@ -47,6 +65,7 @@ function ProjectCard({ project }) {
 function Portfolio() {
     const [activeFilter, setActiveFilter] = useState("All");
     const projects = useMemo(() => [...CURRENT_PROJECTS, ...LEGACY_PROJECTS], []);
+    const caseStudyCount = CURRENT_PROJECTS.filter((project) => project.to).length;
     const visibleProjects = activeFilter === "All"
         ? projects
         : projects.filter((project) => project.category === activeFilter);
@@ -58,6 +77,11 @@ function Portfolio() {
                     <p className="page-eyebrow">Portfolio</p>
                     <h1>Products, systems, and useful experiments.</h1>
                     <p>Current platform work, open-source tools, client products, and earlier projects.</p>
+                </div>
+                <div className="portfolio-proof" aria-label="Portfolio summary">
+                    <p><strong>{caseStudyCount}</strong><span>Detailed case studies</span></p>
+                    <p><strong>{CURRENT_PROJECTS.length}</strong><span>Current projects</span></p>
+                    <p><strong>7+ years</strong><span>Building software</span></p>
                 </div>
             </section>
 

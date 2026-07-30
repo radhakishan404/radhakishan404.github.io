@@ -23,8 +23,10 @@ html.lenis body {
     --home-purple: #c98cdd;
     --home-pink: #cf4981;
     --home-rule: rgba(194, 160, 253, 0.17);
+    position: relative;
     min-height: 100%;
     overflow: clip;
+    isolation: isolate;
     background: var(--home-bg);
     color: var(--home-ink);
     cursor: auto;
@@ -210,7 +212,6 @@ html.lenis body {
     min-height: 100dvh;
     padding: clamp(4rem, 7vh, 6rem) clamp(2rem, 5vw, 5rem) 2.4rem clamp(3rem, 5vw, 5rem);
     overflow: hidden;
-    isolation: isolate;
     display: flex;
     flex-direction: column;
     background:
@@ -219,12 +220,21 @@ html.lenis body {
 }
 
 .home-scene {
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 60px;
+    width: calc(100% - 60px);
+    height: 100dvh;
+    opacity: 0.7;
     pointer-events: none;
+}
+
+.macbook-story__sticky,
+.macbook-stage {
+    z-index: 2;
 }
 
 .home-hero__layout {
@@ -611,7 +621,11 @@ html.lenis body {
 }
 
 .macbook-stage {
-    width: min(66vw, 58rem);
+    /*
+     * The laptop must fit by height as well as width. Without the third cap,
+     * short desktop viewports crop the keyboard against the sticky scene.
+     */
+    width: min(66vw, 58rem, calc((100dvh - 16rem) * 1.5));
     margin: auto;
     perspective: 1500px;
     transform-style: preserve-3d;
@@ -620,6 +634,7 @@ html.lenis body {
 .macbook {
     position: relative;
     width: 100%;
+    container-type: inline-size;
     transform: translateY(0) scale(0.96);
     filter: drop-shadow(0 2.6rem 4rem rgba(0, 0, 0, 0.7));
     transform-style: preserve-3d;
@@ -686,13 +701,14 @@ html.lenis body {
     position: relative;
     z-index: 1;
     width: 100%;
-    height: 9.6rem;
+    height: 11rem;
+    height: 20cqi;
     margin: -0.15rem auto 0;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 0.25rem 0.25rem 1.15rem 1.15rem;
     background: linear-gradient(145deg, #55545c, #26252b 48%, #65636b);
-    transform: perspective(1400px) rotateX(58deg);
+    transform: perspective(1400px) rotateX(48deg);
     transform-origin: 50% 0;
 
     &::after {
@@ -725,46 +741,150 @@ html.lenis body {
     top: 0;
     left: 50%;
     width: 12%;
-    height: 0.35rem;
+    height: max(0.2rem, 0.55cqi);
     border-radius: 0 0 0.55rem 0.55rem;
     background: #25242a;
     transform: translateX(-50%);
 }
 
-.macbook__keyboard {
+.macbook__deck {
     position: absolute;
-    top: 1.1rem;
+    top: 1.35cqi;
     left: 50%;
-    width: 86%;
+    width: 91%;
     display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 0.28rem;
+    grid-template-columns: 6.4% minmax(0, 1fr) 6.4%;
+    align-items: stretch;
+    gap: 1.1cqi;
     transform: translateX(-50%);
+}
 
-    span {
-        min-width: 0;
-        height: 1.15rem;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 0.14rem;
+.macbook__speaker {
+    min-width: 0;
+    border-radius: 0.25rem;
+    opacity: 0.52;
+    background-image: radial-gradient(
+        circle,
+        rgba(12, 11, 15, 0.92) 0 0.12cqi,
+        transparent 0.14cqi
+    );
+    background-size: 0.46cqi 0.46cqi;
+}
+
+.macbook__keyboard {
+    min-width: 0;
+    display: grid;
+    gap: 0.26cqi;
+}
+
+.macbook__key-row {
+    min-width: 0;
+    display: flex;
+    gap: 0.26cqi;
+}
+
+.macbook__key {
+    min-width: 0;
+    height: 1.27cqi;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: max(0.08rem, 0.14cqi);
+    display: grid;
+    flex: 1 1 0;
+    place-items: center;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.52);
+    background: linear-gradient(180deg, #222126, #111014 72%);
+    box-shadow:
+        inset 0 0.1cqi 0 rgba(255, 255, 255, 0.04),
+        0 0.1cqi 0 rgba(5, 5, 7, 0.85);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: clamp(0.16rem, 0.31cqi, 0.27rem);
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.is-function-row .macbook__key {
+    height: 1.08cqi;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: clamp(0.14rem, 0.26cqi, 0.23rem);
+}
+
+.macbook__key--wide {
+    flex-grow: 1.55;
+}
+
+.macbook__key--xwide {
+    flex-grow: 1.9;
+}
+
+.macbook__key--shift {
+    flex-grow: 2.35;
+}
+
+.macbook__key--command {
+    flex-grow: 1.45;
+}
+
+.macbook__key--space {
+    flex-grow: 5.6;
+}
+
+.macbook__key--arrows {
+    flex-grow: 2.45;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.macbook__arrow-cluster {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.09cqi;
+
+    i {
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: max(0.04rem, 0.08cqi);
         display: grid;
         place-items: center;
         color: rgba(255, 255, 255, 0.42);
         background: #151419;
-        box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.33rem;
-        text-transform: uppercase;
+        font-size: clamp(0.1rem, 0.21cqi, 0.18rem);
+        font-style: normal;
+
+        &:first-child {
+            grid-column: 2;
+        }
+
+        &:nth-child(2) {
+            grid-row: 2;
+            grid-column: 1;
+        }
+
+        &:nth-child(3) {
+            grid-row: 2;
+            grid-column: 2;
+        }
+
+        &:last-child {
+            grid-row: 2;
+            grid-column: 3;
+        }
     }
 }
 
 .macbook__trackpad {
     position: absolute;
-    bottom: 0.8rem;
+    bottom: 1.15cqi;
     left: 50%;
-    width: 35%;
-    height: 2.65rem;
-    border: 1px solid rgba(10, 10, 12, 0.45);
-    border-radius: 0.3rem;
+    width: 37%;
+    height: 6.35cqi;
+    border: 1px solid rgba(10, 10, 12, 0.55);
+    border-radius: max(0.2rem, 0.4cqi);
+    background: rgba(52, 51, 58, 0.28);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     transform: translateX(-50%);
 }
 
@@ -1782,6 +1902,11 @@ html.lenis body {
 }
 
 @media (max-width: 900px) {
+    .home-scene {
+        left: 0;
+        width: 100%;
+    }
+
     .home-section {
         padding-block: 6rem;
     }
@@ -1838,7 +1963,7 @@ html.lenis body {
     }
 
     .macbook-stage {
-        width: 82vw;
+        width: min(82vw, 48rem, calc((100dvh - 16rem) * 1.5));
     }
 
     .macbook-story__facts {
@@ -1965,26 +2090,7 @@ html.lenis body {
     }
 
     .macbook-stage {
-        width: 95vw;
-    }
-
-    .macbook__base {
-        height: 7.1rem;
-    }
-
-    .macbook__keyboard {
-        top: 0.7rem;
-        gap: 0.16rem;
-
-        span {
-            height: 0.82rem;
-            font-size: 0.24rem;
-        }
-    }
-
-    .macbook__trackpad {
-        bottom: 0.55rem;
-        height: 1.8rem;
+        width: min(95vw, calc((100dvh - 17rem) * 1.45));
     }
 
     .macbook-story__facts p {

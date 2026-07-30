@@ -1,7 +1,9 @@
-const articleAsset = (name) => `https://radhakishan404.is-a.dev/articles/${name}`;
-const articleLink = (slug) => `https://radhakishan404.is-a.dev/articles/${slug}`;
+const PUBLISHING_SITE = "https://radhakishan404.is-a.dev";
+const siteAsset = (path) => `${PUBLISHING_SITE}${path}`;
+const articleAsset = (name) => siteAsset(`/articles/${name}`);
+const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
-export const ARTICLES = [
+const ARTICLE_DATA = [
     {
         slug: "free-ai-coding-tools-zero-rupees",
         title: "10 AI coding tools you can start for zero rupees",
@@ -49,6 +51,14 @@ export const ARTICLES = [
         category: "AI models",
         date: "Jun 10, 2026",
         cover: articleAsset("claude-fable-5-breakdown.png")
+    },
+    {
+        slug: "ai-content-prompterrr",
+        title: "AI Content Prompterrr",
+        excerpt: "A copy-ready prompt system for generating developer and AI Instagram carousels with Claude or ChatGPT.",
+        category: "Prompt system",
+        date: "Apr 6, 2026",
+        cover: siteAsset("/rk-images/walking-black-suit.png")
     },
     {
         slug: "vimax-agentic-video-generation",
@@ -99,6 +109,30 @@ export const ARTICLES = [
         cover: articleAsset("100-image-prompts.png")
     },
     {
+        slug: "caveman-mode-guide",
+        title: "Caveman Mode: 75% fewer tokens",
+        excerpt: "A no-fluff prompting style that cuts token usage while keeping the output useful.",
+        category: "Prompt workflow",
+        date: "Apr 14, 2026",
+        cover: articleAsset("caveman-mode-guide.png")
+    },
+    {
+        slug: "hermes-agent-guide",
+        title: "Hermes Agent complete guide",
+        excerpt: "What Hermes Agent is, why it matters, and how to use it for fast, reliable agent workflows.",
+        category: "AI agents",
+        date: "Apr 13, 2026",
+        cover: null
+    },
+    {
+        slug: "bonsai-free-models-guide",
+        title: "Free AI models in five minutes with Bonsai",
+        excerpt: "Route Claude Code or Codex through Bonsai and start using free frontier AI models.",
+        category: "Developer tools",
+        date: "Apr 13, 2026",
+        cover: articleAsset("bonsai-free-models-guide.png")
+    },
+    {
         slug: "superpowers-deepdive",
         title: "obra/superpowers deep dive",
         excerpt: "A close look at the open-source agent workflow, its useful conventions, and where it fits into development.",
@@ -139,19 +173,76 @@ export const ARTICLES = [
         cover: articleAsset("10-coding-projects-you-can-add-to-your-resume.png")
     },
     {
+        slug: "claude-carousel-generator",
+        title: "Claude carousel generator",
+        excerpt: "A clean workflow for creating developer Instagram carousel ideas and layouts, from hook to slide sequence.",
+        category: "Creator workflow",
+        date: "Apr 6, 2026",
+        cover: siteAsset("/rk-images/leaning-smile-black-suit.png")
+    },
+    {
+        slug: "open-source-content-formats-for-dev-creators",
+        title: "Open-source content formats that get attention",
+        excerpt: "A better way to showcase open-source tools without making every post feel like a product advertisement.",
+        category: "Creator workflow",
+        date: "Apr 6, 2026",
+        cover: siteAsset("/rk-images/mirror-selfie-black-suit.png")
+    },
+    {
+        slug: "javascript-interview-series-plan",
+        title: "JavaScript interview series plan for tech content",
+        excerpt: "A repeatable format for turning JavaScript interview preparation into short-form or carousel content.",
+        category: "Interview content",
+        date: "Apr 6, 2026",
+        cover: siteAsset("/rk-images/black-suit-looking-down.png")
+    },
+    {
         slug: "from-repo-to-reader",
         title: "From repo to reader",
         excerpt: "A simple workflow for turning repository-backed Markdown into structured, publishable technical writing.",
         category: "Developer workflow",
-        date: "Apr 2026",
+        date: "Apr 1, 2026",
         cover: articleAsset("from-repo-to-reader.png")
+    },
+    {
+        slug: "odysseus-setup-guide",
+        title: "Odysseus complete setup guide",
+        excerpt: "Install and understand PewDiePie's open-source AI workspace, from the first command to a working local setup.",
+        category: "Developer tools",
+        date: "",
+        cover: null
     }
-].map((article) => ({
+];
+
+const TOPIC_BY_CATEGORY = {
+    "AI coding guide": "AI and models",
+    "AI models": "AI and models",
+    "AI tools": "AI and models",
+    "AI agents": "AI and models",
+    "Developer tools": "Developer tools",
+    "Developer resources": "Developer tools",
+    "Developer workflow": "Developer tools",
+    "Open source": "Developer tools",
+    "Prompt engineering": "Prompts and creation",
+    "Prompt system": "Prompts and creation",
+    "Prompt workflow": "Prompts and creation",
+    "Prompt library": "Prompts and creation",
+    "Creator workflow": "Prompts and creation",
+    "Interview content": "Learning and career",
+    "Free resources": "Learning and career",
+    "Career growth": "Learning and career"
+};
+
+export const ARTICLES = ARTICLE_DATA.map((article) => ({
     ...article,
-    href: articleLink(article.slug)
+    href: articleLink(article.slug),
+    topic: TOPIC_BY_CATEGORY[article.category] || "Other"
 }));
 
-export const ARTICLE_CATEGORIES = [
+export const ARTICLE_TOPICS = [
     "All",
-    ...Array.from(new Set(ARTICLES.map((article) => article.category)))
+    "AI and models",
+    "Developer tools",
+    "Prompts and creation",
+    "Learning and career"
 ];

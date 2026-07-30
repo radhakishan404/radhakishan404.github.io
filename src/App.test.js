@@ -72,12 +72,25 @@ test("opens and closes a selected project", () => {
 test("renders useful principles and a complete laptop keyboard", () => {
     const { container } = render(<App />);
 
+    expect(container.querySelector(".home-v3 > canvas.home-scene")).toBeInTheDocument();
+    expect(container.querySelector(".home-hero canvas.home-scene")).not.toBeInTheDocument();
     expect(screen.getByText("Make it work. Make it clear. Then make it fast.")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Understand the job" })).toBeInTheDocument();
-    expect(container.querySelectorAll(".macbook__keyboard span")).toHaveLength(48);
+    expect(container.querySelectorAll(".macbook__key-row")).toHaveLength(6);
+    expect(container.querySelectorAll(".macbook__key")).toHaveLength(74);
+    expect(container.querySelectorAll(".macbook__speaker")).toHaveLength(2);
+    expect(container.querySelector(".macbook__arrow-cluster")).toBeInTheDocument();
     expect(container.querySelector(".ascii-portrait__source"))
         .toHaveAttribute("src", "/images/radhakishan-web-2.jpg");
     expect(screen.queryByRole("tablist", { name: "Code examples" })).not.toBeInTheDocument();
+});
+
+test("keeps the pointer field on inner portfolio pages", () => {
+    window.history.pushState({}, "", "/portfolio");
+    const { container } = render(<App />);
+
+    expect(container.querySelector("canvas.page-pointer-field")).toBeInTheDocument();
+    expect(container.querySelector(".site-page")).toHaveClass("portfolio-page");
 });
 
 test("keeps both navigation controls operable and truthful", () => {
@@ -111,7 +124,7 @@ test("opens every sidebar page at the top with visible content", () => {
 
     navigation = within(screen.getByRole("navigation", { name: "Main" }));
     fireEvent.click(navigation.getByRole("link", { name: /Articles Guides, prompts/i }));
-    expect(screen.getByRole("heading", { name: "Practical writing for developers and creators." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Guides you can use, not just bookmark." })).toBeInTheDocument();
 
     navigation = within(screen.getByRole("navigation", { name: "Main" }));
     fireEvent.click(navigation.getByRole("link", { name: /Say Hello Get in touch/i }));
@@ -155,9 +168,26 @@ test("filters the portfolio and article collection", () => {
     window.history.pushState({}, "", "/articles");
     render(<App />);
 
-    fireEvent.change(screen.getByLabelText("Search articles"), { target: { value: "zero rupees" } });
+    expect(screen.getAllByText("26")).toHaveLength(2);
+    expect(screen.getByText("Featured guide")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Browse all writing" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "AI Content Prompterrr" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Odysseus complete setup guide" })).toBeInTheDocument();
+
+    const publishedArticleLinks = screen.getAllByRole("link")
+        .filter((link) => link.href.startsWith("https://radhakishan404.is-a.dev/articles/"));
+    expect(publishedArticleLinks).toHaveLength(26);
+    expect(new Set(publishedArticleLinks.map((link) => link.href)).size).toBe(26);
+    expect(publishedArticleLinks.every((link) => link.href.endsWith("/"))).toBe(true);
+
+    fireEvent.change(screen.getByLabelText("Search the archive"), { target: { value: "zero rupees" } });
     expect(screen.getByRole("heading", { name: "10 AI coding tools you can start for zero rupees" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Claude Fable 5 master guide" })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
+    fireEvent.click(screen.getByRole("button", { name: "Learning and career" }));
+    expect(screen.getByRole("heading", { name: "Free courses, real skills, zero rupees" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Sakana Fugu: full breakdown" })).not.toBeInTheDocument();
 });
 
 test("opens an earlier project in the updated detail layout", () => {
@@ -169,20 +199,34 @@ test("opens an earlier project in the updated detail layout", () => {
     expect(screen.getByRole("link", { name: "Back to portfolio" })).toHaveAttribute("href", "/portfolio");
 });
 
+test("opens a current project as an evidence-based case study", () => {
+    window.history.pushState({}, "", "/portfolio/transformo");
+    render(<App />);
+
+    expect(screen.getByRole("heading", { name: "Transformo" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "How the product moves." })).toBeInTheDocument();
+    expect(screen.getByText("Creator and maintainer")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "View source" })).toHaveAttribute(
+        "href",
+        "https://github.com/radhakishan404/transformo"
+    );
+    expect(screen.getByRole("navigation", { name: "More case studies" })).toBeInTheDocument();
+});
+
 test("uses canonical destinations for recent writing", () => {
     render(<App />);
 
     expect(screen.getByRole("link", { name: /10 AI coding tools/i })).toHaveAttribute(
         "href",
-        "https://radhakishan404.is-a.dev/articles/free-ai-coding-tools-zero-rupees"
+        "https://radhakishan404.is-a.dev/articles/free-ai-coding-tools-zero-rupees/"
     );
     expect(screen.getByRole("link", { name: /Garry Tan's gstack/i })).toHaveAttribute(
         "href",
-        "https://radhakishan404.is-a.dev/articles/garry-tan-gstack-claude-code-agents"
+        "https://radhakishan404.is-a.dev/articles/garry-tan-gstack-claude-code-agents/"
     );
     expect(screen.getByRole("link", { name: /Claude Fable 5 master guide/i })).toHaveAttribute(
         "href",
-        "https://radhakishan404.is-a.dev/articles/claude-fable-5-master-guide"
+        "https://radhakishan404.is-a.dev/articles/claude-fable-5-master-guide/"
     );
 });
 

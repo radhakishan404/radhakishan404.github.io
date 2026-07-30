@@ -84,13 +84,6 @@ function useAboutMotion() {
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         let observer;
         let lenis;
-        let frame = 0;
-        const pointer = {
-            x: window.innerWidth * 0.75,
-            y: window.innerHeight * 0.25,
-            targetX: window.innerWidth * 0.75,
-            targetY: window.innerHeight * 0.25
-        };
 
         if (reducedMotion || !("IntersectionObserver" in window)) {
             elements.forEach((element) => element.classList.add("is-visible"));
@@ -118,27 +111,9 @@ function useAboutMotion() {
             });
         }
 
-        const movePointer = (event) => {
-            pointer.targetX = event.clientX;
-            pointer.targetY = event.clientY;
-        };
-
-        const renderPointer = () => {
-            pointer.x += (pointer.targetX - pointer.x) * 0.075;
-            pointer.y += (pointer.targetY - pointer.y) * 0.075;
-            page.style.setProperty("--about-pointer-x", `${pointer.x}px`);
-            page.style.setProperty("--about-pointer-y", `${pointer.y}px`);
-            if (!reducedMotion) frame = window.requestAnimationFrame(renderPointer);
-        };
-
-        window.addEventListener("pointermove", movePointer, { passive: true });
-        renderPointer();
-
         return () => {
             observer?.disconnect();
             lenis?.destroy();
-            window.cancelAnimationFrame(frame);
-            window.removeEventListener("pointermove", movePointer);
         };
     }, []);
 }
