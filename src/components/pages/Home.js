@@ -203,8 +203,8 @@ function Home(props) {
                                     <div className="home-hero__portrait-orbit" aria-hidden="true" />
                                     <div className="home-hero__portrait-frame">
                                         <img
-                                            src="/images/radhakishan-web-3.jpg"
-                                            alt="Radhakishan Jangid seated at his workspace"
+                                            src="/images/radhakishan-red-portrait.png"
+                                            alt="Radhakishan Jangid seated in a red suit"
                                         />
                                     </div>
                                 </figure>
