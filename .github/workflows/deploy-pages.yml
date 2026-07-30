@@ -1,0 +1,93 @@
+name: Test and deploy portfolio
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout portfolio
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        env:
+          CI: true
+        run: npm test -- --watchAll=false --runInBand
+
+      - name: Build portfolio
+        run: npm run build
+
+      - name: Checkout the published article archive
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: published-site
+
+      - name: Preserve published article routes
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+        shell: bash
+        run: |
+          mkdir -p build/articles
+          cp -R published-site/articles/. build/articles/
+          cp -R published-site/assets build/assets
+          cp -R published-site/rk-images build/rk-images
+
+          for asset in apple-touch-icon.png favicon-16x16.png favicon-32x32.png; do
+            if [ -f "published-site/$asset" ]; then
+              cp "published-site/$asset" "build/$asset"
+            fi
+          done
+
+          cp build/index.html build/articles/index.html
+          touch build/.nojekyll
+
+      - name: Configure GitHub Pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: build
+          include-hidden-files: true
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
