@@ -43,6 +43,9 @@ jobs:
       - name: Build portfolio
         run: npm run build
 
+      - name: Create static route entrypoints
+        run: node scripts/create-static-route-entrypoints.js
+
       - name: Checkout the published article archive
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
         uses: actions/checkout@v6
@@ -77,7 +80,6 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: build
-          include-hidden-files: true
 
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
