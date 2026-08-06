@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "browser-use",
+        title: "Browser Use: give your coding agent browser control",
+        excerpt: "The official repository, exact setup prompt, Chrome connection steps, useful examples, and safety notes in one place.",
+        category: "Developer tools",
+        date: "Aug 6, 2026",
+        cover: articleAsset("browser-use-control-guide.png")
+    },
+    {
         slug: "free-ai-coding-tools-zero-rupees",
         title: "10 AI coding tools you can start for zero rupees",
         excerpt: "Official links, setup steps, current free limits, and the catches worth knowing before you choose a tool.",

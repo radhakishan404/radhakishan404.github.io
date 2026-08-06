@@ -168,7 +168,7 @@ test("filters the portfolio and article collection", () => {
     window.history.pushState({}, "", "/articles");
     render(<App />);
 
-    expect(screen.getAllByText("26")).toHaveLength(2);
+    expect(screen.getAllByText("27")).toHaveLength(2);
     expect(screen.getByText("Featured guide")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Browse all writing" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "AI Content Prompterrr" })).toBeInTheDocument();
@@ -176,8 +176,8 @@ test("filters the portfolio and article collection", () => {
 
     const publishedArticleLinks = screen.getAllByRole("link")
         .filter((link) => link.href.startsWith("https://radhakishan404.is-a.dev/articles/"));
-    expect(publishedArticleLinks).toHaveLength(26);
-    expect(new Set(publishedArticleLinks.map((link) => link.href)).size).toBe(26);
+    expect(publishedArticleLinks).toHaveLength(27);
+    expect(new Set(publishedArticleLinks.map((link) => link.href)).size).toBe(27);
     expect(publishedArticleLinks.every((link) => link.href.endsWith("/"))).toBe(true);
 
     fireEvent.change(screen.getByLabelText("Search the archive"), { target: { value: "zero rupees" } });
@@ -216,6 +216,10 @@ test("opens a current project as an evidence-based case study", () => {
 test("uses canonical destinations for recent writing", () => {
     render(<App />);
 
+    expect(screen.getByRole("link", { name: /Browser Use/i })).toHaveAttribute(
+        "href",
+        "https://radhakishan404.is-a.dev/articles/browser-use/"
+    );
     expect(screen.getByRole("link", { name: /10 AI coding tools/i })).toHaveAttribute(
         "href",
         "https://radhakishan404.is-a.dev/articles/free-ai-coding-tools-zero-rupees/"
@@ -223,10 +227,6 @@ test("uses canonical destinations for recent writing", () => {
     expect(screen.getByRole("link", { name: /Garry Tan's gstack/i })).toHaveAttribute(
         "href",
         "https://radhakishan404.is-a.dev/articles/garry-tan-gstack-claude-code-agents/"
-    );
-    expect(screen.getByRole("link", { name: /Claude Fable 5 master guide/i })).toHaveAttribute(
-        "href",
-        "https://radhakishan404.is-a.dev/articles/claude-fable-5-master-guide/"
     );
 });
 
