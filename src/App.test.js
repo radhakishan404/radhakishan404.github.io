@@ -168,7 +168,7 @@ test("filters the portfolio and article collection", () => {
     window.history.pushState({}, "", "/articles");
     render(<App />);
 
-    expect(screen.getAllByText("27")).toHaveLength(2);
+    expect(screen.getAllByText("28")).toHaveLength(2);
     expect(screen.getByText("Featured guide")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Browse all writing" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "AI Content Prompterrr" })).toBeInTheDocument();
@@ -176,8 +176,8 @@ test("filters the portfolio and article collection", () => {
 
     const publishedArticleLinks = screen.getAllByRole("link")
         .filter((link) => link.href.startsWith("https://radhakishan404.is-a.dev/articles/"));
-    expect(publishedArticleLinks).toHaveLength(27);
-    expect(new Set(publishedArticleLinks.map((link) => link.href)).size).toBe(27);
+    expect(publishedArticleLinks).toHaveLength(28);
+    expect(new Set(publishedArticleLinks.map((link) => link.href)).size).toBe(28);
     expect(publishedArticleLinks.every((link) => link.href.endsWith("/"))).toBe(true);
 
     fireEvent.change(screen.getByLabelText("Search the archive"), { target: { value: "zero rupees" } });
@@ -214,8 +214,13 @@ test("opens a current project as an evidence-based case study", () => {
 });
 
 test("uses canonical destinations for recent writing", () => {
+    window.history.pushState({}, "", "/articles");
     render(<App />);
 
+    expect(screen.getByRole("link", { name: /NVIDIA Nemotron 3/i })).toHaveAttribute(
+        "href",
+        "https://radhakishan404.is-a.dev/articles/nvidia-nemotron-breakdown/"
+    );
     expect(screen.getByRole("link", { name: /Browser Use/i })).toHaveAttribute(
         "href",
         "https://radhakishan404.is-a.dev/articles/browser-use/"

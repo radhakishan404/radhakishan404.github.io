@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "nvidia-nemotron-breakdown",
+        title: "NVIDIA Nemotron 3: benchmarks and setup guide",
+        excerpt: "How the MoE architecture works, how Nano, Super and Ultra compare, what the benchmarks mean, and how to run it locally or through NVIDIA's free API.",
+        category: "AI models",
+        date: "Aug 23, 2026",
+        cover: articleAsset("nvidia-nemotron-breakdown-cover.svg")
+    },
+    {
         slug: "browser-use",
         title: "Browser Use: give your coding agent browser control",
         excerpt: "The official repository, exact setup prompt, Chrome connection steps, useful examples, and safety notes in one place.",

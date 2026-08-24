@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA Nemotron 3: Benchmarks & Setup Guide | RK Codex</title>
+<meta name="description" content="A practical NVIDIA Nemotron 3 guide covering its MoE architecture, Nano, Super and Ultra models, benchmarks, local RTX setup, and free API access.">
+<meta name="author" content="Radhakishan Jangid">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#111111">
+<link rel="canonical" href="https://radhakishan404.is-a.dev/articles/nvidia-nemotron-breakdown/">
+<meta property="og:locale" content="en_IN">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="RK Codex">
+<meta property="og:title" content="NVIDIA Nemotron 3: Benchmarks & Setup Guide">
+<meta property="og:description" content="Understand Nemotron 3's MoE architecture, compare Nano, Super and Ultra, review benchmarks, and run the model locally or through NVIDIA's free API.">
+<meta property="og:url" content="https://radhakishan404.is-a.dev/articles/nvidia-nemotron-breakdown/">
+<meta property="og:image" content="https://radhakishan404.is-a.dev/images/radhakishan-red-portrait.png">
+<meta property="og:image:alt" content="Radhakishan Jangid, author of the NVIDIA Nemotron 3 guide">
+<meta property="article:published_time" content="2026-08-23T10:23:00+05:30">
+<meta property="article:modified_time" content="2026-08-23T10:23:00+05:30">
+<meta property="article:author" content="Radhakishan Jangid">
+<meta property="article:section" content="AI Models">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NVIDIA Nemotron 3: Benchmarks & Setup Guide">
+<meta name="twitter:description" content="MoE architecture, model comparison, benchmarks, local RTX setup, and NVIDIA's free API—explained clearly.">
+<meta name="twitter:image" content="https://radhakishan404.is-a.dev/images/radhakishan-red-portrait.png">
+<meta name="twitter:image:alt" content="Radhakishan Jangid, author of the NVIDIA Nemotron 3 guide">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "NVIDIA Nemotron 3: Full Breakdown, Benchmarks and Setup Guide",
+  "description": "A practical NVIDIA Nemotron 3 guide covering its MoE architecture, Nano, Super and Ultra models, benchmarks, local RTX setup, and free API access.",
+  "url": "https://radhakishan404.is-a.dev/articles/nvidia-nemotron-breakdown/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://radhakishan404.is-a.dev/articles/nvidia-nemotron-breakdown/"
+  },
+  "datePublished": "2026-08-23T10:23:00+05:30",
+  "dateModified": "2026-08-23T10:23:00+05:30",
+  "author": {
+    "@type": "Person",
+    "name": "Radhakishan Jangid",
+    "url": "https://radhakishan404.is-a.dev/",
+    "sameAs": [
+      "https://www.instagram.com/rk.codex",
+      "https://www.youtube.com/@rk-codex",
+      "https://github.com/radhakishan404"
+    ]
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Radhakishan Jangid",
+    "url": "https://radhakishan404.is-a.dev/"
+  },
+  "image": "https://radhakishan404.is-a.dev/images/radhakishan-red-portrait.png",
+  "articleSection": "AI Models",
+  "keywords": [
+    "NVIDIA Nemotron 3",
+    "Nemotron 3 Nano",
+    "open-weight AI model",
+    "mixture of experts",
+    "local LLM",
+    "RTX AI model",
+    "NVIDIA API"
+  ],
+  "inLanguage": "en-IN"
+}
+</script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f7f5;
+    --border: #e5e5e3;
+    --text: #1a1a1a;
+    --muted: #888;
+    --accent: #1a1a1a;
+    --code-bg: #f4f4f2;
+    --link: #1a1a1a;
+  }
+  [data-theme="dark"] {
+    --bg: #111111;
+    --surface: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e8e6e1;
+    --muted: #666;
+    --accent: #e8e6e1;
+    --code-bg: #1e1e1e;
+    --link: #e8e6e1;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', serif;
+    font-size: 17px;
+    line-height: 1.78;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .topbar {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .brand {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+  .brand span { color: var(--muted); }
+  .topbar-right { display: flex; gap: 8px; align-items: center; }
+  .toggle-group { display: flex; gap: 6px; }
+  .toggle-btn {
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.75rem;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.15s;
+  }
+  .toggle-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .toggle-btn:hover:not(.active) { border-color: var(--muted); color: var(--text); }
+
+  .wrapper { max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; }
+
+  .article-header { margin-bottom: 48px; }
+  .tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: block;
+  }
+  h1 {
+    font-family: 'Georgia', serif;
+    font-size: 2.2rem;
+    line-height: 1.15;
+    font-weight: normal;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .meta {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .meta a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+  .meta a:hover { border-color: var(--text); }
+
+  h2 {
+    font-family: 'Georgia', serif;
+    font-size: 1.45rem;
+    font-weight: normal;
+    margin: 52px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.3px;
+  }
+  h3 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 32px 0 10px;
+  }
+  p { margin-bottom: 20px; }
+  a { color: var(--text); border-bottom: 1px solid var(--border); text-decoration: none; }
+  a:hover { border-color: var(--text); }
+  strong { font-weight: 700; }
+
+  .callout {
+    padding: 16px 20px;
+    border-radius: 2px;
+    margin: 24px 0;
+    font-size: 0.92rem;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.65;
+    border-left: 3px solid var(--text);
+    background: var(--surface);
+  }
+  .callout-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+    color: var(--muted);
+  }
+
+  blockquote {
+    border-left: 3px solid var(--border);
+    margin: 28px 0;
+    padding: 4px 0 4px 20px;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--text);
+    padding: 20px 24px;
+    margin: 36px 0;
+    border-radius: 2px;
+  }
+  .toc-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .toc ol { list-style: none; counter-reset: toc; padding: 0; }
+  .toc li {
+    counter-increment: toc;
+    margin-bottom: 6px;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85rem;
+  }
+  .toc li::before { content: counter(toc) ". "; color: var(--muted); font-weight: 700; }
+  .toc a { color: var(--text); border-bottom: none; }
+  .toc a:hover { border-bottom: 1px solid var(--border); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85rem;
+  }
+  th {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--border);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  tr.hl td { background: var(--surface); font-weight: 700; }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    border-radius: 2px;
+    overflow-x: auto;
+    margin: 20px 0;
+    position: relative;
+  }
+  pre code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text);
+    background: none;
+    padding: 0;
+  }
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 2px;
+    color: var(--text);
+  }
+  pre code { background: none; padding: 0; }
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.7rem;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { border-color: var(--text); color: var(--text); }
+  .copy-btn.done { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+  .steps { margin: 24px 0; }
+  .step {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 28px;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--text);
+    color: var(--bg);
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-body { flex: 1; }
+  .step-title {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+  .step-desc { font-family: 'Arial', sans-serif; font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+
+  .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-q:hover { color: var(--muted); }
+  .faq-a { font-size: 0.9rem; color: var(--muted); display: none; line-height: 1.7; font-family: 'Arial', sans-serif; margin-top: 10px; }
+  .faq-a.open { display: block; }
+  .faq-arrow { transition: transform 0.2s; font-style: normal; }
+  .faq-arrow.open { transform: rotate(180deg); }
+
+  .link-list { margin: 20px 0; }
+  .link-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Arial', sans-serif;
+  }
+  .link-item:last-child { border-bottom: none; }
+  .link-num {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-weight: 700;
+    min-width: 20px;
+    margin-top: 2px;
+  }
+  .link-body { flex: 1; }
+  .link-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 3px; }
+  .link-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin-bottom: 4px; }
+  .link-url {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .cta-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--text);
+    padding: 28px;
+    border-radius: 2px;
+    text-align: center;
+    margin: 48px 0;
+  }
+  .cta-block h3 {
+    font-family: 'Georgia', serif;
+    font-size: 1.3rem;
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+  .cta-block p {
+    color: var(--muted);
+    font-family: 'Arial', sans-serif;
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--text);
+    color: var(--bg);
+    padding: 12px 28px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    transition: all 0.15s;
+    margin: 4px;
+    border: none;
+  }
+  .cta-btn:hover { opacity: 0.8; }
+  .cta-btn.outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .cta-btn.outline:hover { border-color: var(--text); }
+
+  .more-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .more-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 18px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s;
+    display: block;
+  }
+  .more-card:hover { border-color: var(--text); }
+  .more-card-tag { font-family: 'Arial', sans-serif; font-size: 0.68rem; color: var(--muted); letter-spacing: 1.2px; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+  .more-card-title { font-family: 'Arial', sans-serif; font-weight: 700; font-size: 0.88rem; line-height: 1.4; margin-bottom: 6px; }
+  .more-card-desc { font-family: 'Arial', sans-serif; font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 36px 24px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  footer a { color: var(--muted); border-bottom: 1px solid var(--border); text-decoration: none; }
+  footer a:hover { color: var(--text); border-color: var(--text); }
+  .footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 10px; flex-wrap: wrap; }
+
+  @media(max-width:600px) {
+    h1 { font-size: 1.7rem; }
+    .wrapper { padding: 36px 18px 80px; }
+    .more-grid { grid-template-columns: 1fr; }
+    .topbar { padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="https://radhakishan404.is-a.dev/">rk<span>.</span>codex</a>
+  <div class="topbar-right">
+    <div class="toggle-group">
+      <button class="toggle-btn" id="btn-light" onclick="setTheme('light')">Light</button>
+      <button class="toggle-btn active" id="btn-dark" onclick="setTheme('dark')">Dark</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <div class="article-header">
+    <span class="tag">AI Model · August 2026</span>
+    <h1>NVIDIA Nemotron 3 — Full Breakdown, Benchmarks & Setup Guide</h1>
+    <p class="subtitle">31 billion parameters. But it only uses 3 billion at a time. Runs on your RTX GPU. Free. Open source. Here is everything.</p>
+    <div class="meta">
+      <span>By <a href="https://www.instagram.com/rk.codex" target="_blank">@rk.codex</a></span>
+      <span>·</span>
+      <span>August 2026</span>
+      <span>·</span>
+      <span>8 min read</span>
+      <span>·</span>
+      <a href="https://huggingface.co/nvidia/Nemotron-3-Nano-30B-A3B" target="_blank">Download Model ↗</a>
+      <span>·</span>
+      <a href="https://www.youtube.com/@rk-codex?sub_confirmation=1" target="_blank">YouTube ↗</a>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="callout-label">No GPU? No problem</span>
+    Try Nemotron 3 free via NVIDIA's API Catalog at <a href="https://build.nvidia.com" target="_blank">build.nvidia.com</a> — no GPU required. Generous free tier for developers.
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">What's in this guide</div>
+    <ol>
+      <li><a href="#what">What is Nemotron 3 — and why it matters</a></li>
+      <li><a href="#how">How the architecture actually works</a></li>
+      <li><a href="#family">The three models — Nano, Super, Ultra</a></li>
+      <li><a href="#benchmarks">Benchmarks</a></li>
+      <li><a href="#setup">Complete setup guide</a></li>
+      <li><a href="#nogs">No GPU? Use the free API</a></li>
+      <li><a href="#links">All official links</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+
+  <h2 id="what">What is Nemotron 3 — and why it matters</h2>
+
+  <p>NVIDIA is known as a chip company. They make GPUs. That's their business. So when they released a family of open-weight AI models — with training data, training recipes, and reinforcement learning environments all included — the AI community paid attention.</p>
+
+  <p>Nemotron 3 is a family of three open-weight language models built specifically for agentic AI. Not for chat. Not for question answering. For agents — AI systems that plan, use tools, and keep working on long complex tasks without stopping to ask for help.</p>
+
+  <p>NVIDIA released it in three stages: Nano in December 2025, Super in March 2026, Ultra in June 2026. All three share the same underlying architecture. All three are genuinely open — weights, training data, training recipes, RL environments. Everything.</p>
+
+  <blockquote>
+    "Open innovation is the foundation of AI progress. With Nemotron, we're transforming advanced AI into an open platform that gives developers the transparency and efficiency they need to build."
+    <cite>— Jensen Huang, CEO of NVIDIA, December 2025</cite>
+  </blockquote>
+
+  <h2 id="how">How the architecture actually works</h2>
+
+  <p>The key to understanding Nemotron is the architecture — it's called <strong>Hybrid Mamba-Transformer MoE</strong>. That sounds complicated. It isn't.</p>
+
+  <p>MoE stands for Mixture of Experts. Think of it like a company with 31 billion employees. For each task, only 3 billion of them show up to work. The rest stay home. The result — you get the intelligence of a 31B model but the speed and cost of a 3B model.</p>
+
+  <p>The Mamba component replaces the standard Transformer attention mechanism for long context. Traditional Transformers get slow and expensive on very long inputs. Mamba handles long sequences efficiently — Nemotron 3 Nano supports a 1 million token context window with 87.5% accuracy maintained at 512K tokens.</p>
+
+  <p>Combined — this architecture delivers <strong>4x higher throughput</strong> than the previous Nemotron generation at the same accuracy level.</p>
+
+  <h2 id="family">The three models — Nano, Super, Ultra</h2>
+
+  <table>
+    <tr>
+      <th>Model</th>
+      <th>Total params</th>
+      <th>Active params</th>
+      <th>Context</th>
+      <th>Best for</th>
+    </tr>
+    <tr class="hl">
+      <td><strong>Nano</strong></td>
+      <td>31.6B</td>
+      <td>3.6B per token</td>
+      <td>1M tokens</td>
+      <td>Local RTX GPU, fast sub-agents</td>
+    </tr>
+    <tr>
+      <td>Super</td>
+      <td>~100B</td>
+      <td>~10B per token</td>
+      <td>128K tokens</td>
+      <td>Multi-agent orchestration</td>
+    </tr>
+    <tr>
+      <td>Ultra</td>
+      <td>550B</td>
+      <td>55B per token</td>
+      <td>128K tokens</td>
+      <td>Complex reasoning, research</td>
+    </tr>
+  </table>
+
+  <p>For most people reading this — <strong>Nano is your model</strong>. It runs on a 24GB GPU. RTX 3090, RTX 4090, RTX 4080. It's fast. It's free. And it's capable enough for most real-world agentic tasks.</p>
+
+  <h2 id="benchmarks">Benchmarks</h2>
+
+  <h3>Coding — SWE-Bench Verified</h3>
+  <table>
+    <tr><th>Model</th><th>Score</th><th>Type</th></tr>
+    <tr class="hl"><td><strong>Nemotron 3 Ultra</strong></td><td><strong>48 Intelligence Index</strong></td><td>Open weight</td></tr>
+    <tr><td>Nemotron 3 Super</td><td>36</td><td>Open weight</td></tr>
+    <tr><td>Gemma 4 31B</td><td>39</td><td>Open weight</td></tr>
+    <tr><td>GPT-OSS 120B</td><td>33</td><td>Open weight</td></tr>
+    <tr><td>Kimi K2.6</td><td>54</td><td>Open weight (China)</td></tr>
+  </table>
+
+  <div class="callout">
+    <span class="callout-label">Honest caveat</span>
+    Ultra leads US-developed open-weight models. Chinese open models like Kimi K2.6 still score higher globally. If raw benchmark score is your only metric — Kimi K2.6 is currently the leader. Nemotron's advantage is data residency, export compliance, and RTX hardware integration.
+  </div>
+
+  <h3>Long context — Nemotron 3 Nano vs Qwen3 30B</h3>
+  <table>
+    <tr><th>Model</th><th>Accuracy at 64K tokens</th><th>Accuracy at 512K tokens</th><th>Max context</th></tr>
+    <tr class="hl"><td><strong>Nemotron 3 Nano</strong></td><td><strong>87.5%</strong></td><td><strong>70.56%</strong></td><td><strong>1M tokens</strong></td></tr>
+    <tr><td>Qwen3 30B-A3B</td><td>~60.69%</td><td>N/A</td><td>128K tokens</td></tr>
+  </table>
+
+  <p>Long context is where Nano wins clearly. 1 million token context window with accuracy maintained across the range — Qwen3 doesn't even support contexts beyond 128K.</p>
+
+  <h2 id="setup">Complete setup guide</h2>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Check your GPU</div>
+        <div class="step-desc">Nemotron 3 Nano requires a 24GB GPU minimum for the full BF16 model. The quantized version can run on less. Compatible GPUs: RTX 3090, RTX 4090, RTX 4080, RTX 4070 Ti, A100, H100. Check your GPU memory with:</div>
+        <pre><code>nvidia-smi</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+        <div class="step-desc">Look for the "Memory-Usage" column. You need at least 24576 MiB available.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Install Ollama (easiest method)</div>
+        <div class="step-desc">Ollama is the simplest way to run Nemotron locally. Install it first:</div>
+        <pre><code># macOS / Linux
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Windows — download from
+# https://ollama.com/download/windows</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Pull and run Nemotron 3 Nano</div>
+        <div class="step-desc">One command downloads and starts the model:</div>
+        <pre><code>ollama run nemotron3-nano</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+        <div class="step-desc">First run downloads the model weights (~18GB). After that it starts instantly. You'll see a chat prompt appear when it's ready.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Alternative — download direct from Hugging Face</div>
+        <div class="step-desc">If you want the raw weights for custom deployment:</div>
+        <pre><code># Install huggingface_hub first
+pip install huggingface_hub
+
+# Download the model
+huggingface-cli download nvidia/Nemotron-3-Nano-30B-A3B \
+  --local-dir ./nemotron-nano</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+        <div class="step-desc">This downloads to a local folder. You can then load it with any framework — vLLM, llama.cpp, LM Studio, etc.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">Use via Python — OpenAI compatible API</div>
+        <div class="step-desc">Once Ollama is running, Nemotron exposes an OpenAI-compatible endpoint. Use it exactly like GPT or Claude in your code:</div>
+        <pre><code>from openai import OpenAI
+
+client = OpenAI(
+    base_url="http://localhost:11434/v1",
+    api_key="ollama",  # required but ignored locally
+)
+
+response = client.chat.completions.create(
+    model="nemotron3-nano",
+    messages=[
+        {"role": "user", "content": "Explain MoE architecture simply."}
+    ]
+)
+
+print(response.choices[0].message.content)</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <div class="step-title">Use with LM Studio (GUI — no code needed)</div>
+        <div class="step-desc">If you prefer a visual interface — download LM Studio, search for "nemotron" in the model browser, download, and chat. No terminal required.</div>
+        <pre><code># Download LM Studio from:
+# https://lmstudio.ai
+
+# Then search: nvidia/nemotron-3-nano
+# Click download. Click load. Chat.</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 id="nogs">No GPU? Use the free API</h2>
+
+  <p>If you don't have a compatible GPU — NVIDIA provides free API access through their AI Catalog. No download needed. No GPU needed. Just an API key.</p>
+
+  <pre><code>pip install openai
+
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://integrate.api.nvidia.com/v1",
+    api_key="YOUR_NVIDIA_API_KEY",  # free at build.nvidia.com
+)
+
+response = client.chat.completions.create(
+    model="nvidia/nemotron-3-nano-30b-a3b",
+    messages=[{"role": "user", "content": "Your prompt here"}],
+    max_tokens=1024,
+)
+
+print(response.choices[0].message.content)</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+  <p>Get your free API key at <a href="https://build.nvidia.com" target="_blank">build.nvidia.com</a>. The free tier is generous enough for development and experimentation.</p>
+
+  <h2 id="links">All official links</h2>
+
+  <div class="link-list">
+    <div class="link-item">
+      <div class="link-num">01</div>
+      <div class="link-body">
+        <div class="link-title"><a href="https://nvidianews.nvidia.com/news/nvidia-debuts-nemotron-3-family-of-open-models" target="_blank">Official NVIDIA Announcement</a></div>
+        <div class="link-desc">The original press release. Jensen Huang quote, full family specs, and NVIDIA Open Model License details.</div>
+        <div class="link-url">nvidianews.nvidia.com/news/nvidia-debuts-nemotron-3-family-of-open-models</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-num">02</div>
+      <div class="link-body">
+        <div class="link-title"><a href="https://huggingface.co/nvidia/Nemotron-3-Nano-30B-A3B" target="_blank">Hugging Face — Nano Model Card</a></div>
+        <div class="link-desc">Download model weights, view full specs, benchmarks, and deployment examples. BF16, FP8, and quantized variants available.</div>
+        <div class="link-url">huggingface.co/nvidia/Nemotron-3-Nano-30B-A3B</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-num">03</div>
+      <div class="link-body">
+        <div class="link-title"><a href="https://developer.nvidia.com/blog/inside-nvidia-nemotron-3-techniques-tools-and-data-that-make-it-efficient-and-accurate/" target="_blank">NVIDIA Technical Blog — Inside Nemotron 3</a></div>
+        <div class="link-desc">Deep technical breakdown of the architecture. MoE routing, Mamba2-Transformer hybrid, training methodology, and GPU requirements.</div>
+        <div class="link-url">developer.nvidia.com/blog/inside-nvidia-nemotron-3</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-num">04</div>
+      <div class="link-body">
+        <div class="link-title"><a href="https://build.nvidia.com" target="_blank">NVIDIA AI Catalog — Free API Access</a></div>
+        <div class="link-desc">Try Nemotron free in browser or via API. No GPU needed. Free tier available for developers and experimenters.</div>
+        <div class="link-url">build.nvidia.com</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-num">05</div>
+      <div class="link-body">
+        <div class="link-title"><a href="https://nvidia.com/en-us/ai-data-science/foundation-models/nemotron/" target="_blank">NVIDIA Nemotron Product Page</a></div>
+        <div class="link-desc">Full family overview, hardware compatibility guide, enterprise deployment options, and cloud provider integrations.</div>
+        <div class="link-url">nvidia.com/en-us/ai-data-science/foundation-models/nemotron</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-num">06</div>
+      <div class="link-body">
+        <div class="link-title"><a href="https://thenewstack.io/nvidias-launches-the-next-generation-of-its-nemotron-models/" target="_blank">The New Stack — 3 Trillion Token Training Data</a></div>
+        <div class="link-desc">Best article covering the open-source training data release. "Three trillion tokens of pre-training data" quote is here.</div>
+        <div class="link-url">thenewstack.io/nvidias-launches-the-next-generation-of-its-nemotron-models</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-num">07</div>
+      <div class="link-body">
+        <div class="link-title"><a href="https://llm-stats.com/blog/research/nemotron-3-nano-launch" target="_blank">LLM Stats — Full Nano Benchmark Analysis</a></div>
+        <div class="link-desc">Independent benchmark analysis. Long context comparison vs Qwen3, throughput comparisons, and pricing breakdown.</div>
+        <div class="link-url">llm-stats.com/blog/research/nemotron-3-nano-launch</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-num">08</div>
+      <div class="link-body">
+        <div class="link-title"><a href="https://www.buildfastwithai.com/blogs/nvidia-nemotron-3-ultra-review-2026" target="_blank">Build Fast With AI — Ultra Review</a></div>
+        <div class="link-desc">Deep dive on Nemotron 3 Ultra. Architecture, Intelligence Index score of 48, and honest comparison vs Chinese open models.</div>
+        <div class="link-url">buildfastwithai.com/blogs/nvidia-nemotron-3-ultra-review-2026</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-num">09</div>
+      <div class="link-body">
+        <div class="link-title"><a href="https://investor.nvidia.com/news/press-release-details/2025/NVIDIA-Debuts-Nemotron-3-Family-of-Open-Models/default.aspx" target="_blank">NVIDIA Investor Relations — Press Release</a></div>
+        <div class="link-desc">Official investor-grade announcement. Full family specs, availability, and cloud partner list including AWS, Google Cloud, Azure.</div>
+        <div class="link-url">investor.nvidia.com/news/press-release-details/2025/NVIDIA-Debuts-Nemotron-3</div>
+      </div>
+    </div>
+    <div class="link-item">
+      <div class="link-num">10</div>
+      <div class="link-body">
+        <div class="link-title"><a href="https://aws.amazon.com/about-aws/whats-new/2025/12/nvidia-nemotron-3-nano-amazon-bedrock/" target="_blank">AWS — Nemotron 3 on Amazon Bedrock</a></div>
+        <div class="link-desc">Use Nemotron via Amazon Bedrock serverless — US East, US West, Asia Pacific (Mumbai), and 4 more regions. OpenAI API compatible.</div>
+        <div class="link-url">aws.amazon.com/about-aws/whats-new/nemotron-3-nano-amazon-bedrock</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Frequently asked questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      What GPU do I need to run Nemotron 3 Nano at home?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">24GB VRAM minimum for the full BF16 model. RTX 3090, RTX 4090, RTX 4080 all work. For quantized versions (4-bit NVFP4) you can get away with 16GB. RTX 4070 Ti with 16GB can run the quantized variant comfortably.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Is Nemotron actually free to use commercially?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">Yes. NVIDIA Open Model License allows commercial use. You can use it in production apps, charge customers, build products on top of it. The training data and recipes are also released openly. One of the most genuinely open releases from a major AI lab.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      How does it compare to Llama 3 or Qwen3?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">On long context tasks — Nemotron 3 Nano is clearly better. 1M token context vs 128K for Qwen3. On raw intelligence benchmarks, Qwen3 scores about 6 points higher on the Artificial Analysis Index but at 40% lower throughput per GPU. For agentic workflows where you need fast inference across many concurrent agents — Nemotron's efficiency advantage compounds fast.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      What's the difference between Nano, Super, and Ultra?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">Size and use case. Nano — 31B total, 3.6B active — is your local GPU model, fast sub-agents, everyday coding. Super — 100B total, 10B active — is for multi-agent orchestration where you need more reasoning depth. Ultra — 550B total, 55B active — is for mission-critical workflows, complex research, maximum accuracy regardless of cost. Unless you have an A100 cluster, start with Nano.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Why is NVIDIA releasing AI models when they sell GPUs?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">Same playbook as CUDA in 2006 and RTX in 2018. Give away the software. Sell the hardware. The more powerful free models exist that run best on NVIDIA GPUs — the more RTX 4090s, DGX Sparks, and H100s get sold. NVIDIA doesn't compete with OpenAI. They want you to need NVIDIA hardware to run whatever AI you use.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Can I fine-tune Nemotron on my own data?
+      <em class="faq-arrow">▼</em>
+    </div>
+    <div class="faq-a">Yes. NVIDIA released training recipes and the NeMo framework alongside the weights. You can fine-tune on custom datasets using LoRA, QLoRA, or full fine-tuning. The training infrastructure documentation is at developer.nvidia.com under the Nemotron technical blog.</div>
+  </div>
+
+  <div class="cta-block">
+    <h3>Try Nemotron 3 right now — free</h3>
+    <p>No GPU needed to start. Use the free API at build.nvidia.com or download the model weights from Hugging Face.</p>
+    <a href="https://build.nvidia.com" target="_blank" class="cta-btn">Try Free API ↗</a>
+    <a href="https://huggingface.co/nvidia/Nemotron-3-Nano-30B-A3B" target="_blank" class="cta-btn outline">Download Model ↗</a>
+  </div>
+
+  <h2>More from rk.codex</h2>
+  <div class="more-grid">
+    <a class="more-card" href="https://radhakishan404.is-a.dev/articles/claude-fable-5-breakdown/" target="_blank">
+      <div class="more-card-tag">AI Model</div>
+      <div class="more-card-title">Claude Fable 5 — Full Breakdown</div>
+      <div class="more-card-desc">Anthropic hid this model for a year. 80.3% on SWE-Bench. Full breakdown inside.</div>
+    </a>
+    <a class="more-card" href="https://radhakishan404.is-a.dev/articles/sakana-fugu-breakdown/" target="_blank">
+      <div class="more-card-tag">AI Model</div>
+      <div class="more-card-title">Sakana Fugu — Japan's Fable 5</div>
+      <div class="more-card-desc">Beats GPT-5.5. $20/month. Built by co-authors of the Transformer paper.</div>
+    </a>
+    <a class="more-card" href="https://radhakishan404.is-a.dev/articles/odysseus-setup-guide/" target="_blank">
+      <div class="more-card-tag">Setup Guide</div>
+      <div class="more-card-title">Odysseus — PewDiePie's Free AI</div>
+      <div class="more-card-desc">30,000 stars in 48 hours. Full install guide inside.</div>
+    </a>
+    <a class="more-card" href="https://www.youtube.com/@rk-codex?sub_confirmation=1" target="_blank">
+      <div class="more-card-tag">YouTube</div>
+      <div class="more-card-title">Full Tutorials on rk.codex</div>
+      <div class="more-card-desc">Deep dives every week. Subscribe for more.</div>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <div>By <a href="https://radhakishan404.is-a.dev/" target="_blank">Radhakishan Jangid</a> · <a href="https://www.instagram.com/rk.codex" target="_blank">@rk.codex</a> · <a href="https://www.youtube.com/@rk-codex?sub_confirmation=1" target="_blank">YouTube</a></div>
+  <div class="footer-links">
+    <a href="https://build.nvidia.com" target="_blank">Free API</a>
+    <a href="https://huggingface.co/nvidia/Nemotron-3-Nano-30B-A3B" target="_blank">Download</a>
+    <a href="https://nvidianews.nvidia.com/news/nvidia-debuts-nemotron-3-family-of-open-models" target="_blank">Official Announcement</a>
+  </div>
+</footer>
+
+<script>
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('btn-light').classList.toggle('active', t === 'light');
+  document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
+}
+function toggleFaq(el) {
+  const ans = el.nextElementSibling;
+  const arrow = el.querySelector('.faq-arrow');
+  ans.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+function copyCode(btn) {
+  const code = btn.previousSibling.textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
