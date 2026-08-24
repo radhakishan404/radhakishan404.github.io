@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">NVIDIA Nemotron 3 breakdown and setup guide</title>
+  <desc id="description">Editorial cover with a dark technical grid, green accents, and the Nemotron 3 article title.</desc>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101310"/>
+      <stop offset="1" stop-color="#050605"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#242a24" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#wash)"/>
+  <rect width="1200" height="675" fill="url(#grid)" opacity=".58"/>
+  <circle cx="1030" cy="118" r="230" fill="#76b900" opacity=".09"/>
+  <circle cx="1030" cy="118" r="128" fill="none" stroke="#76b900" stroke-width="2" opacity=".5"/>
+  <circle cx="1030" cy="118" r="70" fill="none" stroke="#76b900" stroke-width="2" opacity=".9"/>
+  <path d="M914 522h211M914 545h149M914 568h181" stroke="#76b900" stroke-width="5"/>
+  <text x="76" y="86" fill="#76b900" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="5">RK CODEX / AI MODELS</text>
+  <text x="76" y="225" fill="#f2f4ef" font-family="Arial, sans-serif" font-size="92" font-weight="700" letter-spacing="-4">NEMOTRON 3</text>
+  <text x="76" y="309" fill="#f2f4ef" font-family="Arial, sans-serif" font-size="56" font-weight="400" letter-spacing="-2">BREAKDOWN &amp; SETUP</text>
+  <text x="76" y="398" fill="#98a098" font-family="Arial, sans-serif" font-size="25">MoE architecture · benchmarks · local RTX · free API</text>
+  <rect x="76" y="500" width="350" height="64" rx="4" fill="#76b900"/>
+  <text x="103" y="541" fill="#0a0c09" font-family="Arial, sans-serif" font-size="24" font-weight="700">31B TOTAL / 3B ACTIVE</text>
+  <text x="76" y="622" fill="#626a62" font-family="Arial, sans-serif" font-size="18" letter-spacing="2">RADHAKISHAN404.IS-A.DEV</text>
+</svg>
