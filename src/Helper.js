@@ -1,7 +1,5 @@
-import $ from "jquery";
-
 export function permalinkGenerate(val) {
-    let permalink = $.trim(val);
+    let permalink = val.trim();
 
     // replace more then 1 space with only one
     permalink = permalink.replace(/\s+/g, ' ');

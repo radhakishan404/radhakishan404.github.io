@@ -1,4 +1,7 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Seo from "./components/common/Seo";
+import NotFound from "./components/pages/NotFound";
 
 import Home from './components/pages/Home';
 import About from './components/pages/About';
@@ -8,16 +11,20 @@ import PortfolioDetail from './components/pages/PortfolioDetail';
 import Articles from './components/pages/Articles';
 import ScrollToTop from './components/common/ScrollToTop';
 
-function App() {
+function App({ Router = BrowserRouter, routerProps = {} }) {
     return (
-        <Router>
+        <Router {...routerProps}>
+            <Seo />
             <ScrollToTop />
+            <Switch>
             <Route exact={true} path="/" component={Home} />
             <Route exact={true} path="/about" component={About} />
             <Route exact={true} path="/contact" component={Contact} />
             <Route exact={true} path="/articles" component={Articles} />
             <Route exact={true} path="/portfolio" component={Portfolio} />
             <Route exact={true} path="/portfolio/:topic" component={PortfolioDetail} />
+            <Route component={NotFound} />
+            </Switch>
         </Router>
     );
 }

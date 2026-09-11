@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+import NotFound from "./NotFound";
 import PageFrame from "../common/PageFrame";
 import softdata from "../../softdata.json";
 import { permalinkGenerate } from "../../Helper";
@@ -125,7 +126,7 @@ function PortfolioDetail({ match }) {
     );
 
     if (!project) {
-        return <Redirect to="/portfolio" />;
+        return <NotFound />;
     }
 
     return (

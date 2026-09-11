@@ -43,6 +43,9 @@ jobs:
       - name: Build portfolio
         run: npm run build
 
+      - name: Check frontend skills article
+        run: npm run test:article
+
       - name: Create static route entrypoints
         run: node scripts/create-static-route-entrypoints.js
 

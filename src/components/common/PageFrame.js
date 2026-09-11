@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./Header";
 import PointerField from "./PointerField";
 import "../css/Pages.scss";
 
-function PageFrame({ children, className = "", title }) {
-    useEffect(() => {
-        if (title) document.title = `${title} - Radhakishan Jangid`;
-    }, [title]);
-
+function PageFrame({ children, className = "" }) {
     return (
         <div className={`main-wrapper site-page ${className}`}>
             <Header />
