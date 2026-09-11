@@ -25,6 +25,7 @@
     "prebuild": "node scripts/generate-sitemap.js",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "test": "react-scripts test",
+    "test:article": "node scripts/check-frontend-article.js",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -48,8 +49,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
     "ajv": "^8.17.1",
     "ajv-keywords": "^5.1.0",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "jsdom": "^16.7.0"
   }
 }

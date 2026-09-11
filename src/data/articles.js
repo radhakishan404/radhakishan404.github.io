@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "frontend-agent-skills",
+        title: "10 GitHub agent skills every frontend developer should know",
+        excerpt: "A practical shortlist for UI, React, Next.js, performance, accessibility, and animation—with repository links, real star counts, and when to use each.",
+        category: "Developer tools",
+        date: "Sep 11, 2026",
+        cover: "/articles/frontend-agent-skills/cover.png"
+    },
+    {
         slug: "nvidia-nemotron-breakdown",
         title: "NVIDIA Nemotron 3: benchmarks and setup guide",
         excerpt: "How the MoE architecture works, how Nano, Super and Ultra compare, what the benchmarks mean, and how to run it locally or through NVIDIA's free API.",

@@ -133,7 +133,6 @@ function Home(props) {
 
     useEffect(() => {
         ReactGA.pageview(window.location.pathname + window.location.search);
-        document.title = "Radhakishan Jangid - Product Engineer";
 
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (reducedMotion) return undefined;
