@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">10 free courses to build AI agents</title>
+  <desc id="desc">A black and off-white editorial cover with a numbered list of free AI-agent courses.</desc>
+  <rect width="1200" height="630" fill="#f7f7f2"/>
+  <rect x="0" y="0" width="1200" height="18" fill="#111111"/>
+  <text x="74" y="126" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="3">RK CODEX · FREE LEARNING PATH</text>
+  <text x="70" y="244" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="800" letter-spacing="-4">10 FREE COURSES</text>
+  <text x="70" y="334" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="800" letter-spacing="-4">BUILD AI AGENTS.</text>
+  <rect x="70" y="380" width="1060" height="2" fill="#111111"/>
+  <g fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">
+    <text x="76" y="438">01  Hugging Face Agents Course</text>
+    <text x="76" y="486">02  Introduction to LangGraph</text>
+    <text x="76" y="534">03  Introduction to LangChain</text>
+  </g>
+  <g transform="translate(825 413)">
+    <rect width="305" height="142" rx="8" fill="#edff63"/>
+    <text x="26" y="60" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800">MCP · LANGCHAIN</text>
+    <text x="26" y="103" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800">LANGGRAPH · AGENTS</text>
+  </g>
+</svg>

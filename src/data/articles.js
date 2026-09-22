@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "free-ai-agent-courses",
+        title: "10 free courses to start building AI agents",
+        excerpt: "A practical learning path from AI basics to MCP, LangChain, LangGraph, and a certified Hugging Face agent project—with the official links in one place.",
+        category: "Free resources",
+        date: "Sep 22, 2026",
+        cover: "/articles/free-ai-agent-courses/cover.svg"
+    },
+    {
         slug: "frontend-agent-skills",
         title: "10 GitHub agent skills every frontend developer should know",
         excerpt: "A practical shortlist for UI, React, Next.js, performance, accessibility, and animation—with repository links, real star counts, and when to use each.",
