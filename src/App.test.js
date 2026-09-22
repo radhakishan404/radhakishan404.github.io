@@ -168,7 +168,7 @@ test("filters the portfolio and article collection", () => {
     window.history.pushState({}, "", "/articles");
     render(<App />);
 
-    expect(screen.getAllByText("29")).toHaveLength(2);
+    expect(screen.getAllByText("30")).toHaveLength(2);
     expect(screen.getByText("Featured guide")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Browse all writing" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "AI Content Prompterrr" })).toBeInTheDocument();
@@ -176,8 +176,8 @@ test("filters the portfolio and article collection", () => {
 
     const publishedArticleLinks = screen.getAllByRole("link")
         .filter((link) => link.href.startsWith("https://radhakishan404.is-a.dev/articles/"));
-    expect(publishedArticleLinks).toHaveLength(29);
-    expect(new Set(publishedArticleLinks.map((link) => link.href)).size).toBe(29);
+    expect(publishedArticleLinks).toHaveLength(30);
+    expect(new Set(publishedArticleLinks.map((link) => link.href)).size).toBe(30);
     expect(publishedArticleLinks.every((link) => link.href.endsWith("/"))).toBe(true);
 
     fireEvent.change(screen.getByLabelText("Search the archive"), { target: { value: "zero rupees" } });
