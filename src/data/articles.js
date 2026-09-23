@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "open-source-developer-tools",
+        title: "10 open-source alternatives to paid developer tools",
+        excerpt: "Official links and practical notes for evaluating alternatives to Postman, Sentry, Zapier, Vercel, Firebase, Datadog, and GitHub Copilot.",
+        category: "Developer tools",
+        date: "Sep 23, 2026",
+        cover: "/articles/open-source-developer-tools/cover.png"
+    },
+    {
         slug: "free-ai-agent-courses",
         title: "10 free courses to start building AI agents",
         excerpt: "A practical learning path from AI basics to MCP, LangChain, LangGraph, and a certified Hugging Face agent project—with the official links in one place.",
