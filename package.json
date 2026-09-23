@@ -25,7 +25,7 @@
     "prebuild": "node scripts/generate-sitemap.js",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "test": "react-scripts test",
-    "test:article": "node scripts/check-frontend-article.js",
+    "test:article": "node scripts/check-frontend-article.js && node scripts/check-open-source-tools-article.js",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
