@@ -236,7 +236,7 @@ export function MacbookScroll() {
 
                 <div className="macbook-story__facts section-shell">
                     <p>Marketplace / Admin operations / API gateway / Services</p>
-                    <MagneticAction as="link" to="/portfolio" className="text-action">
+                    <MagneticAction as="link" to="/portfolio/" className="text-action">
                         Explore project work <span aria-hidden="true">↗</span>
                     </MagneticAction>
                 </div>
@@ -301,7 +301,7 @@ export function TiltProject({ project, expanded, onToggle }) {
                         Visit project <span aria-hidden="true">↗</span>
                     </a>
                 ) : (
-                    <Link to="/portfolio">
+                    <Link to="/portfolio/">
                         View portfolio <span aria-hidden="true">↗</span>
                     </Link>
                 )}

@@ -11,7 +11,7 @@ export const CURRENT_PROJECTS = [
         year: "2024 — now",
         role: "Senior Software Engineer",
         status: "Active platform",
-        to: "/portfolio/infolive",
+        to: "/portfolio/infolive/",
         caseStudy: {
             intro: "InfoLive is not one website. It connects a public marketplace, an operations console, an API gateway, and domain services that all need to agree on the same businesses, people, products, and locations.",
             system: [
@@ -72,7 +72,7 @@ export const CURRENT_PROJECTS = [
         year: "Current build",
         role: "Product engineer",
         status: "In development",
-        to: "/portfolio/yourvay",
+        to: "/portfolio/yourvay/",
         caseStudy: {
             intro: "YOURVAY helps someone answer a simple question: where should we eat right now? The product combines place data with recent community signals instead of presenting another static restaurant directory.",
             system: [
@@ -141,7 +141,7 @@ export const CURRENT_PROJECTS = [
         year: "Open source",
         role: "Creator and maintainer",
         status: "Public repository",
-        to: "/portfolio/transformo",
+        to: "/portfolio/transformo/",
         links: [
             {
                 label: "View source",

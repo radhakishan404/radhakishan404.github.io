@@ -153,7 +153,7 @@ function About() {
                         I started working in 2018, and I still get excited when a rough idea becomes real.
                     </p>
                     <div className="about-hero__actions">
-                        <Link className="page-action" to="/portfolio">See what I’ve built</Link>
+                        <Link className="page-action" to="/portfolio/">See what I’ve built</Link>
                         <a className="page-text-link" href="https://github.com/radhakishan404" target="_blank" rel="noreferrer">
                             See what I’m building now ↗
                         </a>
@@ -333,8 +333,8 @@ function About() {
                     send it over. Those are usually the interesting ones.
                 </p>
                 <div>
-                    <Link className="page-action" to="/contact">Say hello</Link>
-                    <Link className="page-text-link" to="/articles">Read my articles</Link>
+                    <Link className="page-action" to="/contact/">Say hello</Link>
+                    <Link className="page-text-link" to="/articles/">Read my articles</Link>
                 </div>
             </section>
         </PageFrame>

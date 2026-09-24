@@ -7,7 +7,16 @@ export const SITE_URL = "https://radhakishan404.is-a.dev";
 export const VERIFICATION = "X3yExWHLcyhIPrHMHjKg6pIex1aSyL3Atw1hDdecGL0";
 const NAME = "Radhakishan Jangid";
 const PORTRAIT = `${SITE_URL}/images/radhakishan-red-portrait.png`;
-export const normalizePath = (path) => `${path.split(/[?#]/)[0].replace(/\/+$/, "")}/`;
+export const normalizePath = (path) => {
+    const clean = `${path.split(/[?#]/)[0].replace(/\/+$/, "") || "/"}/`;
+    if (clean === "/projects/") {
+        return "/portfolio/";
+    }
+    if (clean.startsWith("/projects/")) {
+        return `/portfolio/${clean.slice("/projects/".length)}`;
+    }
+    return clean;
+};
 export const absoluteUrl = (path) => new URL(path, SITE_URL).href;
 
 export const PAGE_METADATA = {

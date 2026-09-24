@@ -32,6 +32,8 @@ function Header(props) {
         setMobileMenuOpen((isOpen) => !isOpen);
     }
 
+    const currentPath = location.pathname.replace(/\/+$/, "") || "/";
+
     return (
         <Fragment>
             <header className="header-nav" id="legacy-sidebar">
@@ -40,8 +42,8 @@ function Header(props) {
                         <ul>
                             <li>
                                 <Link
-                                    aria-current={location.pathname === "/" ? "page" : undefined}
-                                    className={location.pathname === "/" ? "active" : ""}
+                                    aria-current={currentPath === "/" ? "page" : undefined}
+                                    className={currentPath === "/" ? "active" : ""}
                                     to={"/"}
                                 >
                                     <span className="menu-item-title text-gradient">Home</span>
@@ -49,25 +51,25 @@ function Header(props) {
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/about"} className={location.pathname === "/about" ? "active" : ""} >
+                                <Link to={"/about/"} className={currentPath === "/about" ? "active" : ""} >
                                     <span className="menu-item-title text-gradient">About</span>
                                     <span>Professional skills and experience</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/portfolio"} className={location.pathname.startsWith("/portfolio") ? "active" : ""}>
+                                <Link to={"/portfolio/"} className={currentPath.startsWith("/portfolio") || currentPath.startsWith("/projects") ? "active" : ""}>
                                     <span className="menu-item-title text-gradient">Portfolio</span>
                                     <span>Some of the projects I worked on</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/articles"} className={location.pathname.startsWith("/articles") ? "active" : ""}>
+                                <Link to={"/articles/"} className={currentPath.startsWith("/articles") ? "active" : ""}>
                                     <span className="menu-item-title text-gradient">Articles</span>
                                     <span>Guides, prompts, and technical writing</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/contact"} className={location.pathname === "/contact" ? "active" : ""}>
+                                <Link to={"/contact/"} className={currentPath === "/contact" ? "active" : ""}>
                                     <span className="menu-item-title text-gradient">Say Hello</span>
                                     <span>Get in touch, I will buy the coffee</span>
                                 </Link>
@@ -105,22 +107,22 @@ function Header(props) {
                                 <Link to={"/"}>Home</Link>
                             </li>
                             <li className="watch-sub-nav portfolio">
-                                <Link to={"/portfolio"}>
+                                <Link to={"/portfolio/"}>
                                     <span>Portfolio</span>
                                 </Link>
                             </li>
                             <li className="watch-sub-nav about">
-                                <Link to={"/about"}>
+                                <Link to={"/about/"}>
                                     <span>About</span>
                                 </Link>
                             </li>
                             <li className="watch-sub-nav articles">
-                                <Link to={"/articles"}>
+                                <Link to={"/articles/"}>
                                     <span>Articles</span>
                                 </Link>
                             </li>
                             <li className="gradient-btn">
-                                <Link to={"/contact"}>
+                                <Link to={"/contact/"}>
                                     <span>Say Hello</span>
                                 </Link>
                             </li>

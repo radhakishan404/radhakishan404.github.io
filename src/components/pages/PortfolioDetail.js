@@ -14,7 +14,7 @@ function CurrentProjectDetail({ project }) {
     return (
         <PageFrame className="portfolio-detail-page portfolio-detail-page--case-study" title={project.title}>
             <article className="project-detail page-shell">
-                <Link className="project-detail__back" to="/portfolio">Back to portfolio</Link>
+                <Link className="project-detail__back" to="/portfolio/">Back to portfolio</Link>
 
                 <header className="project-detail__header project-detail__header--case-study">
                     <div>
@@ -132,7 +132,7 @@ function PortfolioDetail({ match }) {
     return (
         <PageFrame className="portfolio-detail-page" title={project.title}>
             <article className="project-detail page-shell">
-                <Link className="project-detail__back" to="/portfolio">Back to portfolio</Link>
+                <Link className="project-detail__back" to="/portfolio/">Back to portfolio</Link>
 
                 <header className="project-detail__header">
                     <div>

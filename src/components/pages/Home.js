@@ -121,7 +121,7 @@ const BUILDING_NOW = [
         title: "Useful notes",
         text: "Short guides about developer tools, AI workflows, creator tools, and the fixes I want to remember.",
         linkLabel: "Browse the articles",
-        to: "/articles"
+        to: "/articles/"
     }
 ];
 
@@ -192,7 +192,7 @@ function Home(props) {
                                         <MagneticAction as="a" href="#selected-work" className="primary-action">
                                             See selected work <span aria-hidden="true">↓</span>
                                         </MagneticAction>
-                                        <Link className="quiet-action" to="/about">
+                                        <Link className="quiet-action" to="/about/">
                                             More about me <span aria-hidden="true">↗</span>
                                         </Link>
                                     </div>
@@ -268,7 +268,7 @@ function Home(props) {
                                 </div>
 
                                 <div className="work-section__action" data-home-reveal>
-                                    <MagneticAction as="link" to="/portfolio" className="primary-action">
+                                    <MagneticAction as="link" to="/portfolio/" className="primary-action">
                                         Browse the full portfolio <span aria-hidden="true">↗</span>
                                     </MagneticAction>
                                 </div>
@@ -312,7 +312,7 @@ function Home(props) {
                                         Node.js, mobile apps, cloud systems, and now native Mac tools.
                                         I still learn best by building something real.
                                     </p>
-                                    <MagneticAction as="link" to="/about" className="text-action">
+                                    <MagneticAction as="link" to="/about/" className="text-action">
                                         Read the full story <span aria-hidden="true">↗</span>
                                     </MagneticAction>
                                 </div>
@@ -400,7 +400,7 @@ function Home(props) {
                                 </div>
 
                                 <div className="writing-section__action" data-home-reveal>
-                                    <MagneticAction as="link" to="/articles" className="primary-action">
+                                    <MagneticAction as="link" to="/articles/" className="primary-action">
                                         Browse all articles <span aria-hidden="true">↗</span>
                                     </MagneticAction>
                                 </div>

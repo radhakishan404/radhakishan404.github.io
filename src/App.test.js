@@ -139,7 +139,7 @@ test("switches the playful current-work and about modes", () => {
 
     fireEvent.click(screen.getByRole("tab", { name: /04 Write/i }));
     expect(screen.getByRole("heading", { name: "Useful notes" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Browse the articles/i })).toHaveAttribute("href", "/articles");
+    expect(screen.getByRole("link", { name: /Browse the articles/i })).toHaveAttribute("href", "/articles/");
 
     unmount();
     window.history.pushState({}, "", "/about");
@@ -197,7 +197,7 @@ test("opens an earlier project in the updated detail layout", () => {
 
     expect(screen.getByRole("heading", { name: "Nirulas" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Technology" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Back to portfolio" })).toHaveAttribute("href", "/portfolio");
+    expect(screen.getByRole("link", { name: "Back to portfolio" })).toHaveAttribute("href", "/portfolio/");
 });
 
 test("opens a current project as an evidence-based case study", () => {

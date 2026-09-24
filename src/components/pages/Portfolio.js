@@ -11,7 +11,7 @@ const LEGACY_PROJECTS = softdata.project.map((project) => ({
     image: project.thumbnail,
     category: "Earlier work",
     technology: project.technology.split(",").slice(0, 3).join(" / "),
-    to: `/portfolio/${permalinkGenerate(project.title)}`
+    to: `/portfolio/${permalinkGenerate(project.title)}/`
 }));
 
 const FILTERS = [...PROJECT_CATEGORIES, "Earlier work"];
