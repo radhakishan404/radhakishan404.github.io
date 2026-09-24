@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "opus-canvas-prompts",
+        title: "Opus 5.5 reel: links and prompts for every slide",
+        excerpt: "Open Clearwater, the sakura valley, Small World, the riso window, and Plane of Focus, or copy the exact prompts for the launch film, black hole, AR glasses, and website explainer.",
+        category: "Prompt engineering",
+        date: "Sep 24, 2026",
+        cover: "/articles/opus-canvas-prompts/cover.png"
+    },
+    {
         slug: "open-source-developer-tools",
         title: "10 open-source alternatives to paid developer tools",
         excerpt: "Official links and practical notes for evaluating alternatives to Postman, Sentry, Zapier, Vercel, Firebase, Datadog, and GitHub Copilot.",
