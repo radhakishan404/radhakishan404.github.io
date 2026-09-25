@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "mcp-servers",
+        title: "10 MCP servers for coding agents (Claude Code)",
+        excerpt: "Official links and copyable Claude Code setup for filesystem, Serena, Context7, GitHub, Perplexity, Firecrawl, Chrome DevTools, Playwright, and Higgsfield MCP.",
+        category: "Developer tools",
+        date: "Sep 25, 2026",
+        cover: "/articles/mcp-servers/cover.png"
+    },
+    {
         slug: "opus-canvas-prompts",
         title: "Opus 5.5 reel: links and prompts for every slide",
         excerpt: "Open Clearwater, the sakura valley, Small World, the riso window, and Plane of Focus, or copy the exact prompts for the launch film, black hole, AR glasses, and website explainer.",
