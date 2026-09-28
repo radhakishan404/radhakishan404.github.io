@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "local-ai-tools",
+        title: "10 AI tools you can run on your own computer",
+        excerpt: "Free local alternatives to ChatGPT, ElevenLabs and Midjourney: Upscayl, Buzz, Handy, Chatterbox, ComfyUI, AnythingLLM, Open WebUI, Jan, LM Studio and Ollama, with install commands and RAM notes.",
+        category: "AI tools",
+        date: "Sep 28, 2026",
+        cover: "/articles/local-ai-tools/cover.png"
+    },
+    {
         slug: "mcp-servers",
         title: "10 MCP servers for coding agents (Claude Code)",
         excerpt: "Official links and copyable Claude Code setup for filesystem, Serena, Context7, GitHub, Perplexity, Firecrawl, Chrome DevTools, Playwright, and Higgsfield MCP.",
