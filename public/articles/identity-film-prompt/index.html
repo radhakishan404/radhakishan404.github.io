@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The prompt behind my 4K identity film | Radhakishan Jangid</title>
+  <meta name="description" content="The exact prompt I gave Claude to build my cinematic personal intro film in Remotion, plus a fill-in version you can use for your own 12 or 35 second identity film in 1:1, 16:9 and 9:16.">
+  <meta name="author" content="Radhakishan Jangid">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="canonical" href="https://radhakishan404.is-a.dev/articles/identity-film-prompt/">
+  <link rel="icon" href="/images/Round%20with%20transparent%20and%20blue%20.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Radhakishan Jangid">
+  <meta property="og:title" content="The prompt behind my 4K identity film">
+  <meta property="og:description" content="Copy the exact prompt, or fill in the template with your own name, career and handles.">
+  <meta property="og:url" content="https://radhakishan404.is-a.dev/articles/identity-film-prompt/">
+  <meta property="og:image" content="https://radhakishan404.is-a.dev/articles/identity-film-prompt/cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Opening frame of the RK Codex identity film">
+  <meta property="article:published_time" content="2026-10-05">
+  <meta property="article:modified_time" content="2026-10-05">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The prompt behind my 4K identity film">
+  <meta name="twitter:description" content="The exact prompt plus a fill-in template for your own intro film.">
+  <meta name="twitter:image" content="https://radhakishan404.is-a.dev/articles/identity-film-prompt/cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"The prompt behind my 4K identity film","description":"The exact prompt and a fill-in template for a cinematic personal intro film built with Claude and Remotion.","url":"https://radhakishan404.is-a.dev/articles/identity-film-prompt/","datePublished":"2026-10-05","dateModified":"2026-10-05","author":{"@type":"Person","name":"Radhakishan Jangid","url":"https://radhakishan404.is-a.dev/about/"},"image":"https://radhakishan404.is-a.dev/articles/identity-film-prompt/cover.png","mainEntityOfPage":"https://radhakishan404.is-a.dev/articles/identity-film-prompt/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://radhakishan404.is-a.dev/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://radhakishan404.is-a.dev/articles/"},{"@type":"ListItem","position":3,"name":"Identity film prompt","item":"https://radhakishan404.is-a.dev/articles/identity-film-prompt/"}]}]}</script>
+  <script src="./article.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to article</a>
+  <header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="Radhakishan Jangid home"><img src="/images/1000%20X%201000.png" alt="" width="34" height="34"><span>Radhakishan <b>Jangid</b></span></a><nav aria-label="Article navigation"><a href="/articles/">All articles</a><a href="#template">Template <span aria-hidden="true">↓</span></a></nav></div></header>
+  <main id="main"><div class="shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/articles/">Articles</a><span>/</span><span>Identity film prompt</span></nav>
+    <header class="hero"><div><p class="eyebrow">Claude · Remotion · Motion design</p><h1>The prompt behind my <span>4K identity film.</span></h1><p class="lead">I gave Claude one long brief and got a keynote-style intro film: kinetic name reveal, career timeline, tech stack, AI workspace, Instagram and YouTube, all cut on a 124 BPM beat. Here is the exact prompt, and a version you can fill in with your own details.</p><p class="byline">By <a href="/about/">Radhakishan Jangid</a><span>·</span><time datetime="2026-10-05">5 October 2026</time></p><div class="actions"><a class="button primary" href="#template">Get the fill-in template</a><a class="button" href="#exact">See the exact prompt</a></div><p id="copy-status" role="status" class="small"></p></div><figure class="cover"><video src="./film-12s.mp4" poster="./poster.jpg" width="1280" height="720" controls playsinline preload="none"></video><figcaption>The 12-second 16:9 cut. I also made a 35-second cut in 1:1, 16:9 and 9:16.</figcaption></figure></header>
+    <section aria-label="Prompts">
+      <article class="slide-card wide" id="how"><div class="slide-copy"><p class="eyebrow">Before you paste</p><h2>How to run it</h2><ul class="facts"><li><b>Use Claude Code inside a Remotion project.</b> The prompt asks for frame-driven keyframes, so code beats a text-to-video model here.</li><li><b>Put your photo at <code>public/film/me.png</code>.</b> The film uses it as-is, with no AI edits to your face.</li><li><b>Use only real numbers.</b> Followers, years and Reel views come from your actual profiles. The prompt tells Claude not to invent anything.</li><li><b>Approve the plan first.</b> Claude describes each shot, then renders four stills, and only then exports the final 4K files.</li><li><b>The music is synthesized from code</b>, so there are no copyright claims when you upload.</li></ul></div></article>
+      <article class="slide-card wide" id="template"><div class="slide-copy"><p class="eyebrow">Use this one · Fill in the blanks</p><h2>Fill-in template</h2><p>Replace every <code>{{…}}</code> with your details. It covers the 12 and 35 second cuts, all three aspect ratios, 4K export and beat-synced cuts.</p><div class="prompt-block"><div class="prompt-bar"><span class="mono">Template</span><button type="button" class="button copy-prompt" data-target="template-prompt" hidden>Copy prompt</button></div><pre id="template-prompt">Create a premium cinematic personal identity film for **{{FULL NAME}}**, {{ONE-LINE IDENTITY, e.g. &quot;a software engineer and AI/tech content creator&quot;}}.
+
+It must feel like an Apple keynote crossed with a modern AI product film and a premium personal-brand reveal. It is not a portfolio slideshow, a corporate presentation, a Canva/CapCut template or a generic YouTube intro. Every frame is intentional and every movement has momentum.
+
+## Identity facts (use only these, never invent)
+
+- Name: {{FULL NAME}}
+- Experience: {{N}} years in tech
+- Current role: {{ROLE}} at {{&quot;a US-based financial-sector organization&quot; / company, or generic wording}}
+- Career path (year → role → stack): {{2018 → PHP Developer → CodeIgniter · APIs}}, {{2020 → …}}, {{2022 → …}}, {{NOW → …}}
+- Tech stack (8–10, official logos): {{JavaScript, TypeScript, React, Node.js, Python, Docker, AWS, MySQL, CI/CD}}
+- Content focus: {{AI tools · Developer tools · Open source · AI agents · Coding · Architecture}}
+- Instagram: {{@handle}} with {{verified follower count, e.g. 4K+}}
+- YouTube: {{channel name / @handle}}
+- Top Reels (titles + view counts, real only): {{…}}
+- Profile photo: `public/film/me.png`, used as-is with no AI changes to the face
+- Tagline lockup: {{Role · AI Explorer · Tech Creator}}
+
+Don&#x27;t invent companies, awards, follower counts, clients, revenue, degrees or viral numbers. Pull live numbers from the real profiles and confirm them with me before rendering.
+
+## Deliverables
+
+- Versions: 1080×1080 master, plus 1920×1080 and 1080×1920 versions with each layout re-composed for its ratio (not cropped)
+- Render at 60 fps, 4K (`--scale=2`), H.264 high bitrate, with audio
+- Length: {{12 s}} or {{35 s}}. The 35 s version keeps the same shots at a slower pace and adds the Career, Stack and Reels shots.
+
+## Visual direction
+
+- Background: deep black, graphite and dark navy, with a very subtle electric-blue atmosphere
+- Colours: electric blue #3B82F6 (primary), cyan #3CC8F0, mint #4ED6A0 (the &quot;now&quot; / live state only), white #F5F7FA. Official logos keep their own colours.
+- Avoid: purple, violet, magenta, orange accents, rainbow gradients, neon, fake chrome, stock UI, floating social icons, overloaded screens
+- Type: Inter 400/500/600/700, editorial not promotional, generous tracking on large type. Normal text never glows.
+- Glass: a blurred background copy, a slightly brighter fill, a white-blue tint, a 1px highlight, a soft shadow and a large radius. No glassmorphism preset.
+
+## Story (one continuous camera journey)
+
+PERSON → EXPERIENCE → CAREER → STACK → DEVELOPER + AI → CONTENT → INSTAGRAM → TOP REELS → YOUTUBE → BRAND → END CARD
+
+The camera moves **through** each element into the next. Cut on the beat.
+
+| Shot | What happens |
+|---|---|
+| S1 Identity | From near-black, the camera is already moving forward. A blue light streak curves in from lower-right. The photo appears inside a minimal circular mark. The name assembles letter by letter, each letter arriving 3–8 px off with blur and tracking compression. The camera then pushes through the name. |
+| S2 Experience | Hard cut on an impact. A huge &quot;{{N}}+&quot; contracts to size above &quot;YEARS IN TECH&quot; as a glowing timeline expands. Milestone labels (FULL-STACK · WEB · MOBILE · AI · AGENTS) travel along it with parallax. The camera pushes to AI, then everything compresses to a point. |
+| S3 Career *(35 s)* | From that point, a vertical path draws the career steps (year · role · stack). The NOW node pulses mint. |
+| S4 Stack *(35 s)* | Official stack logos orbit as tiles, then converge into a `&lt;/&gt;` core with a white flash. |
+| S5 Developer + AI | An abstract dev workspace (not a VS Code copy): code blocks, a terminal, API nodes, and an LLM/RAG/DB/TOOLS agent network linked by curved lines carrying subtle blue pulses. The camera moves diagonally with depth blur. Then BUILDING → EXPLORING → AI, with a push through the letters. |
+| S6 Content | A minimal phone frame with a vertical feed of abstract tech-content cards. One card morphs AI TOOLS → DEV TOOLS → OPEN SOURCE → AI AGENTS through motion, not fades. The cards then accelerate upward. |
+| S7 Instagram | A custom profile card (not a copy of Instagram&#x27;s UI): the photo, {{@handle}}, real stats, and AI · DEV · TOOLS. It rises, breaks into panels and blows outward with directional blur. |
+| S8 Top Reels *(35 s)* | &quot;{{@handle}} · TOP REELS&quot;: real Reel titles with their view counts in a scrolling strip. |
+| S9 YouTube | A minimal creator grid. Two video cards pass in depth while the camera flies between them. They merge into &quot;{{FULL NAME}}&quot; over &quot;{{tagline}}&quot;. |
+| S10 Brand | Light/white frame. The circular mark with the photo rises, then the name and handle. Hold about 18 frames, the only calm moment in the film. Then accelerate away. |
+| S11 End card | Black with a radial blue glow. The wordmark arrives oversized and horizontally blurred, then contracts. Name, handle and tagline follow. No CTA, no &quot;follow&quot;, no &quot;subscribe&quot;. The film ends mid-collapse, never on a frozen logo. |
+
+## Motion system
+
+- Everything is frame-driven with `kf(frame, [[f, value], …], ease)` tables. No CSS transitions, timers, `Math.random` or `Math.floor` on motion.
+- Entrances use exponential ease-out. Exits accelerate (ease-in). Nothing enters or leaves static.
+- Blur always matches real velocity: horizontal motion gets horizontal blur, vertical gets vertical, zoom gets a smear of 20–30 progressively scaled copies. Use SVG `feGaussianBlur` with `filterUnits=&quot;userSpaceOnUse&quot;` and a large filter region. When a shot is time-stretched, scale the blur by the speed so it still matches on-screen velocity.
+- Blur never destroys the silhouette.
+- Banned: crossfade, dissolve, generic zoom, glitch, RGB split, spinning logos, random particles, presets, frozen frames.
+- Allowed transitions: push-through, whip, scale collapse, directional blur, object morph, UI morph, depth pass.
+- 35 s version: build a segment table in beats at 124 BPM so every cut lands on the score. Stretch the shots, don&#x27;t speed them up. Its pace should feel calmer than the 12 s version.
+
+## Sound
+
+- No voiceover, no copyrighted music
+- Synthesize an original minimal electronic score at 124 BPM:
+  - soft pad intro and a riser into the first impact
+  - kicks from S2, then hats and plucks building through the developer and content shots
+  - bigger hits on each major cut
+  - a shimmer on the brand and end card
+- SFX: identity reveal, soft impacts, clicks, UI ticks, activation, subtle whooshes, sub drops on the key cuts, final shimmer. Keep them below the music, never aggressive.
+- Master to −14 LUFS, −1 dBTP. Fade only over the final ~60 ms.
+
+## Process
+
+1. First, tell me what each shot will show and which facts it uses. No code yet.
+2. After I approve, render four stills: S1 name reveal, S2 years, S5 developer/AI, S9 YouTube/creator. Fix anything inconsistent.
+3. Then render all three aspect ratios in 4K with audio. One final file per ratio, no review or test exports.</pre></div></div></article>
+      <article class="slide-card wide" id="exact"><div class="slide-copy"><p class="eyebrow">For reference · Word for word</p><h2>The exact prompt I gave</h2><p>The original brief, unedited. I followed it with one line: use my real follower numbers and my red photo as the profile picture.</p><div class="prompt-block"><div class="prompt-bar"><span class="mono">Original brief</span><button type="button" class="button copy-prompt" data-target="exact-prompt" hidden>Copy prompt</button></div><pre id="exact-prompt">Create a premium cinematic 12-second personal introduction video for Radhakishan Jangid, a Mumbai-based full-stack developer, AI tools explorer and tech content creator.
+This is NOT a generic portfolio intro, corporate presentation, slideshow, or template-style creator intro.
+It should feel like a high-end Apple keynote × modern AI product film × premium personal brand identity reveal.
+The entire animation must feel intentional, expensive, extremely smooth and technically precise.
+Use the same motion philosophy throughout:
+
+* No static shots entering or leaving.
+* Every scene must already be moving when it appears.
+* Use exponential ease-out for entrances.
+* Use accelerating movement for exits.
+* Motion blur must follow the actual direction and speed of movement.
+* Use directional blur for fast camera movement.
+* Use subtle depth, parallax and scale changes.
+* No generic crossfades.
+* No cheap zoom transitions.
+* No template-looking social media graphics.
+* No unnecessary effects.
+* No random particles.
+* No excessive glow.
+* No cheesy &quot;influencer&quot; aesthetic.
+
+The video should communicate:
+Radhakishan Jangid
+7–8 Years in Tech
+Full-Stack Developer
+AI Tools &amp; Technology Creator
+Instagram: @rk.codex
+YouTube: Radhakishan Jangid
+His content focuses on:
+
+* AI tools and new AI products
+* Developer tools
+* Open-source projects
+* Coding and software development
+* AI agents
+* Practical workflows
+* Productivity for developers
+* Interesting technology discoveries
+* Tools that developers can actually use
+
+The visual storytelling should make the viewer understand all of this without feeling like information is simply being displayed.
+GLOBAL VISUAL DIRECTION
+Duration: exactly 12 seconds.
+Master composition: 1080 × 1080.
+Frame rate:
+
+* Animation authored at 29.97 fps.
+* Master rendered at 59.94 fps.
+* Frames f0–f359.
+
+Visual style:
+Apple keynote.
+Minimal.
+Premium.
+Clean.
+Modern.
+Technical.
+Editorial.
+Cinematic.
+Background:
+
+* Deep black
+* Soft graphite
+* Dark navy
+* Very subtle electric-blue atmosphere
+
+Primary accent:
+
+* Electric blue #3B82F6
+
+Secondary accents:
+
+* Cyan #3CC8F0
+* Subtle mint #4ED6A0
+* White #F5F7FA
+
+Typography:
+
+* Inter
+* 400 / 500 / 600 / 700
+* Extremely clean typography
+* Large type should feel editorial rather than promotional
+
+Avoid:
+
+* Purple
+* Violet
+* Magenta
+* Orange
+* Rainbow gradients
+* Excessive neon
+* Stock UI
+* Fake 3D chrome
+* Generic YouTube graphics
+* Floating social-media icons everywhere
+* Overloaded screens
+
+All UI elements must feel custom-designed specifically for Radhakishan.
+CORE STORY
+The entire film tells one continuous story:
+PERSON → EXPERIENCE → DEVELOPER → AI EXPLORER → CONTENT CREATOR → SOCIAL PRESENCE → BRAND
+The camera begins inside darkness.
+A minimal identity element emerges from a soft blue haze.
+The name RADHAKISHAN JANGID forms through precise kinetic typography.
+The camera pushes through the typography into a minimal timeline showing 7–8 YEARS IN TECH.
+The timeline transforms into a developer workspace containing subtle code, architecture and AI-agent visual elements.
+The developer workspace collapses into a clean content-feed environment showing the kind of technology Radhakishan discovers and talks about.
+The feed morphs into Instagram and YouTube identity elements.
+The camera rapidly pulls back.
+Everything collapses into a single personal brand mark / name.
+Final frame:
+Radhakishan Jangid
+@rk.codex
+with a minimal secondary line:
+Full-Stack Developer · AI Explorer · Tech Creator
+Then the video ends mid-motion rather than freezing.
+SHOT STRUCTURE
+S1 — IDENTITY REVEAL
+f0–71
+Start from almost complete black.
+A very subtle electric-blue haze exists around the centre.
+No text initially.
+At f0 the camera is already moving slowly forward.
+A thin blue light streak enters from the lower-right and curves toward the centre.
+It should feel like a camera moving through a dark digital environment, not a generic light sweep.
+Around f8, a minimal circular personal identity mark begins emerging from the haze.
+The mark should be abstract and minimal.
+Do NOT create a complicated logo.
+At f14–24:
+The text begins appearing:
+RADHAKISHAN
+Then:
+JANGID
+The name should not simply fade in.
+Letters should assemble through extremely subtle horizontal movement and blur.
+Individual characters can arrive 3–8 px from their final positions.
+Use:
+
+* directional blur
+* slight tracking compression
+* subtle opacity changes
+* tiny vertical movement
+
+By approximately f35 the complete name is sharp.
+Typography:
+RADHAKISHAN
+JANGID
+Large, white, bold Inter.
+&quot;JANGID&quot; slightly lighter or smaller.
+At f40 the camera begins moving through the name.
+The text grows beyond the frame while the camera continues forward.
+This transition must feel like entering the world behind the identity.
+S2 — EXPERIENCE
+f72–100
+Hard cut exactly at f72 on a musical impact.
+Do not crossfade.
+The scene becomes a minimal dark timeline.
+Large central typography:
+7–8
+Then underneath:
+YEARS IN TECH
+The number &quot;7–8&quot; should be the visual hero.
+The timeline should not look like a resume.
+Use a horizontal glowing line running behind the typography.
+Small milestones appear extremely briefly:
+FULL-STACK
+WEB
+MOBILE
+AI
+AGENTS
+These should appear as subtle technical labels, not as a list occupying the whole screen.
+Motion:
+The &quot;7–8&quot; begins oversized.
+It contracts toward its final size while the timeline expands horizontally.
+Small milestone labels travel along the timeline with slight parallax.
+Camera pushes toward the &quot;AI&quot; milestone.
+At f88 the timeline accelerates.
+At f94–100 everything compresses toward a single point.
+Directional blur increases.
+At f100 the scene is almost completely motion-blurred.
+S3 — DEVELOPER + AI WORLD
+f101–158
+Hard cut at f101.
+Camera enters a dark developer workspace.
+Do NOT recreate an exact VS Code interface.
+Instead create a highly designed abstract development environment.
+The screen contains:
+
+* clean code blocks
+* terminal-like elements
+* API nodes
+* connected workflow lines
+* small AI model blocks
+* vector / RAG-style nodes
+* agent connections
+* subtle database symbols
+
+The environment should communicate:
+I BUILD SOFTWARE.
+I EXPLORE AI.
+without requiring those exact sentences.
+At f104–112:
+Small code elements slide into position.
+At f113:
+A central workflow node activates.
+Several connected nodes animate outward.
+At f118–130:
+The workflow transforms into an AI-agent network.
+Nodes connect with precise curved lines.
+Use extremely subtle electric-blue pulses traveling along the connections.
+No excessive glowing particles.
+At f130–142:
+The camera moves diagonally through the network.
+Some nodes pass close to camera with depth blur.
+At f142:
+A large clean label emerges:
+BUILDING
+At f148:
+It transforms into:
+EXPLORING
+At f154:
+The word becomes:
+AI
+The camera rapidly pushes through the letters.
+At f158 the entire scene becomes a blue-white directional blur.
+S4 — CONTENT CREATION
+f159–186
+Hard cut at f159.
+The camera lands inside a premium content environment.
+A vertical phone-like frame appears in the centre.
+Inside it are rapidly moving visual fragments representing Radhakishan&#x27;s content:
+
+* AI tools
+* coding
+* GitHub
+* open-source projects
+* AI agents
+* developer workflows
+* new technology
+* useful tools
+
+Do not use actual copyrighted screenshots unless provided.
+Create abstract representations of these concepts.
+The phone itself should be minimal.
+No generic social-media template.
+The content cards move vertically like a real feed.
+Camera follows one card.
+One card expands.
+The card contains a minimal headline:
+AI TOOLS
+It quickly transforms into:
+DEV TOOLS
+Then:
+OPEN SOURCE
+Then:
+AI AGENTS
+Each transformation should happen through motion rather than simple opacity changes.
+At f180 the cards begin accelerating upward.
+At f186 the camera follows the motion.
+S5 — INSTAGRAM
+f187–214
+The feed transforms into a premium Instagram-style vertical interface.
+Do not copy Instagram&#x27;s exact UI.
+Instead use a custom social-content interface inspired by a modern mobile feed.
+The profile identity becomes visible.
+Large clean handle:
+@rk.codex
+Below it:
+AI · DEV · TOOLS · TECHNOLOGY
+A few content thumbnails appear behind the profile identity.
+They should feel like actual tech creator content:
+
+* AI product discoveries
+* developer tools
+* open-source projects
+* coding workflows
+* AI agent demos
+
+At f195 the profile card rises upward.
+At f200 the camera moves closer.
+At f205 the profile interface begins breaking apart into floating visual panels.
+At f210 the panels accelerate outward.
+Use directional blur.
+At f214 everything collapses toward the centre.
+S6 — YOUTUBE + CREATOR IDENTITY
+f215–244
+Hard transition into a dark YouTube-inspired creator environment.
+Do not reproduce YouTube&#x27;s complete interface.
+Show a minimal creator dashboard / video grid.
+Two large video cards stack vertically.
+Titles should be short and believable:
+AI TOOLS
+DEVELOPER TOOLS
+Each card has abstract cinematic thumbnails.
+Small metadata elements:
+Radhakishan Jangid
+The cards move into depth.
+Top card moves closer.
+Bottom card moves backward.
+Camera passes between them.
+Then both cards transform into a single large creator identity.
+Text:
+Radhakishan Jangid
+Underneath:
+Tech Creator · Developer · AI Explorer
+The typography should be extremely clean.
+At f238–244 the entire scene moves upward and accelerates.
+Blur increases.
+S7 — PERSONAL BRAND REVEAL
+f245–300
+The screen becomes almost completely white / very light grey.
+A minimal circular identity mark appears.
+It rises from below.
+The mark should be simple and premium.
+No complicated iconography.
+It settles around the centre.
+Underneath it:
+RADHAKISHAN JANGID
+Then:
+@rk.codex
+The camera slowly pushes in.
+Hold the identity for approximately 18 frames.
+This is the only intentionally calm moment in the entire film.
+No unnecessary animation.
+No floating particles.
+No extra elements.
+The viewer should clearly recognize the personal brand.
+At f287 the camera begins accelerating forward.
+The logo and typography start shrinking into the distance.
+Motion blur increases.
+S8 — FINAL END CARD
+f301–359
+Hard cut into a deep black background.
+A very subtle radial blue atmosphere exists behind the centre.
+The wordmark appears extremely large and horizontally motion-blurred:
+RADHAKISHAN JANGID
+It rapidly contracts toward the centre.
+At approximately f309:
+The text becomes readable.
+At f315:
+RADHAKISHAN JANGID
+At f325:
+@rk.codex
+At f335:
+FULL-STACK DEVELOPER · AI EXPLORER · TECH CREATOR
+Typography remains minimal.
+No CTA.
+No &quot;Follow me&quot;.
+No &quot;Subscribe&quot;.
+No sales language.
+The identity itself is the ending.
+At f350 the complete lockup begins collapsing slightly toward the centre.
+At f359 the animation ends mid-collapse with subtle blur.
+Do NOT freeze on a perfect static logo.
+The ending should feel like a premium brand film that could continue.
+MOTION SYSTEM
+Every animation must be driven by frame number.
+Use:
+keyframe tables:
+kf(frame, [[f, value], ...], ease)
+with linear interpolation between keyframes.
+Do not use:
+
+* CSS transitions
+* timers
+* random animation
+* Math.random
+* arbitrary frame jumps
+
+No motion should suddenly stop unless explicitly specified.
+Use exponential ease-out for most entrances.
+Use accelerating ease-in for exits.
+For camera movement:
+
+* 12–19% of remaining distance per frame for smooth exponential movement.
+* Accelerate before transitions.
+* Use directional motion blur matching actual velocity.
+
+Blur must always correspond to movement.
+Examples:
+Horizontal movement → horizontal directional blur.
+Vertical movement → vertical directional blur.
+Camera zoom → radial / zoom smear.
+Fast diagonal movement → combined directional blur.
+CAMERA LANGUAGE
+The camera is a character in the film.
+Use:
+
+* slow push-ins
+* macro zooms
+* parallax
+* lateral camera movement
+* diagonal camera movement
+* whip transitions
+* controlled zoom-outs
+* depth passes
+
+Never use random camera movement.
+Every camera movement must lead into the next visual concept.
+The camera should frequently move THROUGH elements rather than simply moving around them.
+Examples:
+Move through:
+NAME → EXPERIENCE → CODE → AI → CONTENT → INSTAGRAM → YOUTUBE → BRAND
+This creates one continuous visual journey.
+TYPOGRAPHY
+Use Inter only.
+Weights:
+400 body
+500 supporting text
+600 labels
+700 hero text
+Large typography should have generous tracking.
+No text glow except a very subtle atmospheric effect on the final end card.
+UI text must remain sharp.
+Never use glow around normal text.
+Use blur only during actual movement.
+GLASS / UI MATERIAL
+For glass surfaces:
+Create the effect using:
+
+* blurred background copy
+* slightly brighter foreground
+* subtle white-blue tint
+* soft 1px highlight
+* subtle shadow
+* large radius
+
+Never use a generic glassmorphism preset.
+Glass should feel physically integrated into the environment.
+SOUND
+Exactly 12 seconds.
+No voiceover.
+The visuals must communicate the identity without narration.
+Music:
+Minimal futuristic electronic soundtrack.
+124 BPM.
+Soft intro.
+Strong musical impact around the first identity transition.
+Subtle rhythmic progression through the developer and AI scenes.
+Bigger impact during:
+Experience → Developer
+Developer → Content
+Content → Instagram
+Instagram → YouTube
+YouTube → Final Brand
+Sound effects:
+
+* subtle identity reveal
+* soft impact
+* cursor-like clicks
+* tiny UI ticks
+* digital activation sound
+* subtle whooshes
+* camera transition impacts
+* soft final shimmer
+
+Do not make the SFX aggressive.
+Master:
+-14 LUFS
+True peak:
+-1 dBTP
+No fade except the final approximately 60 ms.
+TECHNICAL BUILD
+Build everything as a single HTML animation.
+Canvas:
+1080 × 1080.
+Render function:
+seek(frame)
+The animation must be deterministic.
+No CSS transitions.
+No timers.
+No Math.random.
+No random particle systems.
+Use seeded deterministic values only if absolutely required.
+Shots register as:
+{f0, f1, render(localFrame)}
+Every animated property must be continuous across frames.
+Use interpolation tables.
+Do not use Math.floor for motion.
+Do not create fake motion by swapping static images.
+Every major visual element must have actual positional, scale, opacity and blur animation.
+MOTION BLUR
+Use CSS blur for normal soft blur.
+Use SVG feGaussianBlur for directional blur.
+For high-speed transitions use separate X/Y blur values.
+For zoom transitions use multiple scaled and faded copies.
+For example:
+20–30 progressively scaled copies for extreme zoom streaks.
+The blur must never completely destroy the visual.
+If an object becomes unreadable, reduce the blur until its silhouette remains recognizable.
+TRANSITION RULES
+Absolutely no:
+
+* crossfade
+* dissolve
+* generic zoom transition
+* glitch transition
+* RGB split
+* excessive chromatic aberration
+* spinning logo
+* random particles
+* stock motion graphics presets
+* template UI
+* frozen frames
+
+Every transition must be motivated by the movement of the previous scene.
+Preferred transitions:
+camera push-through
+whip movement
+scale collapse
+directional blur
+object transformation
+UI morph
+depth transition
+CONTENT ACCURACY
+The identity information must remain consistent:
+Name:
+Radhakishan Jangid
+Experience:
+7–8 Years in Tech
+Role:
+Full-Stack Developer
+Focus:
+AI Tools · Developer Tools · Open Source · AI Agents
+Instagram:
+@rk.codex
+YouTube:
+Radhakishan Jangid
+Location / identity:
+Mumbai-based
+Creator positioning:
+Developer who discovers, builds with and explains interesting technology and AI tools.
+Do not invent:
+
+* companies
+* awards
+* follower counts
+* client names
+* revenue
+* credentials
+* degrees
+* achievements
+* viral numbers
+
+unless explicitly provided.
+VISUAL PRIORITY
+If there is ever a conflict between showing more information and maintaining premium motion design:
+Choose the motion design.
+The viewer should remember:
+Radhakishan Jangid
+Developer
+AI
+@rk.codex
+The film should feel like the introduction of a serious modern technology creator, not an advertisement.
+FINAL QUALITY BAR
+The result should look like:
+A premium personal identity film created by a top motion-design studio.
+Not:
+
+* a Canva intro
+* a CapCut template
+* a YouTube intro template
+* a portfolio slideshow
+* a generic AI-generated video
+* a corporate presentation
+
+Every frame should have intentional composition.
+Every transition should have a reason.
+Every movement should have momentum.
+Every piece of text should be readable.
+The animation should feel physically continuous.
+The viewer should understand who Radhakishan is within the first few seconds and understand his technology/AI creator identity by the end.
+Before rendering the full film, generate four still previews:
+
+1. f40 — Radhakishan Jangid identity reveal
+2. f86 — 7–8 years experience timeline
+3. f150 — developer + AI environment
+4. f230 — Instagram / YouTube creator identity
+
+Only after those stills are visually consistent should the complete 12-second animation be rendered.
+
+update my information as you have seen in our chat the followers and all also use the Red Dress photo rk.png as profile photo</pre></div><p class="small" style="margin-top:18px">The follow-up that produced the 35-second cut:</p><div class="prompt-block"><div class="prompt-bar"><span class="mono">Follow-up</span><button type="button" class="button copy-prompt" data-target="followup-prompt" hidden>Copy prompt</button></div><pre id="followup-prompt">You have already worked on the rk-intro so this shoulldnt take much time I need you to slow down those skills that you are adding and make the video for about 35 second and add few more things that this video should have in the same style motion and feel amazing</pre></div></div></article>
+    </section>
+    <section class="closing"><div><p class="eyebrow">Came here from Instagram?</p><h2>Copy the template, paste it into Claude.</h2><p>Make yours, then tag <a href="https://www.instagram.com/rk.codex/">@rk.codex</a> so I can see it.</p></div><a class="button" href="/articles/">More practical guides <span aria-hidden="true">↗</span></a></section>
+  </div></main>
+  <footer class="site-footer shell"><p>Written by <a href="/about/">Radhakishan Jangid</a></p><p>Built with Claude Code and Remotion.</p><a href="#main">Back to top ↑</a></footer>
+</body>
+</html>

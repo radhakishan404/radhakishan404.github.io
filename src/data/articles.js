@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "identity-film-prompt",
+        title: "The prompt behind my 4K identity film",
+        excerpt: "The exact prompt I gave Claude to build my keynote-style intro film in Remotion, plus a fill-in template for your own 12 or 35 second identity film in 1:1, 16:9 and 9:16.",
+        category: "Prompt engineering",
+        date: "Oct 5, 2026",
+        cover: "/articles/identity-film-prompt/cover.png"
+    },
+    {
         slug: "local-ai-tools",
         title: "10 AI tools you can run on your own computer",
         excerpt: "Free local alternatives to ChatGPT, ElevenLabs and Midjourney: Upscayl, Buzz, Handy, Chatterbox, ComfyUI, AnythingLLM, Open WebUI, Jan, LM Studio and Ollama, with install commands and RAM notes.",
