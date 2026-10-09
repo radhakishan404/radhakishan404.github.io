@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clean Your Claude Code Setup: 3 Audit Prompts | Radhakishan Jangid</title>
+  <meta name="description" content="Boris Cherny, who built Claude Code, says to delete your CLAUDE.md, skills and hooks every six months. Back up first, then run these three copyable audit prompts to find what to kill, merge, fix and add.">
+  <meta name="author" content="Radhakishan Jangid">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="canonical" href="https://radhakishan404.is-a.dev/articles/claude-clean/">
+  <link rel="icon" href="/images/Round%20with%20transparent%20and%20blue%20.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Radhakishan Jangid">
+  <meta property="og:title" content="Clean your Claude Code setup: 3 audit prompts">
+  <meta property="og:description" content="Audit your CLAUDE.md, skills and hooks before you delete them. Three copyable prompts plus a safe backup step.">
+  <meta property="og:url" content="https://radhakishan404.is-a.dev/articles/claude-clean/">
+  <meta property="og:image" content="https://radhakishan404.is-a.dev/articles/claude-clean/cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Boris Cherny with glowing eyes next to the words Delete your CLAUDE.md? Audit it first.">
+  <meta property="article:published_time" content="2026-10-09">
+  <meta property="article:modified_time" content="2026-10-09">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Clean your Claude Code setup: 3 audit prompts">
+  <meta name="twitter:description" content="Audit your CLAUDE.md, skills and hooks before you delete them.">
+  <meta name="twitter:image" content="https://radhakishan404.is-a.dev/articles/claude-clean/cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://radhakishan404.is-a.dev/articles/claude-clean/#article","headline":"Clean your Claude Code setup: 3 audit prompts","description":"Three copyable prompts to audit your CLAUDE.md, skills and hooks before deleting them.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":["https://radhakishan404.is-a.dev/articles/claude-clean/cover.png"],"author":{"@type":"Person","name":"Radhakishan Jangid","url":"https://radhakishan404.is-a.dev/about/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radhakishan404.is-a.dev/articles/claude-clean/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://radhakishan404.is-a.dev/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://radhakishan404.is-a.dev/articles/"},{"@type":"ListItem","position":3,"name":"Clean your Claude Code setup","item":"https://radhakishan404.is-a.dev/articles/claude-clean/"}]}]}</script>
+  <script src="./article.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to article</a>
+  <header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="Radhakishan Jangid home"><img src="/images/1000%20X%201000.png" alt="" width="34" height="34"><span>Radhakishan <b>Jangid</b></span></a><nav aria-label="Article navigation"><a href="/articles/">All articles</a><a href="#prompts">The prompts <span aria-hidden="true">↓</span></a></nav></div></header>
+  <main id="main"><div class="shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/articles/">Articles</a><span>/</span><span>Clean your Claude Code setup</span></nav>
+    <header class="hero"><div><p class="eyebrow">From the reel · Claude Code</p><h1>Don't delete your setup blind. <span>Audit it first.</span></h1><p class="lead">The guy who built Claude Code says to delete your CLAUDE.md, skills and hooks every six months. Here's how to do that safely: back up, then let Claude tell you what to kill, merge, fix and add.</p><p class="byline">By <a href="/about/">Radhakishan Jangid</a><span>·</span><time datetime="2026-10-09">9 October 2026</time></p><div class="actions"><a class="button primary" href="#prompts">Get the 3 prompts <span aria-hidden="true">↓</span></a><button class="button" type="button" data-copy="prompt-md,prompt-skills,prompt-hooks" hidden>Copy all three prompts</button></div><p id="copy-status" role="status" class="small"></p></div><figure class="cover"><img src="./cover.png" width="1200" height="630" alt="Boris Cherny with glowing eyes next to the words Delete your CLAUDE.md? Audit it first."><figcaption>Frame from the Reel. Original talk: YC Startup School 2026.</figcaption></figure></header>
+
+    <section class="intro" aria-labelledby="intro-title"><h2 id="intro-title">What Boris Cherny <br>actually said.</h2><div>
+      <p>Boris Cherny created Claude Code. In his <a href="https://www.youtube.com/watch?v=qyPCVqFUyDo&amp;t=416s">YC Startup School talk with Diana Hu</a>, he said this to everyone using Claude Code:</p>
+      <blockquote class="quote">“Every six months, delete your CLAUDE.md, delete your skills, delete your hooks. See what the model does, and it might surprise you.”<cite>Boris Cherny, around 6:56 in the talk</cite></blockquote>
+      <p style="margin-top:18px">He followed it with: for Opus 5, the model “might really just not need all those instructions that you needed for past models.” The same talk is titled after his team cutting about 80% of Claude Code's own prompt.</p>
+      <p>Anthropic's <a href="https://code.claude.com/docs/en/memory">memory docs</a> say the same thing in plainer words: keep each CLAUDE.md under 200 lines, because longer files use more context and reduce how well Claude follows them, and contradicting rules make Claude pick one arbitrarily.</p>
+    </div></section>
+
+    <section class="start" aria-labelledby="backup-title"><p class="eyebrow">Step 0 · 30 seconds</p><h2 id="backup-title">Back up before you touch anything.</h2><div class="steps"><div><span class="step-number">01</span><h3>Commit it</h3><p>Project files (CLAUDE.md, .claude/skills, .claude/settings.json) go into git, so any delete is one revert away.</p></div><div><span class="step-number">02</span><h3>Copy your global setup</h3><p>Your personal files live in ~/.claude, which usually isn't in git. Copy them somewhere safe.</p></div><div><span class="step-number">03</span><h3>Then audit</h3><p>Run the prompts below in a fresh session. Nothing changes until you approve the edits.</p></div></div><div class="prompt-panel"><div><span class="mono">BACKUP COMMANDS</span><button type="button" class="button" data-copy="backup-cmds" hidden>Copy commands</button></div><pre id="backup-cmds" class="prompt-text"># In your project
+git add CLAUDE.md .claude && git commit -m "Backup Claude setup before audit"
+
+# Your personal setup (macOS / Linux)
+mkdir -p ~/claude-backup
+cp ~/.claude/CLAUDE.md ~/.claude/settings.json ~/claude-backup/ 2>/dev/null
+cp -R ~/.claude/skills ~/claude-backup/ 2>/dev/null</pre></div></section>
+
+    <section id="prompts" class="audits" aria-labelledby="prompts-title"><p class="eyebrow">The CLEAN prompts</p><h2 id="prompts-title" style="font-size:clamp(24px,2.6vw,32px);line-height:1.3;letter-spacing:-.035em;font-weight:500;margin:9px 0 0">Three audits. Paste one at a time.</h2>
+
+      <div class="audit" id="audit-md"><span class="step-number">AUDIT 01</span><h3>Your CLAUDE.md</h3><p>Claude reads every line and sorts it into kill, rewrite, keep and missing. It covers your project file, CLAUDE.local.md and your global ~/.claude/CLAUDE.md.</p><div class="prompt-panel"><div><span class="mono">COPY PROMPT 01</span><button type="button" class="button" data-copy="prompt-md" hidden>Copy prompt</button></div><pre id="prompt-md" class="prompt-text">Audit my Claude Code instruction files. Do not edit anything yet.
+
+Read ./CLAUDE.md, ./.claude/CLAUDE.md, ./CLAUDE.local.md, any CLAUDE.md files in subfolders, ./.claude/rules/, and ~/.claude/CLAUDE.md (skip any that don't exist). Then explore this codebase enough to check every claim in them.
+
+Sort every instruction into one of these groups and show it as a table with the file, the line, the group and a one-line reason:
+
+1. KILL: things you would already do without being told, generic advice ("be careful", "think step by step", "write clean code"), role-play ("you are a senior engineer"), rules written for older models, and anything that references files, commands or tools that no longer exist.
+2. CONTRADICTS: pairs of instructions that conflict with each other, across all files.
+3. REWRITE: rules that matter but are vague. Give the exact new wording, specific and checkable (for example "Use pnpm, never npm" instead of "use the right package manager").
+4. KEEP: things you could not figure out from the code alone, such as build, test and deploy commands, project conventions, and hard safety rules.
+5. MISSING: important facts you discovered in the codebase that are not written anywhere, such as the real test command, environment variables, folders that must not be touched, or recurring gotchas.
+
+Then:
+- Count the lines before and after, and aim for under 200 lines per file.
+- Suggest which rules should move to a path-scoped file in .claude/rules/ because they only matter for part of the codebase.
+- Show the proposed new CLAUDE.md in full.
+
+Wait for my approval before changing any file.</pre></div></div>
+
+      <div class="audit" id="audit-skills"><span class="step-number">AUDIT 02</span><h3>Your skills</h3><p>Old and overlapping skills make Claude pick the wrong one. This finds duplicates to merge and dead ones to delete, in .claude/skills and ~/.claude/skills.</p><div class="prompt-panel"><div><span class="mono">COPY PROMPT 02</span><button type="button" class="button" data-copy="prompt-skills" hidden>Copy prompt</button></div><pre id="prompt-skills" class="prompt-text">Audit my Claude Code skills. Do not edit or delete anything yet.
+
+Read every SKILL.md (and its supporting files) in ./.claude/skills/ and ~/.claude/skills/. Also list any plugin skills that are enabled.
+
+For each skill, report: name, location, what its description says it does, when it would actually trigger, and the last time its files were modified.
+
+Then group them:
+
+1. MERGE: skills that overlap or do nearly the same job (for example deploy, deploy-v2 and deploy-final). Propose one merged skill with a single clear description and combined instructions, and say which originals it replaces.
+2. DELETE: skills that are dead. They reference tools, frameworks, files or commands that no longer exist in my projects, they only repeat things the current model already does well without help, or they were one-off experiments.
+3. FIX: skills worth keeping whose description is too vague to trigger reliably, or whose instructions are outdated or contradict my CLAUDE.md. Give the new description and the specific edits.
+4. KEEP: skills that are specific, still accurate and clearly useful.
+5. MISSING: workflows I repeat often in this codebase or in my git history that would deserve a skill. Suggest at most three, each with a name and description.
+
+Finish with a table of every skill and its verdict, plus the exact file operations you would run. Wait for my approval before changing anything.</pre></div></div>
+
+      <div class="audit" id="audit-hooks"><span class="step-number">AUDIT 03</span><h3>Your hooks</h3><p>Hooks run whether Claude wants them or not. This finds broken and noisy hooks, and the ones you should have built.</p><div class="prompt-panel"><div><span class="mono">COPY PROMPT 03</span><button type="button" class="button" data-copy="prompt-hooks" hidden>Copy prompt</button></div><pre id="prompt-hooks" class="prompt-text">Audit my Claude Code hooks. Do not edit anything yet.
+
+Read the "hooks" section of ~/.claude/settings.json, ./.claude/settings.json and ./.claude/settings.local.json (skip any that don't exist), plus every script those hooks call.
+
+For each hook, report: the event (PreToolUse, PostToolUse, Stop, SessionStart and so on), the matcher, the command, and what it actually does.
+
+Then check each one and group it:
+
+1. BROKEN: the script or command doesn't exist, isn't executable, depends on a missing tool, has a wrong path, or would fail on this machine. Show the evidence.
+2. NOISY or SLOW: runs on every tool call when it only needs to run on some, blocks for a long time, or produces output nobody reads. Suggest a tighter matcher or a better event.
+3. RISKY: anything that could push, delete, deploy or leak secrets without me noticing.
+4. DUPLICATE or CONFLICTING: hooks across user and project settings that do the same thing or fight each other.
+5. KEEP: hooks that are working and earning their place.
+6. MISSING: hooks I should build, based on this codebase and the mistakes that keep happening. Examples are blocking edits to protected files, running the formatter after edits, or running tests before Claude says it is done. Suggest at most three, with the exact JSON and script for each.
+
+Finish with the full proposed "hooks" JSON for each settings file. Wait for my approval before changing anything.</pre></div></div>
+    </section>
+
+    <section class="start" aria-labelledby="after-title"><p class="eyebrow">After the audit</p><h2 id="after-title">Then try Boris's experiment.</h2><div class="steps"><div><span class="step-number">01</span><h3>Run without it</h3><p>With your backup safe, rename CLAUDE.md for one session and give Claude a normal task. Watch what it gets right on its own.</p></div><div><span class="step-number">02</span><h3>Add back only what broke</h3><p>Every rule you restore should fix a mistake you actually saw, not one you guessed it might make.</p></div><div><span class="step-number">03</span><h3>Use the built-in check</h3><p>Recent Claude Code versions also ship <code>/doctor prompt-audit</code>, which flags outdated or conflicting instructions. Run it after these prompts as a second opinion.</p></div></div></section>
+
+    <section class="closing"><div><p class="eyebrow">Came here from the Reel?</p><h2>Here are your CLEAN prompts.</h2><p>You commented <strong>CLEAN</strong> for this page. Back up first, run one audit at a time, and only approve edits you understand.</p></div><a class="button" href="/articles/">More practical guides <span aria-hidden="true">↗</span></a></section>
+  </div></main>
+  <footer class="site-footer shell"><p>Written by <a href="/about/">Radhakishan Jangid</a></p><p>Sources: <a href="https://www.youtube.com/watch?v=qyPCVqFUyDo">YC Startup School talk</a>, <a href="https://code.claude.com/docs/en/memory">CLAUDE.md docs</a>, <a href="https://code.claude.com/docs/en/skills">skills docs</a>, <a href="https://code.claude.com/docs/en/hooks">hooks docs</a>.<br>Independent guide; not affiliated with Anthropic or Y Combinator.</p><a href="#main">Back to top ↑</a></footer>
+</body>
+</html>

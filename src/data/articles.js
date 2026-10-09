@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "claude-clean",
+        title: "Clean your Claude Code setup: 3 audit prompts",
+        excerpt: "Claude Code's creator says to delete your CLAUDE.md, skills and hooks every six months. Back up first, then run three copyable prompts to find what to kill, merge, fix and add.",
+        category: "Prompt engineering",
+        date: "Oct 9, 2026",
+        cover: "/articles/claude-clean/cover.png"
+    },
+    {
         slug: "identity-film-prompt",
         title: "The prompt behind my 4K identity film",
         excerpt: "The exact prompt I gave Claude to build my keynote-style intro film in Remotion, plus a fill-in template for your own 12 or 35 second identity film in 1:1, 16:9 and 9:16.",
