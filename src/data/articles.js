@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "claude-loops",
+        title: "Prompting is dead: how to run loops in Claude Code",
+        excerpt: "Boris Cherny doesn't prompt Claude anymore, he runs loops. Three ways to set one up: /goal, Anthropic's Ralph Wiggum plugin, and /loop, with a finish-line template.",
+        category: "Prompt engineering",
+        date: "Oct 10, 2026",
+        cover: "/articles/claude-loops/cover.png"
+    },
+    {
         slug: "cli-anything",
         title: "CLI-Anything: let Claude use any app on your computer",
         excerpt: "The 50K-star repo that turns Blender, GIMP, OBS, Zoom and 75 more apps into commands Claude Code can run. Install steps, a first task and the limits.",

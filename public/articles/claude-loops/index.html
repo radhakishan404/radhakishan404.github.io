@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompting Is Dead: How to Run Loops in Claude Code | Radhakishan Jangid</title>
+  <meta name="description" content="Boris Cherny, who built Claude Code, says he doesn't prompt Claude anymore: he runs loops. Here are three ways to set up a loop in Claude Code (/goal, the official Ralph Wiggum plugin, /loop) with copyable commands and a finish-line template.">
+  <meta name="author" content="Radhakishan Jangid">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="canonical" href="https://radhakishan404.is-a.dev/articles/claude-loops/">
+  <link rel="icon" href="/images/Round%20with%20transparent%20and%20blue%20.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Radhakishan Jangid">
+  <meta property="og:title" content="Prompting is dead: how to run loops in Claude Code">
+  <meta property="og:description" content="Boris Cherny doesn't prompt Claude anymore. Three ways to set up a loop in Claude Code, with copyable commands.">
+  <meta property="og:url" content="https://radhakishan404.is-a.dev/articles/claude-loops/">
+  <meta property="og:image" content="https://radhakishan404.is-a.dev/articles/claude-loops/cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Boris Cherny with glowing eyes next to the words Prompting is dead, use loops instead">
+  <meta property="article:published_time" content="2026-10-10">
+  <meta property="article:modified_time" content="2026-10-10">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prompting is dead: how to run loops in Claude Code">
+  <meta name="twitter:description" content="Three ways to set up a loop in Claude Code, with copyable commands.">
+  <meta name="twitter:image" content="https://radhakishan404.is-a.dev/articles/claude-loops/cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://radhakishan404.is-a.dev/articles/claude-loops/#article","headline":"Prompting is dead: how to run loops in Claude Code","description":"Three ways to set up a loop in Claude Code: /goal, the official Ralph Wiggum plugin, and /loop.","datePublished":"2026-10-10","dateModified":"2026-10-10","inLanguage":"en","image":["https://radhakishan404.is-a.dev/articles/claude-loops/cover.png"],"author":{"@type":"Person","name":"Radhakishan Jangid","url":"https://radhakishan404.is-a.dev/about/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radhakishan404.is-a.dev/articles/claude-loops/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://radhakishan404.is-a.dev/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://radhakishan404.is-a.dev/articles/"},{"@type":"ListItem","position":3,"name":"Claude Code loops","item":"https://radhakishan404.is-a.dev/articles/claude-loops/"}]}]}</script>
+  <script src="./article.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to article</a>
+  <header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="Radhakishan Jangid home"><img src="/images/1000%20X%201000.png" alt="" width="34" height="34"><span>Radhakishan <b>Jangid</b></span></a><nav aria-label="Article navigation"><a href="/articles/">All articles</a><a href="#setup">The setup <span aria-hidden="true">↓</span></a></nav></div></header>
+  <main id="main"><div class="shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/articles/">Articles</a><span>/</span><span>Claude Code loops</span></nav>
+    <header class="hero"><div><p class="eyebrow">From the reel · Claude Code</p><h1>Prompting is dead. <span>Run a loop instead.</span></h1><p class="lead">The man who built Claude Code doesn't prompt Claude anymore. He gives it a goal and a finish line, and a loop keeps Claude working, checking and fixing until it gets there. Here is how to do the same, in three ways.</p><p class="byline">By <a href="/about/">Radhakishan Jangid</a><span>·</span><time datetime="2026-10-10">10 October 2026</time></p><div class="actions"><a class="button primary" href="#setup">Get the setup <span aria-hidden="true">↓</span></a><button class="button" type="button" data-copy="cmd-goal" hidden>Copy the /goal command</button></div><p id="copy-status" role="status" class="small"></p></div><figure class="cover"><img src="./cover.png" width="1200" height="630" alt="Boris Cherny with glowing eyes next to the words Prompting is dead, use loops instead"><figcaption>Frame from the Reel. Source clip: Acquired Unplugged, presented by WorkOS.</figcaption></figure></header>
+
+    <section class="intro" aria-labelledby="intro-title"><h2 id="intro-title">What Boris Cherny <br>actually said.</h2><div>
+      <p>At <a href="https://www.youtube.com/watch?v=RkQQ7WEor7w&amp;t=696s">Acquired Unplugged</a> (presented by WorkOS, June 2026), Boris Cherny, who created Claude Code, described how his own work changed:</p>
+      <blockquote class="quote">“I don't prompt Claude anymore. I have loops that are running. They're the ones that are prompting Claude and kind of figuring out what to do. My job is to write loops.”<cite>Boris Cherny, around 11:40 in the talk</cite></blockquote>
+      <p style="margin-top:18px">Before that he had uninstalled his code editor and was running five to ten Claude sessions in parallel, prompting each one by hand. The loop is the next step: you stop typing every instruction and start writing the finish line.</p>
+    </div></section>
+
+    <section class="start" aria-labelledby="diff-title"><p class="eyebrow">The difference</p><h2 id="diff-title">Prompting vs looping.</h2><div class="steps"><div><span class="step-number">PROMPTING</span><h3>You are the babysitter</h3><p>You ask, Claude answers, you check it, you ask again. Every step waits for you.</p></div><div><span class="step-number">LOOPING</span><h3>You write the finish line</h3><p>"All tests pass." Claude works, checks itself, fixes what failed, and repeats until that is true.</p></div><div><span class="step-number">THE RULE</span><h3>The check must be able to fail</h3><p>"Looks good" is not a check. A test result, a build exit code, or a file count is.</p></div></div></section>
+
+    <section id="setup" class="audits" aria-labelledby="setup-title"><p class="eyebrow">The setup</p><h2 id="setup-title" style="font-size:clamp(24px,2.6vw,32px);line-height:1.3;letter-spacing:-.035em;font-weight:500;margin:9px 0 0">Three ways to loop in Claude Code.</h2>
+
+      <div class="audit" id="way-goal"><span class="step-number">WAY 01 · BUILT IN · START HERE</span><h3>/goal: keep working until the finish line is true</h3><p>Type /goal and a condition. After every turn, a separate model checks whether the condition holds. If not, Claude starts another turn on its own. It stops when the condition is met or judged impossible, or when you run /goal clear. Run it in auto mode if you want the turns to run without approval prompts.</p><div class="prompt-panel"><div><span class="mono">COPY /GOAL COMMAND</span><button type="button" class="button" data-copy="cmd-goal" hidden>Copy</button></div><pre id="cmd-goal" class="prompt-text">/goal all tests in test/auth pass and the lint step is clean. Prove it by running npm test and npm run lint. Do not modify any other test file. Stop after 20 turns.</pre></div><p class="small" style="margin-top:14px">Check progress with <code>/goal</code>, stop it with <code>/goal clear</code>. Source: <a href="https://code.claude.com/docs/en/goal">Claude Code docs: /goal</a>.</p></div>
+
+      <div class="audit" id="way-ralph"><span class="step-number">WAY 02 · OFFICIAL PLUGIN</span><h3>The Ralph Wiggum loop</h3><p>Anthropic's own plugin, named after Ralph from The Simpsons. A Stop hook blocks Claude every time it tries to finish and feeds the same prompt back, so Claude keeps improving on its own past work until it prints your completion word. Always set a max number of loops.</p><div class="prompt-panel"><div><span class="mono">COPY CLAUDE CODE COMMANDS</span><button type="button" class="button" data-copy="cmd-ralph" hidden>Copy</button></div><pre id="cmd-ralph" class="prompt-text">/plugin marketplace add anthropics/claude-code
+/plugin install ralph-wiggum@claude-code-plugins
+
+/ralph-loop "Build a REST API for todos with CRUD, input validation and tests. Write failing tests first, then make them pass. Output &lt;promise&gt;COMPLETE&lt;/promise&gt; when every test passes." --completion-promise "COMPLETE" --max-iterations 20</pre></div><p class="small" style="margin-top:14px">Stop it with <code>/cancel-ralph</code>. The plugin's README reports a $50k contract finished for $297 in API costs and six repos built overnight in YC hackathon testing. Source: <a href="https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum">anthropics/claude-code · ralph-wiggum</a>.</p></div>
+
+      <div class="audit" id="way-loop"><span class="step-number">WAY 03 · ON A TIMER</span><h3>/loop: re-run a prompt on an interval</h3><p>For work that should check back over time, like watching a deploy or a pull request. Runs while the session is open; recurring loops expire after seven days.</p><div class="prompt-panel"><div><span class="mono">COPY /LOOP COMMAND</span><button type="button" class="button" data-copy="cmd-loop" hidden>Copy</button></div><pre id="cmd-loop" class="prompt-text">/loop 10m check whether CI passed on my PR. If it failed, read the log, push a minimal fix, and tell me what you changed.</pre></div><p class="small" style="margin-top:14px">Press Esc to stop a self-paced loop. Source: <a href="https://code.claude.com/docs/en/scheduled-tasks">Claude Code docs: scheduled tasks</a>.</p></div>
+    </section>
+
+    <section class="start" aria-labelledby="finish-title"><p class="eyebrow">The part that matters</p><h2 id="finish-title">Write a finish line Claude can prove.</h2><div class="steps"><div><span class="step-number">01</span><h3>One measurable end state</h3><p>A test result, a build exit code, a file count, an empty queue.</p></div><div><span class="step-number">02</span><h3>A stated check</h3><p>Say how to prove it: "npm test exits 0", "git status is clean".</p></div><div><span class="step-number">03</span><h3>Limits</h3><p>What must not change, and a cap such as "stop after 20 turns".</p></div></div><div class="prompt-panel"><div><span class="mono">FILL-IN FINISH LINE</span><button type="button" class="button" data-copy="finish" hidden>Copy template</button></div><p id="finish" class="prompt-text">/goal [what must be true when you're done]. Prove it by running [the command that shows it]. Do not change [files or areas that must stay untouched]. Stop after [number] turns and tell me what is blocking you if it isn't done.</p></div></section>
+
+    <section class="start" aria-labelledby="safe-title"><p class="eyebrow">Before you walk away</p><h2 id="safe-title">Three rules for safe loops.</h2><div class="steps"><div><span class="step-number">BRANCH</span><h3>Loop on a branch</h3><p>Commit first and run the loop on a new git branch, so a bad run is one revert away.</p></div><div><span class="step-number">CAP</span><h3>Always set a limit</h3><p>Turns or iterations. A loop chasing an impossible goal keeps spending until you stop it.</p></div><div><span class="step-number">YOU</span><h3>Approve the last step</h3><p>Let the loop do the work, then review the final diff yourself before it merges or ships.</p></div></div></section>
+
+    <section class="closing"><div><p class="eyebrow">Came here from the Reel?</p><h2>Here is your LOOP setup.</h2><p>You commented <strong>LOOP</strong> for this page. Start with <code>/goal</code> on one small task with a test you can run, and watch Claude finish it without you.</p></div><a class="button" href="/articles/">More practical guides <span aria-hidden="true">↗</span></a></section>
+  </div></main>
+  <footer class="site-footer shell"><p>Written by <a href="/about/">Radhakishan Jangid</a></p><p>Sources: <a href="https://www.youtube.com/watch?v=RkQQ7WEor7w&amp;t=696s">Acquired Unplugged / WorkOS</a>, <a href="https://code.claude.com/docs/en/goal">/goal docs</a>, <a href="https://code.claude.com/docs/en/scheduled-tasks">/loop docs</a>, <a href="https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum">ralph-wiggum plugin</a>. Checked 10 October 2026.<br>Independent guide; not affiliated with Anthropic.</p><a href="#main">Back to top ↑</a></footer>
+</body>
+</html>
