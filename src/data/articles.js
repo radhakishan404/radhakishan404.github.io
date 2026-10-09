@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "cli-anything",
+        title: "CLI-Anything: let Claude use any app on your computer",
+        excerpt: "The 50K-star repo that turns Blender, GIMP, OBS, Zoom and 75 more apps into commands Claude Code can run. Install steps, a first task and the limits.",
+        category: "AI agents",
+        date: "Oct 10, 2026",
+        cover: "/articles/cli-anything/cover.png"
+    },
+    {
         slug: "claude-clean",
         title: "Clean your Claude Code setup: 3 audit prompts",
         excerpt: "Claude Code's creator says to delete your CLAUDE.md, skills and hooks every six months. Back up first, then run three copyable prompts to find what to kill, merge, fix and add.",

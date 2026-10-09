@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CLI-Anything: Let Claude Use Any App on Your Computer | Radhakishan Jangid</title>
+  <meta name="description" content="CLI-Anything turns desktop apps like Blender, GIMP, OBS and Zoom into text commands Claude Code can run. Install steps, the 79-app hub, a first task to try, and the limits you should know.">
+  <meta name="author" content="Radhakishan Jangid">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="canonical" href="https://radhakishan404.is-a.dev/articles/cli-anything/">
+  <link rel="icon" href="/images/Round%20with%20transparent%20and%20blue%20.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Radhakishan Jangid">
+  <meta property="og:title" content="CLI-Anything: let Claude use any app on your computer">
+  <meta property="og:description" content="Install steps, the 79-app hub and a first task for the 50K-star repo that gives AI agents command-line control of desktop apps.">
+  <meta property="og:url" content="https://radhakishan404.is-a.dev/articles/cli-anything/">
+  <meta property="og:image" content="https://radhakishan404.is-a.dev/articles/cli-anything/cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="CLI-Anything demo of an agent building a drone in Blender, next to the words Let Claude use any app on your computer">
+  <meta property="article:published_time" content="2026-10-10">
+  <meta property="article:modified_time" content="2026-10-10">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CLI-Anything: let Claude use any app on your computer">
+  <meta name="twitter:description" content="Install steps, the 79-app hub and a first task to try.">
+  <meta name="twitter:image" content="https://radhakishan404.is-a.dev/articles/cli-anything/cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://radhakishan404.is-a.dev/articles/cli-anything/#article","headline":"CLI-Anything: let Claude use any app on your computer","description":"Install steps, the 79-app hub, a first task and limits for HKUDS/CLI-Anything.","datePublished":"2026-10-10","dateModified":"2026-10-10","inLanguage":"en","image":["https://radhakishan404.is-a.dev/articles/cli-anything/cover.png"],"author":{"@type":"Person","name":"Radhakishan Jangid","url":"https://radhakishan404.is-a.dev/about/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radhakishan404.is-a.dev/articles/cli-anything/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://radhakishan404.is-a.dev/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://radhakishan404.is-a.dev/articles/"},{"@type":"ListItem","position":3,"name":"CLI-Anything","item":"https://radhakishan404.is-a.dev/articles/cli-anything/"}]}]}</script>
+  <script src="./article.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to article</a>
+  <header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="Radhakishan Jangid home"><img src="/images/1000%20X%201000.png" alt="" width="34" height="34"><span>Radhakishan <b>Jangid</b></span></a><nav aria-label="Article navigation"><a href="/articles/">All articles</a><a href="#install">Install <span aria-hidden="true">↓</span></a></nav></div></header>
+  <main id="main"><div class="shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/articles/">Articles</a><span>/</span><span>CLI-Anything</span></nav>
+    <header class="hero"><div><p class="eyebrow">From the reel · AI agents</p><h1>Let Claude use any app <span>on your computer.</span></h1><p class="lead">CLI-Anything gives desktop apps like Blender, GIMP, OBS and Zoom a set of text commands, so Claude Code and other agents can drive them by just being asked. Here is how to install it and what to try first.</p><p class="byline">By <a href="/about/">Radhakishan Jangid</a><span>·</span><time datetime="2026-10-10">10 October 2026</time></p><div class="actions"><a class="button primary" href="#install">Install it <span aria-hidden="true">↓</span></a><a class="button" href="https://github.com/HKUDS/CLI-Anything">Open the repo <span aria-hidden="true">↗</span></a></div><p id="copy-status" role="status" class="small"></p></div><figure class="cover"><img src="./cover.png" width="1200" height="630" alt="CLI-Anything demo of an agent building a drone in Blender, next to the words Let Claude use any app on your computer"><figcaption>Frame from the Reel, built on the repo's own Blender demo.</figcaption></figure></header>
+
+    <section class="intro" aria-labelledby="intro-title"><h2 id="intro-title">Apps are built for clicking. <br>Agents are built for commands.</h2><div>
+      <p>Most desktop software expects a person with a mouse. AI agents are much better at typing commands, so they get stuck in normal app windows. <a href="https://github.com/HKUDS/CLI-Anything">CLI-Anything</a>, from the Data Intelligence Lab at the University of Hong Kong (HKUDS), wraps each app in a command-line interface the agent can call directly.</p>
+      <p>On 10 October 2026 the repo had 51,788 stars, an Apache-2.0 license, and 79 ready-made app CLIs in its hub.</p>
+    </div></section>
+
+    <section class="start" aria-labelledby="demo-title"><p class="eyebrow">Real demo from the repo</p><h2 id="demo-title">An agent building a drone in Blender.</h2><figure style="margin:26px 0 0;max-width:860px"><video src="./blender-demo.mp4" poster="./blender-demo.jpg" autoplay muted loop playsinline controls style="width:100%;border:1px solid var(--line);border-radius:9px"></video><figcaption class="small" style="margin-top:12px">The left panel is the agent's step-by-step build trace; the right shows real Blender previews after each step. Source: <a href="https://github.com/HKUDS/CLI-Anything#-real-world-demos">CLI-Anything demos</a>.</figcaption></figure></section>
+
+    <section id="install" class="audits" aria-labelledby="install-title"><p class="eyebrow">Install</p><h2 id="install-title" style="font-size:clamp(24px,2.6vw,32px);line-height:1.3;letter-spacing:-.035em;font-weight:500;margin:9px 0 0">Three ways in. Start with the first.</h2>
+
+      <div class="audit" id="path-hub"><span class="step-number">PATH 01 · USE READY-MADE APPS</span><h3>Install the hub, then add an app</h3><p>Needs Python 3.10+. Each CLI drives the real app, so install the app itself too (for example GIMP or Blender).</p><div class="prompt-panel"><div><span class="mono">COPY COMMANDS</span><button type="button" class="button" data-copy="cmd-hub" hidden>Copy commands</button></div><pre id="cmd-hub" class="prompt-text">pip install cli-anything-hub
+
+# browse the 79 apps
+cli-hub list
+cli-hub search image
+
+# install one and try it
+cli-hub install gimp
+cli-hub info gimp
+cli-hub launch gimp</pre></div></div>
+
+      <div class="audit" id="path-skill"><span class="step-number">PATH 02 · LET YOUR AGENT PICK THE APP</span><h3>Give Claude Code the hub skill</h3><p>This installs a skill that lets Claude Code (and Codex and other skill-compatible agents) search the hub and install the CLI it needs for a task.</p><div class="prompt-panel"><div><span class="mono">COPY COMMAND</span><button type="button" class="button" data-copy="cmd-skill" hidden>Copy command</button></div><pre id="cmd-skill" class="prompt-text">npx skills add HKUDS/CLI-Anything --skill cli-hub-meta-skill -g -y</pre></div></div>
+
+      <div class="audit" id="path-build"><span class="step-number">PATH 03 · YOUR APP ISN'T IN THE HUB</span><h3>Build a CLI from the app's code</h3><p>Run these inside Claude Code. The plugin reads the app's source and runs a 7-phase generator that writes the CLI and its tests. It works best on open-source apps.</p><div class="prompt-panel"><div><span class="mono">COPY CLAUDE CODE COMMANDS</span><button type="button" class="button" data-copy="cmd-build" hidden>Copy commands</button></div><pre id="cmd-build" class="prompt-text">/plugin marketplace add HKUDS/CLI-Anything
+/plugin install cli-anything
+
+# point it at the app's source folder or repo
+/cli-anything ./gimp</pre></div></div>
+    </section>
+
+    <section class="start" aria-labelledby="first-title"><p class="eyebrow">First task</p><h2 id="first-title">Try one small, safe job.</h2><div class="steps"><div><span class="step-number">01</span><h3>Pick an app you own</h3><p>GIMP, Blender, LibreOffice, OBS, Audacity, Obsidian, Inkscape, Krita, FreeCAD, Zoom, draw.io and more are in the hub.</p></div><div><span class="step-number">02</span><h3>Work on a copy</h3><p>Point it at a test folder or a copy of a file, not your only original.</p></div><div><span class="step-number">03</span><h3>Read before you approve</h3><p>Claude Code shows each command first. Approve only what you understand.</p></div></div><div class="prompt-panel"><div><span class="mono">STARTER PROMPT FOR CLAUDE CODE</span><button type="button" class="button" data-copy="starter" hidden>Copy prompt</button></div><p id="starter" class="prompt-text">Use CLI-Anything to work with GIMP. First check whether the GIMP CLI is installed (install it with cli-hub if it isn't). Then take ./test-images/photo.jpg, resize it to 1080x1920, add a 20px white border, and export it as ./test-images/photo-story.png. Show me each command before you run it, and do not touch any other files.</p><p class="small">Swap GIMP and the file paths for your own app and test files.</p></div></section>
+
+    <section class="start" aria-labelledby="limits-title"><p class="eyebrow">Good to know</p><h2 id="limits-title">The limits, in plain words.</h2><div class="steps"><div><span class="step-number">APP</span><h3>The real app stays installed</h3><p>CLI-Anything calls the actual software. If Blender isn't on your machine, the Blender CLI can't do anything.</p></div><div><span class="step-number">CODE</span><h3>Open source works best</h3><p>Building a new CLI means reading the app's code, so closed apps are much harder or impossible.</p></div><div><span class="step-number">COST</span><h3>Free tool, paid brain</h3><p>The repo is free under Apache-2.0. The agent you use with it, like Claude Code, still needs its own plan or API key.</p></div></div></section>
+
+    <section class="closing"><div><p class="eyebrow">Came here from the Reel?</p><h2>Here is your APPS link.</h2><p>You commented <strong>APPS</strong> for this page. Start with path 01, install one app you already use, and give Claude the starter prompt.</p></div><a class="button" href="https://github.com/HKUDS/CLI-Anything">GitHub repo <span aria-hidden="true">↗</span></a></section>
+  </div></main>
+  <footer class="site-footer shell"><p>Written by <a href="/about/">Radhakishan Jangid</a></p><p>Sources: <a href="https://github.com/HKUDS/CLI-Anything">HKUDS/CLI-Anything README</a>, <a href="https://hkuds.github.io/CLI-Anything/">CLI-Hub</a>. Stars and app count checked 10 October 2026.<br>Independent guide; not affiliated with HKUDS or Anthropic.</p><a href="#main">Back to top ↑</a></footer>
+</body>
+</html>
