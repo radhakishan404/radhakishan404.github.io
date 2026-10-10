@@ -46,9 +46,6 @@ jobs:
       - name: Check frontend skills article
         run: npm run test:article
 
-      - name: Create static route entrypoints
-        run: node scripts/create-static-route-entrypoints.js
-
       - name: Checkout the published article archive
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
         uses: actions/checkout@v6
@@ -61,7 +58,8 @@ jobs:
         shell: bash
         run: |
           mkdir -p build/articles
-          cp -R published-site/articles/. build/articles/
+          # Keep older published articles, but never overwrite an article from this build.
+          cp -Rn published-site/articles/. build/articles/
           cp -R published-site/assets build/assets
           cp -R published-site/rk-images build/rk-images
 
@@ -71,8 +69,10 @@ jobs:
             fi
           done
 
-          cp build/index.html build/articles/index.html
           touch build/.nojekyll
+
+      - name: Create static route entrypoints
+        run: node scripts/create-static-route-entrypoints.js
 
       - name: Configure GitHub Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'

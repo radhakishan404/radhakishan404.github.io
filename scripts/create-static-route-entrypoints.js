@@ -1,6 +1,9 @@
 const fs = require("fs");
 const path = require("path");
+const { JSDOM } = require("jsdom");
+require("sucrase/register");
 const softdata = require("../src/softdata.json");
+const { applyPageMetadata, getPageMetadata } = require("../src/seo");
 
 const buildDirectory = path.resolve(__dirname, "../build");
 const entrypoint = path.join(buildDirectory, "index.html");
@@ -59,10 +62,24 @@ if (!fs.existsSync(entrypoint)) {
     throw new Error("Build entrypoint not found. Run the production build first.");
 }
 
+// Each static entrypoint gets its own title, description, canonical, Open Graph and JSON-LD,
+// so crawlers and link previews see the right page before JavaScript runs.
+const template = fs.readFileSync(entrypoint, "utf8");
+function documentFor(route) {
+    const dom = new JSDOM(template);
+    const metadata = getPageMetadata(`/${route}`);
+    if (/not found/i.test(metadata.title)) {
+        throw new Error(`No page metadata for /${route}/`);
+    }
+    applyPageMetadata(dom.window.document, metadata);
+    return dom.serialize();
+}
+
+fs.writeFileSync(entrypoint, documentFor(""));
 for (const route of new Set(routes)) {
     const routeDirectory = path.join(buildDirectory, route);
     fs.mkdirSync(routeDirectory, { recursive: true });
-    fs.copyFileSync(entrypoint, path.join(routeDirectory, "index.html"));
+    fs.writeFileSync(path.join(routeDirectory, "index.html"), documentFor(route));
 }
 
 for (const slug of legacyProjectRedirects) {

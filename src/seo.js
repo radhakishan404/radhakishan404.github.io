@@ -8,7 +8,8 @@ export const VERIFICATION = "X3yExWHLcyhIPrHMHjKg6pIex1aSyL3Atw1hDdecGL0";
 const NAME = "Radhakishan Jangid";
 const PORTRAIT = `${SITE_URL}/images/radhakishan-red-portrait.png`;
 export const normalizePath = (path) => {
-    const clean = `${path.split(/[?#]/)[0].replace(/\/+$/, "") || "/"}/`;
+    const base = path.split(/[?#]/)[0].replace(/\/+$/, "");
+    const clean = base ? `${base}/` : "/";
     if (clean === "/projects/") {
         return "/portfolio/";
     }
@@ -75,7 +76,7 @@ export function getPageMetadata(pathname) {
         "@type": "Person", "@id": `${SITE_URL}/#person`, name: NAME,
         url: `${SITE_URL}/`, image: PORTRAIT, jobTitle: "Product Engineer",
         homeLocation: { "@type": "Place", name: "Mumbai, India" },
-        sameAs: ["https://github.com/radhakishan404", "https://www.linkedin.com/in/radhakishanjangid", "https://dev.to/radhakishanjangid404"]
+        sameAs: ["https://github.com/radhakishan404", "https://www.linkedin.com/in/radhakishanjangid", "https://dev.to/radhakishanjangid404", "https://www.instagram.com/rk.codex/"]
     };
     const graph = [person,
         { "@type": "WebSite", "@id": `${SITE_URL}/#website`, url: `${SITE_URL}/`, name: NAME, publisher: { "@id": person["@id"] } },

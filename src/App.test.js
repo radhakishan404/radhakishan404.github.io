@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 import emailjs from "emailjs-com";
 import App from "./App";
 import { ARTICLES } from "./data/articles";
+import { getPageMetadata, normalizePath } from "./seo";
 
 jest.mock("lenis", () => function MockLenis() {
     this.destroy = jest.fn();
@@ -253,4 +254,17 @@ test("submits the home contact form and exposes a useful status", async () => {
     expect(screen.getByRole("button", { name: /Sending/i })).toBeDisabled();
     await waitFor(() => expect(emailjs.sendForm).toHaveBeenCalledTimes(1));
     expect(await screen.findByRole("status")).toHaveTextContent("Message sent. Thank you.");
+});
+
+test("indexes the homepage and every main page with its own metadata", () => {
+    expect(normalizePath("/")).toBe("/");
+    expect(normalizePath("")).toBe("/");
+    expect(normalizePath("/about")).toBe("/about/");
+    for (const path of ["/", "/about/", "/contact/", "/portfolio/", "/articles/", "/portfolio/infolive/"]) {
+        const metadata = getPageMetadata(path);
+        expect(metadata.title).not.toMatch(/not found/i);
+        expect(metadata.robots).toMatch(/^index/);
+    }
+    expect(getPageMetadata("/").title).toBe("Radhakishan Jangid | Product Engineer in Mumbai");
+    expect(getPageMetadata("/missing-page/").robots).toBe("noindex, follow");
 });
