@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "claude-reels",
+        title: "I don't write my Reels anymore. Claude does.",
+        excerpt: "The free Claude setup behind my Reels: Claude watches any viral Reel, finds the pattern across ten, then writes my version and scores the hook. Two open-source skills and the exact prompts.",
+        category: "Creator workflow",
+        date: "Oct 10, 2026",
+        cover: "/articles/claude-reels/cover.png"
+    },
+    {
         slug: "claude-loops",
         title: "Prompting is dead: how to run loops in Claude Code",
         excerpt: "Boris Cherny doesn't prompt Claude anymore, he runs loops. Three ways to set one up: /goal, Anthropic's Ralph Wiggum plugin, and /loop, with a finish-line template.",
