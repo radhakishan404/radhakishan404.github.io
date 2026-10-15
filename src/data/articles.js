@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "rea",
+        title: "REA: Reverse Engineer Anything with Claude",
+        excerpt: "The 256K-star repo that lets Claude Code and Codex trace how an app feature works, show the evidence, and help you build your own version. Setup, prompt and real case studies.",
+        category: "AI agents",
+        date: "Oct 15, 2026",
+        cover: "/articles/rea/cover.png"
+    },
+    {
         slug: "claude-reels",
         title: "I don't write my Reels anymore. Claude does.",
         excerpt: "The free Claude setup behind my Reels: Claude watches any viral Reel, finds the pattern across ten, then writes my version and scores the hook. Two open-source skills and the exact prompts.",

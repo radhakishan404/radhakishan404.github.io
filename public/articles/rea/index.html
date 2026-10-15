@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>REA: Reverse Engineer Anything with Claude | Radhakishan Jangid</title>
+  <meta name="description" content="REA (Reverse Engineer Anything) lets Claude Code and Codex trace how a feature in an app works, show the evidence, and help you build your own version. Setup command, the prompt to use, real case studies and safe-use rules.">
+  <meta name="author" content="Radhakishan Jangid">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="canonical" href="https://radhakishan404.is-a.dev/articles/rea/">
+  <link rel="icon" href="/images/Round%20with%20transparent%20and%20blue%20.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Radhakishan Jangid">
+  <meta property="og:title" content="REA: Reverse Engineer Anything with Claude">
+  <meta property="og:description" content="The 256K-star repo that lets your AI agent trace how an app feature works and build your own version. Setup, prompt and real case studies.">
+  <meta property="og:url" content="https://radhakishan404.is-a.dev/articles/rea/">
+  <meta property="og:image" content="https://radhakishan404.is-a.dev/articles/rea/cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Reverse Engineer Anything, trending on GitHub with 256K stars">
+  <meta property="article:published_time" content="2026-10-15">
+  <meta property="article:modified_time" content="2026-10-15">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="REA: Reverse Engineer Anything with Claude">
+  <meta name="twitter:description" content="Setup command, the prompt to use and real case studies.">
+  <meta name="twitter:image" content="https://radhakishan404.is-a.dev/articles/rea/cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://radhakishan404.is-a.dev/articles/rea/#article","headline":"REA: Reverse Engineer Anything with Claude","description":"How to set up REA so your AI agent can trace how an app feature works and help you build your own version.","datePublished":"2026-10-15","dateModified":"2026-10-15","inLanguage":"en","image":["https://radhakishan404.is-a.dev/articles/rea/cover.png"],"author":{"@type":"Person","name":"Radhakishan Jangid","url":"https://radhakishan404.is-a.dev/about/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radhakishan404.is-a.dev/articles/rea/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://radhakishan404.is-a.dev/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://radhakishan404.is-a.dev/articles/"},{"@type":"ListItem","position":3,"name":"REA","item":"https://radhakishan404.is-a.dev/articles/rea/"}]}]}</script>
+  <script src="./article.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to article</a>
+  <header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="Radhakishan Jangid home"><img src="/images/1000%20X%201000.png" alt="" width="34" height="34"><span>Radhakishan <b>Jangid</b></span></a><nav aria-label="Article navigation"><a href="/articles/">All articles</a><a href="#setup">Setup <span aria-hidden="true">↓</span></a></nav></div></header>
+  <main id="main"><div class="shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/articles/">Articles</a><span>/</span><span>REA</span></nav>
+    <header class="hero"><div><p class="eyebrow">From the reel · Reverse Engineer Anything</p><h1>See a feature you love. <span>Find out how it works.</span></h1><p class="lead">REA (Reverse Engineer Anything) gives Claude Code, Codex and other AI agents the tools to look inside an app, trace the code behind one feature, show you the evidence, and then help you build your own version.</p><p class="byline">By <a href="/about/">Radhakishan Jangid</a><span>·</span><time datetime="2026-10-15">15 October 2026</time></p><div class="actions"><a class="button primary" href="#setup">Set it up <span aria-hidden="true">↓</span></a><a class="button" href="https://github.com/morluto/rea">GitHub repo <span aria-hidden="true">↗</span></a></div><p id="copy-status" role="status" class="small"></p></div><figure class="cover"><img src="./cover.png" width="1200" height="630" alt="Reverse Engineer Anything, trending on GitHub with 256K stars"><figcaption>REA on GitHub: 256K+ stars, MIT licensed. Checked 15 October 2026.</figcaption></figure></header>
+
+    <section class="intro" aria-labelledby="intro-title"><h2 id="intro-title">Not guessing. <br>Evidence.</h2><div>
+      <p>When you ask an AI "how does this app do that?", it usually guesses. REA changes that. It adds a set of reverse-engineering tools to your agent through MCP, so the agent can actually inspect the program: JavaScript and Electron apps, Android apps, games and native binaries, down to the machine code your computer runs.</p>
+      <p>What comes back is evidence: which files, functions and messages make the feature work. REA does not hand you an app's original source code. It gives your agent enough proof to explain the feature and help you build an independent version for your own project.</p>
+    </div></section>
+
+    <section class="start" aria-labelledby="how-title"><p class="eyebrow">How it works</p><h2 id="how-title">Three steps.</h2><div class="steps"><div><span class="step-number">01</span><h3>Ask about one feature</h3><p>Name the app and the one thing you want to understand: search, copy, a shortcut.</p></div><div><span class="step-number">02</span><h3>The agent inspects the program</h3><p>REA returns code, references and runtime observations as evidence.</p></div><div><span class="step-number">03</span><h3>Explain it, then build your own</h3><p>Your agent uses the findings to explain the feature and help you write a clean version.</p></div></div></section>
+
+    <section id="setup" class="audits" aria-labelledby="setup-title"><p class="eyebrow">Setup</p><h2 id="setup-title" style="font-size:clamp(24px,2.6vw,32px);line-height:1.3;letter-spacing:-.035em;font-weight:500;margin:9px 0 0">One command, then one prompt.</h2>
+      <div class="audit" id="step-install"><span class="step-number">STEP 01 · INSTALL</span><h3>Add REA to your agent</h3><p>Needs Node.js and npm. Pick your agents (Claude Code, Codex, Cursor, Gemini CLI and more), review the changes, approve, then restart your agent.</p><div class="prompt-panel"><div><span class="mono">COPY COMMAND</span><button type="button" class="button" data-copy="cmd-setup" hidden>Copy</button></div><pre id="cmd-setup" class="prompt-text">npx rea-agents setup</pre></div><p class="small" style="margin-top:14px">Only install from <a href="https://github.com/morluto/rea">morluto/rea</a>, <a href="https://rea.tools/">rea.tools</a> or the <a href="https://www.npmjs.com/package/rea-agents">rea-agents npm package</a>. The project warns that look-alike copies exist.</p></div>
+      <div class="audit" id="step-ask"><span class="step-number">STEP 02 · ASK</span><h3>The prompt to paste</h3><p>Replace the app and the feature with your own.</p><div class="prompt-panel"><div><span class="mono">COPY PROMPT</span><button type="button" class="button" data-copy="prompt-ask" hidden>Copy</button></div><p id="prompt-ask" class="prompt-text">Use REA to understand how [the feature] works in [an app I own or am allowed to inspect]. Show me the evidence for each step, explain it in simple terms, then help me build a similar feature for my own project.</p></div></div>
+    </section>
+
+    <section class="start" aria-labelledby="proof-title"><p class="eyebrow">Real examples</p><h2 id="proof-title">What it has actually done.</h2><figure style="margin:26px 0 0;max-width:900px"><img src="./rea-analysis.png" width="1662" height="946" alt="REA running an analysis inside the Hopper disassembler" style="width:100%;height:auto;border:1px solid var(--line);border-radius:9px"><figcaption class="small" style="margin-top:12px">REA driving a disassembler to inspect a native binary. Image from the official repository.</figcaption></figure><div class="steps"><div><span class="step-number">ELECTRON</span><h3>How Notion copies text and HTML</h3><p>REA traced a clipboard call from Notion's page API, through the preload and main process, to Electron's clipboard writer. <a href="https://rea.tools/showcase/notion/">Read the case study</a>.</p></div><div><span class="step-number">GAME</span><h3>Rebuilding DX-Ball</h3><p>Turning the 1996 Windows game into maintainable C: 55 functions rebuilt and 45,380 comparisons against the original. <a href="https://rea.tools/showcase/dx-ball/">Read the case study</a>.</p></div><div><span class="step-number">MORE</span><h3>Guides and showcases</h3><p>Step-by-step guides for apps, games and websites on <a href="https://rea.tools/guides/">rea.tools</a>.</p></div></div></section>
+
+    <section class="start" aria-labelledby="safe-title"><p class="eyebrow">Use it the right way</p><h2 id="safe-title">Three rules.</h2><div class="steps"><div><span class="step-number">YOURS</span><h3>Only apps you can inspect</h3><p>Use REA on software you own or have permission to analyse, and follow each app's license and terms.</p></div><div><span class="step-number">LEARN</span><h3>Learn, then write your own</h3><p>Use the evidence to understand an idea and build an independent version. Don't copy someone else's code or assets.</p></div><div><span class="step-number">OFFICIAL</span><h3>Official downloads only</h3><p>Install from the official repo, site or npm package listed above.</p></div></div></section>
+
+    <section class="closing"><div><p class="eyebrow">Came here from the Reel?</p><h2>Here is your DECODE link.</h2><p>You commented <strong>DECODE</strong> for this page. Run the setup command, pick one feature you've always wondered about in an app you own, and paste the prompt.</p></div><a class="button" href="https://github.com/morluto/rea">GitHub repo <span aria-hidden="true">↗</span></a></section>
+  </div></main>
+  <footer class="site-footer shell"><p>Written by <a href="/about/">Radhakishan Jangid</a></p><p>Sources: <a href="https://github.com/morluto/rea">morluto/rea README</a>, <a href="https://rea.tools/">rea.tools</a>, <a href="https://rea.tools/showcase/">REA showcases</a>. Checked 15 October 2026.<br>Independent guide; not affiliated with REA or Anthropic.</p><a href="#main">Back to top ↑</a></footer>
+</body>
+</html>
