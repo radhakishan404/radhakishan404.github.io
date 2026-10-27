@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "felix-prompt",
+        title: "The Claude Prompt an Anthropic Engineer Uses Himself",
+        excerpt: "Felix Rieseberg shared the prompt he uses to get deeper, expert-level work from Claude. The exact prompt, how to use it and a worked example.",
+        category: "Prompts",
+        date: "Oct 27, 2026",
+        cover: "/articles/felix-prompt/cover.png"
+    },
+    {
         slug: "rea",
         title: "REA: Reverse Engineer Anything with Claude",
         excerpt: "The 256K-star repo that lets Claude Code and Codex trace how an app feature works, show the evidence, and help you build your own version. Setup, prompt and real case studies.",
