@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "karpathy-rules",
+        title: "Karpathy's 4 Rules for Claude Code in One CLAUDE.md",
+        excerpt: "The 233K-star CLAUDE.md built from Andrej Karpathy's notes on how AI gets coding wrong. The four rules in plain English and the one-line install for Claude Code and Cursor.",
+        category: "Claude Code",
+        date: "Nov 16, 2026",
+        cover: "/articles/karpathy-rules/cover.png"
+    },
+    {
         slug: "felix-prompt",
         title: "The Claude Prompt an Anthropic Engineer Uses Himself",
         excerpt: "Felix Rieseberg shared the prompt he uses to get deeper, expert-level work from Claude. The exact prompt, how to use it and a worked example.",

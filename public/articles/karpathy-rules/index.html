@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Karpathy's 4 Rules for Claude Code in One CLAUDE.md | Radhakishan Jangid</title>
+  <meta name="description" content="The 233K-star CLAUDE.md built from Andrej Karpathy's notes on how AI gets coding wrong. The four rules in plain English, the one-line install for Claude Code and Cursor, and how to tell it is working.">
+  <meta name="author" content="Radhakishan Jangid">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="canonical" href="https://radhakishan404.is-a.dev/articles/karpathy-rules/">
+  <link rel="icon" href="/images/Round%20with%20transparent%20and%20blue%20.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Radhakishan Jangid">
+  <meta property="og:title" content="Karpathy's 4 Rules for Claude Code in One CLAUDE.md">
+  <meta property="og:description" content="One file, four rules, 233K stars. The rules in plain English and the one-line install.">
+  <meta property="og:url" content="https://radhakishan404.is-a.dev/articles/karpathy-rules/">
+  <meta property="og:image" content="https://radhakishan404.is-a.dev/articles/karpathy-rules/cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The andrej-karpathy-skills repository on GitHub with 233.6k stars">
+  <meta property="article:published_time" content="2026-11-16">
+  <meta property="article:modified_time" content="2026-11-16">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Karpathy's 4 Rules for Claude Code in One CLAUDE.md">
+  <meta name="twitter:description" content="The four rules in plain English and the one-line install.">
+  <meta name="twitter:image" content="https://radhakishan404.is-a.dev/articles/karpathy-rules/cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://radhakishan404.is-a.dev/articles/karpathy-rules/#article","headline":"Karpathy's 4 Rules for Claude Code in One CLAUDE.md","description":"The CLAUDE.md built from Andrej Karpathy's notes on how AI gets coding wrong, with the four rules and the install commands.","datePublished":"2026-11-16","dateModified":"2026-11-16","inLanguage":"en","image":["https://radhakishan404.is-a.dev/articles/karpathy-rules/cover.png"],"author":{"@type":"Person","name":"Radhakishan Jangid","url":"https://radhakishan404.is-a.dev/about/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radhakishan404.is-a.dev/articles/karpathy-rules/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://radhakishan404.is-a.dev/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://radhakishan404.is-a.dev/articles/"},{"@type":"ListItem","position":3,"name":"Karpathy rules","item":"https://radhakishan404.is-a.dev/articles/karpathy-rules/"}]}]}</script>
+  <script src="./article.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to article</a>
+  <header class="site-header"><div class="shell header-inner"><a class="brand" href="/" aria-label="Radhakishan Jangid home"><img src="/images/1000%20X%201000.png" alt="" width="34" height="34"><span>Radhakishan <b>Jangid</b></span></a><nav aria-label="Article navigation"><a href="/articles/">All articles</a><a href="#install">Install <span aria-hidden="true">↓</span></a></nav></div></header>
+  <main id="main"><div class="shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/articles/">Articles</a><span>/</span><span>Karpathy rules</span></nav>
+    <header class="hero"><div><p class="eyebrow">From the reel · Claude Code</p><h1>Four rules that stop Claude from guessing. <span>One file.</span></h1><p class="lead">Andrej Karpathy wrote down the mistakes AI makes when it writes code. A developer turned those notes into a single <code>CLAUDE.md</code> with four rules. It has 233K stars on GitHub, installs with one command, and works in Cursor too.</p><p class="byline">By <a href="/about/">Radhakishan Jangid</a><span>·</span><time datetime="2026-11-16">16 November 2026</time></p><div class="actions"><a class="button primary" href="#install">Install it <span aria-hidden="true">↓</span></a><a class="button" href="https://github.com/multica-ai/andrej-karpathy-skills">GitHub repo <span aria-hidden="true">↗</span></a></div><p id="copy-status" role="status" class="small"></p></div><figure class="cover"><img src="./cover.png" width="1200" height="630" alt="The andrej-karpathy-skills repository on GitHub with 233.6k stars"><figcaption>andrej-karpathy-skills on GitHub: 233.6K stars, 23.2K forks. Checked 16 November 2026.</figcaption></figure></header>
+
+    <section class="intro" aria-labelledby="intro-title"><h2 id="intro-title">Where the rules <br>come from.</h2><div>
+      <p>In January 2026, Andrej Karpathy posted his notes after weeks of coding with Claude. He described what the models still get wrong: they "make wrong assumptions on your behalf and just run along with them without checking", they write "a bloated construction over 1000 lines when 100 would do", and they change code they were never asked to touch.</p>
+      <p>The developer forrestchang turned those notes into one instruction file for Claude Code. Karpathy did not write the file himself; it is built from his post. Each rule answers one of the problems he named.</p>
+      <figure style="margin:22px 0 0;max-width:620px"><img src="./karpathy-post.png" width="828" height="591" alt="Andrej Karpathy's post from 27 January 2026 about coding with Claude" style="width:100%;height:auto;border:1px solid var(--line);border-radius:9px"><figcaption class="small" style="margin-top:10px">Karpathy's original post, 27 January 2026. <a href="https://x.com/karpathy/status/2015883857489522876">Read it on X</a>.</figcaption></figure>
+    </div></section>
+
+    <section class="start" aria-labelledby="rules-title"><p class="eyebrow">The four rules</p><h2 id="rules-title">In plain English.</h2><div class="steps"><div><span class="step-number">01 · THINK BEFORE CODING</span><h3>Ask, don't guess</h3><p>Claude states its assumptions, shows you the options when a request is unclear, and stops to ask when it is confused.</p></div><div><span class="step-number">02 · SIMPLICITY FIRST</span><h3>Write less code</h3><p>No extra features, no abstractions for one-off code. If 200 lines could be 50, it rewrites them.</p></div><div><span class="step-number">03 · SURGICAL CHANGES</span><h3>Touch only what you asked for</h3><p>No "improving" nearby code or formatting. Every changed line should trace back to your request.</p></div></div><div class="steps"><div><span class="step-number">04 · GOAL-DRIVEN EXECUTION</span><h3>Test until it works</h3><p>Claude turns the task into something it can check, such as a test that must pass, and loops until it does.</p></div></div>
+      <figure style="margin:26px 0 0;max-width:760px"><img src="./claude-md.png" width="900" height="938" alt="The CLAUDE.md file showing the first rules" style="width:100%;height:auto;border:1px solid var(--line);border-radius:9px"><figcaption class="small" style="margin-top:10px">The actual CLAUDE.md from the repository: 65 lines.</figcaption></figure>
+    </section>
+
+    <section id="install" class="audits" aria-labelledby="install-title"><p class="eyebrow">Install</p><h2 id="install-title" style="font-size:clamp(24px,2.6vw,32px);line-height:1.3;letter-spacing:-.035em;font-weight:500;margin:9px 0 0">Pick one way.</h2>
+      <div class="audit" id="way-new"><span class="step-number">OPTION A · NEW PROJECT</span><h3>One command</h3><p>Run this in your project folder. It saves the file as <code>CLAUDE.md</code>, and Claude Code reads it automatically.</p><div class="prompt-panel"><div><span class="mono">COPY COMMAND</span><button type="button" class="button" data-copy="cmd-new" hidden>Copy</button></div><pre id="cmd-new" class="prompt-text" style="white-space:pre-wrap;overflow-wrap:anywhere">curl -o CLAUDE.md https://raw.githubusercontent.com/forrestchang/andrej-karpathy-skills/main/CLAUDE.md</pre></div></div>
+      <div class="audit" id="way-existing"><span class="step-number">OPTION B · YOU ALREADY HAVE A CLAUDE.md</span><h3>Add the rules to the end</h3><p>This keeps your own file and appends the four rules below it.</p><div class="prompt-panel"><div><span class="mono">COPY COMMAND</span><button type="button" class="button" data-copy="cmd-append" hidden>Copy</button></div><pre id="cmd-append" class="prompt-text" style="white-space:pre-wrap;overflow-wrap:anywhere">echo "" >> CLAUDE.md && curl https://raw.githubusercontent.com/forrestchang/andrej-karpathy-skills/main/CLAUDE.md >> CLAUDE.md</pre></div></div>
+      <div class="audit" id="way-plugin"><span class="step-number">OPTION C · ALL YOUR PROJECTS</span><h3>Install as a Claude Code plugin</h3><p>Run these two commands inside Claude Code, one after the other.</p><div class="prompt-panel"><div><span class="mono">STEP 1</span><button type="button" class="button" data-copy="cmd-market" hidden>Copy</button></div><pre id="cmd-market" class="prompt-text" style="white-space:pre-wrap;overflow-wrap:anywhere">/plugin marketplace add forrestchang/andrej-karpathy-skills</pre></div><div class="prompt-panel" style="margin-top:12px"><div><span class="mono">STEP 2</span><button type="button" class="button" data-copy="cmd-plugin" hidden>Copy</button></div><pre id="cmd-plugin" class="prompt-text" style="white-space:pre-wrap;overflow-wrap:anywhere">/plugin install andrej-karpathy-skills@karpathy-skills</pre></div></div>
+      <div class="audit" id="way-cursor"><span class="step-number">CURSOR</span><h3>Works there too</h3><p>The repository ships a Cursor rule at <code>.cursor/rules/karpathy-guidelines.mdc</code>. Setup steps are in <a href="https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CURSOR.md">CURSOR.md</a>.</p></div>
+    </section>
+
+    <section class="start" aria-labelledby="works-title"><p class="eyebrow">Is it working?</p><h2 id="works-title">Four signs.</h2><div class="steps"><div><span class="step-number">DIFFS</span><h3>Smaller diffs</h3><p>Only the change you asked for shows up.</p></div><div><span class="step-number">CODE</span><h3>Simple the first time</h3><p>Fewer rewrites because something was overbuilt.</p></div><div><span class="step-number">QUESTIONS</span><h3>Questions come first</h3><p>Claude asks before it builds, not after it gets it wrong.</p></div></div><p class="small" style="margin-top:18px">Good to know: the file says these rules lean toward caution over speed, so for tiny tasks Claude may ask more than you need. The repository has no licence file listed, so check with the author before reusing it in a commercial product. Last month's advice still holds: keep your <code>CLAUDE.md</code> short. This one is 65 lines.</p></section>
+
+    <section class="closing"><div><p class="eyebrow">Came here from the Reel?</p><h2>Here is your RULES link.</h2><p>You commented <strong>RULES</strong> for this page. Copy the one-line command above, run it in your project, and start your next Claude Code session.</p></div><a class="button" href="https://github.com/multica-ai/andrej-karpathy-skills">GitHub repo <span aria-hidden="true">↗</span></a></section>
+  </div></main>
+  <footer class="site-footer shell"><p>Written by <a href="/about/">Radhakishan Jangid</a></p><p>Sources: <a href="https://github.com/multica-ai/andrej-karpathy-skills">andrej-karpathy-skills README and CLAUDE.md</a>, <a href="https://x.com/karpathy/status/2015883857489522876">Andrej Karpathy's post</a> (27 January 2026). Checked 16 November 2026.<br>Independent guide; not affiliated with Andrej Karpathy, the repository's author or Anthropic.</p><a href="#main">Back to top ↑</a></footer>
+</body>
+</html>
