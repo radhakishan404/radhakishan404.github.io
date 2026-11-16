@@ -39,10 +39,20 @@ Object.defineProperty(interactive.window, "isSecureContext", { value: true });
 Object.defineProperty(interactive.window.navigator, "clipboard", { value: { writeText: async (text) => { copied = text; } } });
 interactive.window.eval(fs.readFileSync(path.join(directory, "article.js"), "utf8"));
 const doc = interactive.window.document;
+const PINNED = "https://raw.githubusercontent.com/multica-ai/andrej-karpathy-skills/8462496b34419f20b32778610571ac723e91f94c/CLAUDE.md";
 doc.querySelector('button[data-copy="cmd-new"]').click();
-assert.equal(copied, "curl -o CLAUDE.md https://raw.githubusercontent.com/forrestchang/andrej-karpathy-skills/main/CLAUDE.md");
+assert.equal(copied, "curl -fsSL -o CLAUDE.md " + PINNED);
+doc.querySelector('button[data-copy="cmd-fetch"]').click();
+assert.equal(copied, "curl -fsSL -o karpathy-rules.md " + PINNED);
 ["cmd-append", "cmd-market", "cmd-plugin"].forEach((id) => {
   doc.querySelector(`button[data-copy="${id}"]`).click();
   assert.equal(copied, doc.getElementById(id).textContent.trim());
 });
-console.log("Article checks passed: four rules, install commands, source links, metadata, anchors, assets, copy actions, and 1200x630 cover.");
+// Every reference to the repository must use the same owner, and every raw download must be pinned to a full commit SHA.
+const owners = new Set([...source.matchAll(/(?:github\.com|raw\.githubusercontent\.com)\/([\w-]+)\/andrej-karpathy-skills/g)].map((m) => m[1]));
+assert.deepEqual([...owners], ["multica-ai"], "Mixed repository owners: " + [...owners].join(", "));
+assert.ok(doc.getElementById("cmd-market").textContent.includes("multica-ai/andrej-karpathy-skills"));
+const raws = [...source.matchAll(/raw\.githubusercontent\.com\/[\w-]+\/andrej-karpathy-skills\/([^/]+)\//g)].map((m) => m[1]);
+assert.ok(raws.length >= 2 && raws.every((ref) => /^[0-9a-f]{40}$/.test(ref)), "Unpinned raw download: " + raws.join(", "));
+assert.ok(source.includes("Read the file first"));
+console.log("Article checks passed: four rules, pinned install commands, single repository owner, source links, metadata, anchors, assets, copy actions, and 1200x630 cover.");
