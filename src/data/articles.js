@@ -5,6 +5,14 @@ const articleLink = (slug) => `${PUBLISHING_SITE}/articles/${slug}/`;
 
 const ARTICLE_DATA = [
     {
+        slug: "secure-your-app",
+        title: "10 Free Security Tools to Check Your App Before You Launch",
+        excerpt: "Leaked keys, vulnerable packages, unsafe code and live-site checks for apps built with Claude Code or Cursor. Ten free open-source tools, what each does and the command to run.",
+        category: "Security",
+        date: "Nov 17, 2026",
+        cover: "/articles/secure-your-app/cover.png"
+    },
+    {
         slug: "karpathy-rules",
         title: "Karpathy's 4 Rules for Claude Code in One CLAUDE.md",
         excerpt: "The 233K-star CLAUDE.md built from Andrej Karpathy's notes on how AI gets coding wrong. The four rules in plain English and the one-line install for Claude Code and Cursor.",
