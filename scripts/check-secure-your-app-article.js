@@ -43,4 +43,5 @@ buttons.forEach((b) => {
   b.click();
   assert.equal(copied, doc.getElementById(b.dataset.copy).textContent.trim());
 });
+doc.querySelectorAll("pre").forEach((pre) => assert.ok(!/\|\s*(ba)?sh\b/.test(pre.textContent), "Piped shell installer: " + pre.textContent));
 console.log("Article checks passed: ten tools, official repo links, safety note, metadata, anchors, assets, " + buttons.length + " copy actions, and 1200x630 cover.");
